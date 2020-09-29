@@ -1,5 +1,5 @@
 package com.exam.ZipZom;
 
 public class test {
-	String test = "실험용";
+	String test2 = "test2";
 }
