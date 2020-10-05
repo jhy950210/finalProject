@@ -3320,13 +3320,17 @@ ul.chat-available-user li a:hover {
 
 /*footer*/
 .site-footer {
-    background: #4ECDC4;
-    color: #fff;
+    background: #22242A;
+    color: #FFFFFF;
     padding: 15px 0;
+    position: absolute; 
+    bottom: 0;
+	width: 100%;
 }
 
 .site-footer p {
   margin-bottom: 5px;
+ 
 }
 
 .credits, .credits a {
