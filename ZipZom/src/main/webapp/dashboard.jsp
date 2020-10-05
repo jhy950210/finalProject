@@ -249,7 +249,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered"><a href="./resources/profile.html"><img src="./resources/img/ui-sam.jpg" class="./resources/img-circle" width="80"></a></p>
-          <h5 class="centered">집 좀 구해줘</h5>
+          <h5 class="centered">ZIPZOM logo</h5>
           <li class="mt">
             <a class="active" href="index.html">
               <i class="fa fa-dashboard"></i>
@@ -259,103 +259,47 @@
           <li class="sub-menu">
             <a href="javascript:;">
               <i class="fa fa-desktop"></i>
-              <span>UI Elements</span>
+              <span>매물 관리</span>
               </a>
             <ul class="sub">
-              <li><a href="general.html">General</a></li>
-              <li><a href="buttons.html">Buttons</a></li>
-              <li><a href="panels.html">Panels</a></li>
-              <li><a href="font_awesome.html">Font Awesome</a></li>
+              <li><a href="general.html">등록매물 보기</a></li>
+              <li><a href="buttons.html">신규매물 등록</a></li>
+              <li><a href="panels.html">매물 비교하기</a></li>
+              <li><a href="font_awesome.html">단지정보/실거래가</a></li>
             </ul>
           </li>
           <li class="sub-menu">
             <a href="javascript:;">
               <i class="fa fa-cogs"></i>
-              <span>Components</span>
+              <span>고객 관리</span>
               </a>
             <ul class="sub">
-              <li><a href="grids.html">Grids</a></li>
-              <li><a href="calendar.html">Calendar</a></li>
-              <li><a href="gallery.html">Gallery</a></li>
-              <li><a href="todo_list.html">Todo List</a></li>
-              <li><a href="dropzone.html">Dropzone File Upload</a></li>
-              <li><a href="inline_editor.html">Inline Editor</a></li>
-              <li><a href="file_upload.html">Multiple File Upload</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class="fa fa-book"></i>
-              <span>Extra Pages</span>
-              </a>
-            <ul class="sub">
-              <li><a href="blank.html">Blank Page</a></li>
-              <li><a href="login.html">Login</a></li>
-              <li><a href="lock_screen.html">Lock Screen</a></li>
-              <li><a href="profile.html">Profile</a></li>
-              <li><a href="invoice.html">Invoice</a></li>
-              <li><a href="pricing_table.html">Pricing Table</a></li>
-              <li><a href="faq.html">FAQ</a></li>
-              <li><a href="404.html">404 Error</a></li>
-              <li><a href="500.html">500 Error</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class="fa fa-tasks"></i>
-              <span>Forms</span>
-              </a>
-            <ul class="sub">
-              <li><a href="form_component.html">Form Components</a></li>
-              <li><a href="advanced_form_components.html">Advanced Components</a></li>
-              <li><a href="form_validation.html">Form Validation</a></li>
-              <li><a href="contactform.html">Contact Form</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class="fa fa-th"></i>
-              <span>Data Tables</span>
-              </a>
-            <ul class="sub">
-              <li><a href="basic_table.html">Basic Table</a></li>
-              <li><a href="responsive_table.html">Responsive Table</a></li>
-              <li><a href="advanced_table.html">Advanced Table</a></li>
+              <li><a href="grids.html">등록고객 보기</a></li>
+              <li><a href="calendar.html">신규고객 등록</a></li>
             </ul>
           </li>
           <li>
             <a href="inbox.html">
               <i class="fa fa-envelope"></i>
-              <span>Mail </span>
-              <span class="label label-theme pull-right mail-info">2</span>
+              <span>세금 계산</span>
               </a>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class=" fa fa-bar-chart-o"></i>
-              <span>Charts</span>
-              </a>
-            <ul class="sub">
-              <li><a href="morris.html">Morris</a></li>
-              <li><a href="chartjs.html">Chartjs</a></li>
-              <li><a href="flot_chart.html">Flot Charts</a></li>
-              <li><a href="xchart.html">xChart</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class="fa fa-comments-o"></i>
-              <span>Chat Room</span>
-              </a>
-            <ul class="sub">
-              <li><a href="lobby.html">Lobby</a></li>
-              <li><a href="chat_room.html"> Chat Room</a></li>
-            </ul>
           </li>
           <li>
-            <a href="google_maps.html">
-              <i class="fa fa-map-marker"></i>
-              <span>Google Maps </span>
+            <a href="inbox.html">
+              <i class="fa fa-envelope"></i>
+              <span>일정 관리</span>
+              </a>
+          </li>
+          <li>
+            <a href="inbox.html">
+              <i class="fa fa-envelope"></i>
+              <span>관련 사이트</span>
+              </a>
+          </li>
+          <li>
+            <a href="inbox.html">
+              <i class="fa fa-envelope"></i>
+              <span>사이트 소개</span>
               </a>
           </li>
         </ul>
@@ -369,10 +313,12 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper">
+      
       <!--custom table start-->
         <div class="row">
-          <div class="content-panel">
-              <h4><i class="fa fa-angle-right"></i> Basic Table</h4>
+          <div class="col-md-12">
+            <div class="content-panel">
+              <h4><i class="fa fa-angle-right"></i>Basic Table1</h4>
               <hr>
               <table class="table">
                 <thead>
@@ -406,10 +352,12 @@
               </table>
             </div>
           </div>
+          <!-- /col-md-12 -->
             <!--custom table end-->
+            
             <!--custom table start-->
-        <div class="row">
-          <div class="content-panel">
+          <div class="col-md-12 mt">
+            <div class="content-panel">
               <h4><i class="fa fa-angle-right"></i> Basic Table2</h4>
               <hr>
               <table class="table">
@@ -444,86 +392,30 @@
               </table>
             </div>
           </div>
+          </div>
+          <!-- /row -->
             <!--custom table end-->
           
           <!-- **********************************************************************************************************************************************************
               RIGHT SIDEBAR CONTENT
               *********************************************************************************************************************************************************** -->
-          <div class="col-lg-3 ds">
-           
-           
+			<br />
             <!-- CALENDAR-->
-            <h3><i class="fa fa-angle-right"></i> Calendar</h3>
-	        <!-- page start-->
-	        <div class="row mt">
-	          <aside class="col-lg-3 mt">
-	            <h4><i class="fa fa-angle-right"></i> Draggable Events</h4>
-	            <div id="external-events">
-	              <div class="external-event label label-theme">My Event 1</div>
-	              <div class="external-event label label-success">My Event 2</div>
-	              <div class="external-event label label-info">My Event 3</div>
-	              <div class="external-event label label-warning">My Event 4</div>
-	              <div class="external-event label label-danger">My Event 5</div>
-	              <div class="external-event label label-default">My Event 6</div>
-	              <div class="external-event label label-theme">My Event 7</div>
-	              <div class="external-event label label-info">My Event 8</div>
-	              <div class="external-event label label-success">My Event 9</div>
-	              <p class="drop-after">
-	                <input type="checkbox" id="drop-remove"> Remove After Drop
-	              </p>
-	            </div>
-          </aside>
-          <aside class="col-lg-9 mt">
-            <section class="panel">
-              <div class="panel-body">
-                <div id="calendar" class="has-toolbar">
-                	<table class="fc-header" style="width:100%">
-                	<tbody>
-                	<tr>
-                	<td class="fc-header-left">
-                	<span class="fc-button fc-button-prev fc-state-default fc-corner-left">
-                	<span class="fc-button-inner">
-                	<span class="fc-button-content">&nbsp;◄&nbsp;</span>
-                	<span class="fc-button-effect">
-                	<span></span>
-                	</span></span></span>
-                	<span class="fc-button fc-button-next fc-state-default fc-corner-right">
-                	<span class="fc-button-inner">
-                	<span class="fc-button-content">&nbsp;►&nbsp;</span>
-                	<span class="fc-button-effect"><span></span>
-                	</span></span></span>
-                	<span class="fc-header-space"></span>
-                	<span class="fc-button fc-button-today fc-state-default fc-corner-left fc-corner-right fc-state-disabled">
-                	<span class="fc-button-inner">
-                	<span class="fc-button-content">today</span>
-                	<span class="fc-button-effect"><span></span>
-                	</span></span></span></td>
-                	<td class="fc-header-center">
-                	<span class="fc-header-title">
-                	<h2>September 2020</h2></span></td><td class="fc-header-right">
-                	<span class="fc-button fc-button-month fc-state-default fc-corner-left fc-state-active">
-                	<span class="fc-button-inner">
-                	<span class="fc-button-content">month</span>
-                	<span class="fc-button-effect"><span></span></span></span></span>
-                	<span class="fc-button fc-button-basicWeek fc-state-default">
-                	<span class="fc-button-inner">
-                	<span class="fc-button-content">week</span><span class="fc-button-effect"><span></span></span></span></span>
-                	<span class="fc-button fc-button-basicDay fc-state-default fc-corner-right">
-                	<span class="fc-button-inner">
-                	<span class="fc-button-content">day</span>
-                	<span class="fc-button-effect"><span></span></span></span></span></td>
-                	</tr>
-                	</tbody>
-                	</table>
+            <div id="calendar" class="mb" >
+              <div class="panel green-panel no-margin">
+                <div class="panel-body">
+                  <div id="date-popover" class="popover top" style="cursor: pointer; disadding: block; margin-left: 33%; margin-top: -50px; width: 175px;">
+                    <div class="arrow"></div>
+                    <h3 class="popover-title" style="disadding: none;"></h3>
+                    <div id="date-popover-content" class="popover-content"></div>
+                  </div>
+                  <div id="my-calendar"></div>
                 </div>
               </div>
-            </section>
-          </aside>
-        </div>
-        <!-- page end-->
+            </div>
             <!-- / calendar -->
-          </div>
-          <!-- /col-lg-3 -->
+           
+        </div>
         </div>
         <!-- /row -->
       </section>
@@ -552,20 +444,20 @@
     <!--footer end-->
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
-  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="./resources/lib/jquery/jquery.min.js"></script>
 
-  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-  <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
-  <script src="lib/jquery.scrollTo.min.js"></script>
-  <script src="lib/jquery.nicescroll.js" type="text/javascript"></script>
-  <script src="lib/jquery.sparkline.js"></script>
+  <script src="./resources/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script class="include" type="text/javascript" src="./resources/lib/jquery.dcjqaccordion.2.7.js"></script>
+  <script src="./resources/lib/jquery.scrollTo.min.js"></script>
+  <script src="./resources/lib/jquery.nicescroll.js" type="text/javascript"></script>
+  <script src="./resources/lib/jquery.sparkline.js"></script>
   <!--common script for all pages-->
-  <script src="lib/common-scripts.js"></script>
-  <script type="text/javascript" src="lib/gritter/js/jquery.gritter.js"></script>
-  <script type="text/javascript" src="lib/gritter-conf.js"></script>
+  <script src="./resources/lib/common-scripts.js"></script>
+  <script type="text/javascript" src="./resources/lib/gritter/js/jquery.gritter.js"></script>
+  <script type="text/javascript" src="./resources/lib/gritter-conf.js"></script>
   <!--script for this page-->
-  <script src="lib/sparkline-chart.js"></script>
-  <script src="lib/zabuto_calendar.js"></script>
+  <script src="./resources/lib/sparkline-chart.js"></script>
+  <script src="./resources/lib/zabuto_calendar.js"></script>
   <script type="text/javascript">
     $(document).ready(function() {
       var unique_id = $.gritter.add({
