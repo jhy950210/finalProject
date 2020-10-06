@@ -25,22 +25,6 @@
 			<url-pattern>*.do</url-pattern>
 		</filter-mapping>
 		
-		<!-- Spring용 Servlet 설정 -->
-		<servlet>
-			<servlet-name>dispatcher</servlet-name>
-			<servlet-class>
-				org.springframework.web.servlet.DispatcherServlet
-			</servlet-class>
-			<init-param>
-				<param-name>contextConfigLocation</param-name>
-				<param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
-			</init-param>
-			<load-on-startup>1</load-on-startup>
-		</servlet>
-		<servlet-mapping>
-			<servlet-name>dispatcher</servlet-name>
-			<url-pattern>*.do</url-pattern>
-	</servlet-mapping>
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -65,7 +49,7 @@
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
 </web-app>
