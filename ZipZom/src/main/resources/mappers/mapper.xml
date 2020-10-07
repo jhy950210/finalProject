@@ -2,5 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.exam.ZipZom.TestMapper">
-	
+	<select id="loginSelect" parameterType="modelTO.userTO" resultType="modelTO.userTO">
+		select id from user where id=#{ID} and password=#{PASSWORD}
+	</select>
+	<insert id="signUpInsert" parameterType="modelTO.userTO">
+		insert into user (
+		name, 
+		id, 
+		password, 
+		email, 
+		address, 
+		tel1, 
+		tel2
+		) 
+		values (
+		#{NAME}, 
+		#{ID}, 
+		#{PASSWORD}, 
+		#{EMAIL}, 
+		#{ADDRESS}, 
+		#{TEL1}, 
+		#{TEL2}
+		)
+	</insert>
+	<select id="duIdSelect" parameterType="modelTO.userTO" resultType="modelTO.userTO">
+		select id from user where id=#{ID}
+	</select>
+	<select id="duEmailSelect" parameterType="modelTO.userTO" resultType="modelTO.userTO">
+		select email from user where email=#{EMAIL}
+	</select>
+	<select id="findIdSelect" parameterType="modelTO.userTO" resultType="String">
+		select id from user where email=#{EMAIL} and name=#{NAME}
+	</select>
+	<select id="findPasswordSelect" parameterType="modelTO.userTO" resultType="modelTO.userTO">
+		select email from user where email=#{EMAIL}
+	</select>
 </mapper>

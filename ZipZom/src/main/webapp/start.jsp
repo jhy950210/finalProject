@@ -21,6 +21,33 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
  
 </head>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#btn").button().on('click', function() {
+		var id = $( '#id' ).val();
+		var password = $( '#password' ).val();
+		$.ajax({
+			url: './login.do',
+			data: {
+				id: id,
+				password: password
+			},
+			type: 'get',
+			datatype: 'json',
+			success: function( json ) {
+				if( json.flag == 1 ){
+					alert('성공');
+					//location.href = './newDashboard.jsp';
+				} else {
+					alert("아이디/패스워드 오류");
+					//location.href = './start.jsp';
+				}
+				
+			}
+		});
+	});
+});
+</script>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
@@ -33,7 +60,7 @@
 
       <form action="./login.do" method="post" >
         <div class="input-group mb-3">
-          <input type="text" class="form-control"  name="id" placeholder="ID">
+          <input type="text" class="form-control"  id="id" name="id" placeholder="ID">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -41,7 +68,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control"  name="password" placeholder="Password">
+          <input type="password" class="form-control"  id="password" name="password" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

@@ -39,6 +39,11 @@ public class pfsTO {
 	private String B_YEAR;
 	private String CONTEXT;
 	private boolean SECURITY;
+	private String LESSOR_NAME;
+	private String LESSOR_TEL;
+	private String LESSEE_NAME;
+	private String LESSEE_TEL;
+
 	
 	public int getSEQ_PFS() {
 		return SEQ_PFS;
@@ -263,5 +268,29 @@ public class pfsTO {
 		SECURITY = sECURITY;
 	}
 	
+	public String getLESSOR_NAME() {
+	      return LESSOR_NAME;
+	}
+	public void setLESSOR_NAME(String lESSOR_NAME) {
+		LESSOR_NAME = lESSOR_NAME;
+	}
+	public String getLESSOR_TEL() {
+		return LESSOR_TEL;
+	}
+	public void setLESSOR_TEL(String lESSOR_TEL) {
+		LESSOR_TEL = lESSOR_TEL;
+	}
+	public String getLESSEE_NAME() {
+		return LESSEE_NAME;
+	}
+	public void setLESSEE_NAME(String lESSEE_NAME) {
+      LESSEE_NAME = lESSEE_NAME;
+	}
+	public String getLESSEE_TEL() {
+		return LESSEE_TEL;
+	}
+	public void setLESSEE_TEL(String lESSEE_TEL) {
+		LESSEE_TEL = lESSEE_TEL;
+	}
 	
 }
