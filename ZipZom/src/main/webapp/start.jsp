@@ -21,11 +21,18 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
  
 </head>
+<!-- jQuery -->
+<script src="./resources/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	var id = $('#id').val();
+	var password = $('#password').val();
+	
 	$("#btn").button().on('click', function() {
-		var id = $( '#id' ).val();
-		var password = $( '#password' ).val();
+		loginOk(id, password);
+	});
+	
+	var loginOk = function( id, password ){
 		$.ajax({
 			url: './login.do',
 			data: {
@@ -40,12 +47,12 @@ $(document).ready(function() {
 					//location.href = './newDashboard.jsp';
 				} else {
 					alert("아이디/패스워드 오류");
-					//location.href = './start.jsp';
+					location.href = './newDashboard.jsp';
 				}
 				
 			}
-		});
-	});
+		}); 
+	}
 });
 </script>
 <body class="hold-transition login-page">
@@ -58,7 +65,7 @@ $(document).ready(function() {
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="./login.do" method="post" >
+      <form method="post" >
         <div class="input-group mb-3">
           <input type="text" class="form-control"  id="id" name="id" placeholder="ID">
           <div class="input-group-append">
@@ -115,8 +122,7 @@ $(document).ready(function() {
 </div>
 <!-- /.login-box -->
 
-<!-- jQuery -->
-<script src="./resources/plugins/jquery/jquery.min.js"></script>
+
 <!-- Bootstrap 4 -->
 <script src="./resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->

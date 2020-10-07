@@ -29,9 +29,6 @@ public class ConfigController {
 			String id = request.getParameter("id"); 
 			String password = enc.encryptionMain(request.getParameter("password"));
 			
-			System.out.println(id);
-			System.out.println(password);
-			
 			to.setID(id);
 			to.setPASSWORD(password);
 		
