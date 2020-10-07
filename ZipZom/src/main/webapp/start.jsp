@@ -58,7 +58,7 @@ $(document).ready(function() {
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>ZipZom</b>Login</a>
+    <a href="#"><b>ZipZom</b>Login</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -114,7 +114,7 @@ $(document).ready(function() {
         <a href="forgot-password.html">I forgot my password</a>
       </p>
       <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="./register.jsp" class="text-center">Register a new membership</a>
       </p>
     </div>
     <!-- /.login-card-body -->

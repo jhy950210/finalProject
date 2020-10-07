@@ -87,8 +87,8 @@ public class ConfigController {
 		request.setAttribute("flag", flag);
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("test");
-		modelAndView.addObject("list", request);
+		modelAndView.setViewName("register");
+		modelAndView.addObject("flag",flag);
 		
 		return modelAndView;
 	}
