@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.exam.ZipZom.TestMapper_pfs">
-	<select id="pfs_list" parameterType="modelTO.userTO" resultType="modelTO.pfsTO">
+	<select id="pfs_list" parameterType="modelTO.userTO" resultType="modelTO.PfsTO">
 	select SEQ_PFS,PSEQ_PFS,B_TYPE,SI,GU,DONG,BUNJI,H_NUMBER,CONTRACT_TYPE,BUDGET1,BUDGET2,BUDGET3,BUDGET4,BUDGET5,BUDGET6,M_COST,LOAN,AREA1,AREA2,AREA3,MOVE_SCHEDULE,
 	END_OFLEASE,ROOM,BATHROOM,DIRECTION,HEATING_SYSTEM,NUMBER_OF_HOUSEHOLD,PARKING,FLOOR,FLOOR_TOTAL,B_YEAR,CONTEXT
 	from property_for_sale
 	where pseq_pfs = (select seq_u from user where id = #{ID})
 	</select>
 	
-	<insert id="pfs_write" parameterType="modelTO.pfsTO">
+	<insert id="pfs_write" parameterType="modelTO.PfsTO">
 	insert into property_for_sale values(0,#{PSEQ_PFS},#{B_TYPE},#{SI},#{GU},#{DONG},#{BUNJI},#{H_NUMBER},#{CONTRACT_TYPE},#{BUDGET1},#{BUDGET2},#{BUDGET3},#{BUDGET4},#{BUDGET5},#{BUDGET6},#{M_COST},#{LOAN},#{AREA1},#{AREA2},#{AREA3},#{MOVE_SCHEDULE},
 	#{END_OFLEASE},#{ROOM},#{BATHROOM},#{DIRECTION},#{HEATING_SYSTEM},#{AIRCONDITION},#{OPTION},#{NUMBER_OF_HOUSEHOLD},#{PARKING},#{FLOOR},#{FLOOR_TOTAL},#{ELEVATOR},#{B_YEAR},#{CONTEXT},#{SECURITY})
 	</insert>
