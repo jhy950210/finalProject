@@ -2,295 +2,294 @@ package modelTO;
 
 public class pfsTO {
 	// PROPERTY FOR SALE
-	private int SEQ_PFS;
-	private int PSEQ_PFS;
-	private boolean IMAGES;
-	private String B_TYPE;
-	private String SI;
-	private String GU;
-	private String DONG;
-	private String BUNJI;
-	private int H_NUMBER;
-	private String CONTRACT_TYPE;
-	private int BUDGET1;
-	private int BUDGET2;
-	private int BUDGET3;
-	private int BUDGET4;
-	private int BUDGET5;
-	private int BUDGET6;
-	private int M_COST;
-	private int LOAN;
-	private int AREA1;
-	private int AREA2;
-	private int AREA3;
-	private String MOVE_SCHEDULE;
-	private String END_OFLEASE;
-	private int ROOM;
-	private int BATHROOM;
-	private String DIRECTION;
-	private String HEATING_SYSTEM;
-	private boolean AIRCONDITION;
-	private boolean OPTION;
-	private int NUMBER_OFHOUSEHOLD;
-	private int PARKING;
-	private int FLOOR;
-	private int FLOOR_TOTAL;
-	private boolean ELEVATOR;
-	private String B_YEAR;
-	private String CONTEXT;
-	private boolean SECURITY;
-	private String LESSOR_NAME;
-	private String LESSOR_TEL;
-	private String LESSEE_NAME;
-	private String LESSEE_TEL;
-
+	private int seqPfs;
+	private int pseqPfs;
+	private boolean images;
+	private String bType;
+	private String si;
+	private String gu;
+	private String dong;
+	private String bunji;
+	private int hNumber;
+	private String contractType;
+	private int budget1;
+	private int budget2;
+	private int budget3;
+	private int budget4;
+	private int budget5;
+	private int budget6;
+	private int mCost;
+	private int loan;
+	private int area1;
+	private int area2;
+	private int area3;
+	private String moveSchedule;
+	private String endOfLease;
+	private int room;
+	private int bathroom;
+	private String direction;
+	private String heatingSystem;
+	private boolean aircondition;
+	private boolean option;
+	private int numberOfHousehold;
+	private int parking;
+	private int floor;
+	private int floorTotal;
+	private boolean elevator;
+	private String bYear;
+	private String context;
+	private boolean security;
+	private String lessorName;
+	private String lessorTel;
+	private String lesseeName;
+	private String lesseeTel;
 	
-	public int getSEQ_PFS() {
-		return SEQ_PFS;
+	public int getSeqPfs() {
+		return seqPfs;
 	}
-	public void setSEQ_PFS(int sEQ_PFS) {
-		SEQ_PFS = sEQ_PFS;
+	public void setSeqPfs(int seqPfs) {
+		this.seqPfs = seqPfs;
 	}
-	public int getPSEQ_PFS() {
-		return PSEQ_PFS;
+	public int getPseqPfs() {
+		return pseqPfs;
 	}
-	public void setPSEQ_PFS(int pSEQ_PFS) {
-		PSEQ_PFS = pSEQ_PFS;
+	public void setPseqPfs(int pseqPfs) {
+		this.pseqPfs = pseqPfs;
 	}
-	public boolean isIMAGES() {
-		return IMAGES;
+	public boolean isImages() {
+		return images;
 	}
-	public void setIMAGES(boolean iMAGES) {
-		IMAGES = iMAGES;
+	public void setImages(boolean images) {
+		this.images = images;
 	}
-	public String getB_TYPE() {
-		return B_TYPE;
+	public String getbType() {
+		return bType;
 	}
-	public void setB_TYPE(String b_TYPE) {
-		B_TYPE = b_TYPE;
+	public void setbType(String bType) {
+		this.bType = bType;
 	}
-	public String getSI() {
-		return SI;
+	public String getSi() {
+		return si;
 	}
-	public void setSI(String sI) {
-		SI = sI;
+	public void setSi(String si) {
+		this.si = si;
 	}
-	public String getGU() {
-		return GU;
+	public String getGu() {
+		return gu;
 	}
-	public void setGU(String gU) {
-		GU = gU;
+	public void setGu(String gu) {
+		this.gu = gu;
 	}
-	public String getDONG() {
-		return DONG;
+	public String getDong() {
+		return dong;
 	}
-	public void setDONG(String dONG) {
-		DONG = dONG;
+	public void setDong(String dong) {
+		this.dong = dong;
 	}
-	public String getBUNJI() {
-		return BUNJI;
+	public String getBunji() {
+		return bunji;
 	}
-	public void setBUNJI(String bUNJI) {
-		BUNJI = bUNJI;
+	public void setBunji(String bunji) {
+		this.bunji = bunji;
 	}
-	public int getH_NUMBER() {
-		return H_NUMBER;
+	public int gethNumber() {
+		return hNumber;
 	}
-	public void setH_NUMBER(int h_NUMBER) {
-		H_NUMBER = h_NUMBER;
+	public void sethNumber(int hNumber) {
+		this.hNumber = hNumber;
 	}
-	public String getCONTRACT_TYPE() {
-		return CONTRACT_TYPE;
+	public String getContractType() {
+		return contractType;
 	}
-	public void setCONTRACT_TYPE(String cONTRACT_TYPE) {
-		CONTRACT_TYPE = cONTRACT_TYPE;
+	public void setContractType(String contractType) {
+		this.contractType = contractType;
 	}
-	public int getBUDGET1() {
-		return BUDGET1;
+	public int getBudget1() {
+		return budget1;
 	}
-	public void setBUDGET1(int bUDGET1) {
-		BUDGET1 = bUDGET1;
+	public void setBudget1(int budget1) {
+		this.budget1 = budget1;
 	}
-	public int getBUDGET2() {
-		return BUDGET2;
+	public int getBudget2() {
+		return budget2;
 	}
-	public void setBUDGET2(int bUDGET2) {
-		BUDGET2 = bUDGET2;
+	public void setBudget2(int budget2) {
+		this.budget2 = budget2;
 	}
-	public int getBUDGET3() {
-		return BUDGET3;
+	public int getBudget3() {
+		return budget3;
 	}
-	public void setBUDGET3(int bUDGET3) {
-		BUDGET3 = bUDGET3;
+	public void setBudget3(int budget3) {
+		this.budget3 = budget3;
 	}
-	public int getBUDGET4() {
-		return BUDGET4;
+	public int getBudget4() {
+		return budget4;
 	}
-	public void setBUDGET4(int bUDGET4) {
-		BUDGET4 = bUDGET4;
+	public void setBudget4(int budget4) {
+		this.budget4 = budget4;
 	}
-	public int getBUDGET5() {
-		return BUDGET5;
+	public int getBudget5() {
+		return budget5;
 	}
-	public void setBUDGET5(int bUDGET5) {
-		BUDGET5 = bUDGET5;
+	public void setBudget5(int budget5) {
+		this.budget5 = budget5;
 	}
-	public int getBUDGET6() {
-		return BUDGET6;
+	public int getBudget6() {
+		return budget6;
 	}
-	public void setBUDGET6(int bUDGET6) {
-		BUDGET6 = bUDGET6;
+	public void setBudget6(int budget6) {
+		this.budget6 = budget6;
 	}
-	public int getM_COST() {
-		return M_COST;
+	public int getmCost() {
+		return mCost;
 	}
-	public void setM_COST(int m_COST) {
-		M_COST = m_COST;
+	public void setmCost(int mCost) {
+		this.mCost = mCost;
 	}
-	public int getLOAN() {
-		return LOAN;
+	public int getLoan() {
+		return loan;
 	}
-	public void setLOAN(int lOAN) {
-		LOAN = lOAN;
+	public void setLoan(int loan) {
+		this.loan = loan;
 	}
-	public int getAREA1() {
-		return AREA1;
+	public int getArea1() {
+		return area1;
 	}
-	public void setAREA1(int aREA1) {
-		AREA1 = aREA1;
+	public void setArea1(int area1) {
+		this.area1 = area1;
 	}
-	public int getAREA2() {
-		return AREA2;
+	public int getArea2() {
+		return area2;
 	}
-	public void setAREA2(int aREA2) {
-		AREA2 = aREA2;
+	public void setArea2(int area2) {
+		this.area2 = area2;
 	}
-	public int getAREA3() {
-		return AREA3;
+	public int getArea3() {
+		return area3;
 	}
-	public void setAREA3(int aREA3) {
-		AREA3 = aREA3;
+	public void setArea3(int area3) {
+		this.area3 = area3;
 	}
-	public String getMOVE_SCHEDULE() {
-		return MOVE_SCHEDULE;
+	public String getMoveSchedule() {
+		return moveSchedule;
 	}
-	public void setMOVE_SCHEDULE(String mOVE_SCHEDULE) {
-		MOVE_SCHEDULE = mOVE_SCHEDULE;
+	public void setMoveSchedule(String moveSchedule) {
+		this.moveSchedule = moveSchedule;
 	}
-	public String getEND_OFLEASE() {
-		return END_OFLEASE;
+	public String getEndOfLease() {
+		return endOfLease;
 	}
-	public void setEND_OFLEASE(String eND_OFLEASE) {
-		END_OFLEASE = eND_OFLEASE;
+	public void setEndOfLease(String endOfLease) {
+		this.endOfLease = endOfLease;
 	}
-	public int getROOM() {
-		return ROOM;
+	public int getRoom() {
+		return room;
 	}
-	public void setROOM(int rOOM) {
-		ROOM = rOOM;
+	public void setRoom(int room) {
+		this.room = room;
 	}
-	public int getBATHROOM() {
-		return BATHROOM;
+	public int getBathroom() {
+		return bathroom;
 	}
-	public void setBATHROOM(int bATHROOM) {
-		BATHROOM = bATHROOM;
+	public void setBathroom(int bathroom) {
+		this.bathroom = bathroom;
 	}
-	public String getDIRECTION() {
-		return DIRECTION;
+	public String getDirection() {
+		return direction;
 	}
-	public void setDIRECTION(String dIRECTION) {
-		DIRECTION = dIRECTION;
+	public void setDirection(String direction) {
+		this.direction = direction;
 	}
-	public String getHEATING_SYSTEM() {
-		return HEATING_SYSTEM;
+	public String getHeatingSystem() {
+		return heatingSystem;
 	}
-	public void setHEATING_SYSTEM(String hEATING_SYSTEM) {
-		HEATING_SYSTEM = hEATING_SYSTEM;
+	public void setHeatingSystem(String heatingSystem) {
+		this.heatingSystem = heatingSystem;
 	}
-	public boolean isAIRCONDITION() {
-		return AIRCONDITION;
+	public boolean isAircondition() {
+		return aircondition;
 	}
-	public void setAIRCONDITION(boolean aIRCONDITION) {
-		AIRCONDITION = aIRCONDITION;
+	public void setAircondition(boolean aircondition) {
+		this.aircondition = aircondition;
 	}
-	public boolean isOPTION() {
-		return OPTION;
+	public boolean isOption() {
+		return option;
 	}
-	public void setOPTION(boolean oPTION) {
-		OPTION = oPTION;
+	public void setOption(boolean option) {
+		this.option = option;
 	}
-	public int getNUMBER_OFHOUSEHOLD() {
-		return NUMBER_OFHOUSEHOLD;
+	public int getNumberOfHousehold() {
+		return numberOfHousehold;
 	}
-	public void setNUMBER_OFHOUSEHOLD(int nUMBER_OFHOUSEHOLD) {
-		NUMBER_OFHOUSEHOLD = nUMBER_OFHOUSEHOLD;
+	public void setNumberOfHousehold(int numberOfHousehold) {
+		this.numberOfHousehold = numberOfHousehold;
 	}
-	public int getPARKING() {
-		return PARKING;
+	public int getParking() {
+		return parking;
 	}
-	public void setPARKING(int pARKING) {
-		PARKING = pARKING;
+	public void setParking(int parking) {
+		this.parking = parking;
 	}
-	public int getFLOOR() {
-		return FLOOR;
+	public int getFloor() {
+		return floor;
 	}
-	public void setFLOOR(int fLOOR) {
-		FLOOR = fLOOR;
+	public void setFloor(int floor) {
+		this.floor = floor;
 	}
-	public int getFLOOR_TOTAL() {
-		return FLOOR_TOTAL;
+	public int getFloorTotal() {
+		return floorTotal;
 	}
-	public void setFLOOR_TOTAL(int fLOOR_TOTAL) {
-		FLOOR_TOTAL = fLOOR_TOTAL;
+	public void setFloorTotal(int floorTotal) {
+		this.floorTotal = floorTotal;
 	}
-	public boolean isELEVATOR() {
-		return ELEVATOR;
+	public boolean isElevator() {
+		return elevator;
 	}
-	public void setELEVATOR(boolean eLEVATOR) {
-		ELEVATOR = eLEVATOR;
+	public void setElevator(boolean elevator) {
+		this.elevator = elevator;
 	}
-	public String getB_YEAR() {
-		return B_YEAR;
+	public String getbYear() {
+		return bYear;
 	}
-	public void setB_YEAR(String b_YEAR) {
-		B_YEAR = b_YEAR;
+	public void setbYear(String bYear) {
+		this.bYear = bYear;
 	}
-	public String getCONTEXT() {
-		return CONTEXT;
+	public String getContext() {
+		return context;
 	}
-	public void setCONTEXT(String cONTEXT) {
-		CONTEXT = cONTEXT;
+	public void setContext(String context) {
+		this.context = context;
 	}
-	public boolean isSECURITY() {
-		return SECURITY;
+	public boolean isSecurity() {
+		return security;
 	}
-	public void setSECURITY(boolean sECURITY) {
-		SECURITY = sECURITY;
+	public void setSecurity(boolean security) {
+		this.security = security;
+	}
+	public String getLessorName() {
+		return lessorName;
+	}
+	public void setLessorName(String lessorName) {
+		this.lessorName = lessorName;
+	}
+	public String getLessorTel() {
+		return lessorTel;
+	}
+	public void setLessorTel(String lessorTel) {
+		this.lessorTel = lessorTel;
+	}
+	public String getLesseeName() {
+		return lesseeName;
+	}
+	public void setLesseeName(String lesseeName) {
+		this.lesseeName = lesseeName;
+	}
+	public String getLesseeTel() {
+		return lesseeTel;
+	}
+	public void setLesseeTel(String lesseeTel) {
+		this.lesseeTel = lesseeTel;
 	}
 	
-	public String getLESSOR_NAME() {
-	      return LESSOR_NAME;
-	}
-	public void setLESSOR_NAME(String lESSOR_NAME) {
-		LESSOR_NAME = lESSOR_NAME;
-	}
-	public String getLESSOR_TEL() {
-		return LESSOR_TEL;
-	}
-	public void setLESSOR_TEL(String lESSOR_TEL) {
-		LESSOR_TEL = lESSOR_TEL;
-	}
-	public String getLESSEE_NAME() {
-		return LESSEE_NAME;
-	}
-	public void setLESSEE_NAME(String lESSEE_NAME) {
-      LESSEE_NAME = lESSEE_NAME;
-	}
-	public String getLESSEE_TEL() {
-		return LESSEE_TEL;
-	}
-	public void setLESSEE_TEL(String lESSEE_TEL) {
-		LESSEE_TEL = lESSEE_TEL;
-	}
 	
 }

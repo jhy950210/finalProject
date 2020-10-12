@@ -25,16 +25,20 @@
 <script src="./resources/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	var id = $('#id').val();
-	var password = $('#password').val();
+	//var id = $('#id').val();
+	//var password = $('#password').val();
 	
 	$("#btn").button().on('click', function() {
+		var id = $('#id').val();
+		var password = $('#password').val();
+		console.log(id);
+		console.log(password);
 		loginOk(id, password);
 	});
 	
 	var loginOk = function( id, password ){
 		$.ajax({
-			url: './login.do',
+			url: './login.action',
 			data: {
 				id: id,
 				password: password
@@ -47,7 +51,7 @@ $(document).ready(function() {
 					//location.href = './newDashboard.jsp';
 				} else {
 					alert("아이디/패스워드 오류");
-					location.href = './newDashboard.jsp';
+					//location.href = './newDashboard.jsp';
 				}
 				
 			}
@@ -67,7 +71,7 @@ $(document).ready(function() {
 
       <form method="post" >
         <div class="input-group mb-3">
-          <input type="text" class="form-control"  id="id" name="id" placeholder="ID">
+          <input type="text" class="form-control"  id="id" name="id" placeholder="ID" />
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -75,7 +79,7 @@ $(document).ready(function() {
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control"  id="password" name="password" placeholder="Password">
+          <input type="password" class="form-control"  id="password" name="password" placeholder="Password" />
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -85,7 +89,7 @@ $(document).ready(function() {
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="remember">
+              <input type="checkbox" id="remember" />
               <label for="remember">
                 Remember Me
               </label>
@@ -111,10 +115,10 @@ $(document).ready(function() {
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
+        <a href="./forgot_password.action">I forgot my password</a>
       </p>
       <p class="mb-0">
-        <a href="./register.jsp" class="text-center">Register a new membership</a>
+        <a href="./register.action" class="text-center">Register a new membership</a>
       </p>
     </div>
     <!-- /.login-card-body -->

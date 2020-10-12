@@ -2,9 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.exam.ZipZom.TestMapper">
+	<!-- 로그인 확인 sql문 -->
 	<select id="loginSelect" parameterType="modelTO.userTO" resultType="modelTO.userTO">
-		select id from user where id=#{ID} and password=#{PASSWORD}
+		select id from user where id=#{id} and password=#{password}
 	</select>
+	<!-- 회원가입 시 회원 정보 입력 sql문 -->
 	<insert id="signUpInsert" parameterType="modelTO.userTO">
 		insert into user (
 		name, 
@@ -16,25 +18,66 @@
 		tel2
 		) 
 		values (
-		#{NAME}, 
-		#{ID}, 
-		#{PASSWORD}, 
-		#{EMAIL}, 
-		#{ADDRESS}, 
-		#{TEL1}, 
-		#{TEL2}
+		#{name}, 
+		#{id}, 
+		#{password}, 
+		#{email}, 
+		#{address}, 
+		#{tel1}, 
+		#{tel2}
 		)
 	</insert>
+	<!-- 아이디 중복 검사 sql문 -->
 	<select id="duIdSelect" parameterType="modelTO.userTO" resultType="modelTO.userTO">
-		select id from user where id=#{ID}
+		select id from user where id=#{id}
 	</select>
+	<!-- 이메일 중복 검사 sql문 -->
 	<select id="duEmailSelect" parameterType="modelTO.userTO" resultType="modelTO.userTO">
-		select email from user where email=#{EMAIL}
+		select email from user where email=#{email}
 	</select>
+	<!-- 아이디 찾기 sql문 -->
 	<select id="findIdSelect" parameterType="modelTO.userTO" resultType="String">
-		select id from user where email=#{EMAIL} and name=#{NAME}
+		select id from user where email=#{email} and name=#{name}
 	</select>
-	<select id="findPasswordSelect" parameterType="modelTO.userTO" resultType="modelTO.userTO">
-		select email from user where email=#{EMAIL}
+	<!-- 비밀번호 찾기 sql문 -->
+	<select id="sendNumberSelect" parameterType="modelTO.userTO" resultType="modelTO.userTO">
+		select email from user where email=#{email} and ID=#{id}
 	</select>
+	<!-- 비밀번호 찾기 sql문에 의해 회원이 인증 된 후 인증번호 저장 sql문 -->
+	<insert id="auth_KeyInsert" parameterType="modelTO.auth_passwordTO">
+		insert into auth_password (
+		email,
+		auth_Key, 
+		generate_Date
+		) 
+		values (
+		#{email}, 
+		#{authKey}, 
+		#{generateDate}
+		)
+	</insert>
+	<!-- 이메일로 발송하는 인증번호의 중복검사 sql문 -->
+	<select id="duplicateAuth_KeySelect" parameterType="modelTO.auth_passwordTO" resultType="String">
+		select AUTH_KEY from auth_password where AUTH_KEY=#{authKey}
+	</select>
+	<!-- 인증번호 테이블의 이메일 중복검사 sql문 -->
+	<select id="duplicateEmailSelect" parameterType="modelTO.auth_passwordTO" resultType="String">
+		select email from auth_password where EMAIL=#{email}
+	</select>
+	<!-- 인증번호 테이블의 이메일이 중복되었을 경우 삭제하는 sql문 -->
+	<delete id="duplicateEmailDelete" parameterType="modelTO.auth_passwordTO">
+		delete from auth_password where EMAIL=#{email}
+	</delete>
+	<!-- 생성된지 1시간이 지난 인증번호 삭제 sql문 -->
+	<delete id="auth_KeyDelete" parameterType="modelTO.auth_passwordTO">
+		delete from auth_password where generate_date &lt; date_add(now(), interval -1 hour)
+	</delete>
+	<!-- 인증번호 검사 sql문 -->
+	<select id="authKeySelect" parameterType="modelTO.auth_passwordTO" resultType="String">
+		select email from auth_password where AUTH_KEY=#{authKey}
+	</select>
+	<!--비밀번호 변경 sql문 -->
+	<update id="userPasswordUpdate" parameterType="modelTO.auth_passwordTO">
+		UPDATE user SET password = #{password} WHERE email = #{email};
+	</update>
 </mapper>

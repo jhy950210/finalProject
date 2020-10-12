@@ -1,26 +1,28 @@
 package modelTO;
 
 public class customer_visit_dateTO {
-	private int SEQ_CVD;
-	private int PSEQ_CVD;
-	private String VISIT_DATE;
+	private int seqCvd;
+	private int pseqCvd;
+	private String visitDate;
 	
-	public int getSEQ_CVD() {
-		return SEQ_CVD;
+	public int getSeqCvd() {
+		return seqCvd;
 	}
-	public void setSEQ_CVD(int sEQ_CVD) {
-		SEQ_CVD = sEQ_CVD;
+	public void setSeqCvd(int seqCvd) {
+		this.seqCvd = seqCvd;
 	}
-	public int getPSEQ_CVD() {
-		return PSEQ_CVD;
+	public int getPseqCvd() {
+		return pseqCvd;
 	}
-	public void setPSEQ_CVD(int pSEQ_CVD) {
-		PSEQ_CVD = pSEQ_CVD;
+	public void setPseqCvd(int pseqCvd) {
+		this.pseqCvd = pseqCvd;
 	}
-	public String getVISIT_DATE() {
-		return VISIT_DATE;
+	public String getVisitDate() {
+		return visitDate;
 	}
-	public void setVISIT_DATE(String vISIT_DATE) {
-		VISIT_DATE = vISIT_DATE;
+	public void setVisitDate(String visitDate) {
+		this.visitDate = visitDate;
 	}
+	
+	
 }

@@ -1,21 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%
-    	int flag = (Integer)request.getAttribute("flag");
-    
-		out.println("<script type='text/javascript'>");
-		if( flag == 1 ){
-			out.println("alert('회원 등록에 성공했습니다.');");
-			out.println("location.href='./list.do';");
-		}else if( flag == 0){
-			out.println("alert('회원 등록에 실패했습니다.');");
-			out.println("history.back();");
-		}else {
-			out.println("alert('이상한 값입니다.');");
-			out.println("history.back();"); // 되돌아가기
-		}
-		out.println("</script>");
-    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,23 +27,35 @@ $(document).ready(function() {
 	$("#btn").button().on('click', function() {
 		//alert('click');
 		if( $('#name').val().trim() == "" ){
-			alert('동의를 하셔야 합니다.');
+			alert('이름 입력 오류입니다.');
 			return false;
 		}
-		if( document.wfrm.writer.value.trim() == '' ){
-			alert('이름을 입력하셔야 합니다.');
+		if( $('#id').val().trim() == "" ){
+			alert('아이디 입력 오류입니다.');
 			return false;
 		}
-		if( document.wfrm.password.value.trim() == ''){
-			alert('비밀번호를 입력하셔야 합니다.');
+		if( $('#password').val().trim() == "" ){
+			alert('패스워드 입력 오류입니다.');
 			return false;
 		}
-		if( document.wfrm.subject.value.trim() == ''){
-			alert('제목을 입력하셔야 합니다.');
+		if( $('#email').val().trim() == "" ){
+			alert('이메일 입력 오류입니다.');
+			return false;
+		}
+		if( $('#address').val().trim() == "" ){
+			alert('주소 입력 오류입니다.');
+			return false;
+		}
+		if( $('#phone').val().trim() == "" ){
+			alert('핸드폰 번호 입력 오류입니다.');
+			return false;
+		}
+		if( $('#tel').val().trim() == "" ){
+			alert('유선 전화번호 입력 오류입니다.');
 			return false;
 		}
 		
-	};
+	});
 });
 </script>
 <body class="hold-transition register-page">
