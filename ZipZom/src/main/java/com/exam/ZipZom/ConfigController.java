@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -27,22 +28,26 @@ public class ConfigController {
 	@RequestMapping(value = "/login.do")
 	public ModelAndView loginRequest(HttpServletRequest request) {
 
+		HttpServletRequest httpRequest = (HttpServletRequest)request;
+		HttpSession session = httpRequest.getSession(false);
+
 		userTO to = new userTO();
 		encryption enc = new encryption();
 		
-//			String id = request.getParameter("id"); 
-//			String password = enc.encryptionMain(request.getParameter("password"));
-//			
-//			to.setId(id);
-//			to.setPassword(password);
+		String id = request.getParameter("id"); 
+		String password = enc.encryptionMain(request.getParameter("password"));
 		
-		to.setId("user");
-		to.setPassword("123");
+		to.setId(id);
+		to.setPassword(password);
+		
+//		to.setId("user");
+//		to.setPassword("123");
 		
 		int flag = 0;
 
 		if(sqlSession.selectOne("loginSelect", to) != null) {
 			flag = 1;
+			session.setAttribute("s_id", to.getId());
 		}
 		
 		request.setAttribute("flag", flag);
