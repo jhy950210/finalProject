@@ -1,27 +1,28 @@
 package modelTO;
 
 public class customer_selecthouseTO {
-	private int SEQ_CS;
-	private int PSEQ_CS;
-	private int SELECTHOUSE;
+	private int seqCs;
+	private int pseqCs;
+	private int selectHouse;
 	
-	public int getSEQ_CS() {
-		return SEQ_CS;
+	public int getSeqCs() {
+		return seqCs;
 	}
-	public void setSEQ_CS(int sEQ_CS) {
-		SEQ_CS = sEQ_CS;
+	public void setSeqCs(int seqCs) {
+		this.seqCs = seqCs;
 	}
-	public int getPSEQ_CS() {
-		return PSEQ_CS;
+	public int getPseqCs() {
+		return pseqCs;
 	}
-	public void setPSEQ_CS(int pSEQ_CS) {
-		PSEQ_CS = pSEQ_CS;
+	public void setPseqCs(int pseqCs) {
+		this.pseqCs = pseqCs;
 	}
-	public int getSELECTHOUSE() {
-		return SELECTHOUSE;
+	public int getSelectHouse() {
+		return selectHouse;
 	}
-	public void setSELECTHOUSE(int sELECTHOUSE) {
-		SELECTHOUSE = sELECTHOUSE;
+	public void setSelectHouse(int selectHouse) {
+		this.selectHouse = selectHouse;
 	}
+	
 	
 }

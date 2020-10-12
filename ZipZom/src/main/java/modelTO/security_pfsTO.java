@@ -1,70 +1,69 @@
 package modelTO;
 
 public class security_pfsTO {
-	private int SEQ_SP;
-	private int PSEQ_SP;
-	private boolean SECURITY_GUARD;
-	private boolean VIDEOPHONE;
-	private boolean INTERPHONE;
-	private boolean CARD_KEY;
-	private boolean CCTV;
-	private boolean DOOR_SECURITY;
-	private boolean WINDOW_GUARD;
+	private int seqSp;
+	private int pseqSp;
+	private boolean securityGuard;
+	private boolean videophone;
+	private boolean interphone;
+	private boolean cardKey;
+	private boolean cctv;
+	private boolean doorSecurity;
+	private boolean windowGuard;
 	
-	public int getSEQ_SP() {
-		return SEQ_SP;
+	public int getSeqSp() {
+		return seqSp;
 	}
-	public void setSEQ_SP(int sEQ_SP) {
-		SEQ_SP = sEQ_SP;
+	public void setSeqSp(int seqSp) {
+		this.seqSp = seqSp;
 	}
-	public int getPSEQ_SP() {
-		return PSEQ_SP;
+	public int getPseqSp() {
+		return pseqSp;
 	}
-	public void setPSEQ_SP(int pSEQ_SP) {
-		PSEQ_SP = pSEQ_SP;
+	public void setPseqSp(int pseqSp) {
+		this.pseqSp = pseqSp;
 	}
-	public boolean isSECURITY_GUARD() {
-		return SECURITY_GUARD;
+	public boolean isSecurityGuard() {
+		return securityGuard;
 	}
-	public void setSECURITY_GUARD(boolean sECURITY_GUARD) {
-		SECURITY_GUARD = sECURITY_GUARD;
+	public void setSecurityGuard(boolean securityGuard) {
+		this.securityGuard = securityGuard;
 	}
-	public boolean isVIDEOPHONE() {
-		return VIDEOPHONE;
+	public boolean isVideophone() {
+		return videophone;
 	}
-	public void setVIDEOPHONE(boolean vIDEOPHONE) {
-		VIDEOPHONE = vIDEOPHONE;
+	public void setVideophone(boolean videophone) {
+		this.videophone = videophone;
 	}
-	public boolean isINTERPHONE() {
-		return INTERPHONE;
+	public boolean isInterphone() {
+		return interphone;
 	}
-	public void setINTERPHONE(boolean iNTERPHONE) {
-		INTERPHONE = iNTERPHONE;
+	public void setInterphone(boolean interphone) {
+		this.interphone = interphone;
 	}
-	public boolean isCARD_KEY() {
-		return CARD_KEY;
+	public boolean isCardKey() {
+		return cardKey;
 	}
-	public void setCARD_KEY(boolean cARD_KEY) {
-		CARD_KEY = cARD_KEY;
+	public void setCardKey(boolean cardKey) {
+		this.cardKey = cardKey;
 	}
-	public boolean isCCTV() {
-		return CCTV;
+	public boolean isCctv() {
+		return cctv;
 	}
-	public void setCCTV(boolean cCTV) {
-		CCTV = cCTV;
+	public void setCctv(boolean cctv) {
+		this.cctv = cctv;
 	}
-	public boolean isDOOR_SECURITY() {
-		return DOOR_SECURITY;
+	public boolean isDoorSecurity() {
+		return doorSecurity;
 	}
-	public void setDOOR_SECURITY(boolean dOOR_SECURITY) {
-		DOOR_SECURITY = dOOR_SECURITY;
+	public void setDoorSecurity(boolean doorSecurity) {
+		this.doorSecurity = doorSecurity;
 	}
-	public boolean isWINDOW_GUARD() {
-		return WINDOW_GUARD;
+	public boolean isWindowGuard() {
+		return windowGuard;
 	}
-	public void setWINDOW_GUARD(boolean wINDOW_GUARD) {
-		WINDOW_GUARD = wINDOW_GUARD;
+	public void setWindowGuard(boolean windowGuard) {
+		this.windowGuard = windowGuard;
 	}
-	
 	
 }

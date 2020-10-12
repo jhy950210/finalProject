@@ -1,166 +1,167 @@
 package modelTO;
 
 public class customerTO {
-	private int SEQ_C;
-	private int PSEQ_C;
-	private String NAME;
-	private String TEL;
-	private String TYPE;
-	private String PROGRESS;
-	private String CONTRACT_TYPE;
-	private int BUDGET_T1;
-	private int BUDGET_T2;
-	private int BUDGET_T3;
-	private int BUDGET_L;
-	private int BUDGET_M1;
-	private int BUDGET_M2;
-	private int AREA2;
-	private String MOVE_SCHEDULE;
-	private int ROOM;
-	private String DIRECTION;
-	private boolean OPTION;
-	private int FLOOR;
-	private boolean ELEVATOR;
-	private String B_YEAR;
-	private String CONTEXT;
-	private boolean SECURITY;
+	private int seqC;
+	private int pseqC;
+	private String name;
+	private String tel;
+	private String type;
+	private String progress;
+	private String contractType;
+	private int budgetT1;
+	private int budgetT2;
+	private int budgetT3;
+	private int budgetl;
+	private int budgetM1;
+	private int budgetM2;
+	private int area2;
+	private String moveSchedule;
+	private int room;
+	private String direction;
+	private boolean option;
+	private int floor;
+	private boolean elevator;
+	private String bYear;
+	private String context;
+	private boolean security;
+	public int getSeqC() {
+		return seqC;
+	}
+	public void setSeqC(int seqC) {
+		this.seqC = seqC;
+	}
+	public int getPseqC() {
+		return pseqC;
+	}
+	public void setPseqC(int pseqC) {
+		this.pseqC = pseqC;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getProgress() {
+		return progress;
+	}
+	public void setProgress(String progress) {
+		this.progress = progress;
+	}
+	public String getContractType() {
+		return contractType;
+	}
+	public void setContractType(String contractType) {
+		this.contractType = contractType;
+	}
+	public int getBudgetT1() {
+		return budgetT1;
+	}
+	public void setBudgetT1(int budgetT1) {
+		this.budgetT1 = budgetT1;
+	}
+	public int getBudgetT2() {
+		return budgetT2;
+	}
+	public void setBudgetT2(int budgetT2) {
+		this.budgetT2 = budgetT2;
+	}
+	public int getBudgetT3() {
+		return budgetT3;
+	}
+	public void setBudgetT3(int budgetT3) {
+		this.budgetT3 = budgetT3;
+	}
+	public int getBudgetl() {
+		return budgetl;
+	}
+	public void setBudgetl(int budgetl) {
+		this.budgetl = budgetl;
+	}
+	public int getBudgetM1() {
+		return budgetM1;
+	}
+	public void setBudgetM1(int budgetM1) {
+		this.budgetM1 = budgetM1;
+	}
+	public int getBudgetM2() {
+		return budgetM2;
+	}
+	public void setBudgetM2(int budgetM2) {
+		this.budgetM2 = budgetM2;
+	}
+	public int getArea2() {
+		return area2;
+	}
+	public void setArea2(int area2) {
+		this.area2 = area2;
+	}
+	public String getMoveSchedule() {
+		return moveSchedule;
+	}
+	public void setMoveSchedule(String moveSchedule) {
+		this.moveSchedule = moveSchedule;
+	}
+	public int getRoom() {
+		return room;
+	}
+	public void setRoom(int room) {
+		this.room = room;
+	}
+	public String getDirection() {
+		return direction;
+	}
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+	public boolean isOption() {
+		return option;
+	}
+	public void setOption(boolean option) {
+		this.option = option;
+	}
+	public int getFloor() {
+		return floor;
+	}
+	public void setFloor(int floor) {
+		this.floor = floor;
+	}
+	public boolean isElevator() {
+		return elevator;
+	}
+	public void setElevator(boolean elevator) {
+		this.elevator = elevator;
+	}
+	public String getbYear() {
+		return bYear;
+	}
+	public void setbYear(String bYear) {
+		this.bYear = bYear;
+	}
+	public String getContext() {
+		return context;
+	}
+	public void setContext(String context) {
+		this.context = context;
+	}
+	public boolean isSecurity() {
+		return security;
+	}
+	public void setSecurity(boolean security) {
+		this.security = security;
+	}
 	
-	public int getSEQ_C() {
-		return SEQ_C;
-	}
-	public void setSEQ_C(int sEQ_C) {
-		SEQ_C = sEQ_C;
-	}
-	public int getPSEQ_C() {
-		return PSEQ_C;
-	}
-	public void setPSEQ_C(int pSEQ_C) {
-		PSEQ_C = pSEQ_C;
-	}
-	public String getNAME() {
-		return NAME;
-	}
-	public void setNAME(String nAME) {
-		NAME = nAME;
-	}
-	public String getTEL() {
-		return TEL;
-	}
-	public void setTEL(String tEL) {
-		TEL = tEL;
-	}
-	public String getTYPE() {
-		return TYPE;
-	}
-	public void setTYPE(String tYPE) {
-		TYPE = tYPE;
-	}
-	public String getPROGRESS() {
-		return PROGRESS;
-	}
-	public void setPROGRESS(String pROGRESS) {
-		PROGRESS = pROGRESS;
-	}
-	public String getCONTRACT_TYPE() {
-		return CONTRACT_TYPE;
-	}
-	public void setCONTRACT_TYPE(String cONTRACT_TYPE) {
-		CONTRACT_TYPE = cONTRACT_TYPE;
-	}
-	public int getBUDGET_T1() {
-		return BUDGET_T1;
-	}
-	public void setBUDGET_T1(int bUDGET_T1) {
-		BUDGET_T1 = bUDGET_T1;
-	}
-	public int getBUDGET_T2() {
-		return BUDGET_T2;
-	}
-	public void setBUDGET_T2(int bUDGET_T2) {
-		BUDGET_T2 = bUDGET_T2;
-	}
-	public int getBUDGET_T3() {
-		return BUDGET_T3;
-	}
-	public void setBUDGET_T3(int bUDGET_T3) {
-		BUDGET_T3 = bUDGET_T3;
-	}
-	public int getBUDGET_L() {
-		return BUDGET_L;
-	}
-	public void setBUDGET_L(int bUDGET_L) {
-		BUDGET_L = bUDGET_L;
-	}
-	public int getBUDGET_M1() {
-		return BUDGET_M1;
-	}
-	public void setBUDGET_M1(int bUDGET_M1) {
-		BUDGET_M1 = bUDGET_M1;
-	}
-	public int getBUDGET_M2() {
-		return BUDGET_M2;
-	}
-	public void setBUDGET_M2(int bUDGET_M2) {
-		BUDGET_M2 = bUDGET_M2;
-	}
-	public int getAREA2() {
-		return AREA2;
-	}
-	public void setAREA2(int aREA2) {
-		AREA2 = aREA2;
-	}
-	public String getMOVE_SCHEDULE() {
-		return MOVE_SCHEDULE;
-	}
-	public void setMOVE_SCHEDULE(String mOVE_SCHEDULE) {
-		MOVE_SCHEDULE = mOVE_SCHEDULE;
-	}
-	public int getROOM() {
-		return ROOM;
-	}
-	public void setROOM(int rOOM) {
-		ROOM = rOOM;
-	}
-	public String getDIRECTION() {
-		return DIRECTION;
-	}
-	public void setDIRECTION(String dIRECTION) {
-		DIRECTION = dIRECTION;
-	}
-	public boolean isOPTION() {
-		return OPTION;
-	}
-	public void setOPTION(boolean oPTION) {
-		OPTION = oPTION;
-	}
-	public int getFLOOR() {
-		return FLOOR;
-	}
-	public void setFLOOR(int fLOOR) {
-		FLOOR = fLOOR;
-	}
-	public boolean isELEVATOR() {
-		return ELEVATOR;
-	}
-	public void setELEVATOR(boolean eLEVATOR) {
-		ELEVATOR = eLEVATOR;
-	}
-	public String getB_YEAR() {
-		return B_YEAR;
-	}
-	public void setB_YEAR(String b_YEAR) {
-		B_YEAR = b_YEAR;
-	}
-	public String getCONTEXT() {
-		return CONTEXT;
-	}
-	public void setCONTEXT(String cONTEXT) {
-		CONTEXT = cONTEXT;
-	}
-	public boolean isSECURITY() {
-		return SECURITY;
-	}
-	public void setSECURITY(boolean sECURITY) {
-		SECURITY = sECURITY;
-	}
+	
 }
