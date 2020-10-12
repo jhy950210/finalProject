@@ -24,6 +24,22 @@
 			<filter-name>encodingFilter</filter-name>
 			<url-pattern>*.do</url-pattern>
 		</filter-mapping>
+		<!-- 로그인 세션 검사 필터 -->
+
+		<filter>
+			<filter-name>LoginCheck</filter-name>
+			<filter-class>com.youtube.search.LoginCheckFilter</filter-class>
+		</filter>
+	
+		<filter-mapping>
+			<filter-name>LoginCheck</filter-name>
+			<url-pattern>*.do</url-pattern>
+		</filter-mapping>
+		<filter-mapping>
+			<filter-name>LoginCheck</filter-name>
+			<url-pattern>*.json</url-pattern>
+		</filter-mapping>
+		
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -49,6 +65,14 @@
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.action</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.json</url-pattern>
 	</servlet-mapping>
 
 </web-app>
