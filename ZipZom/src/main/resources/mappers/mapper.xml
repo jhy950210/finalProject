@@ -13,7 +13,7 @@
 	#{endOfLease},#{room},#{bathroom},#{direction},#{heatingSystem},#{aircondition},#{option},#{numberOfHousehold},#{parking},#{floor},#{floorTotal},#{elevator},#{bear},#{context},#{security})
 	</insert>
 	
-	<select id="customerView" parameterType="modelTO.userTO" resultType="modelTO.CustomerAllTO">
+	<select id="customerView" parameterType="modelTO.customerTO" resultType="modelTO.CustomerAllTO">
 		select seq_c,pseq_c,name,tel,type,progress,contract_type contractType,budget_t1 budgetT1,budget_t2 budgetT2,budget_t3 budgetT3,budget_l budgetL,budget_m1 budgetM1,budget_m2 budgetM2,area2,move_schedule moveSchedule,room,direction,option,floor,elevator,b_year bYear,context,security,
 		bed,washing_machine,desk,drying_machine,induction,electric_range electricRange,gas_range gasRange,wordrobe,sink,shoe_rack shoeRack,refrigerator,bath_tube bathTube,
 		security_guard securityGuard,videophone,interphone,card_key cardKey,cctv,door_security doorSecurity,window_guard windowGuard,
@@ -24,11 +24,11 @@
 		on cvd.pseq_cvd = c.seq_c
 		left outer join security_customer sc
 		on sc.pseq_sc = c.seq_c
-		where c.pseq_c = (select seq_u from user where id = #{id})
+		where c.seq_c = #{seqC}
 	</select>
 	
 	<select id="customerList" parameterType="modelTO.userTO" resultType="modelTO.customerTO">
-		select name,tel,type,progress,contract_type conrtractType, (select visit_date from customer_visit_date where pseq_cvd = seq_c limit 1) visitDate from customer where pseq_c = (select seq_u from user where id = #{id})
+		select seq_c seqC,name,tel,type,progress,contract_type contractType, (select visit_date from customer_visit_date where pseq_cvd = seq_c limit 1) visitDate from customer where pseq_c = (select seq_u from user where id = #{id})
 	</select>
 	
 	<insert id="customerWrite" parameterType="modelTO.customerTO" useGeneratedKeys="true" keyProperty="seqC">
@@ -66,4 +66,23 @@
 	delete from security_customer where pseq_sc = #{pseqSc}
 	</delete>
 	
+	<update id="customerUpdate" parameterType="modelTO.customerTO">
+		update from customer set tel = #{tel},type = #{type},progress = #{progress},contract_type = #{contractType},
+		budget_t1 = #{budgetT1},budget_t2 = #{budgetT2},budget_t3=#{budgetT3},budget_l=#{budgetL},budget_m1=#{budgetM1},budget_m2=#{budgetM2},area2=#{area2},
+		move_schedule=#{moveSchedule},room=#{room},direction=#{direction},option=#{option},floor=#{floor},elevator=#{elevator},b_year=#{bYear},context=#{context},security=#{security}
+		where seq_c = #{seqC}
+	</update>
+	
+	<update id="ocUpdate" parameterType="modelTO.customerTO">
+		update from option_customer set bed=#{bed},washing_machine=#{washingMachine},desk=#{desk},drying_machine=#{dryingMachine},
+		induction=#{induction},electric_range=#{electricRange},gas_range=#{gasRange},wordrobe=#{wordrobe},sink=#{sink},
+		shoe_rack=#{shoeRack},refrigerator=#{refrigerator},bath_tube=#{bathTube}
+		where pseq_oc = #{seqC}
+	</update>
+	
+	<update id="scUpdate" parameterType="modelTO.customerTO">
+		update from security_customer set security_guard=#{securityGuard},videophone=#{videophone},interphone=#{interphone},
+		card_key=#{cardKey},cctv=#{cctv},door_security=#{doorSecurity},window_guard=#{windowGuard}
+		where pseq_sc = #{seqC}
+	</update>
 </mapper>

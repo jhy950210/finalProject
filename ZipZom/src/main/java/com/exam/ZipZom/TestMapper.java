@@ -18,6 +18,9 @@ public interface TestMapper {
 	public abstract int customerVisitDate(customer_visit_dateTO cvdto);
 	public abstract int securityCustomer(security_customerTO scto);
 	public abstract ArrayList<customerTO> customerList(userTO uto);
-	public abstract ArrayList<CustomerAllTO> customerView(userTO uto);
+	public abstract ArrayList<CustomerAllTO> customerView(customerTO cto);
+	public abstract int customerUpdate(customerTO cto);
+	public abstract int ocUpdate(customerTO cto);
+	public abstract int scUpdate(customerTO cto);
 	
 }

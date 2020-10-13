@@ -8,7 +8,8 @@
   <title>Zipzom - Realtor</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<!-- jQuery -->
+	<script src="./resources/plugins/jquery/jquery.min.js"></script>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="./resources/plugins/fontawesome-free/css/all.min.css">
   <!-- 폰트 테스트 -->
@@ -24,7 +25,6 @@
   <link rel="stylesheet" href="./resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- datepicker -->
   <link rel="stylesheet" href="./resources/plugins//jquery-ui/jquery-ui.css">
-  <link rel="stylesheet" href="./resources/demos/style.css">
   <!-- daterange picker -->
   <link rel="stylesheet" href="./resources/plugins/daterangepicker/daterangepicker.css">
   <!-- iCheck for checkboxes and radio inputs -->
@@ -37,6 +37,36 @@
   <link rel="stylesheet" href="./resources/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="./resources/css/adminlte.min.css">
+  <script type="text/javascript">
+  	$(document).ready(function() {
+  		$.ajax({
+			url: 'customer_list.json',
+			type: 'get',
+			dataType: 'json',
+			success: function( json ) {
+				$( '#tbody' ).empty();
+				$.each( json.data, function( index, item ) {
+					var html = '<tr><td><div class="custom-control custom-checkbox">';
+					html +=	'<input class="custom-control-input" type="checkbox" id="customCheckbox'+ index+'" value="option'+index+'">'
+					html += '<label for="customCheckbox'+index+'" class="custom-control-label"></label>';
+					html += '</div></td>';
+					html += '<td>'+item.seqC + ' ' + item.name+'</td>'
+					html += '<td>'+ item.tel +'</td>';
+					html += '<td>'+ item.type +'</td>';
+					html += '<td>'+ item.progress +'</td>';
+					html += '<td>'+ item.contractType +'</td>';
+					html += '<td>'+ item.visitDate +'</td></tr>';
+					
+					$( '#tbody' ).append( html );
+				});
+			},
+			error: function( e ) {
+				alert( '서버 에러 ' + e );
+			}
+		})	
+  	})
+  
+  </script>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -220,7 +250,7 @@
                     <th>방문일</th>
                   </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="tbody">
                   <tr>
                   	<th>
                   		<div class="custom-control custom-checkbox">
@@ -330,12 +360,10 @@
 
 <!-- 다이얼로그창 인클루드 -->
 <jsp:include page="./customer_resister_dialog.jsp"></jsp:include>
-<!-- jQuery -->
-<script src="./resources/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="./resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Select2 -->
-<script src="./resources/plugins/select2/js/select2.full.min.js"></script>
+<!-- <!-- Select2
+<script src="./resources/plugins/select2/js/select2.full.min.js"></script> -->
 <!-- Bootstrap4 Duallistbox -->
 <script src="./resources/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
 <!-- InputMask -->
@@ -362,19 +390,19 @@
 <script>
   $(function () {
     //Initialize Select2 Elements
-    $('.select2').select2()
+   //$('.select2').select2()
 
     //Initialize Select2 Elements
-    $('.select2bs4').select2({
+    /* $('.select2bs4').select2({
       theme: 'bootstrap4'
-    })
+    }) */
 
     //Datemask dd/mm/yyyy
-    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //$('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
     //Datemask2 mm/dd/yyyy
-    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //$('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
     //Money Euro
-    $('[data-mask]').inputmask()
+   // $('[data-mask]').inputmask()
     
     //Date picker
     $( '#datepicker' ).datepicker()
@@ -422,7 +450,7 @@
     })
     
     //Bootstrap Duallistbox
-    $('.duallistbox').bootstrapDualListbox()
+    //$('.duallistbox').bootstrapDualListbox()
 
     //Colorpicker
     $('.my-colorpicker1').colorpicker()

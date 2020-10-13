@@ -102,12 +102,22 @@ public class ConfigCotroller {
 	}
 	
 	@RequestMapping("/customer_view.json")
-	public String customerView(HttpServletRequest request, HttpServletResponse response,Model model,userTO uto) {
-		uto.setId("user1");
+	public String customerView(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
+		cto.setSeqC(3);
 		
 		ArrayList<CustomerAllTO> caList = new ArrayList<CustomerAllTO>();
-		caList = (ArrayList<CustomerAllTO>)testmapper.customerView(uto);
+		caList = (ArrayList<CustomerAllTO>)testmapper.customerView(cto);
 		request.setAttribute("caList", caList);
 		return "data/customer_view";
+	}
+	
+	@RequestMapping("/customer_update.json")
+	public String customerUpdate(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
+		cto.setSeqC(1);
+		
+		ArrayList<CustomerAllTO> caList = new ArrayList<CustomerAllTO>();
+		int flag = (int)testmapper.customerUpdate(cto);
+		request.setAttribute("flag", flag);
+		return "data/customer_update";
 	}
 }
