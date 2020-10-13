@@ -51,29 +51,31 @@
 
 <script type="text/javascript">
 //카운트 다운 
-var num = 60 * 5; // 몇분을 설정할지의 대한 변수 선언
+var num = 60 * 1; // 몇분을 설정할지의 대한 변수 선언
 var myVar;
 
 $(document).ready(function() {
 	$("#btn").button().on('click', function() {
-		$("#modal").show(); // 인증번호 모달
-		time();
+		var id = $('#id').val();
+		var email = $('#email').val();
+		forgotOk( id, email ); // id email 일치 확인
 	});
 	
 	$("#closeBtn").button().on('click', function() {
-		$("#modal").hide();
+		$("#modal").hide(); // 모달 닫기
 		clearInterval(myVar);
 	});
 	
 	$("#okBtn").button().on('click', function() {
-		$('#target').submit();
+		var number = $('#number').val();
+		numberCheckOk( number ); // 인증번호 전송
 	});
 	
 });
 
 
 function time(){
-	num = 60*5;
+	num = 60*1;
     myVar = setInterval(alertFunc, 1000); 
 }
 
@@ -87,9 +89,54 @@ function alertFunc() {
     $('#timer').text(min + '분' + sec + '초');
 
     if(num == 0){
+    	alert("시간 초과");
+    	$("#modal").hide(); // 모달 닫기
         clearInterval(myVar) // num 이 0초가 되었을대 clearInterval로 타이머 종료
     }
     num--;
+}
+
+var forgotOk = function( id, email ){
+	$.ajax({
+		url: './sendNumber.action',
+		data: {
+			id: id,
+			email: email
+		},
+		type: 'post',
+		datatype: 'json',
+		success: function( json ) {
+			if( json.flag == 1 ){
+				alert('성공');
+				$("#modal").show(); // 인증번호 모달
+				time();
+			} else {
+				alert("실패");
+			}
+			
+		}
+	}); 
+}
+
+var numberCheckOk = function( number ){
+	var email = $('#email').val();
+	$.ajax({
+		url: './checkAuthKey.action',
+		data: {
+			number: number
+		},
+		type: 'post',
+		datatype: 'json',
+		success: function( json ) {
+			if( json.flag == 1 ){
+				alert('성공 numberCheck');
+				location.href = "./change_password.action?email=" +  encodeURIComponent(email);
+			} else {
+				alert("실패 numberCheck");
+			}
+			
+		}
+	}); 
 }
 
 </script>
@@ -122,7 +169,7 @@ function alertFunc() {
         </div>
         <div class="row">
           <div class="col-12">
-            <button type="button"  id="btn" class="btn btn-primary btn-block">Request new password</button>
+            <button type="button"  id="btn" class="btn btn-primary btn-block">인증번호 발송</button>
           </div>
           <!-- /.col -->
         </div>

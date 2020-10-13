@@ -81,7 +81,7 @@ $(document).ready(function() {
           <input type="text" class="form-control" id="id" name="id" placeholder="ID">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-passport"></span>
+              <button type="button"  id="idBtn" class="btn btn-primary btn-block">중복검사</button>
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@ $(document).ready(function() {
           <input type="email" class="form-control"  id="email" name="email" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+              <button type="button"  id="emailBtn" class="btn btn-primary btn-block">중복검사</button>
             </div>
           </div>
         </div>
@@ -143,7 +143,7 @@ $(document).ready(function() {
         </div>
       </form>
 
-      <a href="./start.jsp" class="text-center">I already have a membership</a>
+      <a href="./start.action" class="text-center">I already have a membership</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

@@ -6,8 +6,11 @@
 
 <%
 	int flag = (Integer)request.getAttribute("flag");
+	String email = (String)request.getAttribute("email");
+	
 	JSONObject result = new JSONObject();
 	result.put("flag", flag);
+	result.put("email", email);
 	
 	out.println(result);
 %>

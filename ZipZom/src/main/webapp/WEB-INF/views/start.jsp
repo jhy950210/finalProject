@@ -43,12 +43,12 @@ $(document).ready(function() {
 				id: id,
 				password: password
 			},
-			type: 'get',
+			type: 'post',
 			datatype: 'json',
 			success: function( json ) {
 				if( json.flag == 1 ){
 					alert('성공');
-					//location.href = './newDashboard.jsp';
+					location.href = './newDashboard.do';
 				} else {
 					alert("아이디/패스워드 오류");
 					//location.href = './newDashboard.jsp';

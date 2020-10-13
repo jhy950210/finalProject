@@ -23,6 +23,7 @@ public class ConfigController {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	// 비밀번호 분실 초기화면
 	@RequestMapping(value = "/forgot_password.action")
 	public ModelAndView forgotPasswordRequest(HttpServletRequest request) {
 
@@ -32,6 +33,27 @@ public class ConfigController {
 		return modelAndView;
 	}
 	
+	// 대쉬보드 초기화면
+	@RequestMapping(value = "/newDashboard.do")
+	public ModelAndView dashboardPasswordRequest(HttpServletRequest request) {
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("newDashboard");
+
+		return modelAndView;
+	}
+	
+	// 비밀번호 초기화면  
+	@RequestMapping(value = "/change_password.action")
+	public ModelAndView change_PasswordRequest(HttpServletRequest request) {
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("change_password");
+
+		return modelAndView;
+	}
+	
+	// 로그인 초기화면
 	@RequestMapping(value = "/start.action")
 	public ModelAndView startRequest(HttpServletRequest request) {
 
@@ -41,6 +63,7 @@ public class ConfigController {
 		return modelAndView;
 	}
 	
+	// 회원가입 초기화면
 	@RequestMapping(value = "/register.action")
 	public ModelAndView registerRequest(HttpServletRequest request) {
 
@@ -60,14 +83,11 @@ public class ConfigController {
 		userTO to = new userTO();
 		encryption enc = new encryption();
 		
-			String id = request.getParameter("id"); 
-			String password = enc.encryptionMain(request.getParameter("password"));
+		String id = request.getParameter("id"); 
+		String password = enc.encryptionMain(request.getParameter("password"));
 			
-			to.setId(id);
-			to.setPassword(password);
-		
-//		to.setID("user");
-//		to.setPASSWORD("123");
+		to.setId(id);
+		to.setPassword(password);
 	
 		int flag = 0;
 
@@ -107,14 +127,6 @@ public class ConfigController {
 		to.setEmail(email);
 		to.setTel1(phone);
 		to.setTel2(tel);
-		
-//		to.setNAME("박성훈");
-//		to.setID("user");
-//		to.setPASSWORD("123");
-//		to.setADDRESS("123");
-//		to.setEMAIL("dlsncjfthodk@naver.com");
-//		to.setTEL1("123");
-//		to.setTEL2("123");
 		
 		int flag = 0;
 		
@@ -221,15 +233,11 @@ public class ConfigController {
 			encryption enc = new encryption();
 			MailSender ms = new MailSender();
 
-//			String email = request.getParameter("email");
-//			String id = request.getParameter("id");
-//			to.setId(id);
-//			to.setEmail(email);
-//			ato.setEmail(email);
-
-			to.setId("user");
-			to.setEmail("dlsncjfthodk@naver.com");
-			ato.setEmail("dlsncjfthodk@naver.com");
+			String email = request.getParameter("email");
+			String id = request.getParameter("id");
+			to.setId(id);
+			to.setEmail(email);
+			ato.setEmail(email);
 
 			int flag = 0;
 			String result = "";
@@ -276,7 +284,7 @@ public class ConfigController {
 			request.setAttribute("flag", flag);
 
 			ModelAndView modelAndView = new ModelAndView();
-			modelAndView.setViewName("test");
+			modelAndView.setViewName("/data/flag_json");
 			modelAndView.addObject("list", request);
 
 			return modelAndView;
@@ -290,9 +298,7 @@ public class ConfigController {
 
 			auth_passwordTO ato = new auth_passwordTO();
 
-//			ato.setAuthKey(request.getParameter("authKey"));
-
-			ato.setAuthKey("NjQ3MzI4");
+			ato.setAuthKey(request.getParameter("number"));
 
 			int flag = 0;
 			String email = sqlSession.selectOne("authKeySelect", ato);
@@ -304,7 +310,7 @@ public class ConfigController {
 			request.setAttribute("email", email);
 
 			ModelAndView modelAndView = new ModelAndView();
-			modelAndView.setViewName("change_password");
+			modelAndView.setViewName("/data/flag_json");
 			modelAndView.addObject("list", request);
 
 			return modelAndView;
@@ -317,14 +323,12 @@ public class ConfigController {
 			userTO to = new userTO();
 			encryption enc = new encryption();
 
-//			String password = enc.encryptionMain(request.getParameter("password")); 
-//			String email = request.getParameter("email");
-//			
-//			to.setEmail(email);
-//			to.setPassword(password);
+			String password = enc.encryptionMain(request.getParameter("password")); 
+			String email = request.getParameter("email");
+			
+			to.setEmail(email);
+			to.setPassword(password);
 
-			to.setEmail("dlsncjfthodk@naver.com");
-			to.setPassword("12334567890");
 			int flag = 0;
 			int update = sqlSession.update("userPasswordUpdate", to);
 			if(update == 1) {
@@ -335,7 +339,7 @@ public class ConfigController {
 			request.setAttribute("flag", flag);
 
 			ModelAndView modelAndView = new ModelAndView();
-			modelAndView.setViewName("start");
+			modelAndView.setViewName("/data/flag_json");
 			modelAndView.addObject("list", request);
 
 			return modelAndView;

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,10 +53,41 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#okBtn").button().on('click', function() {
-		$('#target').submit();
+		var email = "<%=request.getParameter("email") %>";
+		var password = $('#password').val();
+		var checkPassword = $('#checkPassword').val();
+		console.log( password );
+		console.log( checkPassword );
+		if( password == checkPassword ){
+			alert('비밀번호 일치');
+			checkPasswordOk( password, email );
+		} else {
+			alert('비밀번호 일치하지 않음');
+		}
 	});
-	
+
 });
+
+var checkPasswordOk = function( password, email ){
+	$.ajax({
+		url: './changePassword.action',
+		data: {
+			password: password,
+			email: email
+		},
+		type: 'post',
+		datatype: 'json',
+		success: function( json ) {
+			if( json.flag == 1 ){
+				alert('성공');
+				location.href = "./start.action";
+			} else {
+				alert("실패");
+				//location.href = "./start.action";
+			}
+		}
+	}); 
+}
 
 </script>
 <body class="hold-transition login-page">
@@ -78,7 +110,7 @@ $(document).ready(function() {
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email"  id="checkPassword" name="checkPassword" class="form-control" placeholder="Check Password">
+          <input type="text"  id="checkPassword" name="checkPassword" class="form-control" placeholder="Check Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-password"></span>
@@ -87,7 +119,7 @@ $(document).ready(function() {
         </div>
         <div class="row">
           <div class="col-12">
-            <button type="button"  id="btn" class="btn btn-primary btn-block">변경</button>
+            <button type="button"  id="okBtn" class="btn btn-primary btn-block">변경</button>
           </div>
           <!-- /.col -->
         </div>
