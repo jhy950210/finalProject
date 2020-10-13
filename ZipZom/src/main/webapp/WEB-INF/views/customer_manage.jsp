@@ -8,7 +8,7 @@
   <title>Zipzom - Realtor</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<!--   <link rel="stylesheet" href="./resources/demos/style.css"> -->
   <!-- Font Awesome -->
   <link rel="stylesheet" href="./resources/plugins/fontawesome-free/css/all.min.css">
   <!-- 폰트 테스트 -->
@@ -24,7 +24,6 @@
   <link rel="stylesheet" href="./resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- datepicker -->
   <link rel="stylesheet" href="./resources/plugins//jquery-ui/jquery-ui.css">
-  <link rel="stylesheet" href="./resources/demos/style.css">
   <!-- daterange picker -->
   <link rel="stylesheet" href="./resources/plugins/daterangepicker/daterangepicker.css">
   <!-- iCheck for checkboxes and radio inputs -->
@@ -442,9 +441,11 @@
 <!-- ./wrapper -->
 
 <!-- 다이얼로그창 인클루드 -->
-<jsp:include page="./customer_resister_dialog.jsp"></jsp:include>
+<jsp:include page="customer_resister_dialog.jsp"></jsp:include>
 <!-- jQuery -->
-<script src="./resources/plugins/jquery/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!-- datepicker -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- Bootstrap 4 -->
 <script src="./resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Select2 -->
@@ -456,9 +457,6 @@
 <script src="./resources/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
 <!-- bs-custom-file-input -->
 <script src="./resources/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-<!-- datepicker -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- date-range-picker -->
 <script src="./resources/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- bootstrap color picker -->
@@ -475,7 +473,7 @@
 <script>
   $(function () {
     //Initialize Select2 Elements
-    $('.select2').select2()
+    //$('.select2').select2()
 
     //Initialize Select2 Elements
     $('.select2bs4').select2({
@@ -507,7 +505,7 @@
       timePicker: true,
       timePickerIncrement: 30,
       locale: {
-        format: 'MM/DD/YYYY hh:mm A'
+        format: 'YYYY/MM/DD hh:mm A'
       }
     })
     //Date range as a button
@@ -528,6 +526,7 @@
         $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
       }
     )
+    	
 
     //Timepicker
     $('#timepicker').datetimepicker({

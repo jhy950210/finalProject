@@ -1,15 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.exam.ZipZom.TestMapper_pfs">
-	<select id="pfs_list" parameterType="modelTO.userTO" resultType="modelTO.PfsTO">
+	<select id="pfsList" parameterType="modelTO.userTO" resultType="modelTO.pfsTO">
 	select SEQ_PFS,PSEQ_PFS,B_TYPE,SI,GU,DONG,BUNJI,H_NUMBER,CONTRACT_TYPE,BUDGET1,BUDGET2,BUDGET3,BUDGET4,BUDGET5,BUDGET6,M_COST,LOAN,AREA1,AREA2,AREA3,MOVE_SCHEDULE,
 	END_OFLEASE,ROOM,BATHROOM,DIRECTION,HEATING_SYSTEM,NUMBER_OF_HOUSEHOLD,PARKING,FLOOR,FLOOR_TOTAL,B_YEAR,CONTEXT
 	from property_for_sale
-	where pseq_pfs = (select seq_u from user where id = #{ID})
+	where pseq_pfs = (select seq_u from user where id = #{id})
 	</select>
 	
-	<insert id="pfs_write" parameterType="modelTO.PfsTO">
-	insert into property_for_sale values(0,#{PSEQ_PFS},#{B_TYPE},#{SI},#{GU},#{DONG},#{BUNJI},#{H_NUMBER},#{CONTRACT_TYPE},#{BUDGET1},#{BUDGET2},#{BUDGET3},#{BUDGET4},#{BUDGET5},#{BUDGET6},#{M_COST},#{LOAN},#{AREA1},#{AREA2},#{AREA3},#{MOVE_SCHEDULE},
-	#{END_OFLEASE},#{ROOM},#{BATHROOM},#{DIRECTION},#{HEATING_SYSTEM},#{AIRCONDITION},#{OPTION},#{NUMBER_OF_HOUSEHOLD},#{PARKING},#{FLOOR},#{FLOOR_TOTAL},#{ELEVATOR},#{B_YEAR},#{CONTEXT},#{SECURITY})
+	<insert id="pfsWrite" parameterType="modelTO.pfsTO">
+	insert into property_for_sale values(0,#{pseqPfs},#{bType},#{si},#{gu},#{dong},#{bunji},#{hNumber},#{contractType},#{budget1},#{budget2},#{budget3},#{budget4},#{budget5},#{budget6},#{mCost},#{loan},#{area1},#{area2},#{area3},#{moveSchedule},
+	#{endOfLease},#{room},#{bathroom},#{direction},#{heatingSystem},#{aircondition},#{option},#{numberOfHousehold},#{parking},#{floor},#{floorTotal},#{elevator},#{bear},#{context},#{security})
 	</insert>
+	
+	<select id="customerList" parameterType="modelTO.userTO" resultType="modelTO.customerTO">
+	select seq_c,pseq_c,name,tel,type,progress,contract_type,budget_t1,budget_t2,budget_t3,budget_l,budget_m1,budget_m2,area2,move_schedule,room,direction,option,floor,elevator,b_year,context,security
+	from customer
+	where pseq_c = (select seq_u from user where id = #{id})
+	</select>
+	
+	<insert id="customerWrite" parameterType="modelTO.customerTO" useGeneratedKeys="true" keyProperty="seqC">
+	insert into customer values(0,#{pseqC},#{name},#{tel},#{type},#{progress},#{contractType},#{budgetT1},#{budgetT2},#{budgetT3},#{budgetL},#{budgetM1},#{budgetM2},#{area2},#{moveSchedule},#{room},#{direction},#{option},#{floor},#{elevator},#{bYear},#{context},#{security})
+	<selectKey keyProperty="seqC" resultType="int">
+	select last_insert_id()
+	</selectKey>
+	</insert>
+	
+	<insert id="optionCustomerWrite" parameterType="modelTO.option_customerTO">
+	insert into option_customer values(0,#{pseqOc},#{bed},#{washingMachine},#{desk},#{dryingMachine},#{induction},#{electricRange},#{gasRange},#{wordrobe},#{sink},#{shoeRack},#{refrigerator},#{bathTube})
+	</insert>
+	
+	<insert id="customerVisitDate" parameterType="modelTO.customer_visit_dateTO">
+	insert into customer_visit_date values(0,#{pseqCvd},#{visitDate})
+	</insert>
+	
+	<insert id="securityCustomer" parameterType="modelTO.security_customerTO">
+	insert into security_customer values(0,#{pseqSc},#{securityGuard},#{videophone},#{interphone},#{cardKey},#{cctv},#{doorSecurity},#{windowGuard});
+	</insert>
+	
+	<delete id="customerDelete" parameterType="modelTO.customerTO">
+	delete from customer where seq_c = #{seqC}
+	</delete>
+	
+	<delete id="cvdDelete" parameterType="int">
+	delete from customer_visit_date where pseq_cvd = #{pseq_cvd}
+	</delete>
+	
+	<delete id="ocDelete" parameterType="int">
+	delete from option_customer where pseq_oc = #{pseq_oc}
+	</delete>
+	
+	<delete id="scDelete" parameterType="int">
+	delete from security_customer where pseq_sc = #{pseqSc}
+	</delete>
+	
 </mapper>

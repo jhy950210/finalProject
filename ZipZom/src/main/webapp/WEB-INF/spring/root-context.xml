@@ -23,5 +23,5 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.exam.ZipZom"/>
     </bean>
-		
+
 </beans>

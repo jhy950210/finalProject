@@ -1080,7 +1080,7 @@
 				<!-- text input -->
 				<div class="form-group">
 					<label>건축 년도</label>
-						<input type="text" name="b_year" id="b_year" class="form-control" style="width: 50px;">
+						<input type="text" name="bYear" id="b_year" class="form-control" style="width: 50px;">
 				</div>
 				
 				<!-- textarea -->

@@ -1,27 +1,27 @@
 package modelTO;
 
 public class imagesTO {
-	private int SEQ_I;
-	private int PSEQ_I;
-	private String IMAGE_NAME;
+	private int seqI;
+	private int pseqI;
+	private String imageName;
 	
-	public int getSEQ_I() {
-		return SEQ_I;
+	public int getSeqI() {
+		return seqI;
 	}
-	public void setSEQ_I(int sEQ_I) {
-		SEQ_I = sEQ_I;
+	public void setSeqI(int seqI) {
+		this.seqI = seqI;
 	}
-	public int getPSEQ_I() {
-		return PSEQ_I;
+	public int getPseqI() {
+		return pseqI;
 	}
-	public void setPSEQ_I(int pSEQ_I) {
-		PSEQ_I = pSEQ_I;
+	public void setPseqI(int pseqI) {
+		this.pseqI = pseqI;
 	}
-	public String getIMAGE_NAME() {
-		return IMAGE_NAME;
+	public String getImageName() {
+		return imageName;
 	}
-	public void setIMAGE_NAME(String iMAGE_NAME) {
-		IMAGE_NAME = iMAGE_NAME;
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 	
 	

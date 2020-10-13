@@ -1,61 +1,60 @@
 package modelTO;
 
 public class userTO {
-	private int SEQ_U;
-	private String ID;
-	private String NAME;
-	private String PASSWORD;
-	private String EMAIL;
-	private String ADDRESS;
-	private String TEL1;
-	private String TEL2;
-	
-	public int getSEQ_U() {
-		return SEQ_U;
+	private int seqU;
+	private String id;
+	private String name;
+	private String password;
+	private String email;
+	private String address;
+	private String tel1;
+	private String tel2;
+	public int getSeqU() {
+		return seqU;
 	}
-	public void setSEQ_U(int sEQ_U) {
-		SEQ_U = sEQ_U;
+	public void setSeqU(int seqU) {
+		this.seqU = seqU;
 	}
-	public String getID() {
-		return ID;
+	public String getId() {
+		return id;
 	}
-	public void setID(String iD) {
-		ID = iD;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getNAME() {
-		return NAME;
+	public String getName() {
+		return name;
 	}
-	public void setNAME(String nAME) {
-		NAME = nAME;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getPASSWORD() {
-		return PASSWORD;
+	public String getPassword() {
+		return password;
 	}
-	public void setPASSWORD(String pASSWORD) {
-		PASSWORD = pASSWORD;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public String getEMAIL() {
-		return EMAIL;
+	public String getEmail() {
+		return email;
 	}
-	public void setEMAIL(String eMAIL) {
-		EMAIL = eMAIL;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getADDRESS() {
-		return ADDRESS;
+	public String getAddress() {
+		return address;
 	}
-	public void setADDRESS(String aDDRESS) {
-		ADDRESS = aDDRESS;
+	public void setAddress(String address) {
+		this.address = address;
 	}
-	public String getTEL1() {
-		return TEL1;
+	public String getTel1() {
+		return tel1;
 	}
-	public void setTEL1(String tEL1) {
-		TEL1 = tEL1;
+	public void setTel1(String tel1) {
+		this.tel1 = tel1;
 	}
-	public String getTEL2() {
-		return TEL2;
+	public String getTel2() {
+		return tel2;
 	}
-	public void setTEL2(String tEL2) {
-		TEL2 = tEL2;
-	}	
+	public void setTel2(String tel2) {
+		this.tel2 = tel2;
+	}
 }
