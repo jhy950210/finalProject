@@ -21,9 +21,13 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <!-- jQuery -->
-<script src="./resources/plugins/jquery/jquery.min.js" />
+<script src="./resources/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript">
+var isCheckId = 0;
+var isCheckEmail = 0;
+
 $(document).ready(function() {
+	
 	$("#btn").button().on('click', function() {
 		//alert('click');
 		if( $('#name').val().trim() == "" ){
@@ -55,8 +59,70 @@ $(document).ready(function() {
 			return false;
 		}
 		
+		if( isCheckId == 0 ){
+			alert('ID 중복을 확인하세요.');
+			return false;
+		}
+		
+		if( isCheckEmail == 0 ){
+			alert('Email 중복을 확인하세요.');
+			return false;
+		}
+		
+		$("#target").submit();
 	});
+	
+	$("#idBtn").button().on('click', function() {
+		var id = $('#id').val();
+		checkId( id );
+	});
+	
+	$("#emailBtn").button().on('click', function() {
+		var email = $('#email').val();
+		checkEmail( email );
+	});
+	
 });
+
+var checkId = function( id ){
+	$.ajax({
+		url: './duId.action',
+		data: {
+			id: id
+		},
+		type: 'post',
+		datatype: 'json',
+		success: function( json ) {
+			if( json.flag == 1 ){
+				alert("이미 존재하는 ID입니다.");
+			} else {
+				alert('사용 가능한 ID입니다.');
+				isCheckId = 1;
+			}
+		}
+		
+	}); 
+}
+
+var checkEmail = function( email ){
+	$.ajax({
+		url: './duEmail.action',
+		data: {
+			email: email
+		},
+		type: 'post',
+		datatype: 'json',
+		success: function( json ) {
+			if( json.flag == 1 ){
+				alert("이미 존재하는 email입니다.");
+			} else {
+				alert('사용 가능한 email입니다.');
+				isCheckEmail = 1;
+			}
+		}
+		
+	}); 
+}
 </script>
 <body class="hold-transition register-page">
 <div class="register-box">
@@ -68,7 +134,7 @@ $(document).ready(function() {
     <div class="card-body register-card-body">
       <p class="login-box-msg">Register a new membership</p>
 
-      <form action="./sign_up.do" method="post">
+      <form id="target" action="./sign_up.action" method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" id="name" name="name" placeholder="Name">
           <div class="input-group-append">
@@ -81,7 +147,7 @@ $(document).ready(function() {
           <input type="text" class="form-control" id="id" name="id" placeholder="ID">
           <div class="input-group-append">
             <div class="input-group-text">
-              <button type="button"  id="idBtn" class="btn btn-primary btn-block">중복검사</button>
+              <button type="button"  id="idBtn" class="btn btn-primary btn-block" style="width:60pt; height:18pt; padding: 0.1rem 0.1rem; font-size: 11.5pt;'">중복검사</button>
             </div>
           </div>
         </div>
@@ -97,7 +163,7 @@ $(document).ready(function() {
           <input type="email" class="form-control"  id="email" name="email" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
-              <button type="button"  id="emailBtn" class="btn btn-primary btn-block">중복검사</button>
+              <button type="button"  id="emailBtn" class="btn btn-primary btn-block" style="width:60pt; height:18pt; padding: 0.1rem 0.1rem; font-size: 11.5pt;'">중복검사</button>
             </div>
           </div>
         </div>
@@ -137,7 +203,7 @@ $(document).ready(function() {
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit"  id="btn" class="btn btn-primary btn-block">Register</button>
+            <button type="button"  id="btn" class="btn btn-primary btn-block">Register</button>
           </div>
           <!-- /.col -->
         </div>

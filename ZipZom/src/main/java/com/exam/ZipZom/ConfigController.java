@@ -141,13 +141,12 @@ public class ConfigController {
 	}
 	
 	// 아이디 중복검사 버튼 클릭한 경우
-	@RequestMapping(value = "/duId.do")
+	@RequestMapping(value = "/duId.action")
 	public ModelAndView duplicateIdRequest(HttpServletRequest request) {
 
 		userTO to = new userTO();
 		
-//		to.setID(request.getParameter("id"));
-		to.setId("user");
+		to.setId(request.getParameter("id"));
 		
 		int flag = 0;
 		
@@ -158,37 +157,32 @@ public class ConfigController {
 		request.setAttribute("flag", flag);
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("test");
+		modelAndView.setViewName("/data/flag_json");
 		modelAndView.addObject("list", request);
 		
 		return modelAndView;
 	}
 	
 	// 이메일 중복검사 버튼 클릭한 경우
-	@RequestMapping(value = "/duEmail.do")
+	@RequestMapping(value = "/duEmail.action")
 	public ModelAndView duplicateEmailRequest(HttpServletRequest request) {
 
 		userTO to = new userTO();
 		
-//		String email = request.getParameter("email");
-//		String id = request.getParameter("id");
-//		to.setID(id);
-//		to.setEMAIL(email);
-
-		to.setId("user");
-		to.setEmail("123@123");
+		String email = request.getParameter("email");
 		
+		to.setEmail(email);
+
 		int flag = 0;
-		String id = "";
-		if(sqlSession.selectOne("findIdSelect", to) != null) {
+		
+		if(sqlSession.selectOne("duEmailSelect", to) != null) {
 			flag = 1;
 		}
 		
 		request.setAttribute("flag", flag);
-		request.setAttribute("id", id);
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("test");
+		modelAndView.setViewName("/data/flag_json");
 		modelAndView.addObject("list", request);
 		
 		return modelAndView;

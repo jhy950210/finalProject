@@ -6,7 +6,7 @@
 		out.println("<script type='text/javascript'>");
 		if( flag == 1 ){
 			out.println("alert('회원 등록에 성공했습니다.');");
-			out.println("location.href='./start.do';");
+			out.println("location.href='./start.action';");
 		}else if( flag == 0){
 			out.println("alert('회원 등록에 실패했습니다.');");
 			out.println("history.back();");

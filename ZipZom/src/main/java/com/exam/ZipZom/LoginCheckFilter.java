@@ -35,7 +35,7 @@ public class LoginCheckFilter implements Filter {
 		if(login) {
 			chain.doFilter(request, response);
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/start.actiom");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/start.action");
 			dispatcher.forward(request, response);
 		}
 	}

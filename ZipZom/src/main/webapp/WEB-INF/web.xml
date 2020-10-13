@@ -24,6 +24,10 @@
 			<filter-name>encodingFilter</filter-name>
 			<url-pattern>*.do</url-pattern>
 		</filter-mapping>
+		<filter-mapping>
+			<filter-name>encodingFilter</filter-name>
+			<url-pattern>*.action</url-pattern>
+		</filter-mapping>
 		<!-- 로그인 세션 검사 필터 -->
 
 		<filter>
