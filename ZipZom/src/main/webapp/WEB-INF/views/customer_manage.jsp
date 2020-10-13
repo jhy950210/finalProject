@@ -8,7 +8,7 @@
   <title>Zipzom - Realtor</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--   <link rel="stylesheet" href="./resources/demos/style.css"> -->
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="./resources/plugins/fontawesome-free/css/all.min.css">
   <!-- 폰트 테스트 -->
@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="./resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- datepicker -->
   <link rel="stylesheet" href="./resources/plugins//jquery-ui/jquery-ui.css">
+  <link rel="stylesheet" href="./resources/demos/style.css">
   <!-- daterange picker -->
   <link rel="stylesheet" href="./resources/plugins/daterangepicker/daterangepicker.css">
   <!-- iCheck for checkboxes and radio inputs -->
@@ -82,123 +83,9 @@
       <span class="brand-text font-weight-light">ZipZom</span>
     </a>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-		<!-- Sidebar Menu -->
-		<nav class="mt-2">
-			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-			<!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-			<li class="nav-item has-treeview">
-				<a href="#" class="nav-link">
-					<i class="nav-icon fas fa-tachometer-alt"></i>
-					<p>
-	                사이트 소개
-	                
-	                <i class="right fas fa-angle-left"></i>
-					</p>
-	            </a>
-            	<ul class="nav nav-treeview">
-					<li class="nav-item">
-						<a href="./resources/index.html" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>사이트 소개</p>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="./resources/index2.html" class="nav-link">
-						<!-- 공지사항이나 업데이트에 새로운 글이 등록되면 옆에 숫자뜸 -->
-						<span class="badge badge-info right">1</span>
-						<i class="far fa-circle nav-icon"></i>
-						<p>공지사항</p>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="./resources/index3.html" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>업데이트</p>
-						</a>
-					</li>
-				</ul>
-			</li>
-          
-			<li class="nav-item has-treeview">
-				<a href="#" class="nav-link">
-					<i class="nav-icon fas fa-copy"></i>
-					<p>
-					고객 관리
-					<i class="fas fa-angle-left right"></i>
-					</p>
-				</a>
-            
-			</li>
-			<li class="nav-item has-treeview">
-				<a href="#" class="nav-link">
-					<i class="nav-icon fas fa-chart-pie"></i>
-					<p>
-                	고객 상담
-					<i class="right fas fa-angle-left"></i>
-					</p>
-				</a>
-				<ul class="nav nav-treeview">
-					<li class="nav-item">
-						<a href="../charts/chartjs.html" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>매물 시세</p>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="../charts/flot.html" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>맞춤 매물</p>
-        		        </a>
-              		</li>
-					<li class="nav-item">
-						<a href="../charts/inline.html" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>상담 보고서</p>
-						</a>
-					</li>
-				</ul>
-			</li>
-			<li class="nav-item has-treeview">
-				<a href="#" class="nav-link">
-					<i class="nav-icon fas fa-tree"></i>
-              		<p>
-                	매물 관리
-                	<i class="fas fa-angle-left right"></i>
-              		</p>
-            	</a>
-				<ul class="nav nav-treeview">
-					<li class="nav-item">
-						<a href="../UI/icons.html" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>등록 매물 관리</p>
-						</a>
-					</li>
-					<li class="nav-item">
-                		<a href="../UI/buttons.html" class="nav-link">
-            	      	<i class="far fa-circle nav-icon"></i>
-						<p>매물 비교</p>
-             	   		</a>
-              		</li>
-             
-            	</ul>
-          </li>
-          
-	          <li class="nav-item">
-					<a href="../calendar.html" class="nav-link">
-					<i class="nav-icon far fa-calendar-alt"></i>
-					<p>일정 관리
-	                <!-- 오늘의 일정 갯수가 옆에 뜸 -->
-	                <span class="badge badge-info right">2</span>
-					</p>
-					</a>
-	          </li>          
-			</ul>
-      	</nav>
-      	<!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
+	<!-- sidebar include -->
+    <jsp:include page = "./sidebar.jsp" flush = "false"/>
+    
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
@@ -233,7 +120,8 @@
 			<div class="card-body" >
 	        	<div class="form-group clearfix">
 					<div class="col">
-						<div>고객 상태
+						<div class="form-group row">
+							<span style="font-family: 'Helvetica', sans-serif; font-weight: bold; margin-right: 10px; margin-top: 5px;">고객 상태</span>
 							<select class="form-control select2bs4" style="width: 200px;">
 								<option value="none">선택</option>
 								<option>계약대기</option>
@@ -245,7 +133,8 @@
 						</div>
 						<br/>
 						
-						<span>고객 속성
+						<div class="form-group row">
+						<span style="font-family: 'Helvetica', sans-serif; font-weight: bold; margin-right: 10px; margin-top: 5px;">고객 속성</span>
 							<div class="icheck-primary d-inline">
 	                        	<input type="checkbox" id="checkboxPrimary1" name="r1" checked>
 	                        	<label for="checkboxPrimary1">
@@ -288,7 +177,7 @@
 	        	                <span>일반상담</span>
 	            	            </label>
 							</div>
-						</span>
+						</div>
 						<br/>
 						
 						
@@ -306,6 +195,7 @@
 					</div>      
 				</div>
 			</div>
+			
 
     <!-- 고객리스트 테이블 -->
     <section class="content">
@@ -422,15 +312,12 @@
     
     <!-- /.content -->
   </div>
+  
   <!-- /.content-wrapper -->
+</section>
+  <!-- footer include -->
+<jsp:include page = "./footer.jsp" flush = "false"/>
 
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.0.5
-    </div>
-    <strong>Copyright &copy; 2020-2020 <a href="http://adminlte.io">ZipZom.com</a>.</strong> All rights
-    reserved.
-  </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -438,14 +325,13 @@
   </aside>
   <!-- /.control-sidebar -->
 </div>
+</div>
 <!-- ./wrapper -->
 
 <!-- 다이얼로그창 인클루드 -->
-<jsp:include page="customer_resister_dialog.jsp"></jsp:include>
+<jsp:include page="./customer_resister_dialog.jsp"></jsp:include>
 <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<!-- datepicker -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="./resources/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="./resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Select2 -->
@@ -457,6 +343,9 @@
 <script src="./resources/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
 <!-- bs-custom-file-input -->
 <script src="./resources/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<!-- datepicker -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- date-range-picker -->
 <script src="./resources/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- bootstrap color picker -->
@@ -473,7 +362,7 @@
 <script>
   $(function () {
     //Initialize Select2 Elements
-    //$('.select2').select2()
+    $('.select2').select2()
 
     //Initialize Select2 Elements
     $('.select2bs4').select2({
@@ -505,7 +394,7 @@
       timePicker: true,
       timePickerIncrement: 30,
       locale: {
-        format: 'YYYY/MM/DD hh:mm A'
+        format: 'MM/DD/YYYY hh:mm A'
       }
     })
     //Date range as a button
@@ -526,7 +415,6 @@
         $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
       }
     )
-    	
 
     //Timepicker
     $('#timepicker').datetimepicker({

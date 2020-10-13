@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.exam.ZipZom.TestMapper_pfs">
+<mapper namespace="com.exam.ZipZom.TestMapper">
 	<select id="pfsList" parameterType="modelTO.userTO" resultType="modelTO.pfsTO">
 	select SEQ_PFS,PSEQ_PFS,B_TYPE,SI,GU,DONG,BUNJI,H_NUMBER,CONTRACT_TYPE,BUDGET1,BUDGET2,BUDGET3,BUDGET4,BUDGET5,BUDGET6,M_COST,LOAN,AREA1,AREA2,AREA3,MOVE_SCHEDULE,
 	END_OFLEASE,ROOM,BATHROOM,DIRECTION,HEATING_SYSTEM,NUMBER_OF_HOUSEHOLD,PARKING,FLOOR,FLOOR_TOTAL,B_YEAR,CONTEXT
@@ -13,10 +13,22 @@
 	#{endOfLease},#{room},#{bathroom},#{direction},#{heatingSystem},#{aircondition},#{option},#{numberOfHousehold},#{parking},#{floor},#{floorTotal},#{elevator},#{bear},#{context},#{security})
 	</insert>
 	
+	<select id="customerView" parameterType="modelTO.userTO" resultType="modelTO.CustomerAllTO">
+		select seq_c,pseq_c,name,tel,type,progress,contract_type contractType,budget_t1 budgetT1,budget_t2 budgetT2,budget_t3 budgetT3,budget_l budgetL,budget_m1 budgetM1,budget_m2 budgetM2,area2,move_schedule moveSchedule,room,direction,option,floor,elevator,b_year bYear,context,security,
+		bed,washing_machine,desk,drying_machine,induction,electric_range electricRange,gas_range gasRange,wordrobe,sink,shoe_rack shoeRack,refrigerator,bath_tube bathTube,
+		security_guard securityGuard,videophone,interphone,card_key cardKey,cctv,door_security doorSecurity,window_guard windowGuard,
+		visit_date visitDate
+		from customer c left outer join option_customer oc
+		on c.seq_c = oc.pseq_oc
+		left outer join customer_visit_date cvd
+		on cvd.pseq_cvd = c.seq_c
+		left outer join security_customer sc
+		on sc.pseq_sc = c.seq_c
+		where c.pseq_c = (select seq_u from user where id = #{id})
+	</select>
+	
 	<select id="customerList" parameterType="modelTO.userTO" resultType="modelTO.customerTO">
-	select seq_c,pseq_c,name,tel,type,progress,contract_type,budget_t1,budget_t2,budget_t3,budget_l,budget_m1,budget_m2,area2,move_schedule,room,direction,option,floor,elevator,b_year,context,security
-	from customer
-	where pseq_c = (select seq_u from user where id = #{id})
+		select name,tel,type,progress,contract_type conrtractType, (select visit_date from customer_visit_date where pseq_cvd = seq_c limit 1) visitDate from customer where pseq_c = (select seq_u from user where id = #{id})
 	</select>
 	
 	<insert id="customerWrite" parameterType="modelTO.customerTO" useGeneratedKeys="true" keyProperty="seqC">

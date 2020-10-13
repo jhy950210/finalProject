@@ -132,7 +132,7 @@
                         <i class="far fa-calendar-alt"></i>
                       </span>
                     </div>
-                    <input type="text" name="moveschedule" class="form-control float-right" id="moveschedule">
+                    <input type="text" name="moveSchedule" class="form-control float-right" id="moveschedule">
                   </div>
                   <!-- /.input group -->
                 </div>

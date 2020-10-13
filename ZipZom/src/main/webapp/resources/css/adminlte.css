@@ -8202,6 +8202,7 @@ button.bg-dark:focus {
 .mb-1,
 .my-1 {
   margin-bottom: 0.25rem !important;
+  margin-right: 20px !important;
 }
 
 .ml-1,
@@ -31231,4 +31232,6 @@ a.text-muted:hover {
         float: left; /*가로 정렬을 하기위한 float*/
 	
 }
+
+.modal-color {font-family:'Nanum Gothic Coding',monospace;color: blue;}
 /*# sourceMappingURL=adminlte.css.map */

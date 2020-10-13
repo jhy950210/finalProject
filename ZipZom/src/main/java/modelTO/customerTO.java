@@ -27,7 +27,15 @@ public class customerTO {
 	private String bYear;
 	private String context;
 	private int security;
+	private String visitDate;
 	
+	
+	public String getVisitDate() {
+		return visitDate;
+	}
+	public void setVisitDate(String visitDate) {
+		this.visitDate = visitDate;
+	}
 	public int getSeqC() {
 		return seqC;
 	}
