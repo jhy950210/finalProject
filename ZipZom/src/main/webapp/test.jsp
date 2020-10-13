@@ -13,7 +13,7 @@
 // 	response.sendRedirect( "./duEmail.do" );
 //	response.sendRedirect( "./login.do" );
 //	response.sendRedirect( "./sendNumber.do" );
-	response.sendRedirect( "./changePassword.do" );
+	response.sendRedirect( "./changePassword.action" );
 %>
 </body>
 </html>

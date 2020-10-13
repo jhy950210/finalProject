@@ -1,6 +1,7 @@
 package com.exam.ZipZom;
 
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import modelDAO.MailSender;
 import modelDAO.encryption;
 import modelTO.auth_passwordTO;
+import modelTO.scheduleTO;
 import modelTO.userTO;
 
 @Controller
@@ -25,7 +27,7 @@ public class ConfigController {
 	private SqlSession sqlSession;
 	
 	// 메인에서 로그인 버튼을 누를 경우
-	@RequestMapping(value = "/login.do")
+	@RequestMapping(value = "/login.action")
 	public ModelAndView loginRequest(HttpServletRequest request) {
 
 		HttpServletRequest httpRequest = (HttpServletRequest)request;
@@ -60,7 +62,7 @@ public class ConfigController {
 	}
 	
 	// 회원가입 창에서 확인 버튼을 누른 경우
-	@RequestMapping(value = "/sign_up.do")
+	@RequestMapping(value = "/sign_up.action")
 	public ModelAndView sign_upRequest(HttpServletRequest request) {
 
 		userTO to = new userTO();
@@ -104,7 +106,7 @@ public class ConfigController {
 	}
 	
 	// 아이디 중복검사 버튼 클릭한 경우
-	@RequestMapping(value = "/duId.do")
+	@RequestMapping(value = "/duId.action")
 	public ModelAndView duplicateIdRequest(HttpServletRequest request) {
 
 		userTO to = new userTO();
@@ -128,7 +130,7 @@ public class ConfigController {
 	}
 	
 	// 이메일 중복검사 버튼 클릭한 경우
-	@RequestMapping(value = "/duEmail.do")
+	@RequestMapping(value = "/duEmail.action")
 	public ModelAndView duplicateEmailRequest(HttpServletRequest request) {
 
 		userTO to = new userTO();
@@ -186,7 +188,7 @@ public class ConfigController {
 	}
 	
 	// 인증번호 발송 버튼을 클릭한 경우
-	@RequestMapping(value = "/sendNumber.do")
+	@RequestMapping(value = "/sendNumber.action")
 	public ModelAndView sendNumberRequest(HttpServletRequest request) {
 
 		userTO to = new userTO();
@@ -256,7 +258,7 @@ public class ConfigController {
 	}
 	
 	// 인증번호 입력 확인 버튼을 누른 경우
-	@RequestMapping(value = "/checkAuthKey.do")
+	@RequestMapping(value = "/checkAuthKey.action")
 	public ModelAndView checkAuthKeyRequest(HttpServletRequest request) {
 		// 1시간이 지난 인증번호 삭제
 		sqlSession.delete("auth_KeyDelete");
@@ -284,7 +286,7 @@ public class ConfigController {
 	}
 
 	// 비밀번호 변경 확인 버튼 클릭 시
-	@RequestMapping(value = "/changePassword.do")
+	@RequestMapping(value = "/changePassword.action")
 	public ModelAndView changePasswordRequest(HttpServletRequest request) {
 
 		userTO to = new userTO();
@@ -306,6 +308,40 @@ public class ConfigController {
 		}
 
 		request.setAttribute("flag", flag);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("test");
+		modelAndView.addObject("list", request);
+		
+		return modelAndView;
+	}
+	
+	// 일정관리에서 일정을 추가 한 경우
+	@RequestMapping(value = "/addSchedule.action")
+	public ModelAndView addScheduleRequest(HttpServletRequest request) {
+
+		scheduleTO to = new scheduleTO();
+		
+		int pseqS = Integer.parseInt(request.getParameter("pseqS"));
+		int cseq = Integer.parseInt(request.getParameter("cseq"));
+		String date = request.getParameter("date");
+		String context = request.getParameter("context");
+		String scheduleType = request.getParameter("scheduleType");
+		String progress = request.getParameter("progress");
+		String bType = request.getParameter("bType");
+		String contractType = request.getParameter("contractType");
+		
+		to.setPseqS(pseqS);
+		to.setCseq(cseq);
+		to.setDate(date);
+		to.setContext(context);
+		to.setScheduleType(scheduleType);
+		to.setProgress(progress);
+		to.setbType(bType);
+		to.setContractType(contractType);
+		
+		
+//		request.setAttribute("flag", flag);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("test");

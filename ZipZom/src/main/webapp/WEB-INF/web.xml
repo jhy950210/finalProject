@@ -28,7 +28,7 @@
 
 		<filter>
 			<filter-name>LoginCheck</filter-name>
-			<filter-class>com.youtube.search.LoginCheckFilter</filter-class>
+			<filter-class>com.exam.ZipZom.LoginCheckFilter</filter-class>
 		</filter>
 	
 		<filter-mapping>
