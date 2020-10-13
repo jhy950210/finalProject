@@ -9,6 +9,9 @@
 <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
 
@@ -34,9 +37,9 @@
 						<div class="input-group mb-3">
 							<!-- 고객 이름 -->
 	              			<span style="margin-right: 10px; margin-top: 10px;">고객 이름</span>
-							<input type="text" class="form-control" name="name" style="width: 200px; margin-right: 30px; margin-top: 5px;" >
+							<input type="text" class="form-control" id="name" name="name" style="width: 200px; margin-right: 30px; margin-top: 5px;" >
 							<span style="margin-right: 10px; margin-top: 10px;">고객 속성</span>
-							<select class="form-control select2bs4" name="type" style="width: 200px; margin-right: 30px; margin-top: 5px;">
+							<select class="form-control select2bs4" id="type" name="type" style="width: 200px; margin-right: 30px; margin-top: 5px;">
 		                    	<option value="none">선택</option>
 									<option>매도인</option>
 									<option>매수인</option>
@@ -48,7 +51,7 @@
 							
 							<!-- 진행 상태 -->
 							<span style="margin-right: 10px; margin-top: 10px;">진행 상태</span>
-							<select class="form-control select2bs4" name="progress" style="width: 200px; margin-right: 30px; margin-top: 5px;">
+							<select class="form-control select2bs4" id="progress" name="progress" style="width: 200px; margin-right: 30px; margin-top: 5px;">
 		                    	<option value="none">선택</option>
 									<option>계약대기</option>
 									<option>계약준비</option>
@@ -64,7 +67,7 @@
 	              		<!-- 계약 타입 -->
 	              		<div class="input-group mb-3">
 	              		<span style="margin-right: 10px; margin-top: 10px;">계약 타입</span>
-						<input type="text" class="form-control" style="width: 200px; margin-right: 30px; margin-top: 5px;" >
+						<input type="text" class="form-control" id="contract_type" name="contractType" style="width: 200px; margin-right: 30px; margin-top: 5px;" >
 						<span style="margin-right: 10px; margin-top: 10px;">방문 날짜</span>
 						<input type="text" name="visitDate" id="visitDate" readonly="readonly"/>
 						
@@ -80,16 +83,15 @@
 	         			<span>예  산</span>
 	         			<div class="input-group mb-3">
 	              		<span style="margin-right: 10px; margin-top: 10px;">매매가</span>
-						<input type="text" class="form-control" name="budgetT1" style="width: 200px; margin-right: 30px; margin-top: 5px;" >
+						<input type="text" class="form-control" id="budget_t1" name="budgetT1" style="width: 200px; margin-right: 30px; margin-top: 5px;" >
 						<span style="margin-right: 10px; margin-top: 10px;">현보증금</span>
-						<input type="text" class="form-control" name="budgetT2" style="width: 200px; margin-right: 30px; margin-top: 5px;" >
+						<input type="text" class="form-control" id="budget_t2" name="budgetT2" style="width: 200px; margin-right: 30px; margin-top: 5px;" >
 						<span style="margin-right: 10px; margin-top: 10px;">현월세</span>
-						<input type="text" class="form-control" name="budgetT3" style="width: 200px; margin-right: 30px; margin-top: 5px;" >
+						<input type="text" class="form-control" id="budget_t3" name="budgetT3" style="width: 200px; margin-right: 30px; margin-top: 5px;" >
 						<span style="margin-right: 10px; margin-top: 10px;">대출유무</span>
-						<select class="form-control select2bs4" name="budget_l" style="width: 200px; margin-right: 30px; margin-top: 5px;">
+						<select class="form-control select2bs4" id="budget_t4" name="budgetL" style="width: 200px; margin-right: 30px; margin-top: 5px;">
 		                    	<option value="none">선택</option>
-									<option>융자 50%이하</option>
-									<option>융자 50%이상</option>
+									<option>융자 있음</option>
 									<option>융자 없음</option>
 						</select>
 						</div>
@@ -100,14 +102,14 @@
 	              		<div class="input-group mb-3">
 	              			<!-- 전용면적 -->
 	              			<span style="margin-right: 15px; margin-top: 5px;">전용 면적</span>
-							<input type="text" name="area2" class="form-control" >
+							<input type="text" class="form-control" id="area2" name="area2" >
 							<div class="input-group-append">
 								<span class="input-group-text" style="margin-right: 30px; ">평</span>
 							</div>
 							
 							<!-- 방 개수 -->
 							<span style="margin-right: 10px; margin-top: 10px;">방 개수</span>
-							<select class="form-control select2bs4" name="rooms" style="width: 200px; margin-right: 30px; margin-top: 5px;">
+							<select class="form-control select2bs4" id="room" name="rooms" style="width: 200px; margin-right: 30px; margin-top: 5px;">
 		                    	<option value="none">선택</option>
 									<option>1개</option>
 									<option>2개</option>
@@ -118,7 +120,7 @@
 							
 							<!-- 향 -->
 							<span style="margin-right: 10px; margin-top: 10px;">향</span>
-							<select class="form-control select2bs4" name="direction" style="width: 200px; margin-right: 30px; margin-top: 5px;">
+							<select class="form-control select2bs4" id="direction" name="direction" style="width: 200px; margin-right: 30px; margin-top: 5px;">
 		                    	<option value="none">선택</option>
 									<option>북향</option>
 									<option>남향</option>
@@ -129,11 +131,11 @@
 							
 							<!-- 층수/총 층수 -->
 							<span style="margin-right: 10px; margin-top: 10px;">층수/총층수</span>
-							<input type="text" class="form-control" name="floor" style="width: 20px; margin-right: 30px; margin-top: 5px;" >
-							<input type="text" class="form-control" name="floorTotal" style="width: 20px; margin-right: 30px; margin-top: 5px;" >
+							<input type="text" class="form-control" id="floor" name="floor" style="width: 20px; margin-right: 30px; margin-top: 5px;" >
+							<input type="text" class="form-control" id="floor_t" name="floorTotal" style="width: 20px; margin-right: 30px; margin-top: 5px;" >
 						
 							<span style="margin-right: 10px; margin-top: 10px;">승강기</span>
-							<select class="form-control select2bs4" name="elevators" style="width: 200px; margin-right: 30px; margin-top: 5px;">
+							<select class="form-control select2bs4" id="elevator" name="elevators" style="width: 200px; margin-right: 30px; margin-top: 5px;">
 		                    	<option value="none">선택</option>
 									<option>있음</option>
 									<option>없음</option>
@@ -239,50 +241,50 @@
 	              		<span>보안시설</span>
 	              			<div class="input-group mb-3">
 								<div class="icheck-primary d-inline">
-	                        	<input type="checkbox" id="securitycheck1" name="securityGuard" value="1" >
-	                        	<label for="securitycheck1">
+	                        	<input type="checkbox" id="securityGuard" name="securityGuard" value="1" >
+	                        	<label for="securityGuard">
 	                        	<span style="margin-right: 10px; margin-top: 10px;">경비원</span>
 	                        	</label>
 	                      		</div>
 	                      		
 	                      		<div class="icheck-primary d-inline">
-	                        	<input type="checkbox" id="securitycheck2" name="videophone" value="1" >
-	                        	<label for="securitycheck2">
+	                        	<input type="checkbox" id="videophone" name="videophone" value="1" >
+	                        	<label for="videophone">
 	                        	<span style="margin-right: 10px; margin-top: 10px;">비디오폰</span>
 	                        	</label>
 	                      		</div>
 	                      		
 	                      		<div class="icheck-primary d-inline">
-	                        	<input type="checkbox" id="securitycheck3" name="interphone" value="1" >
-	                        	<label for="securitycheck3">
+	                        	<input type="checkbox" id="interphone" name="interphone" value="1" >
+	                        	<label for="interphone">
 	                        	<span style="margin-right: 10px; margin-top: 10px;">인터폰</span>
 	                        	</label>
 	                      		</div>
 	                      		
 	                      		<div class="icheck-primary d-inline">
-	                        	<input type="checkbox" id="securitycheck4" name="cardKey" value="1" >
-	                        	<label for="securitycheck4">
+	                        	<input type="checkbox" id="cardKey" name="cardKey" value="1" >
+	                        	<label for="cardKey">
 	                        	<span style="margin-right: 10px; margin-top: 10px;">카드키</span>
 	                        	</label>
 	                      		</div>
 	                      		
 	                      		<div class="icheck-primary d-inline">
-	                        	<input type="checkbox" id="securitycheck5" name="cctv" value="1" >
-	                        	<label for="securitycheck5">
+	                        	<input type="checkbox" id="cctv" name="cctv" value="1" >
+	                        	<label for="cctv">
 	                        	<span style="margin-right: 10px; margin-top: 10px;">CCTV</span>
 	                        	</label>
 	                      		</div>
 	                      		
 	                      		<div class="icheck-primary d-inline">
-	                        	<input type="checkbox" id="securitycheck6" name="doorSecurity" value="1" >
-	                        	<label for="securitycheck6">
+	                        	<input type="checkbox" id="doorSecurity" name="doorSecurity" value="1" checked="checked" >
+	                        	<label for="doorSecurity">
 	                        	<span style="margin-right: 10px; margin-top: 10px;">현관보안</span>
 	                        	</label>
 	                      		</div>
 	                      		
 	                      		<div class="icheck-primary d-inline">
-	                        	<input type="checkbox" id="securitycheck7" name="windowGuard" value="1" >
-	                        	<label for="securitycheck7">
+	                        	<input type="checkbox" id="windowGuard" name="windowGuard" value="1" >
+	                        	<label for="windowGuard">
 	                        	<span style="margin-right: 10px; margin-top: 10px;">방범창</span>
 	                        	</label>
 	                      		</div>
@@ -294,40 +296,34 @@
 	              	<li>
 	              		<div class="form-group">
 	              			<span>메 모</span>
-	                        <textarea class="form-control" name="context" rows="3" placeholder="특이사항 메모"></textarea>
+	                        <textarea class="form-control" id="context" name="context" rows="3" placeholder="특이사항 메모.."></textarea>
 	              		</div>
 	              	
 	              	</li>
 	              	
 	              	
-	              	<!-- 임대인 / 임차인 정보 -->
+	              	<!-- -->
 	              	<li>
 	              	
 	                	<div class="form-group row">
-	                		<!-- 임대인 -->
-							<span style="margin-right: 15px; margin-top: 5px;">임대인</span>
-							<input type="text" class="form-control" name="lessorName" placeholder="이름"  style="width: 150px; margin-right: 15px;">
+	                		<!-- 연락처 -->
+							<span style="margin-right: 15px; margin-top: 5px;">연락처</span>
 							<span class="input-group-text"><i class="fas fa-phone"></i></span>
-							<input type="text" class="form-control" name="lessorTel" placeholder="연락처" data-inputmask='"mask": "(999) 9999-9999"' style="width: 250px; margin-right: 15px;">
+							<input type="text" class="form-control" id="tel" name="tel" placeholder="연락처" data-inputmask='"mask": "(999) 9999-9999"' style="width: 250px; margin-right: 15px;">
 	                  
-	                  		<!-- 임차인 -->
-							<span style="margin-right: 15px; margin-top: 5px;">임차인</span>   
-							<input type="text" class="form-control" name="lesseeName" placeholder="이름"  style="width: 150px; margin-right: 15px;">
-							<span class="input-group-text"><i class="fas fa-phone"></i></span>
-							<input type="text" class="form-control" name="lesseeTel" placeholder="연락처" data-inputmask='"mask": "(999) 9999-9999"' style="width: 250px; margin-right: 15px;">
+	                  		
 						</div>
 	
 	                </li>
-	              
+	              </ul>
 					<!-- 닫기 / 등록 버튼 -->	              
 					<div class="modal-footer justify-content-between">
 						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-						<input type="button" id="customerWrite" class="btn btn-primary" value="등록" />
+						<button type="button" id="customerWrite" class="btn btn-primary">등록</button>
 					</div>              
 	            </div>
-       </form>
+       			</form>
 	      </div>
-    </section>
 
   </div>
 
@@ -341,5 +337,6 @@ $('#customerWrite').on('click', function(){
 	document.cfrm.submit();
 })
 </script>
+
 </body>
 </html>
