@@ -153,7 +153,7 @@
           </li>
           
           <li class="nav-item">
-            <a href="../calendar.html" class="nav-link">
+            <a href="./schedule.do" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
               <p>
                 일정 관리

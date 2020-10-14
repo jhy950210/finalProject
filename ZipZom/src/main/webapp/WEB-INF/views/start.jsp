@@ -25,39 +25,33 @@
 <script src="./resources/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	//var id = $('#id').val();
-	//var password = $('#password').val();
-	
 	$("#btn").button().on('click', function() {
 		var id = $('#id').val();
-		var password = $('#password').val();
-		console.log(id);
-		console.log(password);
+		var password =$('#password').val();
 		loginOk(id, password);
 	});
 	
-	var loginOk = function( id, password ){
-		$.ajax({
-			url: './login.action',
-			data: {
-				id: id,
-				password: password
-			},
-			type: 'post',
-			datatype: 'json',
-			success: function( json ) {
-				if( json.flag == 1 ){
-					alert('성공');
-					location.href = './newDashboard.do';
-				} else {
-					alert("아이디/패스워드 오류");
-					//location.href = './newDashboard.jsp';
-				}
-				
-			}
-		}); 
-	}
 });
+
+var loginOk = function( id, password ){
+	$.ajax({
+		url: './login.action',
+		data: {
+			id: id,
+			password: password
+		},
+		type: 'post',
+		datatype: 'json',
+		success: function( json ) {
+			if( json.flag == 1 ){
+				alert('성공');
+				location.href = './newDashboard.do';
+			} else {
+				alert("아이디/패스워드 오류");
+			}
+		}
+	}); 
+}
 </script>
 <body class="hold-transition login-page">
 <div class="login-box">

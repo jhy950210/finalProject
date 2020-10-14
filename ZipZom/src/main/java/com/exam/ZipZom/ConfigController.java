@@ -357,4 +357,14 @@ public class ConfigController {
 
 			return modelAndView;
 		}
+	
+	// 일정관리 화면
+		@RequestMapping(value = "/schedule.do")
+		public ModelAndView scheduleRequest(HttpServletRequest request) {
+
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("schedule");
+
+			return modelAndView;
+		}
 }
