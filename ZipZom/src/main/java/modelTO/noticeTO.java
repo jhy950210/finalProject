@@ -1,55 +1,56 @@
 package modelTO;
 
 public class noticeTO {
-	private int SEQ_N;
-	private String SUBJECT;
-	private String WRITER;
-	private String CONTENT;
-	private String FILENAME;
-	private int HIT;
-	private String DATE;
+	private int seqN;
+	private String subject;
+	private String writer;
+	private String content;
+	private String filename;
+	private int hit;
+	private String date;
 	
-	public int getSEQ_N() {
-		return SEQ_N;
+	public int getSeqN() {
+		return seqN;
 	}
-	public void setSEQ_N(int sEQ_N) {
-		SEQ_N = sEQ_N;
+	public void setSeqN(int seqN) {
+		this.seqN = seqN;
 	}
-	public String getSUBJECT() {
-		return SUBJECT;
+	public String getSubject() {
+		return subject;
 	}
-	public void setSUBJECT(String sUBJECT) {
-		SUBJECT = sUBJECT;
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
-	public String getWRITER() {
-		return WRITER;
+	public String getWriter() {
+		return writer;
 	}
-	public void setWRITER(String wRITER) {
-		WRITER = wRITER;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
-	public String getCONTENT() {
-		return CONTENT;
+	public String getContent() {
+		return content;
 	}
-	public void setCONTENT(String cONTENT) {
-		CONTENT = cONTENT;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public String getFILENAME() {
-		return FILENAME;
+	public String getFilename() {
+		return filename;
 	}
-	public void setFILENAME(String fILENAME) {
-		FILENAME = fILENAME;
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
-	public int getHIT() {
-		return HIT;
+	public int getHit() {
+		return hit;
 	}
-	public void setHIT(int hIT) {
-		HIT = hIT;
+	public void setHit(int hit) {
+		this.hit = hit;
 	}
-	public String getDATE() {
-		return DATE;
+	public String getDate() {
+		return date;
 	}
-	public void setDATE(String dATE) {
-		DATE = dATE;
+	public void setDate(String date) {
+		this.date = date;
 	}
+	
 	
 }

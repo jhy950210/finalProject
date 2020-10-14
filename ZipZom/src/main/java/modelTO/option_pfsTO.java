@@ -1,103 +1,105 @@
 package modelTO;
 
 public class option_pfsTO {
-	private int SEQ_OP;
-	private int PSEQ_OP;
-	private boolean BED;
-	private boolean WASHING_MACHINE;
-	private boolean DESC;
-	private boolean DRYING_MACHINE;
-	private boolean INDUCTION;
-	private boolean ELECTRIC_RANGE;
-	private boolean GAS_RANGE;
-	private boolean WORDROBE;
-	private boolean SINK;
-	private boolean SHOE_RACK;
-	private boolean REFRIGERATOR;
-	private boolean BATH_TUBE;
+	private int seqOp;
+	private int pseqOp;
+	private int bed;
+	private int washingMachine;
+	private int desc;
+	private int dryingMachine;
+	private int induction;
+	private int electricRange;
+	private int gasRange;
+	private int wordrobe;
+	private int sink;
+	private int shoeRack;
+	private int refrigerator;
+	private int bathTube;
 	
-	public int getSEQ_OP() {
-		return SEQ_OP;
+	public int getSeqOp() {
+		return seqOp;
 	}
-	public void setSEQ_OP(int sEQ_OP) {
-		SEQ_OP = sEQ_OP;
+	public void setSeqOp(int seqOp) {
+		this.seqOp = seqOp;
 	}
-	public int getPSEQ_OP() {
-		return PSEQ_OP;
+	public int getPseqOp() {
+		return pseqOp;
 	}
-	public void setPSEQ_OP(int pSEQ_OP) {
-		PSEQ_OP = pSEQ_OP;
+	public void setPseqOp(int pseqOp) {
+		this.pseqOp = pseqOp;
 	}
-	public boolean isBED() {
-		return BED;
+	public int getBed() {
+		return bed;
 	}
-	public void setBED(boolean bED) {
-		BED = bED;
+	public void setBed(int bed) {
+		this.bed = bed;
 	}
-	public boolean isWASHING_MACHINE() {
-		return WASHING_MACHINE;
+	public int getWashingMachine() {
+		return washingMachine;
 	}
-	public void setWASHING_MACHINE(boolean wASHING_MACHINE) {
-		WASHING_MACHINE = wASHING_MACHINE;
+	public void setWashingMachine(int washingMachine) {
+		this.washingMachine = washingMachine;
 	}
-	public boolean isDESC() {
-		return DESC;
+	public int getDesc() {
+		return desc;
 	}
-	public void setDESC(boolean dESC) {
-		DESC = dESC;
+	public void setDesc(int desc) {
+		this.desc = desc;
 	}
-	public boolean isDRYING_MACHINE() {
-		return DRYING_MACHINE;
+	public int getDryingMachine() {
+		return dryingMachine;
 	}
-	public void setDRYING_MACHINE(boolean dRYING_MACHINE) {
-		DRYING_MACHINE = dRYING_MACHINE;
+	public void setDryingMachine(int dryingMachine) {
+		this.dryingMachine = dryingMachine;
 	}
-	public boolean isINDUCTION() {
-		return INDUCTION;
+	public int getInduction() {
+		return induction;
 	}
-	public void setINDUCTION(boolean iNDUCTION) {
-		INDUCTION = iNDUCTION;
+	public void setInduction(int induction) {
+		this.induction = induction;
 	}
-	public boolean isELECTRIC_RANGE() {
-		return ELECTRIC_RANGE;
+	public int getElectricRange() {
+		return electricRange;
 	}
-	public void setELECTRIC_RANGE(boolean eLECTRIC_RANGE) {
-		ELECTRIC_RANGE = eLECTRIC_RANGE;
+	public void setElectricRange(int electricRange) {
+		this.electricRange = electricRange;
 	}
-	public boolean isGAS_RANGE() {
-		return GAS_RANGE;
+	public int getGasRange() {
+		return gasRange;
 	}
-	public void setGAS_RANGE(boolean gAS_RANGE) {
-		GAS_RANGE = gAS_RANGE;
+	public void setGasRange(int gasRange) {
+		this.gasRange = gasRange;
 	}
-	public boolean isWORDROBE() {
-		return WORDROBE;
+	public int getWordrobe() {
+		return wordrobe;
 	}
-	public void setWORDROBE(boolean wORDROBE) {
-		WORDROBE = wORDROBE;
+	public void setWordrobe(int wordrobe) {
+		this.wordrobe = wordrobe;
 	}
-	public boolean isSINK() {
-		return SINK;
+	public int getSink() {
+		return sink;
 	}
-	public void setSINK(boolean sINK) {
-		SINK = sINK;
+	public void setSink(int sink) {
+		this.sink = sink;
 	}
-	public boolean isSHOE_RACK() {
-		return SHOE_RACK;
+	public int getShoeRack() {
+		return shoeRack;
 	}
-	public void setSHOE_RACK(boolean sHOE_RACK) {
-		SHOE_RACK = sHOE_RACK;
+	public void setShoeRack(int shoeRack) {
+		this.shoeRack = shoeRack;
 	}
-	public boolean isREFRIGERATOR() {
-		return REFRIGERATOR;
+	public int getRefrigerator() {
+		return refrigerator;
 	}
-	public void setREFRIGERATOR(boolean rEFRIGERATOR) {
-		REFRIGERATOR = rEFRIGERATOR;
+	public void setRefrigerator(int refrigerator) {
+		this.refrigerator = refrigerator;
 	}
-	public boolean isBATH_TUBE() {
-		return BATH_TUBE;
+	public int getBathTube() {
+		return bathTube;
 	}
-	public void setBATH_TUBE(boolean bATH_TUBE) {
-		BATH_TUBE = bATH_TUBE;
-	}	
+	public void setBathTube(int bathTube) {
+		this.bathTube = bathTube;
+	}
+	
+	
 }

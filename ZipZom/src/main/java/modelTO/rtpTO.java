@@ -2,103 +2,105 @@ package modelTO;
 
 public class rtpTO {
 	// REAL TRANSACTION PRICE
-	private int SEQ_RTP;
-	private int PSEQ_RTP;
-	private String SI;
-	private String GU;
-	private String DONG;
-	private String BUNJI;
-	private String B_NAME;
-	private int AREA2;
-	private String CONTRACT_DATE1;
-	private String CONTRACT_DATE2;
-	private int PRICE;
-	private int FLOOR;
-	private int B_YEAR;
-	private String ROAD_ADDRESS;
+	private int seqRtp;
+	private int pseqRtp;
+	private String si;
+	private String gu;
+	private String dong;
+	private String bunji;
+	private String bName;
+	private int area2;
+	private String contractDate1;
+	private String contractDate2;
+	private int price;
+	private int floor;
+	private int bYear;
+	private String roadAddress;
 	
-	public int getSEQ_RTP() {
-		return SEQ_RTP;
+	public int getSeqRtp() {
+		return seqRtp;
 	}
-	public void setSEQ_RTP(int sEQ_RTP) {
-		SEQ_RTP = sEQ_RTP;
+	public void setSeqRtp(int seqRtp) {
+		this.seqRtp = seqRtp;
 	}
-	public int getPSEQ_RTP() {
-		return PSEQ_RTP;
+	public int getPseqRtp() {
+		return pseqRtp;
 	}
-	public void setPSEQ_RTP(int pSEQ_RTP) {
-		PSEQ_RTP = pSEQ_RTP;
+	public void setPseqRtp(int pseqRtp) {
+		this.pseqRtp = pseqRtp;
 	}
-	public String getSI() {
-		return SI;
+	public String getSi() {
+		return si;
 	}
-	public void setSI(String sI) {
-		SI = sI;
+	public void setSi(String si) {
+		this.si = si;
 	}
-	public String getGU() {
-		return GU;
+	public String getGu() {
+		return gu;
 	}
-	public void setGU(String gU) {
-		GU = gU;
+	public void setGu(String gu) {
+		this.gu = gu;
 	}
-	public String getDONG() {
-		return DONG;
+	public String getDong() {
+		return dong;
 	}
-	public void setDONG(String dONG) {
-		DONG = dONG;
+	public void setDong(String dong) {
+		this.dong = dong;
 	}
-	public String getBUNJI() {
-		return BUNJI;
+	public String getBunji() {
+		return bunji;
 	}
-	public void setBUNJI(String bUNJI) {
-		BUNJI = bUNJI;
+	public void setBunji(String bunji) {
+		this.bunji = bunji;
 	}
-	public String getB_NAME() {
-		return B_NAME;
+	public String getbName() {
+		return bName;
 	}
-	public void setB_NAME(String b_NAME) {
-		B_NAME = b_NAME;
+	public void setbName(String bName) {
+		this.bName = bName;
 	}
-	public int getAREA2() {
-		return AREA2;
+	public int getArea2() {
+		return area2;
 	}
-	public void setAREA2(int aREA2) {
-		AREA2 = aREA2;
+	public void setArea2(int area2) {
+		this.area2 = area2;
 	}
-	public String getCONTRACT_DATE1() {
-		return CONTRACT_DATE1;
+	public String getContractDate1() {
+		return contractDate1;
 	}
-	public void setCONTRACT_DATE1(String cONTRACT_DATE1) {
-		CONTRACT_DATE1 = cONTRACT_DATE1;
+	public void setContractDate1(String contractDate1) {
+		this.contractDate1 = contractDate1;
 	}
-	public String getCONTRACT_DATE2() {
-		return CONTRACT_DATE2;
+	public String getContractDate2() {
+		return contractDate2;
 	}
-	public void setCONTRACT_DATE2(String cONTRACT_DATE2) {
-		CONTRACT_DATE2 = cONTRACT_DATE2;
+	public void setContractDate2(String contractDate2) {
+		this.contractDate2 = contractDate2;
 	}
-	public int getPRICE() {
-		return PRICE;
+	public int getPrice() {
+		return price;
 	}
-	public void setPRICE(int pRICE) {
-		PRICE = pRICE;
+	public void setPrice(int price) {
+		this.price = price;
 	}
-	public int getFLOOR() {
-		return FLOOR;
+	public int getFloor() {
+		return floor;
 	}
-	public void setFLOOR(int fLOOR) {
-		FLOOR = fLOOR;
+	public void setFloor(int floor) {
+		this.floor = floor;
 	}
-	public int getB_YEAR() {
-		return B_YEAR;
+	public int getbYear() {
+		return bYear;
 	}
-	public void setB_YEAR(int b_YEAR) {
-		B_YEAR = b_YEAR;
+	public void setbYear(int bYear) {
+		this.bYear = bYear;
 	}
-	public String getROAD_ADDRESS() {
-		return ROAD_ADDRESS;
+	public String getRoadAddress() {
+		return roadAddress;
 	}
-	public void setROAD_ADDRESS(String rOAD_ADDRESS) {
-		ROAD_ADDRESS = rOAD_ADDRESS;
+	public void setRoadAddress(String roadAddress) {
+		this.roadAddress = roadAddress;
 	}
+	
+	
 }
