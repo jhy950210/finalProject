@@ -4,7 +4,7 @@
 <mapper namespace="com.exam.ZipZom.TestMapper">
 	<!-- 로그인 확인 sql문 -->
 	<select id="loginSelect" parameterType="modelTO.userTO" resultType="modelTO.userTO">
-		select id from user where id=#{id} and password=#{password}
+		select id, seq_u as seqU from user where id=#{id} and password=#{password}
 	</select>
 	<!-- 회원가입 시 회원 정보 입력 sql문 -->
 	<insert id="signUpInsert" parameterType="modelTO.userTO">
@@ -80,4 +80,63 @@
 	<update id="userPasswordUpdate" parameterType="modelTO.auth_passwordTO">
 		UPDATE user SET password = #{password} WHERE email = #{email};
 	</update>
+	<!-- 일정관리 view 페이지 select sql문 -->
+	<select id="scheduleSelect" parameterType="modelTO.scheduleTO" resultType="modelTO.scheduleTO">
+		select SEQ_S as seqS,
+		PSEQ_S as pseqS,
+		CUSTOMER_NAME as customerName,
+		CUSTOMER_TEL as customerTel,
+		CUSTOMER_STATE as customerState,
+		DATE, 
+		CONTEXT, 
+		SCHEDULE_TYPE as scheduleType, 
+		PROGRESS, 
+		B_TYPE as bType, 
+		CONTRACT_TYPE as contractType
+		from schedule
+		where PSEQ_S = #{pseqS}
+	</select>
+	<!-- 일정관리 상세정보 view 페이지 select sql문 -->
+	<select id="schedulePropertySelect" parameterType="modelTO.scheduleTO" resultType="modelTO.scheduleTO">
+		select SEQ_S as seqS,
+		PSEQ_S as pseqS,
+		CUSTOMER_NAME as customerName,
+		CUSTOMER_TEL as customerTel,
+		CUSTOMER_STATE as customerState,
+		DATE, 
+		CONTEXT, 
+		SCHEDULE_TYPE as scheduleType, 
+		PROGRESS, 
+		B_TYPE as bType, 
+		CONTRACT_TYPE as contractType
+		from schedule
+		where SEQ_S = #{seqS}
+	</select>
+	<!-- 일정 추가 sql문 -->
+	<insert id="scheduleInsert" parameterType="modelTO.scheduleTO">
+		insert into schedule (
+		PSEQ_S,
+		CUSTOMER_NAME,
+		CUSTOMER_TEL,
+		CUSTOMER_STATE,
+		DATE,
+		CONTEXT, 
+		SCHEDULE_TYPE,
+		PROGRESS, 
+		B_TYPE,
+		CONTRACT_TYPE
+		) 
+		values (
+		#{pseqS}, 
+		#{customerName}, 
+		#{customerTel}, 
+		#{customerState}, 
+		#{date},
+		#{context}, 
+		#{scheduleType}, 
+		#{progress},
+		#{bType}, 
+		#{contractType}
+		)
+	</insert>
 </mapper>

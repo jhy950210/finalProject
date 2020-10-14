@@ -1,11 +1,11 @@
 package modelTO;
 
-import java.util.Date;
-
 public class scheduleTO {
 	private int seqS;
 	private int pseqS;
-	private int cseq;
+	private String customerName;
+	private String customerTel;
+	private String customerState;
 	private String date;
 	private String context;
 	private String scheduleType;
@@ -13,12 +13,6 @@ public class scheduleTO {
 	private String bType;
 	private String contractType;
 	
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
 	public int getSeqS() {
 		return seqS;
 	}
@@ -31,11 +25,29 @@ public class scheduleTO {
 	public void setPseqS(int pseqS) {
 		this.pseqS = pseqS;
 	}
-	public int getCseq() {
-		return cseq;
+	public String getCustomerName() {
+		return customerName;
 	}
-	public void setCseq(int cseq) {
-		this.cseq = cseq;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getCustomerTel() {
+		return customerTel;
+	}
+	public void setCustomerTel(String customerTel) {
+		this.customerTel = customerTel;
+	}
+	public String getCustomerState() {
+		return customerState;
+	}
+	public void setCustomerState(String customerState) {
+		this.customerState = customerState;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
 	}
 	public String getContext() {
 		return context;
@@ -67,5 +79,6 @@ public class scheduleTO {
 	public void setContractType(String contractType) {
 		this.contractType = contractType;
 	}
+	
 	
 }
