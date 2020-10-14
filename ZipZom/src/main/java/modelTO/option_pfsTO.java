@@ -3,18 +3,18 @@ package modelTO;
 public class option_pfsTO {
 	private int seqOp;
 	private int pseqOp;
-	private boolean bed;
-	private boolean washingMachine;
-	private boolean desc;
-	private boolean dryingMachine;
-	private boolean induction;
-	private boolean electricRange;
-	private boolean gasRange;
-	private boolean wordrobe;
-	private boolean sink;
-	private boolean shoeRack;
-	private boolean refrigerator;
-	private boolean bathTube;
+	private int bed;
+	private int washingMachine;
+	private int desc;
+	private int dryingMachine;
+	private int induction;
+	private int electricRange;
+	private int gasRange;
+	private int wordrobe;
+	private int sink;
+	private int shoeRack;
+	private int refrigerator;
+	private int bathTube;
 	
 	public int getSeqOp() {
 		return seqOp;
@@ -28,77 +28,78 @@ public class option_pfsTO {
 	public void setPseqOp(int pseqOp) {
 		this.pseqOp = pseqOp;
 	}
-	public boolean isBed() {
+	public int getBed() {
 		return bed;
 	}
-	public void setBed(boolean bed) {
+	public void setBed(int bed) {
 		this.bed = bed;
 	}
-	public boolean isWashingMachine() {
+	public int getWashingMachine() {
 		return washingMachine;
 	}
-	public void setWashingMachine(boolean washingMachine) {
+	public void setWashingMachine(int washingMachine) {
 		this.washingMachine = washingMachine;
 	}
-	public boolean isDesc() {
+	public int getDesc() {
 		return desc;
 	}
-	public void setDesc(boolean desc) {
+	public void setDesc(int desc) {
 		this.desc = desc;
 	}
-	public boolean isDryingMachine() {
+	public int getDryingMachine() {
 		return dryingMachine;
 	}
-	public void setDryingMachine(boolean dryingMachine) {
+	public void setDryingMachine(int dryingMachine) {
 		this.dryingMachine = dryingMachine;
 	}
-	public boolean isInduction() {
+	public int getInduction() {
 		return induction;
 	}
-	public void setInduction(boolean induction) {
+	public void setInduction(int induction) {
 		this.induction = induction;
 	}
-	public boolean isElectricRange() {
+	public int getElectricRange() {
 		return electricRange;
 	}
-	public void setElectricRange(boolean electricRange) {
+	public void setElectricRange(int electricRange) {
 		this.electricRange = electricRange;
 	}
-	public boolean isGasRange() {
+	public int getGasRange() {
 		return gasRange;
 	}
-	public void setGasRange(boolean gasRange) {
+	public void setGasRange(int gasRange) {
 		this.gasRange = gasRange;
 	}
-	public boolean isWordrobe() {
+	public int getWordrobe() {
 		return wordrobe;
 	}
-	public void setWordrobe(boolean wordrobe) {
+	public void setWordrobe(int wordrobe) {
 		this.wordrobe = wordrobe;
 	}
-	public boolean isSink() {
+	public int getSink() {
 		return sink;
 	}
-	public void setSink(boolean sink) {
+	public void setSink(int sink) {
 		this.sink = sink;
 	}
-	public boolean isShoeRack() {
+	public int getShoeRack() {
 		return shoeRack;
 	}
-	public void setShoeRack(boolean shoeRack) {
+	public void setShoeRack(int shoeRack) {
 		this.shoeRack = shoeRack;
 	}
-	public boolean isRefrigerator() {
+	public int getRefrigerator() {
 		return refrigerator;
 	}
-	public void setRefrigerator(boolean refrigerator) {
+	public void setRefrigerator(int refrigerator) {
 		this.refrigerator = refrigerator;
 	}
-	public boolean isBathTube() {
+	public int getBathTube() {
 		return bathTube;
 	}
-	public void setBathTube(boolean bathTube) {
+	public void setBathTube(int bathTube) {
 		this.bathTube = bathTube;
 	}
+	
 	
 }

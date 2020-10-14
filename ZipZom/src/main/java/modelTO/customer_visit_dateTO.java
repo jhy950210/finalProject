@@ -1,6 +1,9 @@
 package modelTO;
 
 public class customer_visit_dateTO {
+	public customer_visit_dateTO() {
+		// TODO Auto-generated constructor stub
+	}
 	private int seqCvd;
 	private int pseqCvd;
 	private String visitDate;

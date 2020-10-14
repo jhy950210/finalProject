@@ -1,6 +1,9 @@
 package modelTO;
 
 public class customerTO {
+	public customerTO() {
+		// TODO Auto-generated constructor stub
+	}
 	private int seqC;
 	private int pseqC;
 	private String name;
@@ -11,19 +14,28 @@ public class customerTO {
 	private int budgetT1;
 	private int budgetT2;
 	private int budgetT3;
-	private int budgetl;
+	private String budgetL;
 	private int budgetM1;
 	private int budgetM2;
 	private int area2;
 	private String moveSchedule;
 	private int room;
 	private String direction;
-	private boolean option;
+	private int option;
 	private int floor;
-	private boolean elevator;
+	private int elevator;
 	private String bYear;
 	private String context;
-	private boolean security;
+	private int security;
+	private String visitDate;
+	
+	
+	public String getVisitDate() {
+		return visitDate;
+	}
+	public void setVisitDate(String visitDate) {
+		this.visitDate = visitDate;
+	}
 	public int getSeqC() {
 		return seqC;
 	}
@@ -84,11 +96,11 @@ public class customerTO {
 	public void setBudgetT3(int budgetT3) {
 		this.budgetT3 = budgetT3;
 	}
-	public int getBudgetl() {
-		return budgetl;
+	public String getBudgetL() {
+		return budgetL;
 	}
-	public void setBudgetl(int budgetl) {
-		this.budgetl = budgetl;
+	public void setBudgetL(String budgetL) {
+		this.budgetL = budgetL;
 	}
 	public int getBudgetM1() {
 		return budgetM1;
@@ -126,23 +138,11 @@ public class customerTO {
 	public void setDirection(String direction) {
 		this.direction = direction;
 	}
-	public boolean isOption() {
-		return option;
-	}
-	public void setOption(boolean option) {
-		this.option = option;
-	}
 	public int getFloor() {
 		return floor;
 	}
 	public void setFloor(int floor) {
 		this.floor = floor;
-	}
-	public boolean isElevator() {
-		return elevator;
-	}
-	public void setElevator(boolean elevator) {
-		this.elevator = elevator;
 	}
 	public String getbYear() {
 		return bYear;
@@ -156,12 +156,25 @@ public class customerTO {
 	public void setContext(String context) {
 		this.context = context;
 	}
-	public boolean isSecurity() {
+	public int getOption() {
+		return option;
+	}
+	public void setOption(int option) {
+		this.option = option;
+	}
+	public int getElevator() {
+		return elevator;
+	}
+	public void setElevator(int elevator) {
+		this.elevator = elevator;
+	}
+	public int getSecurity() {
 		return security;
 	}
-	public void setSecurity(boolean security) {
+	public void setSecurity(int security) {
 		this.security = security;
 	}
+	
 	
 	
 }

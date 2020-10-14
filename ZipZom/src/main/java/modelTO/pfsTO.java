@@ -1,10 +1,13 @@
 package modelTO;
 
 public class pfsTO {
+	public pfsTO() {
+		// TODO Auto-generated constructor stub
+	}
 	// PROPERTY FOR SALE
 	private int seqPfs;
 	private int pseqPfs;
-	private boolean images;
+	private int images;
 	private String bType;
 	private String si;
 	private String gu;
@@ -29,16 +32,16 @@ public class pfsTO {
 	private int bathroom;
 	private String direction;
 	private String heatingSystem;
-	private boolean aircondition;
-	private boolean option;
+	private int aircondition;
+	private int option;
 	private int numberOfHousehold;
 	private int parking;
 	private int floor;
 	private int floorTotal;
-	private boolean elevator;
+	private int elevator;
 	private String bYear;
 	private String context;
-	private boolean security;
+	private int security;
 	private String lessorName;
 	private String lessorTel;
 	private String lesseeName;
@@ -55,12 +58,6 @@ public class pfsTO {
 	}
 	public void setPseqPfs(int pseqPfs) {
 		this.pseqPfs = pseqPfs;
-	}
-	public boolean isImages() {
-		return images;
-	}
-	public void setImages(boolean images) {
-		this.images = images;
 	}
 	public String getbType() {
 		return bType;
@@ -206,18 +203,7 @@ public class pfsTO {
 	public void setHeatingSystem(String heatingSystem) {
 		this.heatingSystem = heatingSystem;
 	}
-	public boolean isAircondition() {
-		return aircondition;
-	}
-	public void setAircondition(boolean aircondition) {
-		this.aircondition = aircondition;
-	}
-	public boolean isOption() {
-		return option;
-	}
-	public void setOption(boolean option) {
-		this.option = option;
-	}
+
 	public int getNumberOfHousehold() {
 		return numberOfHousehold;
 	}
@@ -242,12 +228,6 @@ public class pfsTO {
 	public void setFloorTotal(int floorTotal) {
 		this.floorTotal = floorTotal;
 	}
-	public boolean isElevator() {
-		return elevator;
-	}
-	public void setElevator(boolean elevator) {
-		this.elevator = elevator;
-	}
 	public String getbYear() {
 		return bYear;
 	}
@@ -259,12 +239,6 @@ public class pfsTO {
 	}
 	public void setContext(String context) {
 		this.context = context;
-	}
-	public boolean isSecurity() {
-		return security;
-	}
-	public void setSecurity(boolean security) {
-		this.security = security;
 	}
 	public String getLessorName() {
 		return lessorName;
@@ -289,6 +263,36 @@ public class pfsTO {
 	}
 	public void setLesseeTel(String lesseeTel) {
 		this.lesseeTel = lesseeTel;
+	}
+	public int getImages() {
+		return images;
+	}
+	public void setImages(int images) {
+		this.images = images;
+	}
+	public int getAircondition() {
+		return aircondition;
+	}
+	public void setAircondition(int aircondition) {
+		this.aircondition = aircondition;
+	}
+	public int getOption() {
+		return option;
+	}
+	public void setOption(int option) {
+		this.option = option;
+	}
+	public int getElevator() {
+		return elevator;
+	}
+	public void setElevator(int elevator) {
+		this.elevator = elevator;
+	}
+	public int getSecurity() {
+		return security;
+	}
+	public void setSecurity(int security) {
+		this.security = security;
 	}
 	
 	
