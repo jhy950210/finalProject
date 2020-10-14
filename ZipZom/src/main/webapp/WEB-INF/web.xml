@@ -24,23 +24,26 @@
 			<filter-name>encodingFilter</filter-name>
 			<url-pattern>*.do</url-pattern>
 		</filter-mapping>
-		
-		<!-- Spring용 Servlet 설정 -->
-		<servlet>
-			<servlet-name>dispatcher</servlet-name>
-			<servlet-class>
-				org.springframework.web.servlet.DispatcherServlet
-			</servlet-class>
-			<init-param>
-				<param-name>contextConfigLocation</param-name>
-				<param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
-			</init-param>
-			<load-on-startup>1</load-on-startup>
-		</servlet>
-		<servlet-mapping>
-			<servlet-name>dispatcher</servlet-name>
+		<filter-mapping>
+			<filter-name>encodingFilter</filter-name>
+			<url-pattern>*.action</url-pattern>
+		</filter-mapping>
+		<!-- 로그인 세션 검사 필터 -->
+
+		<filter>
+			<filter-name>LoginCheck</filter-name>
+			<filter-class>com.exam.ZipZom.LoginCheckFilter</filter-class>
+		</filter>
+
+		<filter-mapping>
+			<filter-name>LoginCheck</filter-name>
 			<url-pattern>*.do</url-pattern>
-	</servlet-mapping>
+		</filter-mapping>
+		<filter-mapping>
+			<filter-name>LoginCheck</filter-name>
+			<url-pattern>*.json</url-pattern>
+		</filter-mapping>
+		
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -62,10 +65,18 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		
+	
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>*.action</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.json</url-pattern>
 	</servlet-mapping>
 
 </web-app>
