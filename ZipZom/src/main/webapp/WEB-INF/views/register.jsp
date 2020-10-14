@@ -199,7 +199,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
         </div>
         <div class="input-group mb-3">
           
-		<input type="text"  class="form-control" id="roadAddrPart1"  placeholder="도로명주소"  readonly >
+		<input type="text"  class="form-control" id="roadAddrPart1" name="roadAddrPart1" placeholder="도로명주소"  readonly >
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-map"></span>
@@ -207,8 +207,8 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
           </div>
         </div>
         <div class="input-group mb-3">
-          	<input type="text"  class="form-control" id="addrDetail" placeholder="상세주소" style="width:50%" value="" readonly>
-			<input type="text"  class="form-control" id="roadAddrPart2"  style="width:50%" value="" readonly>
+          	<input type="text"  class="form-control" id="addrDetail" name="addrDetail" placeholder="상세주소" style="width:50%" value="" readonly>
+			<input type="text"  class="form-control" id="roadAddrPart2" name="roadAddrPart2" style="width:50%" value="" readonly>
 			
           <div class="input-group-append">
             <div class="input-group-text">

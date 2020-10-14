@@ -34,12 +34,22 @@ public class ConfigController {
 		return modelAndView;
 	}
 	
-	// 비밀번호 분실 초기화면
+	// 비밀번호 찾기 초기화면
 	@RequestMapping(value = "/forgot_password.action")
 	public ModelAndView forgotPasswordRequest(HttpServletRequest request) {
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("forgot_password");
+
+		return modelAndView;
+	}
+	
+	// 비밀번호 분실 초기화면
+	@RequestMapping(value = "/forgot_id.action")
+	public ModelAndView forgotIdRequest(HttpServletRequest request) {
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("forgot_id");
 
 		return modelAndView;
 	}
@@ -201,18 +211,15 @@ public class ConfigController {
 	}
 	
 	// 아이디 찾기 버튼 클릭한 경우
-		@RequestMapping(value = "/findId.action")
-		public ModelAndView findIdRequest(HttpServletRequest request) {
+	@RequestMapping(value = "/findId.action")
+	public ModelAndView findIdRequest(HttpServletRequest request) {
 
 			userTO to = new userTO();
 
-//			String email = request.getParameter("email");
-//			String name = request.getParameter("name");
-//			to.setName(name);
-//			to.setEmail(email);
-
-			to.setName("박성훈");
-			to.setEmail("dlsncjfthodk@naver.com");
+			String email = request.getParameter("email");
+			String name = request.getParameter("name");
+			to.setName(name);
+			to.setEmail(email);
 
 			int flag = 0;
 			String id = sqlSession.selectOne("findIdSelect", to);
@@ -230,9 +237,9 @@ public class ConfigController {
 			return modelAndView;
 		}
 
-		// 인증번호 발송 버튼을 클릭한 경우
-		@RequestMapping(value = "/sendNumber.action")
-		public ModelAndView sendNumberRequest(HttpServletRequest request) {
+	// 인증번호 발송 버튼을 클릭한 경우
+	@RequestMapping(value = "/sendNumber.action")
+	public ModelAndView sendNumberRequest(HttpServletRequest request) {
 
 			userTO to = new userTO();
 			auth_passwordTO ato = new auth_passwordTO();
@@ -296,9 +303,9 @@ public class ConfigController {
 			return modelAndView;
 		}
 
-		// 인증번호 입력 확인 버튼을 누른 경우
-		@RequestMapping(value = "/checkAuthKey.action")
-		public ModelAndView checkAuthKeyRequest(HttpServletRequest request) {
+	// 인증번호 입력 확인 버튼을 누른 경우
+	@RequestMapping(value = "/checkAuthKey.action")
+	public ModelAndView checkAuthKeyRequest(HttpServletRequest request) {
 			// 1시간이 지난 인증번호 삭제
 			sqlSession.delete("auth_KeyDelete");
 
@@ -322,9 +329,9 @@ public class ConfigController {
 			return modelAndView;
 		}
 
-		// 비밀번호 변경 확인 버튼 클릭 시
-		@RequestMapping(value = "/changePassword.action")
-		public ModelAndView changePasswordRequest(HttpServletRequest request) {
+	// 비밀번호 변경 확인 버튼 클릭 시
+	@RequestMapping(value = "/changePassword.action")
+	public ModelAndView changePasswordRequest(HttpServletRequest request) {
 
 			userTO to = new userTO();
 			encryption enc = new encryption();

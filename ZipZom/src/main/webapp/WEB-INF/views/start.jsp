@@ -97,7 +97,7 @@ $(document).ready(function() {
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit"  id="btn" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit"  id="btn" class="btn btn-primary btn-block">Login</button>
           </div>
           <!-- /.col -->
         </div>
@@ -115,10 +115,13 @@ $(document).ready(function() {
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="./forgot_password.action">I forgot my password</a>
+        <a href="./forgot_password.action">비밀번호 찾기</a>
+      </p>
+      <p class="mb-1">
+        <a href="./forgot_id.action" class="text-center">ID 찾기</a>
       </p>
       <p class="mb-0">
-        <a href="./register.action" class="text-center">Register a new membership</a>
+        <a href="./register.action" class="text-center">회원가입</a>
       </p>
     </div>
     <!-- /.login-card-body -->

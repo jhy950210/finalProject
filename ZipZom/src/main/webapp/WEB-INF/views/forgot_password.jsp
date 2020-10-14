@@ -51,7 +51,7 @@
 
 <script type="text/javascript">
 //카운트 다운 
-var num = 60 * 1; // 몇분을 설정할지의 대한 변수 선언
+var num = 60 * 3; // 몇분을 설정할지의 대한 변수 선언
 var myVar;
 
 $(document).ready(function() {
@@ -62,7 +62,7 @@ $(document).ready(function() {
 	});
 	
 	$("#closeBtn").button().on('click', function() {
-		$("#modal").hide(); // 모달 닫기
+		$("#myModal").hide(); // 모달 닫기
 		clearInterval(myVar);
 	});
 	
@@ -75,7 +75,7 @@ $(document).ready(function() {
 
 
 function time(){
-	num = 60*1;
+	num = 60*3;
     myVar = setInterval(alertFunc, 1000); 
 }
 
@@ -90,7 +90,7 @@ function alertFunc() {
 
     if(num == 0){
     	alert("시간 초과");
-    	$("#modal").hide(); // 모달 닫기
+    	$("#myModal").hide(); // 모달 닫기
         clearInterval(myVar) // num 이 0초가 되었을대 clearInterval로 타이머 종료
     }
     num--;
@@ -108,7 +108,7 @@ var forgotOk = function( id, email ){
 		success: function( json ) {
 			if( json.flag == 1 ){
 				alert('성공');
-				$("#modal").show(); // 인증번호 모달
+				$("#myModal").show(); // 인증번호 모달
 				time();
 			} else {
 				alert("실패");
@@ -186,6 +186,29 @@ var numberCheckOk = function( number ){
   </div>
 </div>
 <!-- /.login-box -->
+<div id="myModal" class="modal">
+     <div class="modal-dialog">
+          <div class="modal-content">
+               <div class="modal-header">
+               		<h4 class="modal-title">인증번호 확인</h4>
+               </div>
+               <div class="modal-body">
+               <div class="input-group mb-3">
+                  <input type="text" class="form-control" id="number" name="number" placeholder="인증번호">
+		          <div class="input-group-append">
+		            <div class="input-group-text">
+		              <div id="timer"></div>
+		            </div>
+		          </div>
+		          </div>
+               </div>
+               <div class="modal-footer">
+                    <button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal">닫기</button>
+                    <button type="button" id="okBtn" class="btn btn-primary">전송</button>
+               </div>
+          </div>
+     </div>
+</div>
 
 <div id="modal" class="searchModal">
 	<!-- Modal content-->
