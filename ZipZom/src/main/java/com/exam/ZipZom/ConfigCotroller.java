@@ -23,6 +23,11 @@ public class ConfigCotroller {
 	@Autowired
 	private TestMapper testmapper;
 	
+	@RequestMapping("/jusoPopup.do")
+	public String jusoSearch(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,userTO uto) {
+		
+	return "jusoPopup";
+	}
 	@RequestMapping("/customer_manage.do")
 	public String customerManage(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,userTO uto) {
 		uto.setId("user1");

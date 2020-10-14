@@ -3,68 +3,129 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Zipzom - Realtor</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- jQuery -->
-	<script src="./resources/plugins/jquery/jquery.min.js"></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Zipzom - Realtor</title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="./resources/plugins/fontawesome-free/css/all.min.css">
-  <!-- 폰트 테스트 -->
-  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="./resources/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <!-- Select2 -->
-  <link rel="stylesheet" href="./resources/plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="./resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-  <!-- datepicker -->
-  <link rel="stylesheet" href="./resources/plugins//jquery-ui/jquery-ui.css">
-  <!-- daterange picker -->
-  <link rel="stylesheet" href="./resources/plugins/daterangepicker/daterangepicker.css">
-  <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="./resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Bootstrap Color Picker -->
-  <link rel="stylesheet" href="./resources/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
-  <!-- Tempusdominus Bbootstrap 4 -->
-  <link rel="stylesheet" href="./resources/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- Bootstrap4 Duallistbox -->
-  <link rel="stylesheet" href="./resources/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="./resources/css/adminlte.min.css">
+<!-- jQuery -->
+<script src="./resources/plugins/jquery/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="./resources/plugins/fontawesome-free/css/all.min.css">
+<!-- 폰트 테스트 -->
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<!-- jQuery UI -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="./resources/css/adminlte.min.css">
+<!-- Google Font: Source Sans Pro -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<!-- Select2 -->
+<link rel="stylesheet" href="./resources/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="./resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+<!-- datepicker -->
+<link rel="stylesheet" href="./resources/plugins//jquery-ui/jquery-ui.css">
+<!-- daterange picker -->
+<link rel="stylesheet" href="./resources/plugins/daterangepicker/daterangepicker.css">
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="./resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- Bootstrap Color Picker -->
+<link rel="stylesheet" href="./resources/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+<!-- Tempusdominus Bbootstrap 4 -->
+<link rel="stylesheet" href="./resources/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<!-- Bootstrap4 Duallistbox -->
+<link rel="stylesheet" href="./resources/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="./resources/css/adminlte.min.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="./resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="./resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <script type="text/javascript">
   	$(document).ready(function() {
-  		$.ajax({
-			url: 'customer_list.json',
-			type: 'get',
-			dataType: 'json',
-			success: function( json ) {
-				$( '#tbody' ).empty();
-				$.each( json.data, function( index, item ) {
-					var html = '<tr><td><div class="custom-control custom-checkbox">';
-					html +=	'<input class="custom-control-input" type="checkbox" id="customCheckbox'+ index+'" value="option'+index+'">'
-					html += '<label for="customCheckbox'+index+'" class="custom-control-label"></label>';
-					html += '</div></td>';
-					html += '<td>'+item.seqC + ' ' + item.name+'</td>'
-					html += '<td>'+ item.tel +'</td>';
-					html += '<td>'+ item.type +'</td>';
-					html += '<td>'+ item.progress +'</td>';
-					html += '<td>'+ item.contractType +'</td>';
-					html += '<td>'+ item.visitDate +'</td></tr>';
-					
-					$( '#tbody' ).append( html );
-				});
-			},
-			error: function( e ) {
-				alert( '서버 에러 ' + e );
-			}
-		})	
-  	})
+  		readServer(0);
+
+  		
+  		$('#customerWrite').on('click', function(){
+  			var params = $('#cfrm').serialize();
+  			writeServer(params);
+  		})
+  		
+  		
+  		
+
+
+  	});
+  	// ready 끝
+  	
+  			var readServer = function(flag) {    
+			$.ajax({                         
+				url: 'customer_list.json',   
+				type: 'get',                 
+				dataType: 'json',            
+				success: function( json ) {  
+					$( '#tbody' ).empty();
+					$.each( json.data, function( index, item ) {
+						var html = '<tr><td><div class="custom-control custom-checkbox">';
+						html +=	'<input class="custom-control-input" type="checkbox" id="customCheckbox'+ index+'" value="option'+index+'">'
+						html += '<label for="customCheckbox'+index+'" class="custom-control-label"></label>';
+						html += '</div></td>';
+						html += '<td>'+ +item.seqC +'</td>';
+						html += '<td>'+ item.name+'</td>';
+						html += '<td>'+ item.tel +'</td>';
+						html += '<td>'+ item.type +'</td>';
+						html += '<td>'+ item.progress +'</td>';
+						html += '<td>'+ item.contractType +'</td>';
+						html += '<td>'+ item.visitDate +'</td></tr>';
+						
+						$( '#tbody' ).append( html );
+					});
+					//if(flag == 0){
+					$('#example2').DataTable({
+			            "paging": true,
+			            "lengthChange": false,
+			            "displayLength": 5,
+			            "searching": true,
+			            "ordering": false,
+			            "info": true,
+			            "autoWidth": true,
+			            "responsive": true,
+			            "bDestroy": true
+			          });
+				//}
+
+				},
+				error: function( e ) {
+					alert( '서버 에러 ' + e );
+				}
+			})
+  		}
+  		// readServer 끝
+  		
+  		var writeServer = function(params) {
+  			$.ajax({
+				url: 'customer_write.json',
+				type: 'post',
+				data:params,
+				dataType: 'json',
+				success: function( data ) {
+					if(data.flag == 1) {
+						$('#example2').DataTable().destroy();
+						readServer(1);
+					} else {
+						alert('잘못 입력했습니다')
+					}
+				},
+				error: function( e ) {
+					alert( '서버 에러 ' + e );
+				}
+			})
+  		};
   
   </script>
 </head>
@@ -242,6 +303,7 @@
                   <thead>
                   <tr>
 					<th></th>
+					<th style="width:7%;">번호</th>
                     <th>이름</th>
                     <th>연락처</th>
                     <th>고객 타입</th>
@@ -251,76 +313,7 @@
                   </tr>
                   </thead>
                   <tbody id="tbody">
-                  <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>정연규</th>
-                    <th>010-1234-1234</th>
-                    <th>매도인</th>
-                    <th>계약준비</th>
-                    <th>매매</th>
-                    <th>2020-10-05</th>
-                  </tr>
-                  <tr>
-					<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox2" value="option2">
-						<label for="customCheckbox2" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>정연규</th>
-                    <th>010-1234-1234</th>
-                    <th>매도인</th>
-                    <th>계약준비</th>
-                    <th>매매</th>
-                    <th>2020-10-05</th>
-                  </tr>
-                  <tr>
-					<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox3" value="option3">
-						<label for="customCheckbox3" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>정연규</th>
-                    <th>010-1234-1234</th>
-                    <th>매도인</th>
-                    <th>계약준비</th>
-                    <th>매매</th>
-                    <th>2020-10-05</th>
-                  </tr>
-                  <tr>
-					<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox4" value="option4">
-						<label for="customCheckbox4" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                  <tr>
-					<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox5" value="option5">
-						<label for="customCheckbox5" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                  </tr>                  
+                  </tbody>         
                 </table>
                 <div class="modal-footer justify-content-left">
 					<button type="button" class="btn btn-primary">선택 삭제</button>
@@ -387,6 +380,11 @@
 <!-- AdminLTE for demo purposes -->
 <script src="./resources/js/demo.js"></script>
 <!-- Page script -->
+<!-- DataTables -->
+<script src="./resources/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="./resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="./resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="./resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script>
   $(function () {
     //Initialize Select2 Elements

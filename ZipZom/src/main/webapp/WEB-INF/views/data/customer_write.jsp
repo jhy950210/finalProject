@@ -7,9 +7,8 @@
 	
 	int flag = (Integer)request.getAttribute("flag");
 	JSONArray jsonArray = new JSONArray();
-		jsonArray.add(flag);
 	JSONObject result = new JSONObject();
-	result.put( "flag", jsonArray );
+	result.put( "flag", flag );
 	out.println( result );
 	
 	

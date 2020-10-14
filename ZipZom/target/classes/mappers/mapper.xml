@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.exam.ZipZom.TestMapper">
-	<select id="pfsList" parameterType="modelTO.userTO" resultType="modelTO.pfsTO">
-	select SEQ_PFS,PSEQ_PFS,B_TYPE,SI,GU,DONG,BUNJI,H_NUMBER,CONTRACT_TYPE,BUDGET1,BUDGET2,BUDGET3,BUDGET4,BUDGET5,BUDGET6,M_COST,LOAN,AREA1,AREA2,AREA3,MOVE_SCHEDULE,
-	END_OFLEASE,ROOM,BATHROOM,DIRECTION,HEATING_SYSTEM,NUMBER_OF_HOUSEHOLD,PARKING,FLOOR,FLOOR_TOTAL,B_YEAR,CONTEXT
-	from property_for_sale
-	where pseq_pfs = (select seq_u from user where id = #{id})
-	</select>
-	
-	<insert id="pfsWrite" parameterType="modelTO.pfsTO">
-	insert into property_for_sale values(0,#{pseqPfs},#{bType},#{si},#{gu},#{dong},#{bunji},#{hNumber},#{contractType},#{budget1},#{budget2},#{budget3},#{budget4},#{budget5},#{budget6},#{mCost},#{loan},#{area1},#{area2},#{area3},#{moveSchedule},
-	#{endOfLease},#{room},#{bathroom},#{direction},#{heatingSystem},#{aircondition},#{option},#{numberOfHousehold},#{parking},#{floor},#{floorTotal},#{elevator},#{bear},#{context},#{security})
-	</insert>
-	
+<mapper namespace="com.exam.ZipZom.TestMapper">	
 	<select id="customerView" parameterType="modelTO.customerTO" resultType="modelTO.CustomerAllTO">
 		select seq_c,pseq_c,name,tel,type,progress,contract_type contractType,budget_t1 budgetT1,budget_t2 budgetT2,budget_t3 budgetT3,budget_l budgetL,budget_m1 budgetM1,budget_m2 budgetM2,area2,move_schedule moveSchedule,room,direction,option,floor,elevator,b_year bYear,context,security,
 		bed,washing_machine,desk,drying_machine,induction,electric_range electricRange,gas_range gasRange,wordrobe,sink,shoe_rack shoeRack,refrigerator,bath_tube bathTube,
@@ -85,4 +73,19 @@
 		card_key=#{cardKey},cctv=#{cctv},door_security=#{doorSecurity},window_guard=#{windowGuard}
 		where pseq_sc = #{seqC}
 	</update>
+	
+	<select id="pfsList" parameterType="modelTO.userTO" resultType="modelTO.pfsTO">
+		select SEQ_PFS seqPfs,PSEQ_PFS pseqPfs,B_TYPE bType,SI,GU,DONG,BUNJI,H_NUMBER hNumber,CONTRACT_TYPE contractType,
+		BUDGET1,BUDGET2,BUDGET3,BUDGET4,BUDGET5,BUDGET6,M_COST mCost,LOAN,AREA1,AREA2,AREA3,MOVE_SCHEDULE moveSchedule,
+		END_OF_LEASE endOfLease,ROOM,BATHROOM,DIRECTION,HEATING_SYSTEM heatingSystem,NUMBER_OF_HOUSEHOLD numberOfHousehole,
+		PARKING,FLOOR,FLOOR_TOTAL floorTotal,B_YEAR bYear,CONTEXT
+		from property_for_sale
+		where pseq_pfs = (select seq_u from user where id = #{id})
+	</select>
+	
+	<insert id="pfsWrite" parameterType="modelTO.pfsTO">
+		insert into property_for_sale values(0,#{pseqPfs},#{bType},#{si},#{gu},#{dong},#{bunji},#{hNumber},#{contractType},#{budget1},#{budget2},#{budget3},#{budget4},#{budget5},#{budget6},#{mCost},#{loan},#{area1},#{area2},#{area3},#{moveSchedule},
+		#{endOfLease},#{room},#{bathroom},#{direction},#{heatingSystem},#{aircondition},#{option},#{numberOfHousehold},#{parking},#{floor},#{floorTotal},#{elevator},#{bear},#{context},#{security})
+	</insert>
+	
 </mapper>
