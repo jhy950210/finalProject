@@ -210,34 +210,6 @@ var numberCheckOk = function( number ){
      </div>
 </div>
 
-<div id="modal" class="searchModal">
-	<!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">인증번호 확인</h4>
-      </div>
-      <form id="target" action="./checkAuthKey.action" method="post">
-      <div class="modal-body">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" id="number" name="number" placeholder="인증번호">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <div id="timer"></div>
-            </div>
-          </div>
-         </div>
-      </div>
-      <div class="modal-footer">
-      	<button type="button" id="okBtn" class="btn btn-default" data-dismiss="modal" >OK</button>
-     
-        <button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-      </form>
-    </div>
-
-</div>
-
-
 <!-- AdminLTE App -->
 <script src="./resources/js/adminlte.min.js"></script>
 

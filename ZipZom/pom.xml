@@ -177,14 +177,7 @@
 		    <artifactId>activation</artifactId>
 		    <version>1.1.1</version>
 		</dependency>
-		<!-- ADSClient -->
-		<dependency>
-			<groupId>ADSClient</groupId>
-			<artifactId>ADSClient</artifactId>
-			<version>1.1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ADSClient-1.1.jar</systemPath>
-		</dependency>
+		
 	</dependencies>
     <build>
         <plugins>
