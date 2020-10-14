@@ -46,7 +46,7 @@ $(document).ready(function() {
 			alert('이메일 입력 오류입니다.');
 			return false;
 		}
-		if( $('#address').val().trim() == "" ){
+		if( $('#zipNo').val().trim() == "" ){
 			alert('주소 입력 오류입니다.');
 			return false;
 		}
@@ -69,7 +69,7 @@ $(document).ready(function() {
 			return false;
 		}
 		
-		$("#target").submit();
+		$("#form").submit();
 	});
 	
 	$("#idBtn").button().on('click', function() {
@@ -123,6 +123,24 @@ var checkEmail = function( email ){
 		
 	}); 
 }
+
+function goPopup(){
+	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+    var pop = window.open("./jusoPopup.action","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+    
+	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+}
+/** API 서비스 제공항목 확대 (2017.02) **/
+function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
+						, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
+	// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+	document.form.roadAddrPart1.value = roadAddrPart1;
+	document.form.roadAddrPart2.value = roadAddrPart2;
+	document.form.addrDetail.value = addrDetail;
+	document.form.zipNo.value = zipNo;
+}
+
 </script>
 <body class="hold-transition register-page">
 <div class="register-box">
@@ -134,7 +152,7 @@ var checkEmail = function( email ){
     <div class="card-body register-card-body">
       <p class="login-box-msg">Register a new membership</p>
 
-      <form id="target" action="./sign_up.action" method="post">
+      <form id="form" name="form" action="./sign_up.action" method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" id="name" name="name" placeholder="Name">
           <div class="input-group-append">
@@ -167,14 +185,39 @@ var checkEmail = function( email ){
             </div>
           </div>
         </div>
+        <!-- 주소 -->
         <div class="input-group mb-3">
-          <input type="text" class="form-control"  id="address" name="address" placeholder="Address">
+          <!--  <input type="text" class="form-control"  id="address" name="address" placeholder="Address"> -->
+          	<input type="hidden" id="confmKey" name="confmKey" value=""  >
+			<input type="text" class="form-control" id="zipNo" name="zipNo"  placeholder="우편번호" readonly style="width:100px">
+			<input type="button"  class="form-control" value="주소검색" onclick="goPopup();">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-map"></span>
             </div>
           </div>
         </div>
+        <div class="input-group mb-3">
+          
+		<input type="text"  class="form-control" id="roadAddrPart1"  placeholder="도로명주소"  readonly >
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-map"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          	<input type="text"  class="form-control" id="addrDetail" placeholder="상세주소" style="width:50%" value="" readonly>
+			<input type="text"  class="form-control" id="roadAddrPart2"  style="width:50%" value="" readonly>
+			
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-map"></span>
+            </div>
+          </div>
+          
+        </div>
+        <!-- /주소 -->
         <div class="input-group mb-3">
           <input type="tel" class="form-control"  id="phone" name="phone" placeholder="Phone">
           <div class="input-group-append">

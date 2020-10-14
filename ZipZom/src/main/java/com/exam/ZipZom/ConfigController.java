@@ -23,6 +23,17 @@ public class ConfigController {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	
+	// 주소 API popup
+	@RequestMapping(value = "/jusoPopup.action")
+	public ModelAndView jusoPupupRequest(HttpServletRequest request) {
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("jusoPopup");
+
+		return modelAndView;
+	}
+	
 	// 비밀번호 분실 초기화면
 	@RequestMapping(value = "/forgot_password.action")
 	public ModelAndView forgotPasswordRequest(HttpServletRequest request) {
@@ -115,10 +126,11 @@ public class ConfigController {
 		String name = request.getParameter("name"); 
 		String id = request.getParameter("id"); 
 		String password = enc.encryptionMain(request.getParameter("password")); 
-		String address = request.getParameter("address"); 
+		String address = request.getParameter("zipNo") + request.getParameter("roadAddrPart1") + request.getParameter("roadAddrPart2") + request.getParameter("addrDetail");
 		String email = request.getParameter("email"); 
 		String phone = request.getParameter("phone");
 		String tel = request.getParameter("tel");
+		
 		
 		to.setName(name);
 		to.setId(id);
