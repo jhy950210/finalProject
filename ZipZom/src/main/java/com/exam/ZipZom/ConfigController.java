@@ -59,7 +59,6 @@ public class ConfigController {
 			session.setAttribute("s_id", to.getId());
 			to = sqlSession.selectOne("loginSelect", to);
 			session.setAttribute("s_seq", to.getSeqU());
-			System.out.println(session.getAttribute("s_seq"));
 		}
 		
 		request.setAttribute("flag", flag);
