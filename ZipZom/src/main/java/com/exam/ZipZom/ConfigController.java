@@ -23,7 +23,6 @@ public class ConfigController {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	
 	// 주소 API popup
 	@RequestMapping(value = "/jusoPopup.action")
 	public ModelAndView jusoPupupRequest(HttpServletRequest request) {
@@ -359,12 +358,12 @@ public class ConfigController {
 		}
 	
 	// 일정관리 화면
-		@RequestMapping(value = "/schedule.do")
-		public ModelAndView scheduleRequest(HttpServletRequest request) {
+	@RequestMapping(value = "/schedule.do")
+	public ModelAndView scheduleRequest(HttpServletRequest request) {
 
-			ModelAndView modelAndView = new ModelAndView();
-			modelAndView.setViewName("schedule");
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("schedule");
 
-			return modelAndView;
-		}
+		return modelAndView;
+	}
 }

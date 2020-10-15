@@ -29,18 +29,18 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   
-	<link rel="stylesheet" href="./vendor/css/fullcalendar.min.css" />
-   	<link rel="stylesheet" href="./vendor/css/bootstrap.min.css">
-   	<link rel="stylesheet" href='./vendor/css/select2.min.css' />
-   	<link rel="stylesheet" href='./vendor/css/bootstrap-datetimepicker.min.css' />
-   	<link rel="stylesheet" href="./resources/css/main.css">
+   <link rel="stylesheet" href="./vendor/css/fullcalendar.min.css" />
+    <link rel="stylesheet" href="./vendor/css/bootstrap.min.css">
+    <link rel="stylesheet" href='./vendor/css/select2.min.css' />
+    <link rel="stylesheet" href='./vendor/css/bootstrap-datetimepicker.min.css' />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="./resources/css/main.css">
 
 </head>
-<script type="text/javascript">
-$(document).ready(function() {
-	
-});
-</script>
+
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
@@ -112,15 +112,19 @@ $(document).ready(function() {
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-customer">고객</label>
-                                <input class="inputModal" type="text" name="edit-customer" id="edit-customer"
+                                <input class="inputModal" type="text" name="edit-customer" id="edit-customer1"
                                     required="required" style="width:22%" placeholder="연락처"/>
-                                <input class="inputModal" type="text" name="edit-customer" id="edit-customer"
+                                <input class="inputModal" type="text" name="edit-customer" id="edit-customer2"
                                 	required="required" style="width:21%" placeholder="고객명"/>
-                                <select class="inputModal" type="text" name="edit-customer" id="edit-customer" style="width:20.5%">
-                                    <option value="카테고리1">카테고리1</option>
-                                    <option value="카테고리2">카테고리2</option>
-                                    <option value="카테고리3">카테고리3</option>
-                                    <option value="카테고리4">카테고리4</option>
+                                <select class="inputModal" type="text" name="edit-customer" id="edit-customer3"  style="width:20.5%">
+                                    <option value="" hidden>선택</option>
+                                    <option value="카테고리1">매도인</option>
+                                    <option value="카테고리2">매수인</option>
+                                    <option value="카테고리3">임대인</option>
+                                    <option value="카테고리4">임차인</option>
+                                    <option value="카테고리5">중개인</option>
+                                    <option value="카테고리6">집주인</option>
+                                    <option value="카테고리7">일반상담</option>
                                 </select>
                             </div>
                         </div>
@@ -136,10 +140,16 @@ $(document).ready(function() {
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-type1">일정구분</label>
                                 <select class="inputModal" type="text" name="edit-type1" id="edit-type1">
-                                    <option value="카테고리1">카테고리1</option>
-                                    <option value="카테고리2">카테고리2</option>
-                                    <option value="카테고리3">카테고리3</option>
-                                    <option value="카테고리4">카테고리4</option>
+                                	<option value="" hidden>선택</option>
+                                    <option value="카테고리1">전화상담</option>
+                                    <option value="카테고리2">방문상담</option>
+                                    <option value="카테고리3">계약일</option>
+                                    <option value="카테고리4">중도금일</option>
+                                    <option value="카테고리5">잔금일</option>
+                                    <option value="카테고리6">계약일</option>
+                                    <option value="카테고리7">만기일</option>
+                                    <option value="카테고리8">매물방문</option>
+                                    <option value="카테고리9">기타</option>
                                 </select>
                             </div>
                         </div>
@@ -147,10 +157,10 @@ $(document).ready(function() {
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-type2">일정상태</label>
                                 <select class="inputModal" type="text" name="edit-type2" id="edit-type2">
-                                    <option value="카테고리1">카테고리1</option>
-                                    <option value="카테고리2">카테고리2</option>
-                                    <option value="카테고리3">카테고리3</option>
-                                    <option value="카테고리4">카테고리4</option>
+                                	<option value="" hidden>선택</option>
+                                    <option value="카테고리1">진행중</option>
+                                    <option value="카테고리2">대기중</option>
+                                    <option value="카테고리3">완료</option>
                                 </select>
                             </div>
                         </div>
@@ -158,10 +168,20 @@ $(document).ready(function() {
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-type3">매물종류</label>
                                 <select class="inputModal" type="text" name="edit-type3" id="edit-type3">
-                                    <option value="카테고리1">카테고리1</option>
-                                    <option value="카테고리2">카테고리2</option>
-                                    <option value="카테고리3">카테고리3</option>
-                                    <option value="카테고리4">카테고리4</option>
+                                	<option value="" hidden>선택</option>
+                                    <option value="카테고리1">아파트</option>
+                                    <option value="카테고리2">오피스텔</option>
+                                    <option value="카테고리3">연/빌/다세대</option>
+                                    <option value="카테고리4">단독/다가구</option>
+                                    <option value="카테고리5">도시형 생활주택</option>
+                                    <option value="카테고리6">원룸</option>
+                                    <option value="카테고리7">상가</option>
+                                    <option value="카테고리8">사무실</option>
+                                    <option value="카테고리9">건물(전체매매)</option>
+                                    <option value="카테고리10">토지</option>
+                                    <option value="카테고리11">공장/창고</option>
+                                    <option value="카테고리12">분양권</option>
+                                    <option value="카테고리13">지식산업센터</option>
                                 </select>
                             </div>
                         </div>
@@ -169,10 +189,11 @@ $(document).ready(function() {
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-type4">거래유형</label>
                                 <select class="inputModal" type="text" name="edit-type4" id="edit-type4">
-                                    <option value="카테고리1">카테고리1</option>
-                                    <option value="카테고리2">카테고리2</option>
-                                    <option value="카테고리3">카테고리3</option>
-                                    <option value="카테고리4">카테고리4</option>
+                                	<option value="" hidden>선택</option>
+                                    <option value="카테고리1">매매</option>
+                                    <option value="카테고리2">월세</option>
+                                    <option value="카테고리3">전세</option>
+                                    <option value="카테고리4">연세</option>
                                 </select>
                             </div>
                         </div>
@@ -233,17 +254,7 @@ $(document).ready(function() {
   
   </div>
 <!-- ./wrapper -->
-	<script src="./vendor/js/jquery.min.js"></script>
-    <script src="./vendor/js/bootstrap.min.js"></script>
-    <script src="./vendor/js/moment.min.js"></script>
-    <script src="./vendor/js/fullcalendar.min.js"></script>
-    <script src="./vendor/js/ko.js"></script>
-    <script src="./vendor/js/select2.min.js"></script>
-    <script src="./vendor/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="./resources/js/main.js"></script>
-    <script src="./resources/js/addEvent.js"></script>
-    <script src="./resources/js/editEvent.js"></script>
-    <script src="./resources/js/etcSetting.js"></script>
+	
 <!-- jQuery -->
 <script src="./resources/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -259,8 +270,18 @@ $(document).ready(function() {
 <script src="./resources/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="./resources/js/demo.js"></script>
-
 <!-- overlayScrollbars -->
 <script src="./resources/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="./vendor/js/jquery.min.js"></script>
+    <script src="./vendor/js/bootstrap.min.js"></script>
+    <script src="./vendor/js/moment.min.js"></script>
+    <script src="./vendor/js/fullcalendar.min.js"></script>
+    <script src="./vendor/js/ko.js"></script>
+    <script src="./vendor/js/select2.min.js"></script>
+    <script src="./vendor/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="./resources/js/main.js"></script>
+    <script src="./resources/js/addEvent.js"></script>
+    <script src="./resources/js/editEvent.js"></script>
+    <script src="./resources/js/etcSetting.js"></script>
 </body>
 </html>
