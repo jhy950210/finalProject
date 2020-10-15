@@ -11,10 +11,12 @@
 // 	response.sendRedirect( "./sign_up.do" );
 // 	response.sendRedirect( "./duId.do" );
 // 	response.sendRedirect( "./duEmail.do" );
-	response.sendRedirect( "./login.action" );
+// 	response.sendRedirect( "./login.action" );
 //	response.sendRedirect( "./sendNumber.do" );
 // 	response.sendRedirect( "./viewSchedule.action" );
 // 	response.sendRedirect( "./viewPropertySchedule.action" );
+	response.sendRedirect( "./adminView.action" );
+
 %>
 </body>
 </html>

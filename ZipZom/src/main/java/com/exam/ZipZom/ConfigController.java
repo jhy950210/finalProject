@@ -1,8 +1,5 @@
 package com.exam.ZipZom;
 
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -70,6 +67,16 @@ public class ConfigController {
 		return modelAndView;
 	}
 	
+	// 로그아웃 버튼을 누른 경우
+	@RequestMapping(value = "/logout.action")
+	public ModelAndView logoutRequest(HttpServletRequest request) {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("logout");
+		
+		return modelAndView;
+	}
+	
 	// 회원가입 창에서 확인 버튼을 누른 경우
 	@RequestMapping(value = "/sign_up.action")
 	public ModelAndView sign_upRequest(HttpServletRequest request) {
@@ -109,6 +116,75 @@ public class ConfigController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("data/flag_json");
+		modelAndView.addObject("list", request);
+		
+		return modelAndView;
+	}
+	
+	// 회원탈퇴 버튼을 누른 경우
+	@RequestMapping(value = "/signOut.action")
+	public ModelAndView signOutRequest(HttpServletRequest request) {
+
+		userTO to = new userTO();
+		encryption enc = new encryption();
+		
+//		int seqU = Integer.parseInt(request.getParameter("seqU"));
+//		String password = enc.encryptionMain(request.getParameter("password"));
+		
+//		to.setSeqU(seqU);
+//		to.setPassword(password);
+		
+		to.setSeqU(1);
+		to.setPassword("123");
+		
+		int flag = 0;
+		
+		flag = sqlSession.delete("userDelete", to);
+		
+		request.setAttribute("flag", flag);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("data/flag_json");
+		modelAndView.addObject("list", request);
+		
+		return modelAndView;
+	}
+	
+	// 회원탈퇴를 시킨 경우
+	@RequestMapping(value = "/signOutAdmin.action")
+	public ModelAndView signOutAdminRequest(HttpServletRequest request) {
+
+		userTO to = new userTO();
+		
+//		int seqU = Integer.parseInt(request.getParameter("seqU"));
+//	
+//		to.setSeqU(seqU);
+		
+		to.setSeqU(1);
+		
+		int flag = 0;
+		
+		flag = sqlSession.delete("userAdminDelete", to);
+		
+		request.setAttribute("flag", flag);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("data/flag_json");
+		modelAndView.addObject("list", request);
+		
+		return modelAndView;
+	}
+	
+	// 관리자 회원관리 view 페이지
+	@RequestMapping(value = "/adminView.action")
+	public ModelAndView adminViewRequest(HttpServletRequest request) {
+		
+		List<userTO> listTO = sqlSession.selectList("userAdminSelect");
+		
+		request.setAttribute("lists", listTO);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("data/user_json");
 		modelAndView.addObject("list", request);
 		
 		return modelAndView;
@@ -426,8 +502,7 @@ public class ConfigController {
 
 		scheduleTO to = new scheduleTO();
 		
-//		int pseqS = Integer.parseInt(request.getParameter("pseqS"));
-//		String customerName = request.getParameter("customerName");
+//		int seqS = Integer.parseInt(request.getParameter("seqS"));
 //		String customerTel = request.getParameter("customerTel");
 //		String customerState = request.getParameter("customerState");
 //		String date = request.getParameter("date");
@@ -437,8 +512,7 @@ public class ConfigController {
 //		String bType = request.getParameter("bType");
 //		String contractType = request.getParameter("contractType");
 //		
-//		to.setPseqS(pseqS);
-//		to.setCustomerName(customerTel);
+//		to.setSeqS(seqS);
 //		to.setCustomerTel(customerTel);
 //		to.setCustomerState(customerState);
 //		to.setDate(date);
@@ -448,8 +522,7 @@ public class ConfigController {
 //		to.setbType(bType);
 //		to.setContractType(contractType);
 		
-		to.setPseqS(2);
-		to.setCustomerName("박성훈");
+		to.setSeqS(1);
 		to.setCustomerTel("123123");
 		to.setCustomerState("인도인");
 		to.setDate("2000/10/10 15:35");
@@ -461,7 +534,32 @@ public class ConfigController {
 		
 		int flag = 0;
 		
-		flag = sqlSession.insert("scheduleInsert", to);
+		flag = sqlSession.update("scheduleUpdate", to);
+		
+		request.setAttribute("flag", flag);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("data/flag_json");
+		modelAndView.addObject("list", request);
+		
+		return modelAndView;
+	}
+	
+	// 일정관리에서 일정을 삭제 한 경우
+	@RequestMapping(value = "/deleteSchedule.action")
+	public ModelAndView deleteScheduleRequest(HttpServletRequest request) {
+
+		scheduleTO to = new scheduleTO();
+		
+//		int seqS = Integer.parseInt(request.getParameter("seqS"));
+//		
+//		to.setSeqS(seqS);
+		
+		to.setSeqS(2);
+		
+		int flag = 0;
+		
+		flag = sqlSession.delete("scheduleDelete", to);
 		
 		request.setAttribute("flag", flag);
 		
