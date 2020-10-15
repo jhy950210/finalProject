@@ -28,6 +28,12 @@
   <link rel="stylesheet" href="./resources/plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+	<link rel="stylesheet" href="./vendor/css/fullcalendar.min.css" />
+    <link rel="stylesheet" href="./vendor/css/bootstrap.min.css">
+    <link rel="stylesheet" href='./vendor/css/select2.min.css' />
+    <link rel="stylesheet" href='./vendor/css/bootstrap-datetimepicker.min.css' />
+	<link rel="stylesheet" href="./resources/css/main.css">
+	
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -286,17 +292,6 @@
                 </h3>
                 <!-- tools card -->
                 <div class="card-tools">
-                  <!-- button with a dropdown -->
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                      <i class="fas fa-bars"></i></button>
-                    <div class="dropdown-menu" role="menu">
-                      <a href="#" class="dropdown-item">Add new event</a>
-                      <a href="#" class="dropdown-item">Clear events</a>
-                      <div class="dropdown-divider"></div>
-                      <a href="#" class="dropdown-item">View calendar</a>
-                    </div>
-                  </div>
                   <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
                   </button>
@@ -309,64 +304,13 @@
               <!-- /.card-header -->
               <div class="card-body pt-0">
                 <!--The calendar -->
-                <div id="calendar" style="width: 100%"></div>
+                <div id="calendar"></div>
               </div>
               <!-- /.card-body -->
               
             </div>
             <!-- /.card -->
 
-            <div class="card">
-              <div class="card-header border-0">
-                <h3 class="card-title">Online Store Overview</h3>
-                <div class="card-tools">
-                  <a href="#" class="btn btn-sm btn-tool">
-                    <i class="fas fa-download"></i>
-                  </a>
-                  <a href="#" class="btn btn-sm btn-tool">
-                    <i class="fas fa-bars"></i>
-                  </a>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                  <p class="text-success text-xl">
-                    <i class="ion ion-ios-refresh-empty"></i>
-                  </p>
-                  <p class="d-flex flex-column text-right">
-                    <span class="font-weight-bold">
-                      <i class="ion ion-android-arrow-up text-success"></i> 12%
-                    </span>
-                    <span class="text-muted">CONVERSION RATE</span>
-                  </p>
-                </div>
-                <!-- /.d-flex -->
-                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                  <p class="text-warning text-xl">
-                    <i class="ion ion-ios-cart-outline"></i>
-                  </p>
-                  <p class="d-flex flex-column text-right">
-                    <span class="font-weight-bold">
-                      <i class="ion ion-android-arrow-up text-warning"></i> 0.8%
-                    </span>
-                    <span class="text-muted">SALES RATE</span>
-                  </p>
-                </div>
-                <!-- /.d-flex -->
-                <div class="d-flex justify-content-between align-items-center mb-0">
-                  <p class="text-danger text-xl">
-                    <i class="ion ion-ios-people-outline"></i>
-                  </p>
-                  <p class="d-flex flex-column text-right">
-                    <span class="font-weight-bold">
-                      <i class="ion ion-android-arrow-down text-danger"></i> 1%
-                    </span>
-                    <span class="text-muted">REGISTRATION RATE</span>
-                  </p>
-                </div>
-                <!-- /.d-flex -->
-              </div>
-            </div>
           </div>
           <!-- /.col-md-6 -->
         </div>
@@ -382,7 +326,17 @@
   
   </div>
 <!-- ./wrapper -->
-
+<script src="./vendor/js/jquery.min.js"></script>
+    <script src="./vendor/js/bootstrap.min.js"></script>
+    <script src="./vendor/js/moment.min.js"></script>
+    <script src="./vendor/js/fullcalendar.min.js"></script>
+    <script src="./vendor/js/ko.js"></script>
+    <script src="./vendor/js/select2.min.js"></script>
+    <script src="./vendor/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="./resources/js/main.js"></script>
+    <script src="./resources/js/addEvent.js"></script>
+    <script src="./resources/js/editEvent.js"></script>
+    <script src="./resources/js/etcSetting.js"></script>
 <!-- jQuery -->
 <script src="./resources/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
