@@ -1,15 +1,18 @@
 package modelTO;
 
 public class security_customerTO {
+	public security_customerTO() {
+		// TODO Auto-generated constructor stub
+	}
 	private int seqSc;
 	private int pseqSc;
-	private boolean securityGuard;
-	private boolean videophone;
-	private boolean interphone;
-	private boolean cardKey;
-	private boolean cctv;
-	private boolean doorSecurity;
-	private boolean windowGuard;
+	private int securityGuard;
+	private int videophone;
+	private int interphone;
+	private int cardKey;
+	private int cctv;
+	private int doorSecurity;
+	private int windowGuard;
 	
 	public int getSeqSc() {
 		return seqSc;
@@ -23,47 +26,48 @@ public class security_customerTO {
 	public void setPseqSc(int pseqSc) {
 		this.pseqSc = pseqSc;
 	}
-	public boolean isSecurityGuard() {
+	public int getSecurityGuard() {
 		return securityGuard;
 	}
-	public void setSecurityGuard(boolean securityGuard) {
+	public void setSecurityGuard(int securityGuard) {
 		this.securityGuard = securityGuard;
 	}
-	public boolean isVideophone() {
+	public int getVideophone() {
 		return videophone;
 	}
-	public void setVideophone(boolean videophone) {
+	public void setVideophone(int videophone) {
 		this.videophone = videophone;
 	}
-	public boolean isInterphone() {
+	public int getInterphone() {
 		return interphone;
 	}
-	public void setInterphone(boolean interphone) {
+	public void setInterphone(int interphone) {
 		this.interphone = interphone;
 	}
-	public boolean isCardKey() {
+	public int getCardKey() {
 		return cardKey;
 	}
-	public void setCardKey(boolean cardKey) {
+	public void setCardKey(int cardKey) {
 		this.cardKey = cardKey;
 	}
-	public boolean isCctv() {
+	public int getCctv() {
 		return cctv;
 	}
-	public void setCctv(boolean cctv) {
+	public void setCctv(int cctv) {
 		this.cctv = cctv;
 	}
-	public boolean isDoorSecurity() {
+	public int getDoorSecurity() {
 		return doorSecurity;
 	}
-	public void setDoorSecurity(boolean doorSecurity) {
+	public void setDoorSecurity(int doorSecurity) {
 		this.doorSecurity = doorSecurity;
 	}
-	public boolean isWindowGuard() {
+	public int getWindowGuard() {
 		return windowGuard;
 	}
-	public void setWindowGuard(boolean windowGuard) {
+	public void setWindowGuard(int windowGuard) {
 		this.windowGuard = windowGuard;
 	}
+	
 	
 }

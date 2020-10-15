@@ -1,11 +1,3 @@
-/*
- 파일명 : jusoPopup.jsp
- 내  용 : 팝업API 호출 소스(jusoPopup.jsp ↔ 도로명주소 팝업API )
-*/
-/*
-모의 해킹 테스트 시 팝업API를 호출하시면 IP가 차단 될 수 있습니다. 
-주소팝업API를 제외하시고 테스트 하시기 바랍니다.
-*/
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -47,7 +39,14 @@
 <script language="javascript">
 //opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("주소입력화면 소스"도 동일하게 적용시켜야 합니다.)
 //document.domain = "http://localhost:8080/ZipZom/register.action";
-
+/*
+ 파일명 : jusoPopup.jsp
+ 내  용 : 팝업API 호출 소스(jusoPopup.jsp ↔ 도로명주소 팝업API )
+*/
+/*
+모의 해킹 테스트 시 팝업API를 호출하시면 IP가 차단 될 수 있습니다. 
+주소팝업API를 제외하시고 테스트 하시기 바랍니다.
+*/
 function init(){
 	var url = location.href;
 	var confmKey = "devU01TX0FVVEgyMDIwMTAxMjE3MzgzMDExMDI4MDg=";//승인키

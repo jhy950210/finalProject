@@ -80,4 +80,90 @@
 	<update id="userPasswordUpdate" parameterType="modelTO.auth_passwordTO">
 		UPDATE user SET password = #{password} WHERE email = #{email};
 	</update>
+	<select id="customerView" parameterType="modelTO.customerTO" resultType="modelTO.CustomerAllTO">
+		select seq_c,pseq_c,name,tel,type,progress,contract_type contractType,budget_t1 budgetT1,budget_t2 budgetT2,budget_t3 budgetT3,budget_l budgetL,budget_m1 budgetM1,budget_m2 budgetM2,area2,move_schedule moveSchedule,room,direction,option,floor,elevator,b_year bYear,context,security,
+		bed,washing_machine,desk,drying_machine,induction,electric_range electricRange,gas_range gasRange,wordrobe,sink,shoe_rack shoeRack,refrigerator,bath_tube bathTube,
+		security_guard securityGuard,videophone,interphone,card_key cardKey,cctv,door_security doorSecurity,window_guard windowGuard,
+		visit_date visitDate
+		from customer c left outer join option_customer oc
+		on c.seq_c = oc.pseq_oc
+		left outer join customer_visit_date cvd
+		on cvd.pseq_cvd = c.seq_c
+		left outer join security_customer sc
+		on sc.pseq_sc = c.seq_c
+		where c.seq_c = #{seqC}
+	</select>
+	
+	<select id="customerList" parameterType="modelTO.userTO" resultType="modelTO.customerTO">
+		select seq_c seqC,name,tel,type,progress,contract_type contractType, (select visit_date from customer_visit_date where pseq_cvd = seq_c limit 1) visitDate from customer where pseq_c = (select seq_u from user where id = #{id})
+	</select>
+	
+	<insert id="customerWrite" parameterType="modelTO.customerTO" useGeneratedKeys="true" keyProperty="seqC">
+	insert into customer values(0,#{pseqC},#{name},#{tel},#{type},#{progress},#{contractType},#{budgetT1},#{budgetT2},#{budgetT3},#{budgetL},#{budgetM1},#{budgetM2},#{area2},#{moveSchedule},#{room},#{direction},#{option},#{floor},#{elevator},#{bYear},#{context},#{security})
+	<selectKey keyProperty="seqC" resultType="int">
+	select last_insert_id()
+	</selectKey>
+	</insert>
+	
+	<insert id="optionCustomerWrite" parameterType="modelTO.option_customerTO">
+	insert into option_customer values(0,#{pseqOc},#{bed},#{washingMachine},#{desk},#{dryingMachine},#{induction},#{electricRange},#{gasRange},#{wordrobe},#{sink},#{shoeRack},#{refrigerator},#{bathTube})
+	</insert>
+	
+	<insert id="customerVisitDate" parameterType="modelTO.customer_visit_dateTO">
+	insert into customer_visit_date values(0,#{pseqCvd},#{visitDate})
+	</insert>
+	
+	<insert id="securityCustomer" parameterType="modelTO.security_customerTO">
+	insert into security_customer values(0,#{pseqSc},#{securityGuard},#{videophone},#{interphone},#{cardKey},#{cctv},#{doorSecurity},#{windowGuard});
+	</insert>
+	
+	<delete id="customerDelete" parameterType="modelTO.customerTO">
+	delete from customer where seq_c = #{seqC}
+	</delete>
+	
+	<delete id="cvdDelete" parameterType="int">
+	delete from customer_visit_date where pseq_cvd = #{pseq_cvd}
+	</delete>
+	
+	<delete id="ocDelete" parameterType="int">
+	delete from option_customer where pseq_oc = #{pseq_oc}
+	</delete>
+	
+	<delete id="scDelete" parameterType="int">
+	delete from security_customer where pseq_sc = #{pseqSc}
+	</delete>
+	
+	<update id="customerUpdate" parameterType="modelTO.customerTO">
+		update from customer set tel = #{tel},type = #{type},progress = #{progress},contract_type = #{contractType},
+		budget_t1 = #{budgetT1},budget_t2 = #{budgetT2},budget_t3=#{budgetT3},budget_l=#{budgetL},budget_m1=#{budgetM1},budget_m2=#{budgetM2},area2=#{area2},
+		move_schedule=#{moveSchedule},room=#{room},direction=#{direction},option=#{option},floor=#{floor},elevator=#{elevator},b_year=#{bYear},context=#{context},security=#{security}
+		where seq_c = #{seqC}
+	</update>
+	
+	<update id="ocUpdate" parameterType="modelTO.customerTO">
+		update from option_customer set bed=#{bed},washing_machine=#{washingMachine},desk=#{desk},drying_machine=#{dryingMachine},
+		induction=#{induction},electric_range=#{electricRange},gas_range=#{gasRange},wordrobe=#{wordrobe},sink=#{sink},
+		shoe_rack=#{shoeRack},refrigerator=#{refrigerator},bath_tube=#{bathTube}
+		where pseq_oc = #{seqC}
+	</update>
+	
+	<update id="scUpdate" parameterType="modelTO.customerTO">
+		update from security_customer set security_guard=#{securityGuard},videophone=#{videophone},interphone=#{interphone},
+		card_key=#{cardKey},cctv=#{cctv},door_security=#{doorSecurity},window_guard=#{windowGuard}
+		where pseq_sc = #{seqC}
+	</update>
+	
+	<select id="pfsList" parameterType="modelTO.userTO" resultType="modelTO.pfsTO">
+		select SEQ_PFS seqPfs,PSEQ_PFS pseqPfs,B_TYPE bType,SI,GU,DONG,BUNJI,H_NUMBER hNumber,CONTRACT_TYPE contractType,
+		BUDGET1,BUDGET2,BUDGET3,BUDGET4,BUDGET5,BUDGET6,M_COST mCost,LOAN,AREA1,AREA2,AREA3,MOVE_SCHEDULE moveSchedule,
+		END_OF_LEASE endOfLease,ROOM,BATHROOM,DIRECTION,HEATING_SYSTEM heatingSystem,NUMBER_OF_HOUSEHOLD numberOfHousehole,
+		PARKING,FLOOR,FLOOR_TOTAL floorTotal,B_YEAR bYear,CONTEXT
+		from property_for_sale
+		where pseq_pfs = (select seq_u from user where id = #{id})
+	</select>
+	
+	<insert id="pfsWrite" parameterType="modelTO.pfsTO">
+		insert into property_for_sale values(0,#{pseqPfs},#{bType},#{si},#{gu},#{dong},#{bunji},#{hNumber},#{contractType},#{budget1},#{budget2},#{budget3},#{budget4},#{budget5},#{budget6},#{mCost},#{loan},#{area1},#{area2},#{area3},#{moveSchedule},
+		#{endOfLease},#{room},#{bathroom},#{direction},#{heatingSystem},#{aircondition},#{option},#{numberOfHousehold},#{parking},#{floor},#{floorTotal},#{elevator},#{bear},#{context},#{security})
+	</insert>
 </mapper>

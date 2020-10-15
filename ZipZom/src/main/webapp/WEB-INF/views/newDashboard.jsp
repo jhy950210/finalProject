@@ -33,7 +33,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-<jsp:include page="./sideBar.jsp" flush="false" />
+<jsp:include page="./sidebar.jsp" flush="false" />
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
