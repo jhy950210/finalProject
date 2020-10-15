@@ -19,8 +19,8 @@
   <link rel="stylesheet" href="./resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- daterange picker -->
   <link rel="stylesheet" href="./resources/plugins/daterangepicker/daterangepicker.css">
-  <!-- datepicker -->
-  <link rel="stylesheet" href="./resources/plugins/datepicker/css/datepicker.css">
+  <!-- datepicker 
+  <link rel="stylesheet" href="./resources/plugins/datepicker/css/datepicker.css">-->
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="./resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css?after">
   <!-- Bootstrap Color Picker -->
@@ -83,8 +83,7 @@
 </div>
         
 
-<!-- jQuery -->
-<script src="./resources/plugins/jquery/jquery.min.js"></script>
+
 <!-- Bootstrap 4 -->
 <script src="./resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Select2 -->
@@ -98,8 +97,8 @@
 <script src="./resources/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <!-- date-range-picker -->
 <script src="./resources/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- date-picker -->
-<script type="text/javascript"  src="./resources/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+<!-- date-picker 
+<script type="text/javascript"  src="./resources/plugins/datepicker/js/bootstrap-datepicker.js"></script>-->
 <!-- bootstrap color picker -->
 <script src="./resources/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
@@ -139,7 +138,7 @@
     });
     
     //Date picker
-    $('#moveSchedule').datepicker()
+   // $('#moveSchedule').datepicker()
     
     //Date range picker1
     $('#reservation1').daterangepicker()

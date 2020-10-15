@@ -8,11 +8,14 @@
   <title>Zipzom - Realtor</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<!-- jQuery -->
+<script src="./resources/plugins/jquery/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="./resources/plugins/fontawesome-free/css/all.min.css">
   <!-- jQuery UI -->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- overlayScrollbars -->
@@ -24,8 +27,8 @@
   <link rel="stylesheet" href="./resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- daterange picker -->
   <link rel="stylesheet" href="./resources/plugins/daterangepicker/daterangepicker.css">
-  <!-- datepicker -->
-  <link rel="stylesheet" href="./resources/plugins/datepicker/css/datepicker.css">
+  <!-- datepicker 
+  <link rel="stylesheet" href="./resources/plugins/datepicker/css/datepicker.css">-->
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="./resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css?after">
   <!-- Bootstrap Color Picker -->
@@ -727,10 +730,7 @@
 <!-- 다이얼로그창 인클루드 -->
 <jsp:include page="./pfs_register_dialog.jsp"></jsp:include>
 <jsp:include page="./pfs_modify_dialog.jsp"></jsp:include>
-<!-- jQuery -->
-<script src="./resources/plugins/jquery/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <!-- ajax googleapis -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -746,8 +746,8 @@
 <script src="./resources/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <!-- date-range-picker -->
 <script src="./resources/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- date-picker -->
-<script src="./resources/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+<!-- date-picker 
+<script src="./resources/plugins/datepicker/js/bootstrap-datepicker.js"></script>-->
 <!-- bootstrap color picker -->
 <script src="./resources/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
@@ -832,12 +832,12 @@ $("#example2").click(function(){
 <script>
   $(function () {
     //Initialize Select2 Elements
-    $('.select2').select2()
+    //$('.select2').select2()
 
     //Initialize Select2 Elements
-    $('.select2bs4').select2({
+   /*  $('.select2bs4').select2({
       theme: 'bootstrap4'
-    })
+    }) */
 
     //Datemask dd/mm/yyyy
     $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
