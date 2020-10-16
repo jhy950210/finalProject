@@ -2,6 +2,7 @@ package com.exam.ZipZom;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import modelDAO.MailSender;
 import modelDAO.encryption;
 import modelTO.auth_passwordTO;
+import modelTO.scheduleTO;
 import modelTO.userTO;
 @Controller
 public class ConfigController {
@@ -366,4 +368,76 @@ public class ConfigController {
 
 		return modelAndView;
 	}
+	
+	// 일정관리 상세정보 view 페이지
+		@RequestMapping(value = "/viewPropertySchedule.do")
+		public ModelAndView viewPropertyScheduleRequest(HttpServletRequest request) {
+			scheduleTO to = new scheduleTO();
+			
+//			int seqS = Integer.parseInt(request.getParameter("seqS"));
+	//	
+//			to.setSeqS(seqS);
+			to.setSeqS(1);
+			
+			List<scheduleTO> listTO = sqlSession.selectList("schedulePropertySelect", to);
+			
+			request.setAttribute("lists", listTO);
+			
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("data/schedule_json");
+			modelAndView.addObject("list", request);
+			
+			return modelAndView;
+		}
+		
+		// 일정관리에서 일정을 추가 한 경우
+		@RequestMapping(value = "/addSchedule.do")
+		public ModelAndView addScheduleRequest(HttpServletRequest request) {
+			scheduleTO to = new scheduleTO();
+			
+//			int pseqS = Integer.parseInt(request.getParameter("pseqS"));
+//			String customerName = request.getParameter("customerName");
+//			String customerTel = request.getParameter("customerTel");
+//			String customerState = request.getParameter("customerState");
+//			String date = request.getParameter("date");
+//			String context = request.getParameter("context");
+//			String scheduleType = request.getParameter("scheduleType");
+//			String progress = request.getParameter("progress");
+//			String bType = request.getParameter("bType");
+//			String contractType = request.getParameter("contractType");
+//			
+//			to.setPseqS(pseqS);
+//			to.setCustomerName(customerTel);
+//			to.setCustomerTel(customerTel);
+//			to.setCustomerState(customerState);
+//			to.setDate(date);
+//			to.setContext(context);
+//			to.setScheduleType(scheduleType);
+//			to.setProgress(progress);
+//			to.setbType(bType);
+//			to.setContractType(contractType);
+			
+			to.setPseqS(2);
+			to.setCustomerName("박성훈");
+			to.setCustomerTel("123123");
+			to.setCustomerState("인도인");
+			to.setDate("2000/10/10 15:35");
+			to.setContext("내용33333");
+			to.setScheduleType("몰라");
+			to.setProgress("진33");
+			to.setbType("메33");
+			to.setContractType("그33");
+			
+			int flag = 0;
+			
+			flag = sqlSession.insert("scheduleInsert", to);
+			
+			request.setAttribute("flag", flag);
+			
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("data/flag_json");
+			modelAndView.addObject("list", request);
+			
+			return modelAndView;
+		}
 }

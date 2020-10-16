@@ -223,8 +223,8 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                            	<input id="edit-allDay" type="checkbox" style="color:#D25565;">
-                                <label class="col-xs-4" for="edit-allDay" style="color:#D25565; font-size: 8pt;">중요일정일 경우 체크</label>
+                            	<input id="edit-check" type="checkbox" style="color:#D25565;">
+                                <label class="col-xs-4" for="edit-check" style="color:#D25565; font-size: 8pt;">중요일정일 경우 체크</label>
                             </div>
                         </div>
                     </div>
@@ -257,6 +257,8 @@
 	
 <!-- jQuery -->
 <script src="./resources/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="./resources/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="./resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Sparkline -->

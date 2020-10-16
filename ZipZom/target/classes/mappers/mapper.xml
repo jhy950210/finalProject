@@ -4,7 +4,7 @@
 <mapper namespace="com.exam.ZipZom.TestMapper">
 	<!-- 로그인 확인 sql문 -->
 	<select id="loginSelect" parameterType="modelTO.userTO" resultType="modelTO.userTO">
-		select id from user where id=#{id} and password=#{password}
+		select id, seq_u as seqU from user where id=#{id} and password=#{password}
 	</select>
 	<!-- 회원가입 시 회원 정보 입력 sql문 -->
 	<insert id="signUpInsert" parameterType="modelTO.userTO">
@@ -58,7 +58,7 @@
 	</insert>
 	<!-- 이메일로 발송하는 인증번호의 중복검사 sql문 -->
 	<select id="duplicateAuth_KeySelect" parameterType="modelTO.auth_passwordTO" resultType="String">
-		select AUTH_KEY from auth_password where AUTH_KEY=#{authKey}
+		select AUTH_KEY as authKey from auth_password where AUTH_KEY=#{authKey}
 	</select>
 	<!-- 인증번호 테이블의 이메일 중복검사 sql문 -->
 	<select id="duplicateEmailSelect" parameterType="modelTO.auth_passwordTO" resultType="String">
@@ -78,6 +78,101 @@
 	</select>
 	<!--비밀번호 변경 sql문 -->
 	<update id="userPasswordUpdate" parameterType="modelTO.auth_passwordTO">
-		UPDATE user SET password = #{password} WHERE email = #{email};
+		UPDATE user SET password = #{password} WHERE email = #{email}
 	</update>
+	<!-- 일정관리 view 페이지 select sql문 -->
+	<select id="scheduleSelect" parameterType="modelTO.scheduleTO" resultType="modelTO.scheduleTO">
+		select SEQ_S as seqS,
+		PSEQ_S as pseqS,
+		CUSTOMER_NAME as customerName,
+		CUSTOMER_TEL as customerTel,
+		CUSTOMER_STATE as customerState,
+		DATE, 
+		CONTEXT, 
+		SCHEDULE_TYPE as scheduleType, 
+		PROGRESS, 
+		B_TYPE as bType, 
+		CONTRACT_TYPE as contractType
+		from schedule
+		where PSEQ_S = ${pseqS}
+	</select>
+	<!-- 일정관리 상세정보 view 페이지 select sql문 -->
+	<select id="schedulePropertySelect" parameterType="modelTO.scheduleTO" resultType="modelTO.scheduleTO">
+		select SEQ_S as seqS,
+		PSEQ_S as pseqS,
+		CUSTOMER_NAME as customerName,
+		CUSTOMER_TEL as customerTel,
+		CUSTOMER_STATE as customerState,
+		DATE, 
+		CONTEXT, 
+		SCHEDULE_TYPE as scheduleType, 
+		PROGRESS, 
+		B_TYPE as bType, 
+		CONTRACT_TYPE as contractType
+		from schedule
+		where SEQ_S = ${seqS}
+	</select>
+	<!-- 일정 추가 sql문 -->
+	<insert id="scheduleInsert" parameterType="modelTO.scheduleTO">
+		insert into schedule (
+		PSEQ_S,
+		CUSTOMER_NAME,
+		CUSTOMER_TEL,
+		CUSTOMER_STATE,
+		DATE,
+		CONTEXT, 
+		SCHEDULE_TYPE,
+		PROGRESS, 
+		B_TYPE,
+		CONTRACT_TYPE
+		) 
+		values (
+		${pseqS}, 
+		#{customerName}, 
+		#{customerTel}, 
+		#{customerState}, 
+		#{date},
+		#{context}, 
+		#{scheduleType}, 
+		#{progress},
+		#{bType}, 
+		#{contractType}
+		)
+	</insert>
+	<!--일정 변경 sql문 -->
+	<update id="scheduleUpdate" parameterType="modelTO.scheduleTO">
+		UPDATE schedule SET
+		CUSTOMER_TEL = #{customerTel},
+		CUSTOMER_STATE = #{customerState},
+		DATE = #{date},
+		CONTEXT = #{context},
+		SCHEDULE_TYPE = #{scheduleType},
+		PROGRESS = #{progress},
+		B_TYPE = #{bType},
+		CONTRACT_TYPE = #{contractType}
+		WHERE SEQ_S = ${seqS}
+	</update>
+	<!-- 일정 삭제 sql문 -->
+	<delete id="scheduleDelete" parameterType="modelTO.scheduleTO">
+		delete from schedule where SEQ_S=${seqS}
+	</delete>
+	<!-- 회원탈퇴 sql문 -->
+	<delete id="userDelete" parameterType="modelTO.userTO">
+		delete from user where where SEQ_U=${seqU}, password=#{password}
+	</delete>
+	<!-- 관리자 회원탈퇴 sql문 -->
+	<delete id="userAdminDelete" parameterType="modelTO.userTO">
+		delete from user where where SEQ_U=${seqU}
+	</delete>
+	<!-- 관리자 유저관리 view sql문 -->
+	<select id="userAdminSelect" resultType="modelTO.userTO">
+		select SEQ_U as seqU,
+		NAME as name,
+		ID as id,
+		EMAIL as email,
+		ADDRESS as address,
+		TEL1 as tel1, 
+		TEL2 as tel2
+		from user
+	</select>
 </mapper>

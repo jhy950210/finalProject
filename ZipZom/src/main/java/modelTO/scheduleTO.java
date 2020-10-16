@@ -4,6 +4,9 @@ public class scheduleTO {
 	private int seqS;
 	private int pseqS;
 	private int cseq;
+	private String customerName;
+	private String customerTel;
+	private String customerState;
 	private String date;
 	private String context;
 	private String scheduleType;
@@ -11,6 +14,24 @@ public class scheduleTO {
 	private String bType;
 	private String contractType;
 	
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getCustomerTel() {
+		return customerTel;
+	}
+	public void setCustomerTel(String customerTel) {
+		this.customerTel = customerTel;
+	}
+	public String getCustomerState() {
+		return customerState;
+	}
+	public void setCustomerState(String customerState) {
+		this.customerState = customerState;
+	}
 	public int getSeqS() {
 		return seqS;
 	}
