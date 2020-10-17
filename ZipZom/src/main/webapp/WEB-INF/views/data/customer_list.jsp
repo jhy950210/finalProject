@@ -10,33 +10,20 @@
 	JSONArray jsonArray = new JSONArray();
 	for(customerTO cto : lists) {
 		int seqC = cto.getSeqC();
-		int pseqC = cto.getPseqC();
 		String name= cto.getName();
 		String tel= cto.getTel();
 		String type= cto.getType();
 		String progress= cto.getProgress();
 		String contractType= cto.getContractType();
-		int budgetT1= cto.getBudgetT1();
-		int budgetT2= cto.getBudgetT2();
-		int budgetT3= cto.getBudgetT3();
-		String budgetL= cto.getBudgetL();
-		int budgetM1= cto.getBudgetM1();
-		int budgetM2= cto.getBudgetM2();
-		int area2= cto.getArea2();
-		String moveSchedule= cto.getMoveSchedule();
-		int room= cto.getRoom();
-		String direction= cto.getDirection();
-		int option= cto.getOption();
-		int floor= cto.getFloor();
-		int elevator= cto.getElevator();
 		String bYear= cto.getbYear();
 		String visitDate = cto.getVisitDate();
-		int security= cto.getSecurity();
+		String bType = cto.getbType();
 		
 		
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("seqC", seqC);
 		jsonObject.put("name", name);
+		jsonObject.put("bType", bType);
 		jsonObject.put("tel", tel);
 		jsonObject.put("type", type);
 		jsonObject.put("progress", progress);

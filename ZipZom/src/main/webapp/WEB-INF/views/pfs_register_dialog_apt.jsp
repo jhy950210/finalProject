@@ -25,11 +25,12 @@ function goPopup(){
 function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
 						, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
 	// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-	document.form.roadAddrPart1.value = roadAddrPart1;
-	document.form.roadAddrPart2.value = roadAddrPart2;
+	document.form.jibunAddr.value = jibunAddr;
+	document.form.rn.value = rn;
 	document.form.addrDetail.value = addrDetail;
 	document.form.zipNo.value = zipNo;
 }
+
 </script>
 <!-- 도로명주소 api 끝-->
 
@@ -40,11 +41,10 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
 <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
 	<!-- 매물 주소 api 활용-->
+	<form name="form" id="form" method="post" style="margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
 	<div>
 		<li style="margin-right: 10px; margin-top: 10px;"> 매물 주소(아파트) </li>
-			
-	
-			<form name="form" id="form" method="post" style="margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
+		<input type="hidden" name="bType" value="아파트" />
 	<table >
 			<colgroup>
 				<col style="width:25%"><col>
@@ -64,7 +64,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 					<th>도로명주소</th>
 					<td>
 						<div class="form-group row">
-						<input class="form-control" type="text" id="roadAddrPart1" style="width:300px; " readonly>
+						<input class="form-control" type="text" id="jibunAddr" name="jibunAddr" style="width:300px; " readonly>
 						</div>
 					</td>
 				</tr>
@@ -72,14 +72,13 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 					<th>상세주소</th>
 					<td>
 						<div class="form-group row">
-						<input class="form-control" type="text" id="addrDetail" style="width:40%; margin-right: 10px;" value="">
-						<input class="form-control" type="text" id="roadAddrPart2"  style="width:40% " value="" readonly>
+						<input class="form-control" type="text" id="addrDetail" name="hNumber" style="width:40%; margin-right: 10px;" value="">
+						<input class="form-control" type="text" id="rn" name="rn"  style="width:40% " value="" readonly>
 						</div>
 					</td>
 				</tr>
 			</tbody>
-		</table>
-</form>	
+		</table>	
 
 	</div>
 							
@@ -88,21 +87,21 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	<li style="margin-right: 20px; margin-left: 7.5px; margin-top: 5px;">계약 유형 
 		<div class="form-group row" > 
 			<div class="icheck-primary d-inline">
-				<input type="radio" id="contract_type11" name="contract_type" value="매매" checked>
+				<input type="radio" id="contract_type11" name="contractType" value="매매" checked>
 				<label for="contract_type11">
 				매매
 				</label>
 			</div>
 			
 			<div class="icheck-primary d-inline">
-				<input type="radio" id="contract_type12" name="contract_type" value="전세" >
+				<input type="radio" id="contract_type12" name="contractType" value="전세" >
 				<label for="contract_type12">
 				전세
 				</label>
 			</div>
 	                      			
 			<div class="icheck-primary d-inline">
-				<input type="radio" id="contract_type13" name="contract_type" value="월세" >
+				<input type="radio" id="contract_type13" name="contractType" value="월세" >
 				<label for="contract_type13">
 				월세
 				</label>
@@ -146,17 +145,17 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 						</div>
 					</div>
 				</section>
-				
-				<section>						
-					<!-- 집에 저당잡힌 은행 융자금 -->
-					<div class="input-group mb-1">
-						<span style="margin-right: 10px; margin-top: 10px;">융자금</span>
-						<input type="text" class="form-control" name="loan" id="loan" style="width: 80px; margin-top: 5px;" >
-						<div class="input-group-append">
-						<span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">만원</span>
-						</div>
-					</div>
-				</section>
+				<!-- 대출유무 -->
+			<section>
+			    <div class="input-group mb-1">
+				<span style="margin-right: 10px;  margin-top: 10px;">대출유무</span>
+				<select class="form-control select2bs4" id="loan" name="loan" style="width: 125px; margin-top: 5px;">
+				<option value="none">선택</option>
+					<option>융자 있음</option>
+					<option>융자 없음</option>
+				</select>
+				</div>
+			</section>
 			</div>	
 		</li>
 	</div>
@@ -212,7 +211,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				<div class="input-group col-md-12">
 					<!-- 임대 만기 날짜 -->
 					<span style="margin-right: 10px; margin-top: 10px;">임대 만기 날짜</span>
-					<input type="text" name="end_of_lease" id="end_of_lease" readonly="readonly" />
+					<input type="text" name="endOfLease" id="end_of_lease" readonly="readonly" />
 				</div>
 			</section>
 		</div>
@@ -224,14 +223,13 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				<div class="input-group mb-1">
 					<!-- 방 개수 -->
 					<span style="margin-right: 10px; margin-top: 10px;">방개수</span> 
-					<select class="form-control" id="room" name="room" style="width: 100px; margin-right: 30px; margin-top: 5px;">
+					<select class="form-control" id="room" name="rooms" style="width: 100px; margin-right: 30px; margin-top: 5px;">
 						<option value="none">선택</option>
 						<option>1개</option>
 						<option>2개</option>
 						<option>3개</option>
 						<option>4개</option>
 						<option>5개</option>
-						<option>6개 이상</option>
 					</select>
 				</div>
 			</section>
@@ -240,7 +238,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				<div class="input-group mb-1">
 					<!-- 향 -->
 					<span style="margin-right: 10px; margin-top: 10px;">향</span> 
-					<select class="form-control" style="width: 100px; margin-right: 30px; margin-top: 5px;">
+					<select class="form-control" name="direction" style="width: 100px; margin-right: 30px; margin-top: 5px;">
 						<option value="none">선택</option>
 						<option>북향</option>
 						<option>남향</option>
@@ -259,7 +257,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				<div class="input-group mb-1">
 					<!-- 욕실수 -->
 					<span style="margin-right: 10px; margin-top: 10px;">욕실수</span> 
-					<select class="form-control" id="bathroom" name="bathroom" style="width: 100px; margin-right: 30px; margin-top: 5px;">
+					<select class="form-control" id="bathroom" name="bathrooms" style="width: 100px; margin-right: 30px; margin-top: 5px;">
 						<option value="none">선택</option>
 						<option>1개</option>
 						<option>2개</option>
@@ -272,7 +270,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				<div class="input-group mb-1">
 					<!-- 난방방식 -->
 					<span style="margin-right: 10px; margin-top: 10px;">난방방식</span> 
-					<select class="form-control" style="width: 100px; margin-right: 10px; margin-top: 5px;">
+					<select class="form-control" name="heatingSystem" style="width: 100px; margin-right: 10px; margin-top: 5px;">
 						<option value="none">선택</option>
 						<option>도시가스</option>
 						<option>LPG</option>
@@ -288,7 +286,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				<div class="input-group mb-2">
 					<!-- 세대수 -->
 					<span style="margin-right: 10px; margin-top: 10px;">세대수</span> 
-					<input type="text" name="area1" id="area1" class="form-control" style="width: 100px; margin-top: 5px;">
+					<input type="text" name="numberOfHousehold" id="numberOfHousehold" class="form-control" style="width: 100px; margin-top: 5px;">
 					<div class="input-group-append">
 						<span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">세대</span>
 					</div>
@@ -299,7 +297,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				<div class="input-group mb-2">
 					<!-- 건축년도 -->
 					<span style="margin-right: 10px; margin-top: 10px;">건축년도</span> 
-					<input type="text" name="area1" id="area1" class="form-control" style="width: 100px; margin-top: 5px;">
+					<input type="text" name="bYear" id="bYear" class="form-control" style="width: 100px; margin-top: 5px;">
 					<div class="input-group-append">
 						<span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">년</span>
 					</div>
@@ -310,12 +308,12 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				<div class="input-group mb-2">
 					<!-- 층수 / 총층수-->
 					<span style="margin-right: 10px; margin-top: 10px;">층수 / 총 층수</span>
-					<input type="text" name="area1" id="area1" class="form-control" style="width: 50px; margin-top: 5px;">
+					<input type="text" name="floor" id="floor" class="form-control" style="width: 50px; margin-top: 5px;">
 					<div class="input-group-append">
 						<span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">층</span>
 					</div>
 					<span style="margin-top: 10px; font-size: 140%;">/</span> 
-					<input type="text" name="area1" id="area1" class="form-control" style="width: 50px; margin-top: 5px; margin-left: 10px;">
+					<input type="text" name="floorTotal" id="floorTotal" class="form-control" style="width: 50px; margin-top: 5px; margin-left: 10px;">
 					<div class="input-group-append">
 						<span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">층</span>
 					</div>
@@ -325,15 +323,15 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 			
 			<div class="input-group mb-3">
 				<div class="icheck-primary d-inline" style="margin-right: 20px;">
-					<input type="checkbox" id="aircondition" name="aircondition" value="냉방시설"> 
+					<input type="checkbox" id="aircondition" name="aircondition" value="1"> 
 					<label for="aircondition"> 냉방시설 </label>
 				</div>
 				<div class="icheck-primary d-inline" style="margin-right: 20px;">
-					<input type="checkbox" id="parking" value="주차유무" name="parking">
+					<input type="checkbox" id="parking" value="1" name="parking">
 					<label for="parking"> 주차유무 </label>
 				</div>
 				<div class="icheck-primary d-inline" style="margin-right: 20px;">
-					<input type="checkbox" id="elevator" value="승강기" name="elevator">
+					<input type="checkbox" id="elevator" value="1" name="elevator">
 					<label for="elevator"> 승강기 </label>
 				</div>
 
@@ -353,7 +351,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 					<div class="input-group row">
 						<div class="form-group col-md-3">
 						<div class="icheck-primary d-inline" style="margin-right: 20px;" >
-							<input type="checkbox" id="SECURITY_GUARD" name="SECURITY_GUARD" value="경비원">
+							<input type="checkbox" id="SECURITY_GUARD" name="securityGuard" value="1">
 	                        <label for="SECURITY_GUARD">
 	                        경비원
 	                        </label>
@@ -361,7 +359,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	                    </div>
 	                    <div class="form-group col-md-3">
 						<div class="icheck-primary d-inline" style="margin-right: 20px;">
-	                    	<input type="checkbox" id="VIDEOPHONE" value="비디오폰" name="VIDEOPHONE">
+	                    	<input type="checkbox" id="VIDEOPHONE" value="1" name="videophone">
 	                    	<label for="VIDEOPHONE">
 	                    	비디오폰
 	                    	</label>
@@ -369,7 +367,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	                    </div>
 	                    <div class="form-group col-md-3">
 	                    <div class="icheck-primary d-inline" style="margin-right: 20px;">
-	                    	<input type="checkbox" id="INTERPHONE" value="인터폰" name="INTERPHONE" >
+	                    	<input type="checkbox" id="INTERPHONE" value="1" name="interphone" >
 	                    	<label for="INTERPHONE">
 	                    	인터폰
 	                    	</label>
@@ -377,7 +375,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	                    </div>
 	                    <div class="form-group col-md-3">
 	                      <div class="icheck-primary d-inline" style="margin-right: 20px;">
-	                    	<input type="checkbox" id="CARD_KEY" value="카드키" name="CARD_KEY" >
+	                    	<input type="checkbox" id="CARD_KEY" value="1" name="cardKey" >
 	                    	<label for="CARD_KEY">
 	                    	카드키
 	                    	</label>
@@ -385,7 +383,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	                    </div>
 	                    <div class="form-group col-md-3">
 	                      <div class="icheck-primary d-inline" style="margin-right: 20px;">
-	                    	<input type="checkbox" id="CCTV" value="방범카메라" name="CCTV" >
+	                    	<input type="checkbox" id="CCTV" value="1" name="cctv" >
 	                    	<label for="CCTV">
 	                    	방범카메라
 	                    	</label>
@@ -393,7 +391,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	                    </div>
 	                    <div class="form-group col-md-3">
 	                      <div class="icheck-primary d-inline" style="margin-right: 20px;">
-	                    	<input type="checkbox" id="DOOR_SECURITY" value="현관보안" name="DOOR_SECURITY" >
+	                    	<input type="checkbox" id="DOOR_SECURITY" value="1" name="doorSecurity" >
 	                    	<label for="DOOR_SECURITY">
 	                    	현관보안
 	                    	</label>
@@ -401,7 +399,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	                    </div>
 	                    <div class="form-group col-md-3">
 	                      <div class="icheck-primary d-inline" style="margin-right: 20px;">
-	                    	<input type="checkbox" id="WINDOW_GUARD" value="방범창" name="WINDOW_GUARD" >
+	                    	<input type="checkbox" id="WINDOW_GUARD" value="1" name="windowGuard" >
 	                    	<label for="WINDOW_GUARD">
 	                    	방범창
 	                    	</label>
@@ -418,10 +416,10 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	                  <div class="input-group">
 	                    <div class="input-group-prepend">
 	                    <!-- text input -->
-						<input type="text" class="form-control" placeholder="이름"  style="width: 100px;">
+						<input type="text" class="form-control" name="lessorName" placeholder="이름"  style="width: 100px;">
 	                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
 	                    </div>
-	                    <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask>
+	                    <input type="text" class="form-control" name="lessorTel" data-inputmask='"mask": "(999) 9999-9999"' data-mask>
 	                  </div>
 	                  <!-- /.input group -->
 	                </div>
@@ -432,18 +430,19 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	                  <div class="input-group">
 	                    <div class="input-group-prepend">
 						<!-- text input -->
-						<input type="text" class="form-control" placeholder="이름"  style="width: 100px;">
+						<input type="text" class="form-control" name="lesseeName" placeholder="이름"  style="width: 100px;">
 	                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
 	                    </div>
-	                    <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask>
+	                    <input type="text" class="form-control" name="lesseeTel" data-inputmask='"mask": "(999) 9999-9999"' data-mask>
 	                  </div>
 	                  <!-- /.input group -->
 	                </div>
 					</div>
 				<div class="modal-footer justify-content-between">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary">등록</button>
-				</div>       
+					<button type="button" id="pfsWrite" class="btn btn-primary" data-dismiss="modal">등록</button>
+				</div>
+				</form>   
 </div>
         
 

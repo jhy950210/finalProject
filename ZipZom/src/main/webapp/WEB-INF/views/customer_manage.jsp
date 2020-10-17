@@ -49,16 +49,25 @@
   <script type="text/javascript">
      $(document).ready(function() {
         readServer(0);
-
+		
         
         $('#customerWrite').on('click', function(){
            var params = $('#cfrm').serialize();
            writeServer(params);
         })
         
-        
-        
 
+        $("#example2 tbody").on("click","tr",function(){ 	
+			console.log($(this).find('td:eq(0)').text());
+        	viewServer($(this).find('td:eq(0)').text());
+
+        });
+        
+        $('#customerModify').on('click', function(){
+            var params = $('#mcfrm').serialize();
+            modifyServer(params);
+         })
+        
 
      });
      // ready 끝
@@ -72,11 +81,12 @@
             success: function( json ) {  
                $( '#tbody' ).empty();
                $.each( json.data, function( index, item ) {
-                  var html = '<tr><td><div class="custom-control custom-checkbox">';
-                  html +=   '<input class="custom-control-input" type="checkbox" id="customCheckbox'+ index+'" value="option'+index+'">'
+                  var html = '<tr data-toggle="modal" data-target="#modal-modify" ><th onclick="event.cancelBubble=true"><div class="custom-control custom-checkbox">';
+                  html +=   '<input class="custom-control-input" type="checkbox" id="customCheckbox'+ index+'" value="'+item.seqC+'">'
                   html += '<label for="customCheckbox'+index+'" class="custom-control-label"></label>';
-                  html += '</div></td>';
+                  html += '</div></th>';
                   html += '<td>'+ item.seqC +'</td>';
+                  html += '<td>'+ item.bType +'</td>';
                   html += '<td>'+ item.name+'</td>';
                   html += '<td>'+ item.tel +'</td>';
                   html += '<td>'+ item.type +'</td>';
@@ -113,6 +123,7 @@
             url: 'customer_write.json',
             type: 'post',
             data:params,
+            
             dataType: 'json',
             success: function( data ) {
                if(data.flag == 1) {
@@ -127,6 +138,57 @@
             }
          })
         };
+        // writeServer 끝
+        var viewServer = function(seqC) {
+           $.ajax({
+            url: 'customer_view.json?seqC='+seqC,
+            type: 'get',
+            dataType: 'json',
+            success: function( json ) {
+            	$.each( json, function( index, item ) {
+                   // json이 json index는 키값 item은 value값
+            		//console.log(item)
+            		var name = ''+ document.getElementById(index).getAttribute('name');
+            		$('#mcfrm').find('#'+name).val(json[index]);
+            		
+            		
+            		if($('#mcfrm').find('#'+name).attr('type') == 'checkbox' && json[index] == 1){
+            			$('#mcfrm').find('#'+name).prop("checked", true);
+            		}
+                  // console.log($('#mcfrm').find('#'+name));
+                   console.log(json[index]);
+               //	$('#name').val(json.name);
+                 });
+            },
+            error: function( e ) {
+               alert( '서버 에러 ' + e );
+            }
+         })
+        };
+        // viewServer 끝
+        
+        var modifyServer = function(params) {
+           $.ajax({
+            url: 'customer_modify.json',
+            type: 'post',
+            data:params,
+            dataType: 'json',
+            success: function( data ) {
+               if(data.flag == 1) {
+                  $('#example2').DataTable().destroy();
+                  readServer();
+               } else {
+                  alert('잘못 입력했습니다')
+               }
+            },
+            error: function( e ) {
+               alert( '서버 에러 ' + e );
+            }
+         })
+        };
+  
+        
+        
   
   </script>
 </head>
@@ -338,6 +400,7 @@
                   <tr>
                <th></th>
                <th style="width:7%;">번호</th>
+               		<th>매물</th>
                     <th>이름</th>
                     <th>연락처</th>
                     <th>고객 타입</th>
@@ -391,6 +454,7 @@
 
 <!-- 다이얼로그창 인클루드 -->
 <jsp:include page="./customer_resister_dialog.jsp"></jsp:include>
+<jsp:include page="./customer_modify.jsp"></jsp:include>
 <!-- Bootstrap 4 -->
 <script src="./resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- <!-- Select2
@@ -425,20 +489,6 @@
 <script src="./resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script>
   $(function () {
-    //Initialize Select2 Elements
-   //$('.select2').select2()
-
-    //Initialize Select2 Elements
-    /* $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    }) */
-
-    //Datemask dd/mm/yyyy
-    //$('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-    //Datemask2 mm/dd/yyyy
-    //$('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-    //Money Euro
-   // $('[data-mask]').inputmask()
     
     //Date picker
     $( '#datepicker' ).datepicker()
@@ -500,6 +550,7 @@
     $("input[data-bootstrap-switch]").each(function(){
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     });
+    
 
   })
 </script>

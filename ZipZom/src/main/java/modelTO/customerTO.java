@@ -15,21 +15,26 @@ public class customerTO {
 	private int budgetT2;
 	private int budgetT3;
 	private String budgetL;
-	private int budgetM1;
-	private int budgetM2;
 	private int area2;
 	private String moveSchedule;
 	private int room;
 	private String direction;
 	private int option;
 	private int floor;
-	private int elevator;
+	private String elevator;
 	private String bYear;
 	private String context;
 	private int security;
 	private String visitDate;
+	private String bType;
 	
 	
+	public String getbType() {
+		return bType;
+	}
+	public void setbType(String bType) {
+		this.bType = bType;
+	}
 	public String getVisitDate() {
 		return visitDate;
 	}
@@ -102,18 +107,6 @@ public class customerTO {
 	public void setBudgetL(String budgetL) {
 		this.budgetL = budgetL;
 	}
-	public int getBudgetM1() {
-		return budgetM1;
-	}
-	public void setBudgetM1(int budgetM1) {
-		this.budgetM1 = budgetM1;
-	}
-	public int getBudgetM2() {
-		return budgetM2;
-	}
-	public void setBudgetM2(int budgetM2) {
-		this.budgetM2 = budgetM2;
-	}
 	public int getArea2() {
 		return area2;
 	}
@@ -162,10 +155,11 @@ public class customerTO {
 	public void setOption(int option) {
 		this.option = option;
 	}
-	public int getElevator() {
+
+	public String getElevator() {
 		return elevator;
 	}
-	public void setElevator(int elevator) {
+	public void setElevator(String elevator) {
 		this.elevator = elevator;
 	}
 	public int getSecurity() {

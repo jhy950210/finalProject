@@ -43,10 +43,10 @@ public class option_customerTO {
 	public void setWashingMachine(int washingMachine) {
 		this.washingMachine = washingMachine;
 	}
-	public int getDesc() {
+	public int getDesk() {
 		return desk;
 	}
-	public void setDesc(int desk) {
+	public void setDesk(int desk) {
 		this.desk = desk;
 	}
 	public int getDryingMachine() {

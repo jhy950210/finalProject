@@ -81,13 +81,13 @@
 							<jsp:include page = "./pfs_register_dialog_apt.jsp" flush = "false"/>
 							
 							<!-- 오피스텔 탭 시작 -->
-							<jsp:include page = "./pfs_register_dialog_officetel.jsp" flush = "false"/>
+							<%-- <jsp:include page = "./pfs_register_dialog_officetel.jsp" flush = "false"/> --%>
 						
 							<!-- 다세대 탭 시작 -->
-							<jsp:include page = "./pfs_register_dialog_dasede.jsp" flush = "false"/>
+							<%-- <jsp:include page = "./pfs_register_dialog_dasede.jsp" flush = "false"/> --%>
 						
 							<!-- 다가구 탭 시작 -->
-							<jsp:include page = "./pfs_register_dialog_dagagu.jsp" flush = "false"/>  
+							<%-- <jsp:include page = "./pfs_register_dialog_dagagu.jsp" flush = "false"/> --%>  
 						</div>
 					</div>
 				</div>

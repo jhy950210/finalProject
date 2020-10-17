@@ -5,7 +5,7 @@ public class option_pfsTO {
 	private int pseqOp;
 	private int bed;
 	private int washingMachine;
-	private int desc;
+	private int desk;
 	private int dryingMachine;
 	private int induction;
 	private int electricRange;
@@ -40,11 +40,11 @@ public class option_pfsTO {
 	public void setWashingMachine(int washingMachine) {
 		this.washingMachine = washingMachine;
 	}
-	public int getDesc() {
-		return desc;
+	public int getDesk() {
+		return desk;
 	}
-	public void setDesc(int desc) {
-		this.desc = desc;
+	public void setDesk(int desk) {
+		this.desk = desk;
 	}
 	public int getDryingMachine() {
 		return dryingMachine;

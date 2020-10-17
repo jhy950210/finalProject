@@ -6,25 +6,23 @@ public class CustomerAllTO {
 	}
 	private String visitDate;
 	private int seqC;
-	private int pseqC;
 	private String name;
 	private String tel;
+	private String bType;
 	private String type;
 	private String progress;
 	private String contractType;
+	private String bYear;
 	private int budgetT1;
 	private int budgetT2;
 	private int budgetT3;
 	private String budgetL;
-	private int budgetM1;
-	private int budgetM2;
 	private int area2;
 	private String moveSchedule;
 	private int room;
 	private String direction;
 	private int floor;
-	private int elevator;
-	private String bYear;
+	private String elevator;
 	private String context;
 	private int bed;
 	private int washingMachine;
@@ -45,6 +43,20 @@ public class CustomerAllTO {
 	private int cctv;
 	private int doorSecurity;
 	private int windowGuard;
+	
+	
+	public String getElevator() {
+		return elevator;
+	}
+	public void setElevator(String elevator) {
+		this.elevator = elevator;
+	}
+	public String getbType() {
+		return bType;
+	}
+	public void setbType(String bType) {
+		this.bType = bType;
+	}
 	public String getVisitDate() {
 		return visitDate;
 	}
@@ -56,12 +68,6 @@ public class CustomerAllTO {
 	}
 	public void setSeqC(int seqC) {
 		this.seqC = seqC;
-	}
-	public int getPseqC() {
-		return pseqC;
-	}
-	public void setPseqC(int pseqC) {
-		this.pseqC = pseqC;
 	}
 	public String getName() {
 		return name;
@@ -117,18 +123,6 @@ public class CustomerAllTO {
 	public void setBudgetL(String budgetL) {
 		this.budgetL = budgetL;
 	}
-	public int getBudgetM1() {
-		return budgetM1;
-	}
-	public void setBudgetM1(int budgetM1) {
-		this.budgetM1 = budgetM1;
-	}
-	public int getBudgetM2() {
-		return budgetM2;
-	}
-	public void setBudgetM2(int budgetM2) {
-		this.budgetM2 = budgetM2;
-	}
 	public int getArea2() {
 		return area2;
 	}
@@ -158,12 +152,6 @@ public class CustomerAllTO {
 	}
 	public void setFloor(int floor) {
 		this.floor = floor;
-	}
-	public int getElevator() {
-		return elevator;
-	}
-	public void setElevator(int elevator) {
-		this.elevator = elevator;
 	}
 	public String getbYear() {
 		return bYear;

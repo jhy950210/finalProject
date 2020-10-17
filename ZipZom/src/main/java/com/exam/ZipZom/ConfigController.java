@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import modelTO.pfsTO;
 import modelTO.security_customerTO;
+import modelTO.security_pfsTO;
 import modelTO.CustomerAllTO;
 import modelTO.customerTO;
 import modelTO.customer_visit_dateTO;
 import modelTO.option_customerTO;
+import modelTO.option_pfsTO;
 import modelTO.userTO;
 import modelDAO.MailSender;
 import modelDAO.encryption;
@@ -123,6 +125,7 @@ public class ConfigController {
 		if(sqlSession.selectOne("loginSelect", to) != null) {
 			flag = 1;
 			session.setAttribute("s_id", to.getId());
+			session.setAttribute("seqU", to.getSeqU());
 		}
 		
 		request.setAttribute("flag", flag);
@@ -365,34 +368,23 @@ public class ConfigController {
 
 			return modelAndView;
 		}
-	@RequestMapping("/jusoPopup.do")
-	public String jusoSearch(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,userTO uto) {
-		
-	return "jusoPopup";
-	}
+	
+	// 고객 관리 페이지
 	@RequestMapping("/customer_manage.do")
-	public String customerManage(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,userTO uto) {
-		uto.setId("qwer2");
+	public String customerManage(HttpServletRequest request, HttpServletResponse response,Model model) {
 		
-		//ArrayList<customerTO> cList = new ArrayList<customerTO>();
-		//cList = (ArrayList<customerTO>)testmapper.customerList(uto);
-		//request.setAttribute("cList", cList);
 	return "customer_manage";
 	}
 	
+	// 고객 등록
 	@RequestMapping("/customer_write.json")
-	public String customerWrite(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,option_customerTO octo,customer_visit_dateTO cvdto,security_customerTO scto) {
+	public String customerWrite(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,option_customerTO octo,customer_visit_dateTO cvdto,security_customerTO scto,HttpSession session) {
 		int flag = 0;
-		cto.setPseqC(14);
+		cto.setPseqC((int)session.getAttribute("seqU"));
 		if(request.getParameter("rooms") != null) {
-		cto.setRoom(request.getParameter("rooms").charAt(0));
+		cto.setRoom(Integer.parseInt(request.getParameter("rooms").substring(0,1)));
 		}
-		System.out.println(request.getParameter("elevators"));
-		if(request.getParameter("elevators") != null && request.getParameter("elevators").equals("있음")) {
-			cto.setElevator(1);
-		} else {
-			cto.setElevator(0);
-		}
+		
 		flag = (int)testmapper.customerWrite(cto);
 		if(flag == 1) {
 		octo.setPseqOc(cto.getSeqC());
@@ -408,39 +400,115 @@ public class ConfigController {
 	return "data/customer_write";
 	}
 	
-	
-	@RequestMapping("/pfs_manage.do")
-	public String selectpfs(HttpServletRequest request, HttpServletResponse response,Model model,userTO uto,HttpSession session) {
-//		userTO uto = new userTO();
-		uto.setId((String)session.getAttribute("id"));
-		ArrayList<pfsTO> pfslist = (ArrayList<pfsTO>)testmapper.pfsList(uto);
-		request.setAttribute("pfslist",pfslist);
-	return "pfs_manage";
+	// 고객 상세보기,수정창
+	@RequestMapping("/customer_view.json")
+	public String customerView(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,HttpSession session) {
+		cto.setSeqC(Integer.parseInt(request.getParameter("seqC")));
+		ArrayList<CustomerAllTO> caList = new ArrayList<CustomerAllTO>();
+		caList = (ArrayList<CustomerAllTO>)testmapper.customerView(cto);
+		request.setAttribute("caList", caList);
+		return "data/customer_view";
 	}
 	
-	@RequestMapping("/pfs_write.do")
-	public String writepfs(HttpServletRequest request, HttpServletResponse response,Model model,pfsTO pto) {
-		pto.setPseqPfs(1);
-		pto.setSi(pto.getSi());
-		int flag = (int)testmapper.pfsWrite(pto);
-		request.setAttribute("flag",flag);
-	return "pfs_list";
-}
-	
+	//고객 리스트
 	@RequestMapping("/customer_list.json")
-	public String customerList(HttpServletRequest request, HttpServletResponse response,Model model,userTO uto) {
-		uto.setId("qwer2");
+	public String customerList(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,HttpSession session) {
+		cto.setPseqC((int)session.getAttribute("seqU"));
 		
 		ArrayList<customerTO> cList = new ArrayList<customerTO>();
-		cList = (ArrayList<customerTO>)testmapper.customerList(uto);
+		cList = (ArrayList<customerTO>)testmapper.customerList(cto);
 		request.setAttribute("cList", cList);
 		return "data/customer_list";
 	}
+	
+	// 고객 수정페이지
+		@RequestMapping("/customer_modify.json")
+		public String customermodify(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,HttpSession session,option_customerTO octo,customer_visit_dateTO cvdto,security_customerTO scto) {
+			int flag = 0;
+			//cto.setSeqC(Integer.parseInt(request.getParameter("seqC")));
+			if(request.getParameter("rooms") != null) {
+			cto.setRoom(Integer.parseInt(request.getParameter("rooms").substring(0,1)));
+			}
+			
+			flag = (int)testmapper.customerUpdate(cto);
+			if(flag == 1) {
+			octo.setPseqOc(cto.getSeqC());
+			testmapper.ocUpdate(cto);
+			cvdto.setPseqCvd(cto.getSeqC());
+			testmapper.customerVisitDate(cvdto);
+			scto.setPseqSc(cto.getSeqC());
+			testmapper.securityCustomer(scto);
+			}
+			
+			
+			request.setAttribute("flag", flag);
+			return "flag_json";
+		}
+	
+	// 고객 삭제
 	@RequestMapping("/customer_delete.json")
 	public String customerDelete(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
-
+		
 		return "data/customer_delete";
 	}
+	
+	// 고객 정보 수정
+	@RequestMapping("/customer_update.json")
+	public String customerUpdate(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
+		cto.setSeqC(1);
+		
+		int flag = (int)testmapper.customerUpdate(cto);
+		request.setAttribute("flag", flag);
+		return "data/flag_json";
+	}
+	
+	// 매물 관리 페이지
+	@RequestMapping("/pfs_manage.do")
+	public String pfsManage(HttpServletRequest request, HttpServletResponse response,Model model) {
+	return "pfs_manage";
+	}
+	
+	@RequestMapping("/pfs_list.json")
+	public String pfsList(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session,pfsTO pto) {
+	pto.setPseqPfs((int)session.getAttribute("seqU"));
+	ArrayList<pfsTO> pfsList = (ArrayList<pfsTO>)testmapper.pfsList(pto);
+	request.setAttribute("pfsList", pfsList);
+	return "data/pfs_list";
+	}
+	
+	
+	@RequestMapping("/pfs_write.json")
+	public String writepfs(HttpServletRequest request, HttpServletResponse response,Model model,pfsTO pto,HttpSession session,option_pfsTO opto,security_pfsTO spto) {
+		int flag = 0;
+		pto.setPseqPfs((int)session.getAttribute("seqU"));
+		
+		String[] addr = request.getParameter("jibunAddr").split(" ");
+		pto.setSi(addr[0]);
+		pto.setGu(addr[1]);
+		pto.setDong(addr[2]);
+		String bunji = "";
+		for(int i=3; i<addr.length;i++) {
+			bunji += addr[i] + " ";
+			pto.setBunji(bunji);
+		}
+		if(request.getParameter("rooms") != null) {
+			pto.setRoom(Integer.parseInt(request.getParameter("rooms").substring(0,1)));
+		}
+		if(request.getParameter("bathrooms") != null) {
+			pto.setBathroom(Integer.parseInt(request.getParameter("bathrooms").substring(0,1)));
+		}
+		flag = (int)testmapper.pfsWrite(pto);
+		if(flag == 1) {
+			opto.setPseqOp(pto.getSeqPfs());
+			testmapper.pfsOption(opto);
+			spto.setPseqSp(pto.getSeqPfs());
+			testmapper.pfsSecurity(spto);
+		}
+		request.setAttribute("flag",flag);
+	return "data/flag_json";
+}
+	
+	
 	
 	@RequestMapping("/pfs_compare.do")
 	public String pfsCompare(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
@@ -448,23 +516,5 @@ public class ConfigController {
 		return "pfs_compare";
 	}
 	
-	@RequestMapping("/customer_view.json")
-	public String customerView(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
-		cto.setSeqC(3);
-		
-		ArrayList<CustomerAllTO> caList = new ArrayList<CustomerAllTO>();
-		caList = (ArrayList<CustomerAllTO>)testmapper.customerView(cto);
-		request.setAttribute("caList", caList);
-		return "data/customer_view";
-	}
-	
-	@RequestMapping("/customer_update.json")
-	public String customerUpdate(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
-		cto.setSeqC(1);
-		
-		ArrayList<CustomerAllTO> caList = new ArrayList<CustomerAllTO>();
-		int flag = (int)testmapper.customerUpdate(cto);
-		request.setAttribute("flag", flag);
-		return "data/customer_update";
-	}
+
 }

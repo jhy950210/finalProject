@@ -42,6 +42,92 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="./resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="./resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <script type="text/javascript">
+  $(document).ready(function() {
+      readServer();
+
+      
+      $('#pfsWrite').on('click', function(){
+         var params = $('#form').serialize();
+         writeServer(params);
+      })
+      
+      
+      
+
+
+   });
+   // ready 끝
+      
+                                            
+         var readServer = function() {    
+       $.ajax({                         
+          url: 'pfs_list.json',   
+          type: 'get',                 
+          dataType: 'json',            
+          success: function( json ) {  
+             $( '#myTable' ).empty();
+             $.each( json.data, function( index, item ) {
+            	 var mytable = '<tr data-toggle="modal" data-target="#modal2" >'
+            		 mytable += '<th>';
+            		 mytable += '<div class="custom-control custom-checkbox">';
+            		 mytable += '<input class="custom-control-input" type="checkbox" id="customCheckbox'+index+'" value="option'+index+'">';
+            		 mytable += '<label for="customCheckbox'+index+'" class="custom-control-label"></label></div></th>';
+            		 mytable += '<td>'+item.seqPfs+'</td>';
+                	 mytable += '<td>'+item.bType+'</td>';
+	                 mytable += '<td>'+item.contractType+'</td>';
+	                 mytable += '<td>'+item.si+' '+item.gu+' '+' '+item.dong+' '+item.bunji+' '+item.hNumber+'</td>';
+	                 mytable += '<td>'+item.budget1+'</td>';
+	                 mytable += '<td>'+item.budget2+'</td>' ;
+	                 mytable += '<td>'+item.budget3+'</td>';
+	                 mytable += '<td>'+item.loan+'</td>';
+	                 mytable += '<td>'+item.wdate+'</td></tr>';
+                
+                $( '#myTable' ).append( mytable );
+             });
+             $('#example2').DataTable({
+                 "paging": true,
+                 "lengthChange": false,
+                 "displayLength": 5,
+                 "searching": true,
+                 "ordering": true,
+                 "info": true,
+                 "autoWidth": false,
+                 "responsive": true,
+                 "bDestroy": true
+               });
+
+          },
+          error: function( e ) {
+             alert( '서버 에러 ' + e );
+          }
+       })
+      }
+      // readServer 끝
+      
+      var writeServer = function(params) {
+         $.ajax({
+          url: 'pfs_write.json',
+          type: 'post',
+          data:params,
+          
+          dataType: 'json',
+          success: function( data ) {
+             if(data.flag == 1) {
+                $('#example2').DataTable().destroy();
+                readServer();
+             } else {
+                alert('잘못 입력했습니다')
+             }
+          },
+          error: function( e ) {
+             alert( '서버 에러 ' + e );
+          }
+       })
+      };
+      
+      
+      </script>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -141,7 +227,7 @@
 				</div>
 			</div>
 			
-			<div class="form-group row" style="margin-right: 10px; margin-top: 10px;">
+			<div class="form-group row dataTables_filter" style="margin-right: 10px; margin-top: 10px;">
 				<section>
 					<div class="input-group md-3">
 						<span style="margin-right: 10px; margin-top: 5px;">계약 유형</span>
@@ -151,7 +237,7 @@
 				<section>
 					<div class="input-group md-3">
 						<div class="icheck-primary d-inline" style="margin-right: 20px; ">
-                        <input type="checkbox" id="check_all" name="check_all" value="1" checked>
+                        <input type="checkbox" id="check_all" name="check_all" value="1" checked aria-controls="example2" />
                         <label for="check_all">
                         <span>전체</span>
                         </label>
@@ -162,7 +248,7 @@
 				<section>
 					<div class="input-group md-3">						
 						<div class="icheck-primary d-inline" style="margin-right: 20px; ">
-                        <input type="checkbox" id="checkbox1" name="r1">
+                        <input type="checkbox" id="checkbox1" name="r1" value="매매" aria-controls="example2">
                         <label for="checkbox1">
 						<span>매매</span>
                         </label>
@@ -173,7 +259,7 @@
 				<section>
 					<div class="input-group md-3">
                       	<div class="icheck-primary d-inline" style="margin-right: 20px; ">
-                        <input type="checkbox" id="checkbox2" name="r2">
+                        <input type="checkbox" id="checkbox2" name="r2" value="전세" aria-controls="example2" />
                         <label for="checkbox2">
                         <span>전세</span>
                         </label>
@@ -184,7 +270,7 @@
 				<section>
 					<div class="input-group md-3">
                       	<div class="icheck-primary d-inline" style="margin-right: 20px; ">
-                        <input type="checkbox" id="checkbox3" name="r3" >
+                        <input type="checkbox" id="checkbox3" name="r3" value="월세" aria-controls="example2" />
                         <label for="checkbox3">
                         <span>월세</span>
                         </label>
@@ -253,16 +339,14 @@
                   <thead>
                   <tr>
 					<th></th>
+					<th>매물 번호</th>
                     <th>타입</th>
                     <th>거래 유형</th>
-                    <th>매물</th>
-                    <th>동</th>
-                    <th>호</th>
-                    <th>매도금액(만)</th>
-                    <th>보증금</th>
-                    <th>월임대료</th>
+                    <th>매물 주소</th>
+                    <th>매도금액</th>
+                    <th>(현)보증금</th>
+                    <th>(현)월임대료</th>
                     <th>융자금</th>
-                    <th>거래상태</th>
                     <th>등록일</th>
                   </tr>
                   </thead>
@@ -274,16 +358,14 @@
 						<label for="customCheckbox1" class="custom-control-label"></label>
 						</div>
 					</th>
+					<td></td>
                     <td>아파트</td>
                     <td>매매</td>
                     <td>서울특별시 강남구 역삼동 819-10</td>
-                    <td>역삼동</td>
-                    <td>301호</td>
                     <td>10,000</td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>정상</td>
                     <td>2020-10-06</td>
                   </tr>
                    <tr>
@@ -293,398 +375,16 @@
 						<label for="customCheckbox1" class="custom-control-label"></label>
 						</div>
 					</th>
+					<td></td>
                     <th>아파트</th>
                     <th>매매</th>
                     <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>역삼동</th>
-                    <th>301호</th>
                     <th>10,000</th>
                     <th></th>
                     <th></th>
                     <th></th>
-                    <th>정상</th>
                     <th>2020-10-06</th>
-                  </tr>
-                   <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>역삼동</th>
-                    <th>301호</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-11</th>
-                  </tr>
-                  <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>역삼동</th>
-                    <th>301호</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-11</th>
-                  </tr>
-                  <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>역삼동</th>
-                    <th>301호</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-11</th>
-                  </tr>
-                  <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>삼성동</th>
-                    <th>301호</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-11</th>
-                  </tr>
-                  <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>삼성동</th>
-                    <th>301호</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-11</th>
-                  </tr>
-                  <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>삼성동</th>
-                    <th>301호</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-11</th>
-                  </tr>
-                  <tr>
-					<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox2" value="option2">
-						<label for="customCheckbox2" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 삼성동 12-10</th>
-                    <th>삼성동</th>
-                    <th>203호</th>
-                    <th>14,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-01</th>
-                  </tr>
-                  <tr>
-					<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox3" value="option3">
-						<label for="customCheckbox3" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 삼성동 12-10</th>
-                    <th>삼성동</th>
-                    <th>203호</th>
-                    <th>14,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-01</th>
-                  </tr>
-                  <tr>
-					<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox4" value="option4">
-						<label for="customCheckbox4" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 삼성동 12-10</th>
-                    <th>삼성동</th>
-                    <th>203호</th>
-                    <th>14,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-01</th>
-                  </tr>
-                   <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>역삼동</th>
-                    <th>301호</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-06</th>
-                  </tr>
-                   <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>역삼동</th>
-                    <th>301호</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-06</th>
-                  </tr>
-                   <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>역삼동</th>
-                    <th>301호</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-06</th>
-                  </tr>
-                   <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>역삼동</th>
-                    <th>301호</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-06</th>
-                  </tr>
-                   <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>역삼동</th>
-                    <th>301호</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-06</th>
-                  </tr>
-                   <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>역삼동</th>
-                    <th>301호</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-06</th>
-                  </tr>
-                   <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>역삼동</th>
-                    <th>301호</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-06</th>
-                  </tr>
-                   <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>역삼동</th>
-                    <th>301호</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-06</th>
-                  </tr>
-                   <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>역삼동</th>
-                    <th>301호</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-06</th>
-                  </tr>
-                   <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>역삼동</th>
-                    <th>301호</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-06</th>
-                  </tr>
-                  <tr>
-					<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox5" value="option5">
-						<label for="customCheckbox5" class="custom-control-label"></label>
-						</div>
-					</th>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 삼성동 12-10</th>
-                    <th>삼성동</th>
-                    <th>203호</th>
-                    <th>14,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>정상</th>
-                    <th>2020-10-01</th>
-                  </tr>                  
+                  </tr>                 
                 </table>
                 <div class="modal-footer justify-content-left">
                 <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-xl" style="width: 200px;">
@@ -729,7 +429,7 @@
 
 <!-- 다이얼로그창 인클루드 -->
 <jsp:include page="./pfs_register_dialog.jsp"></jsp:include>
-<jsp:include page="./pfs_modify_dialog.jsp"></jsp:include>
+<%-- <jsp:include page="./pfs_modify_dialog.jsp"></jsp:include> --%>
 
 <!-- ajax googleapis -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -765,7 +465,7 @@
 <script src="./resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <!-- Page script -->
 <script>
-  $(function () {
+ /*  $(function () {
     $("#example1").DataTable({
       "responsive": true,
       "autoWidth": true,
@@ -780,7 +480,7 @@
       "autoWidth": false,
       "responsive": true,
     });
-  });
+  }); */
 </script>
 
 <!-- 테이블 검색기능(필터) -->
@@ -792,9 +492,36 @@ $(document).ready(function(){
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
+  $("#check_all").on("click", function() {
+	    readServer();
+	  });
+  
+  $("#checkbox1").on("change", function() {
+	    var value = $(this).val().toLowerCase();
+	    if($('#checkbox1').is(':checked')){
+	    $("#myTable tr").filter(function() {
+	      $(this).toggle($(this).children().eq(3).text().toLowerCase().indexOf(value) > -1)
+	    });
+	    } else {
+	    	readServer();
+	    }
+	  });
+  
+  $("#checkbox2").on("click", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#myTable tr").filter(function() {
+	      $(this).toggle($(this).children().eq(3).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
+  
+  $("#checkbox3").on("click", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#myTable tr").filter(function() {
+	      $(this).toggle($(this).children().eq(3).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
 });
-</script>
-<script>
+
 $("#example2").click(function(){ 	
 
 	var str = ""

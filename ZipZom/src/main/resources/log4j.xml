@@ -12,8 +12,13 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.exam.ZipZom">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
+	<!-- Query Loggers -->
+	 <logger name="jdbc.sqlonly" additivity="false">
+	 <level value="INFO"/> 
+	 <appender-ref ref="console-infolog"/>
+	  </logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
