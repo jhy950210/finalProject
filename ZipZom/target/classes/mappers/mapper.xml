@@ -4,7 +4,7 @@
 <mapper namespace="com.exam.ZipZom.TestMapper">
 	<!-- 로그인 확인 sql문 -->
 	<select id="loginSelect" parameterType="modelTO.userTO" resultType="modelTO.userTO">
-		select id, seq_u seqU from user where id=#{id} and password=#{password}
+		select id,seq_u seqU from user where id=#{id} and password=#{password}
 	</select>
 	<!-- 회원가입 시 회원 정보 입력 sql문 -->
 	<insert id="signUpInsert" parameterType="modelTO.userTO">
@@ -82,15 +82,13 @@
 	</update>
 	<!-- 고객 상세보기,수정창 -->
 	<select id="customerView" parameterType="modelTO.customerTO" resultType="modelTO.CustomerAllTO">
-		select seq_c seqC,name,tel,b_type bType,type,progress,contract_type contractType,b_year bYear,budget_t1 budgetT1,budget_t2 budgetT2,budget_t3 budgetT3,budget_l budgetL,
+		select seq_c seqC,name,tel,b_type bType,type,progress,contract_type contractType,date_format(b_year,'%Y') bYear,budget_t1 budgetT1,budget_t2 budgetT2,budget_t3 budgetT3,budget_l budgetL,
 		area2,move_schedule moveSchedule,room,direction,option,floor,elevator,context,security,
 		bed,washing_machine washingMachine,desk,drying_machine dryingMachine,induction,electric_range electricRange,gas_range gasRange,wordrobe,sink,shoe_rack shoeRack,refrigerator,bath_tube bathTube,
 		security_guard securityGuard,videophone,interphone,card_key cardKey,cctv,door_security doorSecurity,window_guard windowGuard,
-		visit_date visitDate
+		(select visit_date from customer_visit_date where pseq_cvd = c.seq_c order by seq_cvd desc limit 0,1) visitDate
 		from customer c left outer join option_customer oc
 		on c.seq_c = oc.pseq_oc
-		left outer join customer_visit_date cvd
-		on cvd.pseq_cvd = c.seq_c
 		left outer join security_customer sc
 		on sc.pseq_sc = c.seq_c
 		where c.seq_c = #{seqC}
@@ -98,7 +96,7 @@
 	<!-- 고객관리 창 -->
 	<select id="customerList" parameterType="modelTO.customerTO" resultType="modelTO.customerTO">
 		select seq_c seqC,name,tel,type,b_type bType,progress,contract_type contractType, (select visit_date from customer_visit_date where pseq_cvd = seq_c limit 1) visitDate
-		 from customer where pseq_c = #{pseqC}
+		 from customer where pseq_c = #{pseqC} order by seqC desc
 	</select>
 	<!-- 고객 등록 -->
 	<insert id="customerWrite" parameterType="modelTO.customerTO" useGeneratedKeys="true" keyProperty="seqC">
@@ -126,38 +124,38 @@
 	delete from customer where seq_c = #{seqC}
 	</delete>
 	<!-- 고객 삭제 시 방문날짜 제거 -->
-	<delete id="cvdDelete" parameterType="int">
-	delete from customer_visit_date where pseq_cvd = #{pseq_cvd}
+	<delete id="cvdDelete" parameterType="modelTO.customer_visit_dateTO">
+	delete from customer_visit_date where pseq_cvd = #{pseqCvd}
 	</delete>
 	<!-- 고객 삭제 시 옵션 제거 -->
-	<delete id="ocDelete" parameterType="int">
-	delete from option_customer where pseq_oc = #{pseq_oc}
+	<delete id="ocDelete" parameterType="modelTO.option_customerTO">
+	delete from option_customer where pseq_oc = #{pseqOc}
 	</delete>
 	<!-- 고객 삭제 시 보안 옵션 제거 -->
-	<delete id="scDelete" parameterType="int">
+	<delete id="scDelete" parameterType="modelTO.security_customerTO">
 	delete from security_customer where pseq_sc = #{pseqSc}
 	</delete>
 	<!-- 고객 수정 -->
 	<update id="customerUpdate" parameterType="modelTO.customerTO">
-		update from customer set tel = #{tel},type = #{type},progress = #{progress},contract_type = #{contractType},
-		budget_t1 = #{budgetT1},budget_t2 = #{budgetT2},budget_t3=#{budgetT3},budget_l=#{budgetL},budget_m1=#{budgetM1},budget_m2=#{budgetM2},area2=#{area2},
-		move_schedule=#{moveSchedule},room=#{room},direction=#{direction},option=#{option},floor=#{floor},elevator=#{elevator},b_year=#{bYear},context=#{context},security=#{security}
+		update customer set tel = #{tel},type = #{type},progress = #{progress},contract_type = #{contractType},
+		budget_t1 = #{budgetT1},budget_t2 = #{budgetT2},budget_t3=#{budgetT3},budget_l=#{budgetL},area2=#{area2},
+		move_schedule=#{moveSchedule},room=#{room},direction=#{direction},option=#{option},floor=#{floor},elevator=#{elevator},b_year=#{bYear},context=#{context},security=#{security},b_type=#{bType}
 		where seq_c = #{seqC}
 	</update>
 	<!-- 고객 옵션 수정 -->
-	<update id="ocUpdate" parameterType="modelTO.customerTO">
-		update from option_customer set bed=#{bed},washing_machine=#{washingMachine},desk=#{desk},drying_machine=#{dryingMachine},
+	<update id="ocUpdate" parameterType="modelTO.option_customerTO">
+		update option_customer set bed=#{bed},washing_machine=#{washingMachine},desk=#{desk},drying_machine=#{dryingMachine},
 		induction=#{induction},electric_range=#{electricRange},gas_range=#{gasRange},wordrobe=#{wordrobe},sink=#{sink},
 		shoe_rack=#{shoeRack},refrigerator=#{refrigerator},bath_tube=#{bathTube}
-		where pseq_oc = #{seqC}
+		where pseq_oc = #{pseqOc}
 	</update>
 	<!-- 고객 보안 수정 -->
-	<update id="scUpdate" parameterType="modelTO.customerTO">
-		update from security_customer set security_guard=#{securityGuard},videophone=#{videophone},interphone=#{interphone},
+	<update id="scUpdate" parameterType="modelTO.security_customerTO">
+		update security_customer set security_guard=#{securityGuard},videophone=#{videophone},interphone=#{interphone},
 		card_key=#{cardKey},cctv=#{cctv},door_security=#{doorSecurity},window_guard=#{windowGuard}
-		where pseq_sc = #{seqC}
+		where pseq_sc = #{pseqSc}
 	</update>
-	<insert id="cvdUpdate">
+	<insert id="cvdUpdate" parameterType="modelTO.customer_visit_dateTO">
 	insert into customer_visit_date values(0,#{pseqCvd},#{visitDate})
 	</insert>
 	<!-- 매물 상세보기,수정창 -->
@@ -193,7 +191,7 @@
 	<select id="pfsList" parameterType="modelTO.pfsTO" resultType="modelTO.pfsTO">
 	select seq_pfs seqPfs,b_type bType,contract_type contractType,si,gu,dong,bunji,h_number hNumber,budget1,budget2,budget3,loan,wdate
 	 from property_for_sale
-	 where pseq_pfs = #{pseqPfs}
+	 where pseq_pfs = #{pseqPfs} order by seq_pfs desc
 	</select>
 	
 	

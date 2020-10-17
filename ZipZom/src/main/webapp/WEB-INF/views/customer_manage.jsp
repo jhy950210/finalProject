@@ -56,9 +56,10 @@
            writeServer(params);
         })
         
+        
 
         $("#example2 tbody").on("click","tr",function(){ 	
-			console.log($(this).find('td:eq(0)').text());
+			//console.log($(this).find('td:eq(0)').text());
         	viewServer($(this).find('td:eq(0)').text());
 
         });
@@ -67,7 +68,14 @@
             var params = $('#mcfrm').serialize();
             modifyServer(params);
          })
-        
+		$('#deleteCustomer').on('click', function(){
+			var checkbox = $('input:checkbox[name="selectCustomer"]:checked');
+			var check = new Array();
+			checkbox.each(function(index) {
+				check[index] = checkbox[index].value;
+			})
+			deleteServer(check);
+        })        
 
      });
      // ready 끝
@@ -82,7 +90,7 @@
                $( '#tbody' ).empty();
                $.each( json.data, function( index, item ) {
                   var html = '<tr data-toggle="modal" data-target="#modal-modify" ><th onclick="event.cancelBubble=true"><div class="custom-control custom-checkbox">';
-                  html +=   '<input class="custom-control-input" type="checkbox" id="customCheckbox'+ index+'" value="'+item.seqC+'">'
+                  html +=   '<input class="custom-control-input" type="checkbox" name="selectCustomer" id="customCheckbox'+ index+'" value="'+item.seqC+'">'
                   html += '<label for="customCheckbox'+index+'" class="custom-control-label"></label>';
                   html += '</div></th>';
                   html += '<td>'+ item.seqC +'</td>';
@@ -95,6 +103,7 @@
                   html += '<td>'+ item.visitDate +'</td></tr>';
                   
                   $( '#tbody' ).append( html );
+                  
                });
                //if(flag == 0){
                $('#example2').DataTable({
@@ -149,6 +158,13 @@
                    // json이 json index는 키값 item은 value값
             		//console.log(item)
             		var name = ''+ document.getElementById(index).getAttribute('name');
+                   console.log(index);
+                   if(name == 'rooms') {
+                	   json['room'] = json['room'] + '개';
+                	   $('#mcfrm').find('#room').val(json['room']);
+                	   console.log(name);
+                	   console.log(json['room']);
+                   }
             		$('#mcfrm').find('#'+name).val(json[index]);
             		
             		
@@ -156,7 +172,7 @@
             			$('#mcfrm').find('#'+name).prop("checked", true);
             		}
                   // console.log($('#mcfrm').find('#'+name));
-                   console.log(json[index]);
+                   //console.log(json[index]);
                //	$('#name').val(json.name);
                  });
             },
@@ -186,7 +202,30 @@
             }
          })
         };
-  
+  			// modifyServer 끝
+  			
+  		var deleteServer = function(check) {
+           $.ajax({
+            url: 'customer_delete.json',
+            type: 'get',
+            traditional: true,
+            data:{
+            	check:check
+            	},
+            dataType: 'json',
+            success: function( data ) {
+               if(data.flag == 1) {
+                  $('#example2').DataTable().destroy();
+                  readServer(1);
+               } else {
+                  alert('잘못 입력했습니다')
+               }
+            },
+            error: function( e ) {
+               alert( '서버 에러 ' + e );
+            }
+         })
+        };
         
         
   
@@ -416,7 +455,7 @@
                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-xl" style="width: 100px;">
                신규 등록
                </button>
-               <button type="button" class="btn btn-primary">선택 삭제</button>
+               <button type="button" id="deleteCustomer" class="btn btn-primary">선택 삭제</button>
                
             </div> 
               </div>

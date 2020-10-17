@@ -124,6 +124,8 @@ public class ConfigController {
 
 		if(sqlSession.selectOne("loginSelect", to) != null) {
 			flag = 1;
+			to = sqlSession.selectOne("loginSelect", to);
+			System.out.println("seqU : " +to.getSeqU());
 			session.setAttribute("s_id", to.getId());
 			session.setAttribute("seqU", to.getSeqU());
 		}
@@ -414,7 +416,7 @@ public class ConfigController {
 	@RequestMapping("/customer_list.json")
 	public String customerList(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,HttpSession session) {
 		cto.setPseqC((int)session.getAttribute("seqU"));
-		
+		System.out.println("seqU : " + session.getAttribute("seqU"));
 		ArrayList<customerTO> cList = new ArrayList<customerTO>();
 		cList = (ArrayList<customerTO>)testmapper.customerList(cto);
 		request.setAttribute("cList", cList);
@@ -423,7 +425,7 @@ public class ConfigController {
 	
 	// 고객 수정페이지
 		@RequestMapping("/customer_modify.json")
-		public String customermodify(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,HttpSession session,option_customerTO octo,customer_visit_dateTO cvdto,security_customerTO scto) {
+		public String customermodify(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,option_customerTO octo,customer_visit_dateTO cvdto,security_customerTO scto) {
 			int flag = 0;
 			//cto.setSeqC(Integer.parseInt(request.getParameter("seqC")));
 			if(request.getParameter("rooms") != null) {
@@ -433,23 +435,42 @@ public class ConfigController {
 			flag = (int)testmapper.customerUpdate(cto);
 			if(flag == 1) {
 			octo.setPseqOc(cto.getSeqC());
-			testmapper.ocUpdate(cto);
+			testmapper.ocUpdate(octo);
 			cvdto.setPseqCvd(cto.getSeqC());
-			testmapper.customerVisitDate(cvdto);
+			testmapper.cvdUpdate(cvdto);
 			scto.setPseqSc(cto.getSeqC());
-			testmapper.securityCustomer(scto);
+			testmapper.scUpdate(scto);
 			}
 			
 			
 			request.setAttribute("flag", flag);
-			return "flag_json";
+			return "data/flag_json";
 		}
 	
 	// 고객 삭제
 	@RequestMapping("/customer_delete.json")
-	public String customerDelete(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
+	public String customerDelete(HttpServletRequest request,HttpServletResponse response,Model model,int[] check) {
+		int flag = 0;
+		for(int i=0;i<check.length;i++) {
+			customerTO cto = new customerTO();
+			cto.setSeqC(check[i]);
 		
-		return "data/customer_delete";
+		flag = (int)testmapper.customerDelete(cto);
+		if(flag == 1) {
+		option_customerTO octo = new option_customerTO();
+		octo.setPseqOc(cto.getSeqC());
+		testmapper.ocDelete(octo);
+		customer_visit_dateTO cvdto = new customer_visit_dateTO();
+		cvdto.setPseqCvd(cto.getSeqC());
+		testmapper.cvdDelete(cvdto);
+		security_customerTO scto = new security_customerTO();
+		scto.setPseqSc(cto.getSeqC());
+		testmapper.scDelete(scto);
+		}
+		}
+		
+		request.setAttribute("flag", flag);
+		return "data/flag_json";
 	}
 	
 	// 고객 정보 수정

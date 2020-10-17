@@ -20,8 +20,13 @@ public interface TestMapper {
 	public abstract ArrayList<customerTO> customerList(customerTO cto);
 	public abstract ArrayList<CustomerAllTO> customerView(customerTO cto);
 	public abstract int customerUpdate(customerTO cto);
-	public abstract int ocUpdate(customerTO cto);
-	public abstract int scUpdate(customerTO cto);
+	public abstract int ocUpdate(option_customerTO octo);
+	public abstract int cvdUpdate(customer_visit_dateTO cvdto);
+	public abstract int scUpdate(security_customerTO scto);
+	public abstract int customerDelete(customerTO cto);
+	public abstract int ocDelete(option_customerTO octo);
+	public abstract int cvdDelete(customer_visit_dateTO cvdto);
+	public abstract int scDelete(security_customerTO scto);
 	public abstract ArrayList<pfsTO> pfsList(pfsTO pto);
 	public abstract int pfsWrite(pfsTO pto);
 	public abstract int pfsOption(option_pfsTO opto);

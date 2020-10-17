@@ -21,7 +21,7 @@
 		<div class="modal-content">
 			<!-- modal 헤더 -->
 			<div class="modal-header">
-				<h4 class="modal-title">고객 신규 등록</h4>
+				<h4 class="modal-title">고객 수정</h4>
 	              
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	                <span aria-hidden="true">&times;</span>
@@ -411,7 +411,7 @@
 					<!-- 닫기 / 등록 버튼 -->	              
 					<div class="modal-footer justify-content-between">
 						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-						<button type="button" id="customerModify" class="btn btn-primary" data-dismiss="modal">등록</button>
+						<button type="button" id="customerModify" class="btn btn-primary" data-dismiss="modal">수정</button>
 					</div>              
 	            </div>
        			</form>
