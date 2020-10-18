@@ -1,5 +1,6 @@
 package com.exam.ZipZom;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import modelDAO.MailSender;
 import modelDAO.encryption;
 import modelTO.auth_passwordTO;
+import modelTO.pfsTO;
 import modelTO.scheduleTO;
 import modelTO.userTO;
 
@@ -544,29 +546,66 @@ public class ConfigController {
 		
 		return modelAndView;
 	}
-	
+
 	// 일정관리에서 일정을 삭제 한 경우
 	@RequestMapping(value = "/deleteSchedule.action")
 	public ModelAndView deleteScheduleRequest(HttpServletRequest request) {
 
 		scheduleTO to = new scheduleTO();
-		
+
 //		int seqS = Integer.parseInt(request.getParameter("seqS"));
 //		
 //		to.setSeqS(seqS);
-		
+
 		to.setSeqS(2);
-		
+
 		int flag = 0;
-		
+
 		flag = sqlSession.delete("scheduleDelete", to);
-		
+
 		request.setAttribute("flag", flag);
-		
+
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("data/flag_json");
 		modelAndView.addObject("list", request);
-		
+
+		return modelAndView;
+	}
+
+	// 매물을 선택하고 매물비교 버튼을 누른 경우
+	@RequestMapping(value = "/pfsCompare.action")
+	public ModelAndView pfsCompareRequest(HttpServletRequest request) {
+
+		pfsTO to = new pfsTO();
+
+		ArrayList<pfsTO> listTO = new ArrayList<pfsTO>();
+
+//		int seqPfs1 = Integer.parseInt(request.getParameter("seqPfs1"));
+//		int seqPfs2 = Integer.parseInt(request.getParameter("seqPfs2"));
+		int seqPfs1 = 1;
+		int seqPfs2 = 1;
+
+		to.setSeqPfs(seqPfs1);
+		to = sqlSession.selectOne("pfsCompareSelect", to);
+		listTO.add(to);
+		to.setSeqPfs(seqPfs2);
+		to = sqlSession.selectOne("pfsCompareSelect", to);
+		listTO.add(to);
+
+		if(request.getParameter("seqPfs3") != null) {
+//			int seqPfs3 = Integer.parseInt(request.getParameter("seqPfs3"));
+			int seqPfs3 = 1;
+			to.setSeqPfs(seqPfs3);
+			to = sqlSession.selectOne("pfsCompareSelect", to);
+			listTO.add(to);
+		}
+
+		request.setAttribute("lists", listTO);
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("data/pfsCompare_json");
+		modelAndView.addObject("list", request);
+
 		return modelAndView;
 	}
 }

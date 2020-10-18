@@ -15,7 +15,7 @@
 //	response.sendRedirect( "./sendNumber.do" );
 // 	response.sendRedirect( "./viewSchedule.action" );
 // 	response.sendRedirect( "./viewPropertySchedule.action" );
-	response.sendRedirect( "./adminView.action" );
+	response.sendRedirect( "./pfsCompare.action" );
 
 %>
 </body>

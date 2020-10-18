@@ -175,4 +175,48 @@
 		TEL2 as tel2
 		from user
 	</select>
+	<!-- 매물비교 select sql문 -->
+	<select id="pfsCompareSelect" parameterType="modelTO.pfsTO" resultType="modelTO.pfsTO">
+		select SEQ_PFS as seqPfs,
+		PSEQ_PFS as pseqPfs,
+		IMAGES as images,
+		B_TYPE as bType,
+		SI as si,
+		GU as gu,
+		DONG as dong,
+		BUNJI as bunji,
+		H_NUMBER as hNumber,
+		CONTRACT_TYPE as contractType,
+		BUDGET1 as budget1,
+		BUDGET2 as budget2,
+		BUDGET3 as budget3,
+		M_COST as mCost,
+		LOAN as loan,
+		AREA1 as area1,
+		AREA2 as area2,
+		AREA3 as area3,
+		MOVE_SCHEDULE as moveSchedule,
+		ENDOF_LEASE as endOfLease,
+		ROOM room,
+		BATHROOM bathroom,
+		DIRECTION direction,
+		HEATING_SYSTEM heatingSystem,
+		AIRCONDITION aircondition,
+		OPTION option,
+		NUMBER_OF_HOUSEHOLD numberOfHousehold,
+		PARKING parking,
+		FLOOR floor,
+		FLOOR_TOTAL floorTotal,
+		ELEVATOR elevator,
+		B_YEAR bYear,
+		CONTEXT context,
+		SECURITY security,
+		LESSOR_NAME lessorName,
+		LESSOR_TEL lessorTel,
+		LESSEE_NAME lesseeName,
+		LESSEE_TEL lesseeTel,
+		WDATE wdate
+		from property_for_sale
+		where SEQ_PFS=${seqPfs}
+	</select>
 </mapper>

@@ -10,16 +10,13 @@ public class pfsTO {
 	private String gu;
 	private String dong;
 	private String bunji;
-	private int hNumber;
+	private String hNumber;
 	private String contractType;
 	private int budget1;
 	private int budget2;
 	private int budget3;
-	private int budget4;
-	private int budget5;
-	private int budget6;
 	private int mCost;
-	private int loan;
+	private String loan;
 	private int area1;
 	private int area2;
 	private int area3;
@@ -35,7 +32,7 @@ public class pfsTO {
 	private int parking;
 	private int floor;
 	private int floorTotal;
-	private boolean elevator;
+	private String elevator;
 	private String bYear;
 	private String context;
 	private boolean security;
@@ -43,6 +40,7 @@ public class pfsTO {
 	private String lessorTel;
 	private String lesseeName;
 	private String lesseeTel;
+	private String wdate;
 	
 	public int getSeqPfs() {
 		return seqPfs;
@@ -92,10 +90,10 @@ public class pfsTO {
 	public void setBunji(String bunji) {
 		this.bunji = bunji;
 	}
-	public int gethNumber() {
+	public String gethNumber() {
 		return hNumber;
 	}
-	public void sethNumber(int hNumber) {
+	public void sethNumber(String hNumber) {
 		this.hNumber = hNumber;
 	}
 	public String getContractType() {
@@ -122,34 +120,16 @@ public class pfsTO {
 	public void setBudget3(int budget3) {
 		this.budget3 = budget3;
 	}
-	public int getBudget4() {
-		return budget4;
-	}
-	public void setBudget4(int budget4) {
-		this.budget4 = budget4;
-	}
-	public int getBudget5() {
-		return budget5;
-	}
-	public void setBudget5(int budget5) {
-		this.budget5 = budget5;
-	}
-	public int getBudget6() {
-		return budget6;
-	}
-	public void setBudget6(int budget6) {
-		this.budget6 = budget6;
-	}
 	public int getmCost() {
 		return mCost;
 	}
 	public void setmCost(int mCost) {
 		this.mCost = mCost;
 	}
-	public int getLoan() {
+	public String getLoan() {
 		return loan;
 	}
-	public void setLoan(int loan) {
+	public void setLoan(String loan) {
 		this.loan = loan;
 	}
 	public int getArea1() {
@@ -242,10 +222,10 @@ public class pfsTO {
 	public void setFloorTotal(int floorTotal) {
 		this.floorTotal = floorTotal;
 	}
-	public boolean isElevator() {
+	public String getElevator() {
 		return elevator;
 	}
-	public void setElevator(boolean elevator) {
+	public void setElevator(String elevator) {
 		this.elevator = elevator;
 	}
 	public String getbYear() {
@@ -290,6 +270,13 @@ public class pfsTO {
 	public void setLesseeTel(String lesseeTel) {
 		this.lesseeTel = lesseeTel;
 	}
+	public String getWdate() {
+		return wdate;
+	}
+	public void setWdate(String wdate) {
+		this.wdate = wdate;
+	}
+	
 	
 	
 }

@@ -15,7 +15,6 @@
 	for(scheduleTO to : lists) {
 		int seqS = to.getSeqS();
 		int pseqS = to.getPseqS();
-		int cseq = to.getCseq();
 		String date = to.getDate();
 		String context = to.getContext();
 		String scheduleType = to.getScheduleType();
@@ -27,7 +26,6 @@
 
 		obj.put("seqS", seqS);
 		obj.put("pseqS", pseqS);
-		obj.put("cseq", cseq);
 		obj.put("date", date);
 		obj.put("context", context);
 		obj.put("scheduleType", scheduleType);
