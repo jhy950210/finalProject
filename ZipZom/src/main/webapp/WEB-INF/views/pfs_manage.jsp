@@ -70,23 +70,24 @@
 			})
 			deleteServer(check);
        })        
-      /*  $('#pfsCompare').on('click', function(){
+       $('#pfsCompare').on('click', function() {
 			var checkbox = $('input:checkbox[name="selectPfs"]:checked');
 			var check = new Array();
 			checkbox.each(function(index) {
 				check[index] = checkbox[index].value;
+				console.log(index);
 			})
-			if(check[2] == null && check[1] != null) {
-				location.href = './pfs_compare.do?seqPfs='+check[1];
+			if(check[1] == null && check[0] != null) {
+				alert('2개 이상 선택해주세요');
 			}
-			else if(check[3] == null && check[2] != null){
-				location.href = './pfs_compare.do?seqPfs='+check[1]+'&seqPfs='check[2];
-			} else if(check[3] != null) {
-				location.href = './pfs_compare.do?seqPfs='+check[1]+'&seqPfs='check[2]+'&seqPfs='check[3]
+			else if(check[2] == null && check[1] != null){
+				location.href = './pfs_compare.do?seqPfs='+check[0]+'&seqPfs='+check[1];
+			} else if(check[2] != null) {
+				location.href = './pfs_compare.do?seqPfs='+check[0]+'&seqPfs='+check[1]+'&seqPfs='+check[2]
 			} else {
 				alert('3개까지 선택 가능합니다.');
 			}
-      })  */ 
+      }) 
 	
 
    });
@@ -499,7 +500,7 @@
   <!-- /.content-wrapper -->
 
 <!-- footer include -->
-<jsp:include page = "./footer.jsp" flush = "false"/>
+<%-- <jsp:include page = "./footer.jsp" flush = "false"/> --%>
 
 
   <!-- Control Sidebar -->

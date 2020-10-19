@@ -8,135 +8,144 @@
   <title>Zipzom - Realtor</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="./resources/plugins/fontawesome-free/css/all.min.css">
+<!-- jQuery -->
+<script src="./resources/plugins/jquery/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="./resources/plugins/fontawesome-free/css/all.min.css">
+<!-- 폰트 테스트 -->
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<!-- jQuery UI -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="./resources/css/adminlte.min.css">
+<!-- Google Font: Source Sans Pro -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<!-- Select2 -->
+<link rel="stylesheet" href="./resources/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="./resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+<!-- datepicker -->
+<link rel="stylesheet" href="./resources/plugins//jquery-ui/jquery-ui.css">
+<!-- daterange picker -->
+<link rel="stylesheet" href="./resources/plugins/daterangepicker/daterangepicker.css">
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="./resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- Bootstrap Color Picker -->
+<link rel="stylesheet" href="./resources/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+<!-- Tempusdominus Bbootstrap 4 -->
+<link rel="stylesheet" href="./resources/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<!-- Bootstrap4 Duallistbox -->
+<link rel="stylesheet" href="./resources/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="./resources/css/adminlte.min.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="./resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="./resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 
+<style>
+.w3-sidebar a {font-family: "Roboto", sans-serif}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+
+.w3-content {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.w3-content::after {
+  width: 100%;
+  height: 100%;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+
+</style>
 </head>
 
-<body class="hold-transition sidebar-mini">
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="./resources/index3.html" class="brand-link">
-      <img src="./resources/img/zipzom_logo.png"
-           alt="AdminLTE Logo"
-           class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">ZipZom</span>
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
+  <div class="w3-container w3-display-container w3-padding-16">
+    <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+    <h3 class="w3-wide"><b>ZipZom</b></h3>
+  </div>
+  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+    <a href="./newDashboard.jsp" class="w3-bar-item w3-button">Home</a>
+    <a href="./intro_website.jsp" class="w3-bar-item w3-button">About</a>
+    <a href="./customer_manage.do" class="w3-bar-item w3-button">고객관리</a>
+    
+    <a onclick="myAccFunc1()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn1">
+      매물관리 <i class="fa fa-caret-down"></i>
     </a>
-    <!-- Sidebar -->
-    <div class="sidebar">
-		<!-- Sidebar Menu -->
-		<nav class="mt-2">
-			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-			<!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-			<li class="nav-item has-treeview">
-				<a href="#" class="nav-link">
-					<i class="nav-icon fas fa-tachometer-alt"></i>
-					<p>
-	                사이트 소개
-	                
-	                <i class="right fas fa-angle-left"></i>
-					</p>
-	            </a>
-            	<ul class="nav nav-treeview">
-					<li class="nav-item">
-						<a href="./intro_website.jsp" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>사이트 소개</p>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="./board_notice.jsp" class="nav-link">
-						<!-- 공지사항이나 업데이트에 새로운 글이 등록되면 옆에 숫자뜸 -->
-						<span class="badge badge-info right">1</span>
-						<i class="far fa-circle nav-icon"></i>
-						<p>공지사항</p>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="./resources/index3.html" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>업데이트</p>
-						</a>
-					</li>
-				</ul>
-			</li>
-          
-			<li class="nav-item has-treeview">
-				<a href="./customer_manage.do" class="nav-link">
-					<i class="nav-icon fas fa-copy"></i>
-					<p>
-					고객 관리
-					<i class="fas fa-angle-left right"></i>
-					</p>
-				</a>
-            
-			</li>
-			<li class="nav-item has-treeview">
-				<a href="#" class="nav-link">
-					<i class="nav-icon fas fa-chart-pie"></i>
-					<p>
-                	고객 상담
-					<i class="right fas fa-angle-left"></i>
-					</p>
-				</a>
-				<ul class="nav nav-treeview">
-					<li class="nav-item">
-						<a href="../charts/chartjs.html" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>매물 시세</p>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="../charts/flot.html" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>맞춤 매물</p>
-        		        </a>
-              		</li>
-					<li class="nav-item">
-						<a href="../charts/inline.html" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>상담 보고서</p>
-						</a>
-					</li>
-				</ul>
-			</li>
-			<li class="nav-item has-treeview">
-				<a href="#" class="nav-link">
-					<i class="nav-icon fas fa-tree"></i>
-              		<p>
-                	매물 관리
-                	<i class="fas fa-angle-left right"></i>
-              		</p>
-            	</a>
-				<ul class="nav nav-treeview">
-					<li class="nav-item">
-						<a href="./pfs_manage.do" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>등록 매물 관리</p>
-						</a>
-					</li>
-					<li class="nav-item">
-                		<a href="./pfs_compare.do" class="nav-link">
-            	      	<i class="far fa-circle nav-icon"></i>
-						<p>매물 비교</p>
-             	   		</a>
-              		</li>
-             
-            	</ul>
-          </li>
-          
-	          <li class="nav-item">
-					<a href="./resources/html/calendar.html" class="nav-link">
-					<i class="nav-icon far fa-calendar-alt"></i>
-					<p>일정 관리
-	                <!-- 오늘의 일정 갯수가 옆에 뜸 -->
-	                <span class="badge badge-info right">2</span>
-					</p>
-					</a>
-	          </li>          
-			</ul>
-      	</nav>
-      	<!-- /.sidebar-menu -->
+    <div id="demoAcc1" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+      <a href="./pfs_manage.do" class="w3-bar-item w3-button">등록매물관리</a>
+      <a href="./pfs_compare2.do" class="w3-bar-item w3-button">매물비교</a>
     </div>
-</aside>
+    
+    <a onclick="myAccFunc2()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn2">
+      고객상담 <i class="fa fa-caret-down"></i>
+    </a>
+    <div id="demoAcc2" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+      <a href="./consulting_rtp.do" class="w3-bar-item w3-button">매물 시세</a>
+      <a href="./consulting_map.do" class="w3-bar-item w3-button">매물 위치</a>
+      <a href="./final_report.jsp" class="w3-bar-item w3-button w3-light-grey" <i class="fa fa-caret-right w3-margin-right"></i>>상담보고서</a> 
+    </div>
+    <a href="#" class="w3-bar-item w3-button">일정관리</a>
+
+  </div>
+
+</nav>
+
+<script>
+// Accordion 
+function myAccFunc1() {
+  var x = document.getElementById("demoAcc1");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+function myAccFunc2() {
+  var x = document.getElementById("demoAcc2");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+// Click on the "Jeans" link on page load to open the accordion for demo purposes
+document.getElementById("myBtn1").click();
+document.getElementById("myBtn2").click();
+
+
+// Open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
 </body>
 </html>

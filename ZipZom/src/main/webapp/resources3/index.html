@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Daily UI - Day 1 Sign In</title>
+
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="top">
+			<h1 style="width: 400px;" id="title" class="hidden"><span id="logo">Zip<span>Zom</span></span></h1>
+		</div>
+		<div class="login-box animated fadeInUp">
+			<div class="box-header">
+				<h2>Log In</h2>
+			</div>
+			<label for="username">Userid</label>
+			<br/>
+			<input type="text" id="id" name="id">
+			<br/>
+			<label for="password">Password</label>
+			<br/>
+			<input type="password" id="password" name="password">
+			<br/>
+			<button type="submit" id="btn">Sign In</button>
+			<br/>
+			<a href="./forgot_id.action"><p class="small">아이디 찾기</p></a>
+			
+			<a href="./forgot_password.action"><p class="small">비밀번호 찾기?</p></a>
+			
+			<a href="./register.action"><p class="small">회원가입</p></a>
+		</div>
+	</div>
+</body>
+
+<script>
+	$(document).ready(function () {
+    	$('#logo').addClass('animated fadeInDown');
+    	$("input:text:visible:first").focus();
+    	
+    	$("#btn").button().on('click', function() {
+    		var id = $('#id').val();
+    		var password = $('#password').val();
+    		console.log(id);
+    		console.log(password);
+    		loginOk(id, password);
+    	});
+    	
+    	var loginOk = function( id, password ){
+    		$.ajax({
+    			url: './login.action',
+    			data: {
+    				id: id,
+    				password: password
+    			},
+    			type: 'post',
+    			datatype: 'json',
+    			success: function( json ) {
+    				if( json.flag == 1 ){
+    					alert('성공');
+    					location.href = './newDashboard.do';
+    				} else {
+    					alert("아이디/패스워드 오류");
+    					//location.href = './newDashboard.jsp';
+    				}
+    				
+    			}
+    		}); 
+    	}
+	});
+	$('#username').focus(function() {
+		$('label[for="username"]').addClass('selected');
+	});
+	$('#username').blur(function() {
+		$('label[for="username"]').removeClass('selected');
+	});
+	$('#password').focus(function() {
+		$('label[for="password"]').addClass('selected');
+	});
+	$('#password').blur(function() {
+		$('label[for="password"]').removeClass('selected');
+	});
+</script>
+
+</html>

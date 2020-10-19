@@ -2,6 +2,8 @@ package com.exam.ZipZom;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -372,6 +374,84 @@ public class ConfigController {
 			return modelAndView;
 		}
 	
+	// 로그아웃 버튼을 누른 경우
+	@RequestMapping(value = "/logout.action")
+	public ModelAndView logoutRequest(HttpServletRequest request) {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("logout");
+		
+		return modelAndView;
+	}
+	
+	// 회원탈퇴 버튼을 누른 경우
+	@RequestMapping(value = "/signOut.action")
+	public ModelAndView signOutRequest(HttpServletRequest request) {
+
+		userTO to = new userTO();
+		encryption enc = new encryption();
+		
+//		int seqU = Integer.parseInt(request.getParameter("seqU"));
+//		String password = enc.encryptionMain(request.getParameter("password"));
+		
+//		to.setSeqU(seqU);
+//		to.setPassword(password);
+		
+		to.setSeqU(1);
+		to.setPassword("123");
+		
+		int flag = 0;
+		
+		flag = sqlSession.delete("userDelete", to);
+		
+		request.setAttribute("flag", flag);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("data/flag_json");
+		modelAndView.addObject("list", request);
+		
+		return modelAndView;
+	}
+	
+	// 회원탈퇴를 시킨 경우
+	@RequestMapping(value = "/signOutAdmin.action")
+	public ModelAndView signOutAdminRequest(HttpServletRequest request) {
+
+		userTO to = new userTO();
+		
+//		int seqU = Integer.parseInt(request.getParameter("seqU"));
+//	
+//		to.setSeqU(seqU);
+		
+		to.setSeqU(1);
+		
+		int flag = 0;
+		
+		flag = sqlSession.delete("userAdminDelete", to);
+		
+		request.setAttribute("flag", flag);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("data/flag_json");
+		modelAndView.addObject("list", request);
+		
+		return modelAndView;
+	}
+	
+	// 관리자 회원관리 view 페이지
+	@RequestMapping(value = "/adminView.action")
+	public ModelAndView adminViewRequest(HttpServletRequest request) {
+		
+		List<userTO> listTO = sqlSession.selectList("userAdminSelect");
+		
+		request.setAttribute("lists", listTO);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("data/user_json");
+		modelAndView.addObject("list", request);
+		
+		return modelAndView;
+	}
 	// 고객 관리 페이지
 	@RequestMapping("/customer_manage.do")
 	public String customerManage(HttpServletRequest request, HttpServletResponse response,Model model) {
@@ -383,7 +463,7 @@ public class ConfigController {
 	@RequestMapping("/customer_write.json")
 	public String customerWrite(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,option_customerTO octo,customer_visit_dateTO cvdto,security_customerTO scto,HttpSession session) {
 		int flag = 0;
-		cto.setPseqC((int)session.getAttribute("seqU"));
+		cto.setPseqC((Integer)session.getAttribute("seqU"));
 		if(request.getParameter("rooms") != null) {
 		cto.setRoom(Integer.parseInt(request.getParameter("rooms").substring(0,1)));
 		}
@@ -416,7 +496,7 @@ public class ConfigController {
 	//고객 리스트
 	@RequestMapping("/customer_list.json")
 	public String customerList(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,HttpSession session) {
-		cto.setPseqC((int)session.getAttribute("seqU"));
+		cto.setPseqC((Integer)session.getAttribute("seqU"));
 		System.out.println("seqU : " + session.getAttribute("seqU"));
 		ArrayList<customerTO> cList = new ArrayList<customerTO>();
 		cList = (ArrayList<customerTO>)testmapper.customerList(cto);
@@ -493,7 +573,7 @@ public class ConfigController {
 	// 매물 리스트
 	@RequestMapping("/pfs_list.json")
 	public String pfsList(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session,pfsTO pto) {
-	pto.setPseqPfs((int)session.getAttribute("seqU"));
+	pto.setPseqPfs((Integer)session.getAttribute("seqU"));
 	ArrayList<pfsTO> pfsList = (ArrayList<pfsTO>)testmapper.pfsList(pto);
 	request.setAttribute("pfsList", pfsList);
 	return "data/pfs_list";
@@ -504,7 +584,7 @@ public class ConfigController {
 	@RequestMapping("/pfs_write.json")
 	public String writepfs(HttpServletRequest request, HttpServletResponse response,Model model,pfsTO pto,HttpSession session,option_pfsTO opto,security_pfsTO spto) {
 		int flag = 0;
-		pto.setPseqPfs((int)session.getAttribute("seqU"));
+		pto.setPseqPfs((Integer)session.getAttribute("seqU"));
 		
 		String[] addr = request.getParameter("jibunAddr").split(" ");
 		pto.setSi(addr[0]);
@@ -531,7 +611,17 @@ public class ConfigController {
 		request.setAttribute("flag",flag);
 	return "data/flag_json";
 }
+	@RequestMapping("/consulting_rtp.do")
+	public String rtpSearch(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
+
+		return "consulting_rtp";
+	}
 	
+	@RequestMapping("/consulting_map.do")
+	public String rtpMap(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
+
+		return "consulting_map";
+	}
 	
 	// 매물 비교 페이지
 	@RequestMapping("/pfs_compare.do")
@@ -549,15 +639,32 @@ public class ConfigController {
 		 }
 
 		
-		request.setAttribute("pcList",pcList);
 		 }
+		request.setAttribute("pcList",pcList);
 		return "pfs_compare";
 	}
 	
-	@RequestMapping("/pfs_compare.json")
+	@RequestMapping("/pfs_compareList.json")
+	public String pfsCompare2(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session) {
+			pfsTO pto = new pfsTO();
+			pto.setPseqPfs((Integer)session.getAttribute("seqU"));
+			
+			ArrayList<pfsTO> pfsList = (ArrayList<pfsTO>)testmapper.pfsList(pto);
+			request.setAttribute("pfsList", pfsList);
+		return "data/pfs_list";
+	}
+	
+	@RequestMapping("/pfs_compareAdd.json")
+	public String pfsCompareView(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session) {
+		pfsTO pto = new pfsTO();
+		pto.setSeqPfs(Integer.parseInt(request.getParameter("")));
+			
+		return "data/pfs_list";
+	}
+	
+	@RequestMapping("/pfs_compare2.do")
 	public String pfsCompareJson(HttpServletRequest request, HttpServletResponse response,Model model) {
-
-		return "data/pfs_compare";
+		return "pfs_compare2";
 	}
 	
 	@RequestMapping("/pfs_view.json")

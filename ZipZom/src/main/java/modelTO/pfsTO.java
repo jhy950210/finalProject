@@ -35,7 +35,7 @@ public class pfsTO {
 	private int parking;
 	private int floor;
 	private int floorTotal;
-	private String elevator;
+	private int elevator;
 	private String bYear;
 	private String context;
 	private int security;
@@ -129,10 +129,10 @@ public class pfsTO {
 	public void setLoan(String loan) {
 		this.loan = loan;
 	}
-	public String getElevator() {
+	public int getElevator() {
 		return elevator;
 	}
-	public void setElevator(String elevator) {
+	public void setElevator(int elevator) {
 		this.elevator = elevator;
 	}
 	public String getWdate() {

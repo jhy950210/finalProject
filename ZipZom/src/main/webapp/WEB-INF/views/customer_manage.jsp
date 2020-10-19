@@ -479,7 +479,7 @@
   <!-- /.content-wrapper -->
 </section>
   <!-- footer include -->
-<jsp:include page = "./footer.jsp" flush = "false"/>
+<%-- <jsp:include page = "./footer.jsp" flush = "false"/> --%>
 
 
   <!-- Control Sidebar -->

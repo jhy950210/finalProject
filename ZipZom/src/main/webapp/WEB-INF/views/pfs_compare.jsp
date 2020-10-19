@@ -3,17 +3,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	/* request.setCharacterEncoding("utf-8");
-	if(request.getAttribute("paList") != null) {
-	ArrayList<pfsTO> pcList = (ArrayList<pfsTO>)request.getAttribute("paList");
+	 request.setCharacterEncoding("utf-8");
 	StringBuffer addressess = new StringBuffer();
 	StringBuffer contract = new StringBuffer();
 	StringBuffer area = new StringBuffer();
+	StringBuffer budget = new StringBuffer();
 	StringBuffer option = new StringBuffer();
-	for(pfsTO pto : pcList) {
-		int i=0;
-		String address = pto.getSi() + " " + pto.getGu() + " " + pto.getDong() + " " + pto.getBunji() + " " + pto.gethNumber();
+	StringBuffer memo = new StringBuffer();
+	if(request.getAttribute("pcList") != null) {
+	ArrayList<pfsTO> pcList = (ArrayList<pfsTO>)request.getAttribute("pcList");
 
+	for(pfsTO pto : pcList) {
+		String address = pto.getSi() + " " + pto.getGu() + " " + pto.getDong() + " " + pto.getBunji() + " " + pto.gethNumber();
+		int seqPfs = pto.getSeqPfs();
 		String contractType = pto.getContractType();
 		int budget1 = pto.getBudget1();
 		int budget2 = pto.getBudget2();
@@ -22,9 +24,11 @@
 		int area2 = pto.getArea2();
 		int area3 = pto.getArea3();
 		int room = pto.getRoom();
+		String direction = pto.getDirection();
 		int bathroom = pto.getBathroom();
 		int numberOfHousehold = pto.getNumberOfHousehold();
 		String heatingSystem = pto.getHeatingSystem();
+		String context = pto.getContext();
 		String parking = "";
 		if(pto.getParking() == 1){
 			parking = "가능";
@@ -33,12 +37,12 @@
 		}
 		String bYear = pto.getbYear();
 		String elevator = "";
-		if(pto.getElevator().equals("1")) {
+		if(pto.getElevator() == 1) {
 			elevator = "있음";
 		} else{
 			elevator = "없음";
 		}
-		
+		System.out.println("주소 : "+address);
 		
 		addressess.append("<td class='cell'>");
 		addressess.append(address);
@@ -47,6 +51,10 @@
 		contract.append("<td class='cell'>");
 		contract.append(contractType);
 		contract.append("</td>");
+		
+		budget.append("<td class=cell'>");
+		budget.append("매매가 : " + budget1 + "만 보증금 : " + budget2 + "만 월세 : " + budget3 + "만");
+		budget.append("</td>            ");
 		
 		area.append("<td class='cell'>");
 		area.append("<section>");
@@ -70,35 +78,39 @@
 	
 		option.append("<td class='cell'>                                                 ");
 		option.append("<div class='input-group mb-3'>                                    ");
-		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>방개수</span>"); 
+		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>방개수 : "+room+"개</span>"); 
 		option.append("</div>                                                            ");
 		option.append("<div class='input-group mb-3'>                                    ");
-		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>욕실수</span>"); 
+		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>욕실수 : "+bathroom+"개</span>"); 
 		option.append("</div>                                                            ");
 		option.append("<div class='input-group mb-3'>                                    ");
-		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>세대수</span>"); 
+		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>세대수 : "+numberOfHousehold+"</span>"); 
 		option.append("</div>                                                            ");
 		option.append("<div class='input-group mb-3'>                                    ");
-		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>향</span>    ");
+		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>향 : "+direction+"</span>    ");
 		option.append("</div>                                                            ");
 		option.append("<div class='input-group mb-3'>                                    ");
-		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>난방방식</span>");
+		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>난방방식 : "+heatingSystem+"</span>");
 		option.append("</div>                                                            ");
 		option.append("<div class='input-group mb-3'>                                    ");
-		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>주차유무</span>"); 
+		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>주차유무 : "+parking+"</span>"); 
 		option.append("</div>                                                            ");
 		option.append("<div class='input-group mb-3'>                                    ");
-		option.append("<span style='margin-right: 10px; margin-top: 10px;'>건축년도</span>"); 
+		option.append("<span style='margin-right: 10px; margin-top: 10px;'>건축년도 : "+bYear+"년</span>"); 
 		option.append("</div>");
 		option.append("<div class='input-group mb-3'>");
-		option.append("<span style='margin-right: 10px; margin-top: 10px;'>승강기</span>"); 
+		option.append("<span style='margin-right: 10px; margin-top: 10px;'>승강기 : "+elevator +"</span>"); 
 		option.append("</div>");
 		option.append("</td>");
-	
+		
+		
+		memo.append("<td class='cell'>");
+		memo.append(context);
+		memo.append("</td>");
 	
 	
 	}
-	} */
+	} 
 
 %>
 <!DOCTYPE html>
@@ -124,9 +136,9 @@
   <link rel="stylesheet" href="./resources/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="./resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- daterange picker -->
-  <link rel="stylesheet" href="./resources/plugins/daterangepicker/daterangepicker.css">
+  <!-- <link rel="stylesheet" href="./resources/plugins/daterangepicker/daterangepicker.css"> -->
   <!-- datepicker -->
-  <link rel="stylesheet" href="./resources/plugins/datepicker/css/datepicker.css">
+  <!-- <link rel="stylesheet" href="./resources/plugins/datepicker/css/datepicker.css"> -->
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="./resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css?after">
   <!-- Bootstrap Color Picker -->
@@ -138,8 +150,8 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="./resources/css/adminlte.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="./resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="./resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<!--   <link rel="stylesheet" href="./resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="./resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"> -->
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -245,7 +257,8 @@
 					<!-- 주소 선택 -->
 					<tr class="top">
 						<th class="cell head">주소</th>
-						<td class="cell">
+						<%=addressess %>
+<!-- 						<td class="cell">
 							<select class="form-control" id="" name="" >
 							<option value="none">매물 선택</option>
 						</td>
@@ -256,13 +269,14 @@
 						<td class="cell">
 							<select class="form-control" id="" name="" >
 							<option value="none">매물 선택 </option>
-						</td>
+						</td> -->
 					</tr>
 					
 					<!-- 거래 유형 출력 -->
 					<tr>
 						<th class="cell head">거래유형</th>
-						<td class="cell">
+						<%out.println(contract); %>
+<!-- 						<td class="cell">
 						-
 						</td>
 						<td class="cell">
@@ -270,13 +284,14 @@
 						</td>
 						<td class="cell">
 						-
-						</td>
+						</td> -->
 					</tr>
 					
 					<!-- 거래 가격 출력 -->
 					<tr>
 						<th class="cell head">거래가격</th>
-						<td class="cell">
+						<%out.println(budget); %>
+ 						<!-- <td class="cell">
 						-
 						</td>
 						<td class="cell">
@@ -284,14 +299,16 @@
 						</td>
 						<td class="cell">
 						-
-						</td>
+						</td> -->
 					</tr>
 					
 					<!-- 면적 정보 출력 -->
 					<tr>
 						<th class="cell head">면적정보</th>
-						<td class="cell">
+						<%out.println(area); %>
+						<!-- <td class="cell">
 							<section>
+							
 								<div class="input-group mb-3">
 									<span style="margin-right: 10px; margin-top: 10px;">공급면적</span> 
 									<input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;">
@@ -369,14 +386,15 @@
 									</div>
 								</div>
 							</section>
-						</td>
+						</td> -->
 					</tr>
 					
 					
 					<!-- 상세 정보 출력 -->
 					<tr>
 						<th class="cell head">상세정보</th>
-						<td class="cell">
+						<%out.println(option); %>
+<!-- 						<td class="cell">
 							<div class="input-group mb-3">
 								<span style="margin-right: 10px; margin-top: 10px;">방개수</span> 
 							</div>
@@ -453,14 +471,14 @@
 							<div class="input-group mb-3">
 								<span style="margin-right: 10px; margin-top: 10px;">승강기</span> 
 							</div>
-						</td>
+						</td> -->
 					</tr>
 					
 					
 					<!-- 메모 출력 -->
 					<tr>
-						<th class="cell head">메 모</th>
-						<td class="cell">
+ 						<th class="cell head">메 모</th>
+						<!--<td class="cell">
 						-
 						</td>
 						<td class="cell">
@@ -468,7 +486,8 @@
 						</td>
 						<td class="cell">
 						-
-						</td>
+						</td> -->
+						<%out.println(memo); %>
 					</tr>
 					
 				</table>
@@ -484,7 +503,7 @@
   <!-- /.content-wrapper -->
 
 <!-- footer include -->
-<jsp:include page = "./footer.jsp" flush = "false"/>
+<%-- <jsp:include page = "./footer.jsp" flush = "false"/> --%>
 
 
   <!-- Control Sidebar -->
@@ -497,7 +516,7 @@
 
 
 <!-- 다이얼로그창 인클루드 -->
-<jsp:include page="./pfs_register_dialog.jsp"></jsp:include>
+<%-- <jsp:include page="./pfs_register_dialog.jsp"></jsp:include> --%>
 <!-- jQuery -->
 <script src="./resources/plugins/jquery/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -516,7 +535,7 @@
 <!-- date-range-picker -->
 <script src="./resources/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- date-picker -->
-<script src="./resources/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+<!-- <script src="./resources/plugins/datepicker/js/bootstrap-datepicker.js"></script> -->
 <!-- bootstrap color picker -->
 <script src="./resources/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
@@ -533,7 +552,7 @@
 <script src="./resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="./resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <!-- Page script -->
-<script>
+<!-- <script>
   $(function () {
     $("#example1").DataTable({
       "responsive": true,
@@ -626,6 +645,6 @@
     });
 
   })
-</script>
+</script> -->
 </body>
 </html>

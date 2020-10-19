@@ -80,6 +80,27 @@
 	<update id="userPasswordUpdate" parameterType="modelTO.auth_passwordTO">
 		UPDATE user SET password = #{password} WHERE email = #{email};
 	</update>
+	
+	<!-- 회원탈퇴 sql문 -->
+	<delete id="userDelete" parameterType="modelTO.userTO">
+		delete from user where where SEQ_U=${seqU}, password=#{password}
+	</delete>
+	<!-- 관리자 회원탈퇴 sql문 -->
+	<delete id="userAdminDelete" parameterType="modelTO.userTO">
+		delete from user where where SEQ_U=${seqU}
+	</delete>
+	<!-- 관리자 유저관리 view sql문 -->
+	<select id="userAdminSelect" resultType="modelTO.userTO">
+		select SEQ_U as seqU,
+		NAME as name,
+		ID as id,
+		EMAIL as email,
+		ADDRESS as address,
+		TEL1 as tel1, 
+		TEL2 as tel2
+		from user
+	</select>
+	
 	<!-- 고객 상세보기,수정창 -->
 	<select id="customerView" parameterType="modelTO.customerTO" resultType="modelTO.CustomerAllTO">
 		select seq_c seqC,name,tel,b_type bType,type,progress,contract_type contractType,date_format(b_year,'%Y') bYear,budget_t1 budgetT1,budget_t2 budgetT2,budget_t3 budgetT3,budget_l budgetL,
@@ -228,7 +249,7 @@
 	</delete>
 	
 	<select id="pfsCompare" parameterType="modelTO.pfsTO" resultType="modelTO.pfsTO">
-	select si,gu,dong,bunji,h_number,b_type bType,contract_type contractType,budget1,budget2,budget3,area1,area2,area3,room,bathroom,
+	select si,gu,dong,bunji,h_number hNumber,b_type bType,contract_type contractType,budget1,budget2,budget3,area1,area2,area3,room,bathroom,
 	direction,heating_system heatingSystem,parking,b_year bYear,elevator,context
 	from property_for_sale
 	where seq_pfs = #{seqPfs}
