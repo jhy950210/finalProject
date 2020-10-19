@@ -48,8 +48,8 @@
 <link rel="stylesheet" href="./resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <script type="text/javascript">
      $(document).ready(function() {
-        readServer();
-      
+        readServer(0);
+		
         
         $('#customerWrite').on('click', function(){
            var params = $('#cfrm').serialize();
@@ -58,9 +58,9 @@
         
         
 
-        $("#example2 tbody").on("click","tr",function(){    
-         //console.log($(this).find('td:eq(0)').text());
-           viewServer($(this).find('td:eq(0)').text());
+        $("#example2 tbody").on("click","tr",function(){ 	
+			//console.log($(this).find('td:eq(0)').text());
+        	viewServer($(this).find('td:eq(0)').text());
 
         });
         
@@ -68,61 +68,20 @@
             var params = $('#mcfrm').serialize();
             modifyServer(params);
          })
-      $('#deleteCustomer').on('click', function(){
-         var checkbox = $('input:checkbox[name="selectCustomer"]:checked');
-         var check = new Array();
-         checkbox.each(function(index) {
-            check[index] = checkbox[index].value;
-         })
-         deleteServer(check);
-        })
-        
-        $('#btn').on('click', function() {
-        	$('#example2').DataTable().destroy();
-        	var value1 = '전체';
-        	var value2 = '전체';
-        	value1 = $('#selectType option:selected').val();
-        	value2 = $('input[name=r1]:checked').val();
-        	console.log(value2);
-        	if(value1 == '전체' && value2 == '전체'){
-        		readServer();
-        	} else if(value1 != '전체' && value2 == '전체' ){
-        	selectServer1(value1);
-        	} else if(value1 == '전체' && value2 != '전체' ){
-        		selectServer2(value2);
-        	}else{
-        		selectServer3(value1,value2);
-        	}
-        })
+		$('#deleteCustomer').on('click', function(){
+			var checkbox = $('input:checkbox[name="selectCustomer"]:checked');
+			var check = new Array();
+			checkbox.each(function(index) {
+				check[index] = checkbox[index].value;
+			})
+			deleteServer(check);
+        })        
 
      });
      // ready 끝
         
-     	var table = function() {
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "displayLength": 5,
-                "searching": true,
-                "ordering": false,
-                "info": true,
-                "autoWidth": true,
-                "responsive": true,
-                "bDestroy": true,
-                "language":{
-               	 "paginate":{
-               		 "next":"다음",
-               		 "previous":"이전"
-               	 },
-               	 "search":"검색",
-               	 "info":"현재 _START_-_END_ / _TOTAL_건",
-               	"emptyTable": "데이터가 없어요."
-                }
-              });
-     }
-     
                                               
-           var readServer = function() {    
+           var readServer = function(flag) {    
          $.ajax({                         
             url: 'customer_list.json',   
             type: 'get',                 
@@ -146,7 +105,27 @@
                   $( '#tbody' ).append( html );
                   
                });
-            table();
+               //if(flag == 0){
+               $('#example2').DataTable({
+                     "paging": true,
+                     "lengthChange": false,
+                     "displayLength": 5,
+                     "searching": true,
+                     "ordering": false,
+                     "info": true,
+                     "autoWidth": true,
+                     "responsive": true,
+                     "bDestroy": true,
+                     "language":{
+                    	 "paginate":{
+                    		 "next":"다음",
+                    		 "previous":"이전"
+                    	 },
+                    	 "search":"검색"
+                     }
+                   });
+            //}
+
             },
             error: function( e ) {
                alert( '서버 에러 ' + e );
@@ -182,26 +161,26 @@
             type: 'get',
             dataType: 'json',
             success: function( json ) {
-               $.each( json, function( index, item ) {
+            	$.each( json, function( index, item ) {
                    // json이 json index는 키값 item은 value값
-                  //console.log(item)
-                  var name = ''+ document.getElementById(index).getAttribute('name');
+            		//console.log(item)
+            		var name = ''+ document.getElementById(index).getAttribute('name');
                    console.log(index);
                    if(name == 'rooms') {
-                      json['room'] = json['room'] + '개';
-                      $('#mcfrm').find('#room').val(json['room']);
-                      console.log(name);
-                      console.log(json['room']);
+                	   json['room'] = json['room'] + '개';
+                	   $('#mcfrm').find('#room').val(json['room']);
+                	   console.log(name);
+                	   console.log(json['room']);
                    }
-                  $('#mcfrm').find('#'+name).val(json[index]);
-                  
-                  
-                  if($('#mcfrm').find('#'+name).attr('type') == 'checkbox' && json[index] == 1){
-                     $('#mcfrm').find('#'+name).prop("checked", true);
-                  }
+            		$('#mcfrm').find('#'+name).val(json[index]);
+            		
+            		
+            		if($('#mcfrm').find('#'+name).attr('type') == 'checkbox' && json[index] == 1){
+            			$('#mcfrm').find('#'+name).prop("checked", true);
+            		}
                   // console.log($('#mcfrm').find('#'+name));
                    //console.log(json[index]);
-               //   $('#name').val(json.name);
+               //	$('#name').val(json.name);
                  });
             },
             error: function( e ) {
@@ -230,16 +209,16 @@
             }
          })
         };
-           // modifyServer 끝
-           
-        var deleteServer = function(check) {
+  			// modifyServer 끝
+  			
+  		var deleteServer = function(check) {
            $.ajax({
             url: 'customer_delete.json',
             type: 'get',
             traditional: true,
             data:{
-               check:check
-               },
+            	check:check
+            	},
             dataType: 'json',
             success: function( data ) {
                if(data.flag == 1) {
@@ -254,105 +233,6 @@
             }
          })
          };
-         
-         var selectServer1 = function(value1) {    
-             $.ajax({                         
-                url: 'customer_list.json',   
-                type: 'get',                 
-                dataType: 'json',            
-                success: function( json ) {  
-                   $( '#tbody' ).empty();
-                   $.each( json.data, function( index, item ) {
-                	   if(item.progress == value1) {
-                      var html = '<tr data-toggle="modal" data-target="#modal-modify" ><th onclick="event.cancelBubble=true"><div class="custom-control custom-checkbox">';
-                      html +=   '<input class="custom-control-input" type="checkbox" name="selectCustomer" id="customCheckbox'+ index+'" value="'+item.seqC+'">'
-                      html += '<label for="customCheckbox'+index+'" class="custom-control-label"></label>';
-                      html += '</div></th>';
-                      html += '<td>'+ item.seqC +'</td>';
-                      html += '<td>'+ item.bType +'</td>';
-                      html += '<td>'+ item.name+'</td>';
-                      html += '<td>'+ item.tel +'</td>';
-                      html += '<td>'+ item.type +'</td>';
-                      html += '<td>'+ item.progress +'</td>';
-                      html += '<td>'+ item.contractType +'</td>';
-                      html += '<td>'+ item.visitDate +'</td></tr>';
-                      
-                      $( '#tbody' ).append( html );
-                	   }
-                   });
-                  table();
-                  },
-                error: function( e ) {
-                   alert( '서버 에러 ' + e );
-                }
-             })
-            }
-         
-         var selectServer2 = function(value2) {    
-             $.ajax({                         
-                url: 'customer_list.json',   
-                type: 'get',                 
-                dataType: 'json',            
-                success: function( json ) {  
-                   $( '#tbody' ).empty();
-                   $.each( json.data, function( index, item ) {
-                	   if(item.type == value2) {
-                      var html = '<tr data-toggle="modal" data-target="#modal-modify" ><th onclick="event.cancelBubble=true"><div class="custom-control custom-checkbox">';
-                      html +=   '<input class="custom-control-input" type="checkbox" name="selectCustomer" id="customCheckbox'+ index+'" value="'+item.seqC+'">'
-                      html += '<label for="customCheckbox'+index+'" class="custom-control-label"></label>';
-                      html += '</div></th>';
-                      html += '<td>'+ item.seqC +'</td>';
-                      html += '<td>'+ item.bType +'</td>';
-                      html += '<td>'+ item.name+'</td>';
-                      html += '<td>'+ item.tel +'</td>';
-                      html += '<td>'+ item.type +'</td>';
-                      html += '<td>'+ item.progress +'</td>';
-                      html += '<td>'+ item.contractType +'</td>';
-                      html += '<td>'+ item.visitDate +'</td></tr>';
-                      
-                      $( '#tbody' ).append( html );
-                	   }
-                   });
-                  table();
-                  },
-                error: function( e ) {
-                   alert( '서버 에러 ' + e );
-                }
-             })
-            }
-         
-         var selectServer3 = function(value1,value2) {    
-             $.ajax({                         
-                url: 'customer_list.json',   
-                type: 'get',                 
-                dataType: 'json',            
-                success: function( json ) {  
-                   $( '#tbody' ).empty();
-                   $.each( json.data, function( index, item ) {
-                	   if(item.type == value2 && item.progress == value1) {
-                      var html = '<tr data-toggle="modal" data-target="#modal-modify" ><th onclick="event.cancelBubble=true"><div class="custom-control custom-checkbox">';
-                      html +=   '<input class="custom-control-input" type="checkbox" name="selectCustomer" id="customCheckbox'+ index+'" value="'+item.seqC+'">'
-                      html += '<label for="customCheckbox'+index+'" class="custom-control-label"></label>';
-                      html += '</div></th>';
-                      html += '<td>'+ item.seqC +'</td>';
-                      html += '<td>'+ item.bType +'</td>';
-                      html += '<td>'+ item.name+'</td>';
-                      html += '<td>'+ item.tel +'</td>';
-                      html += '<td>'+ item.type +'</td>';
-                      html += '<td>'+ item.progress +'</td>';
-                      html += '<td>'+ item.contractType +'</td>';
-                      html += '<td>'+ item.visitDate +'</td></tr>';
-                      
-                      $( '#tbody' ).append( html );
-                	   }
-                   });
-                  table();
-                  },
-                error: function( e ) {
-                   alert( '서버 에러 ' + e );
-                }
-             })
-            }
         
         
   
@@ -393,10 +273,20 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="./resources/index3.html" class="brand-link">
+      <img src="./resources/img/zipzom_logo.png"
+           alt="AdminLTE Logo"
+           class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">ZipZom</span>
+    </a>
 
    <!-- sidebar include -->
     <jsp:include page = "./sidebar.jsp" flush = "false"/>
-
+    
+  </aside>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -405,11 +295,11 @@
       <div class="container-fluid">
          <div class="row mb-2">
             <div class="col-sm-6">
-
+               <h1>고객 관리</h1>
             </div>
             <div class="col-sm-6">
                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="./newDashboard.do">Home</a></li>
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
                   <li class="breadcrumb-item active">고객 관리</li>
                </ol>
             </div>
@@ -431,10 +321,9 @@
               <div class="form-group clearfix">
                <div class="col">
                   <div class="form-group row">
-                     <span style="font-family: 'Helvetica', sans-serif; font-weight: bold; margin-right: 10px; margin-top: 5px;">
-                     진행 상태</span>
-                     <select class="form-control select2" id="selectType" style="width: 200px;">
-                        <option>전체</option>
+                     <span style="font-family: 'Helvetica', sans-serif; font-weight: bold; margin-right: 10px; margin-top: 5px;">고객 상태</span>
+                     <select class="form-control select2bs4" style="width: 200px;">
+                        <option value="none">선택</option>
                         <option>계약대기</option>
                         <option>계약진행</option>
                         <option>계약완료</option>
@@ -447,27 +336,26 @@
                   <div class="form-group row" style="margin-right: 10px; margin-top: 10px;">
                      <section>
                         <div class="input-group md-3">
-                           <span style="font-family: 'Helvetica', sans-serif; font-weight: bold; margin-right: 10px; margin-top: 5px;">
-                           고객 타입</span>
+                           <span style="font-family: 'Helvetica', sans-serif; font-weight: bold; margin-right: 10px; margin-top: 5px;">고객 속성</span>
+                        </div>
+                     </section>
+                     
+                     <section>
+                        <div class="input-group md-3">
+                           <div class="icheck-primary d-inline" style="margin-right: 20px; ">
+                                 <input type="checkbox" id="checkboxPrimary1" name="r1" value="1" checked>
+                                 <label for="checkboxPrimary1">
+                                 <span>전체</span>
+                                 </label>
+                                 </div>
                         </div>
                      </section>
                      
                      <section>
                         <div class="input-group md-3">
                            <div class="icheck-primary d-inline" style="margin-right: 20px;" >
-                                    <input type="radio" id="radioPrimary1" name="r1" value="전체" checked>
-                                    <label for="radioPrimary1">
-                              <span>전체</span>
-                                   </label>
-                           </div>
-                        </div>
-                     </section>
-                     
-                     <section>
-                        <div class="input-group md-3">
-                           <div class="icheck-primary d-inline" style="margin-right: 20px;" >
-                                    <input type="radio" id="radioPrimary2" name="r1" value="매도인">
-                                    <label for="radioPrimary2">
+                                    <input type="checkbox" id="checkboxPrimary2" name="r2">
+                                    <label for="checkboxPrimary2">
                               <span>매도인</span>
                                     </label>
                            </div>
@@ -477,8 +365,8 @@
                      <section>
                         <div class="input-group md-3">
                            <div class="icheck-primary d-inline" style="margin-right: 20px;" >
-                                    <input type="radio" id="radioPrimary3" name="r1" value="매수인">
-                                    <label for="radioPrimary3">
+                                    <input type="checkbox" id="checkboxPrimary3" name="r3">
+                                    <label for="checkboxPrimary3">
                                     <span>매수인</span>
                                     </label>
                            </div>
@@ -488,8 +376,8 @@
                      <section>
                         <div class="input-group md-3">
                            <div class="icheck-primary d-inline" style="margin-right: 20px;" >
-                                    <input type="radio" id="radioPrimary4" name="r1" value="임대인" >
-                                    <label for="radioPrimary4">
+                                    <input type="checkbox" id="checkboxPrimary4" name="r4" >
+                                    <label for="checkboxPrimary4">
                                     <span>임대인</span>
                                     </label>
                            </div>
@@ -499,8 +387,8 @@
                      <section>
                         <div class="input-group md-3">
                            <div class="icheck-primary d-inline" style="margin-right: 20px;" >
-                                    <input type="radio" id="radioPrimary5" name="r1" value="임차인">
-                                    <label for="radioPrimary5">
+                                    <input type="checkbox" id="checkboxPrimary5" name="r5" >
+                                    <label for="checkboxPrimary5">
                                     <span>임차인</span>
                                     </label>
                            </div>
@@ -510,8 +398,8 @@
                      <section>
                         <div class="input-group md-3">
                            <div class="icheck-primary d-inline" style="margin-right: 20px;" >
-                                    <input type="radio" id="radioPrimary6" name="r1" value="집주인" >
-                                    <label for="radioPrimary6">
+                                    <input type="checkbox" id="checkboxPrimary6" name="r6" >
+                                    <label for="checkboxPrimary6">
                                     <span>집주인</span>
                                     </label>
                            </div>
@@ -521,8 +409,8 @@
                      <section>
                         <div class="input-group md-3">
                            <div class="icheck-primary d-inline" style="margin-right: 20px;" >
-                                    <input type="radio" id="radioPrimary7" name="r1" value="일반상담" >
-                                    <label for="radioPrimary7">
+                                    <input type="checkbox" id="checkboxPrimary7" name="r7" >
+                                    <label for="checkboxPrimary7">
                                     <span>일반상담</span>
                                     </label>
                            </div>
@@ -531,7 +419,7 @@
                      
                      <section>
                         <div class="input-group mb-3">
-                        <button type="button" id="btn" class="btn btn-primary" style="width: 100px; margin-top:5px;">
+                        <button type="button" class="btn btn-primary" style="width: 100px; margin-top:5px;">
                         검색하기
                         </button>
                         </div>
@@ -540,9 +428,7 @@
                </div>      
             </div>
          </div>
-    </div>
          
-   <div class="card"> 
 
     <!-- 고객리스트 테이블 -->
     <section class="content">
@@ -560,7 +446,7 @@
                   <tr>
                <th></th>
                <th style="width:7%;">번호</th>
-                     <th>매물</th>
+               		<th>매물</th>
                     <th>이름</th>
                     <th>연락처</th>
                     <th>고객 타입</th>
@@ -617,11 +503,24 @@
 <jsp:include page="./customer_modify.jsp"></jsp:include>
 <!-- Bootstrap 4 -->
 <script src="./resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<!-- <!-- Select2
+<script src="./resources/plugins/select2/js/select2.full.min.js"></script> -->
 <!-- Bootstrap4 Duallistbox -->
 <script src="./resources/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="./resources/plugins/moment/moment.min.js"></script>
+<script src="./resources/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
 <!-- bs-custom-file-input -->
 <script src="./resources/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<!-- datepicker -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- date-range-picker -->
+<script src="./resources/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="./resources/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="./resources/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Bootstrap Switch -->
 <script src="./resources/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <!-- AdminLTE App -->
@@ -634,6 +533,72 @@
 <script src="./resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="./resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="./resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script>
+  $(function () {
+    
+    //Date picker
+    $( '#datepicker' ).datepicker()
 
+    //Date range picker
+    $('#reservationdate').datetimepicker({
+        format: 'L'
+    });
+    
+    //Date range picker1
+    $('#reservation1').daterangepicker()
+    //Date range picker2
+    $('#reservation2').daterangepicker()
+    
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: 'MM/DD/YYYY hh:mm A'
+      }
+    })
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Today'       : [moment(), moment()],
+          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    )
+
+    //Timepicker
+    $('#timepicker').datetimepicker({
+      format: 'LT'
+    })
+    
+    //Bootstrap Duallistbox
+    //$('.duallistbox').bootstrapDualListbox()
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    $('.my-colorpicker2').on('colorpickerChange', function(event) {
+      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+    });
+
+    $("input[data-bootstrap-switch]").each(function(){
+      $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
+    
+
+  })
+</script>
 </body>
 </html>
