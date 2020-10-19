@@ -6,12 +6,16 @@ public class scheduleTO {
 	private String customerName;
 	private String customerTel;
 	private String customerState;
-	private String date;
+	private String start;
+	private String end;
 	private String context;
 	private String scheduleType;
 	private String progress;
 	private String bType;
 	private String contractType;
+	private String backgroundColor;
+	private String textColor;
+	private int allDay;
 	
 	public int getSeqS() {
 		return seqS;
@@ -43,11 +47,17 @@ public class scheduleTO {
 	public void setCustomerState(String customerState) {
 		this.customerState = customerState;
 	}
-	public String getDate() {
-		return date;
+	public String getStart() {
+		return start;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setStart(String start) {
+		this.start = start;
+	}
+	public String getEnd() {
+		return end;
+	}
+	public void setEnd(String end) {
+		this.end = end;
 	}
 	public String getContext() {
 		return context;
@@ -78,6 +88,24 @@ public class scheduleTO {
 	}
 	public void setContractType(String contractType) {
 		this.contractType = contractType;
+	}
+	public String getBackgroundColor() {
+		return backgroundColor;
+	}
+	public void setBackgroundColor(String backgroundColor) {
+		this.backgroundColor = backgroundColor;
+	}
+	public String getTextColor() {
+		return textColor;
+	}
+	public void setTextColor(String textColor) {
+		this.textColor = textColor;
+	}
+	public int getAllDay() {
+		return allDay;
+	}
+	public void setAllDay(int allDay) {
+		this.allDay = allDay;
 	}
 	
 	

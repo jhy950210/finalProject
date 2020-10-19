@@ -15,7 +15,8 @@
 	for(scheduleTO to : lists) {
 		int seqS = to.getSeqS();
 		int pseqS = to.getPseqS();
-		String date = to.getDate();
+		String start = to.getStart();
+		String end = to.getEnd();
 		String customerName = to.getCustomerName();
 		String customerTel = to.getCustomerTel();
 		String customerState = to.getCustomerState();
@@ -24,6 +25,9 @@
 		String progress = to.getProgress();
 		String bType = to.getbType();
 		String contractType = to.getContractType();
+		String backgroundColor = to.getBackgroundColor();
+		String textColor = to.getTextColor();
+		int allDay = to.getAllDay();
 		
 		JSONObject obj = new JSONObject();
 
@@ -32,12 +36,20 @@
 		obj.put("customerName", customerName);
 		obj.put("customerTel", customerTel);
 		obj.put("customerState", customerState);
-		obj.put("date", date);
+		obj.put("start", start);
+		obj.put("end", end);
 		obj.put("context", context);
-		obj.put("scheduleType", scheduleType);
+		obj.put("title", scheduleType);
 		obj.put("progress", progress);
 		obj.put("bType", bType);
 		obj.put("contractType", contractType);
+		obj.put("backgroundColor", backgroundColor);
+		obj.put("textColor", textColor);
+		if(allDay == 1) {
+			obj.put("allDay", true);
+		} else {
+			obj.put("allDay", false);
+		}
 		
 		jsonArray.add(obj);
 	}

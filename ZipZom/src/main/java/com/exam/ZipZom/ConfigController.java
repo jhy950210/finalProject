@@ -452,38 +452,50 @@ public class ConfigController {
 
 		scheduleTO to = new scheduleTO();
 		
-//		int pseqS = Integer.parseInt(request.getParameter("pseqS"));
-//		String customerName = request.getParameter("customerName");
-//		String customerTel = request.getParameter("customerTel");
-//		String customerState = request.getParameter("customerState");
-//		String date = request.getParameter("date");
-//		String context = request.getParameter("context");
-//		String scheduleType = request.getParameter("scheduleType");
-//		String progress = request.getParameter("progress");
-//		String bType = request.getParameter("bType");
-//		String contractType = request.getParameter("contractType");
-//		
-//		to.setPseqS(pseqS);
-//		to.setCustomerName(customerTel);
-//		to.setCustomerTel(customerTel);
-//		to.setCustomerState(customerState);
-//		to.setDate(date);
-//		to.setContext(context);
-//		to.setScheduleType(scheduleType);
-//		to.setProgress(progress);
-//		to.setbType(bType);
-//		to.setContractType(contractType);
+		int pseqS = Integer.parseInt(request.getParameter("pseqS"));
+		String customerName = request.getParameter("customerName");
+		String customerTel = request.getParameter("customerTel");
+		String customerState = request.getParameter("customerState");
+		String start = request.getParameter("start");
+		String end = request.getParameter("end");
+		String context = request.getParameter("context");
+		String scheduleType = request.getParameter("scheduleType");
+		String progress = request.getParameter("progress");
+		String bType = request.getParameter("bType");
+		String contractType = request.getParameter("contractType");
+		String backgroundColor = request.getParameter("backgroundColor");
+		String textColor = request.getParameter("textColor");
+		int allDay = Integer.parseInt(request.getParameter("allDay"));
 		
-		to.setPseqS(2);
-		to.setCustomerName("박성훈");
-		to.setCustomerTel("123123");
-		to.setCustomerState("인도인");
-		to.setDate("2000/10/10 15:35");
-		to.setContext("내용33333");
-		to.setScheduleType("몰라");
-		to.setProgress("진33");
-		to.setbType("메33");
-		to.setContractType("그33");
+		to.setPseqS(pseqS);
+		to.setCustomerName(customerName);
+		to.setCustomerTel(customerTel);
+		to.setCustomerState(customerState);
+		to.setStart(start);
+		to.setEnd(end);
+		to.setContext(context);
+		to.setScheduleType(scheduleType);
+		to.setProgress(progress);
+		to.setbType(bType);
+		to.setContractType(contractType);
+		to.setBackgroundColor(backgroundColor);
+		to.setTextColor(textColor);
+		to.setAllDay(allDay);
+		
+//		to.setPseqS(1);
+//		to.setCustomerName("박성훈");
+//		to.setCustomerTel("123123");
+//		to.setCustomerState("인도인");
+//		to.setStart("2020-10-07T09:30");
+//		to.setEnd("2020-10-07T12:30");
+//		to.setContext("내용33333");
+//		to.setScheduleType("전화");
+//		to.setProgress("진행중");
+//		to.setbType("아파트");
+//		to.setContractType("매매");
+//		to.setBackgroundColor("#D25565");
+//		to.setTextColor("#ffffff");
+//		to.setAllDay(1);
 		
 		int flag = 0;
 		
@@ -525,14 +537,19 @@ public class ConfigController {
 //		to.setContractType(contractType);
 		
 		to.setSeqS(1);
+		to.setCustomerName("박성훈");
 		to.setCustomerTel("123123");
 		to.setCustomerState("인도인");
-		to.setDate("2000/10/10 15:35");
+		to.setStart("2020-10-07T09:30");
+		to.setEnd("2020-10-07T12:30");
 		to.setContext("내용33333");
-		to.setScheduleType("몰라");
-		to.setProgress("진33");
-		to.setbType("메33");
-		to.setContractType("그33");
+		to.setScheduleType("전화");
+		to.setProgress("진행중");
+		to.setbType("아파트");
+		to.setContractType("매매");
+		to.setBackgroundColor("#D25565");
+		to.setTextColor("#ffffff");
+		to.setAllDay(1);
 		
 		int flag = 0;
 		
@@ -567,43 +584,6 @@ public class ConfigController {
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("data/flag_json");
-		modelAndView.addObject("list", request);
-
-		return modelAndView;
-	}
-
-	// 매물을 선택하고 매물비교 버튼을 누른 경우
-	@RequestMapping(value = "/pfsCompare.action")
-	public ModelAndView pfsCompareRequest(HttpServletRequest request) {
-
-		pfsTO to = new pfsTO();
-
-		ArrayList<pfsTO> listTO = new ArrayList<pfsTO>();
-
-//		int seqPfs1 = Integer.parseInt(request.getParameter("seqPfs1"));
-//		int seqPfs2 = Integer.parseInt(request.getParameter("seqPfs2"));
-		int seqPfs1 = 1;
-		int seqPfs2 = 1;
-
-		to.setSeqPfs(seqPfs1);
-		to = sqlSession.selectOne("pfsCompareSelect", to);
-		listTO.add(to);
-		to.setSeqPfs(seqPfs2);
-		to = sqlSession.selectOne("pfsCompareSelect", to);
-		listTO.add(to);
-
-		if(request.getParameter("seqPfs3") != null) {
-//			int seqPfs3 = Integer.parseInt(request.getParameter("seqPfs3"));
-			int seqPfs3 = 1;
-			to.setSeqPfs(seqPfs3);
-			to = sqlSession.selectOne("pfsCompareSelect", to);
-			listTO.add(to);
-		}
-
-		request.setAttribute("lists", listTO);
-
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("data/pfsCompare_json");
 		modelAndView.addObject("list", request);
 
 		return modelAndView;

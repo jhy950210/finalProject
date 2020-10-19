@@ -87,12 +87,16 @@
 		CUSTOMER_NAME as customerName,
 		CUSTOMER_TEL as customerTel,
 		CUSTOMER_STATE as customerState,
-		DATE, 
+		start, 
+		end, 
 		CONTEXT, 
 		SCHEDULE_TYPE as scheduleType, 
 		PROGRESS, 
 		B_TYPE as bType, 
-		CONTRACT_TYPE as contractType
+		CONTRACT_TYPE as contractType,
+		backgroundColor, 
+		textColor, 
+		allday
 		from schedule
 		where PSEQ_S = ${pseqS}
 	</select>
@@ -103,12 +107,16 @@
 		CUSTOMER_NAME as customerName,
 		CUSTOMER_TEL as customerTel,
 		CUSTOMER_STATE as customerState,
-		DATE, 
+		start, 
+		end, 
 		CONTEXT, 
 		SCHEDULE_TYPE as scheduleType, 
 		PROGRESS, 
 		B_TYPE as bType, 
-		CONTRACT_TYPE as contractType
+		CONTRACT_TYPE as contractType,
+		backgroundColor, 
+		textColor, 
+		allday, 
 		from schedule
 		where SEQ_S = ${seqS}
 	</select>
@@ -119,24 +127,32 @@
 		CUSTOMER_NAME,
 		CUSTOMER_TEL,
 		CUSTOMER_STATE,
-		DATE,
+		start, 
+		end, 
 		CONTEXT, 
 		SCHEDULE_TYPE,
 		PROGRESS, 
 		B_TYPE,
-		CONTRACT_TYPE
+		CONTRACT_TYPE,
+		backgroundColor, 
+		textColor, 
+		allday, 
 		) 
 		values (
 		${pseqS}, 
 		#{customerName}, 
 		#{customerTel}, 
 		#{customerState}, 
-		#{date},
+		#{start},
+		#{end},
 		#{context}, 
 		#{scheduleType}, 
 		#{progress},
 		#{bType}, 
-		#{contractType}
+		#{contractType},
+		#{backgroundColor}, 
+		#{textColor}, 
+		${allday}
 		)
 	</insert>
 	<!--일정 변경 sql문 -->
@@ -144,12 +160,15 @@
 		UPDATE schedule SET
 		CUSTOMER_TEL = #{customerTel},
 		CUSTOMER_STATE = #{customerState},
-		DATE = #{date},
+		start = #{start},
+		end = #{end},
 		CONTEXT = #{context},
 		SCHEDULE_TYPE = #{scheduleType},
 		PROGRESS = #{progress},
 		B_TYPE = #{bType},
-		CONTRACT_TYPE = #{contractType}
+		backgroundColor = #{backgroundColor}
+		textColor = #{textColor}
+		allday = ${allday}
 		WHERE SEQ_S = ${seqS}
 	</update>
 	<!-- 일정 삭제 sql문 -->
