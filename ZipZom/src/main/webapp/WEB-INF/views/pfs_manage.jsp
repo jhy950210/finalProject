@@ -52,15 +52,48 @@
          writeServer(params);
       })
       
+      $("#example2 tbody").on("click","tr",function(){ 	
+		//console.log($(this).find('td:eq(0)').text());
+      	viewServer($(this).find('td:eq(0)').text());
+      });
       
+      $('#pfsModify').on('click', function(){
+          var params = $('#form2').serialize();
+          modifyServer(params);
+       })
       
-
+       $('#pfsDelete').on('click', function(){
+			var checkbox = $('input:checkbox[name="selectPfs"]:checked');
+			var check = new Array();
+			checkbox.each(function(index) {
+				check[index] = checkbox[index].value;
+			})
+			deleteServer(check);
+       })        
+      /*  $('#pfsCompare').on('click', function(){
+			var checkbox = $('input:checkbox[name="selectPfs"]:checked');
+			var check = new Array();
+			checkbox.each(function(index) {
+				check[index] = checkbox[index].value;
+			})
+			if(check[2] == null && check[1] != null) {
+				location.href = './pfs_compare.do?seqPfs='+check[1];
+			}
+			else if(check[3] == null && check[2] != null){
+				location.href = './pfs_compare.do?seqPfs='+check[1]+'&seqPfs='check[2];
+			} else if(check[3] != null) {
+				location.href = './pfs_compare.do?seqPfs='+check[1]+'&seqPfs='check[2]+'&seqPfs='check[3]
+			} else {
+				alert('3개까지 선택 가능합니다.');
+			}
+      })  */ 
+	
 
    });
    // ready 끝
       
                                             
-         var readServer = function() {    
+     var readServer = function() {    
        $.ajax({                         
           url: 'pfs_list.json',   
           type: 'get',                 
@@ -69,9 +102,9 @@
              $( '#myTable' ).empty();
              $.each( json.data, function( index, item ) {
             	 var mytable = '<tr data-toggle="modal" data-target="#modal2" >'
-            		 mytable += '<th>';
+            		 mytable += '<th onclick="event.cancelBubble=true">';
             		 mytable += '<div class="custom-control custom-checkbox">';
-            		 mytable += '<input class="custom-control-input" type="checkbox" id="customCheckbox'+index+'" value="option'+index+'">';
+            		 mytable += '<input class="custom-control-input" type="checkbox" name="selectPfs" id="customCheckbox'+index+'" value="'+item.seqPfs+'">';
             		 mytable += '<label for="customCheckbox'+index+'" class="custom-control-label"></label></div></th>';
             		 mytable += '<td>'+item.seqPfs+'</td>';
                 	 mytable += '<td>'+item.bType+'</td>';
@@ -125,7 +158,91 @@
           }
        })
       };
+      // writeServer 끝
       
+      var viewServer = function(seqPfs) {
+          $.ajax({
+              url: 'pfs_view.json?seqPfs='+seqPfs,
+              type: 'get',
+              dataType: 'json',
+              success: function( json ) {
+              	$.each( json, function( index, item ) {
+                     // json이 json index는 키값 item은 value값
+              		//console.log(item)
+              	 	var name = ''+ document.getElementById(index).getAttribute('name');
+                     //console.log(item);
+                     console.log(name);
+                     if(name == 'rooms') {
+                  	   json['room'] = json['room'] + '개';
+                  	   $('#form2').find('#room').val(json['room']);
+                  	   console.log(name);
+                  	   console.log(json['room']);
+                     }
+                     if(name == 'bathrooms') {
+                    	 json['bathroom'] = json['bathroom'] + '개';
+                    	   $('#form2').find('#bathroom').val(json['bathroom']);
+                    	   console.log('bath' + json['bathroom']);
+                     }
+              		$('#form2').find('#'+name).val(json[name]);
+              		
+              		
+              		if($('#form2').find('#'+name).attr('type') == 'checkbox' && json[name] == 1){
+              			$('#form2').find('#'+name).prop("checked", true); 
+              		}
+                    // console.log($('#mcfrm').find('#'+name));
+                     //console.log(json[index]);
+                 //	$('#name').val(json.name);
+                   });
+              },
+              error: function( e ) {
+                 alert( '서버 에러 ' + e );
+              }
+           })
+      }
+      // viewServer 끝
+      
+       var modifyServer = function(params) {
+           $.ajax({
+            url: 'pfs_modify.json',
+            type: 'post',
+            data:params,
+            dataType: 'json',
+            success: function( data ) {
+               if(data.flag == 1) {
+                  $('#example2').DataTable().destroy();
+                  readServer();
+               } else {
+                  alert('잘못 입력했습니다')
+               }
+            },
+            error: function( e ) {
+               alert( '서버 에러 ' + e );
+            }
+         })
+        };
+        
+        var deleteServer = function(check) {
+            $.ajax({
+             url: 'pfs_delete.json',
+             type: 'get',
+             traditional: true,
+             data:{
+             	check:check
+             	},
+             dataType: 'json',
+             success: function( data ) {
+                if(data.flag == 1) {
+                   $('#example2').DataTable().destroy();
+                   readServer(1);
+                } else {
+                   alert('잘못 입력했습니다')
+                }
+             },
+             error: function( e ) {
+                alert( '서버 에러 ' + e );
+             }
+          })
+          };
       
       </script>
 </head>
@@ -351,47 +468,14 @@
                   </tr>
                   </thead>
                   <tbody id="myTable" >
-                  <tr data-toggle="modal" data-target="#modal2" >
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-					<td></td>
-                    <td>아파트</td>
-                    <td>매매</td>
-                    <td>서울특별시 강남구 역삼동 819-10</td>
-                    <td>10,000</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>2020-10-06</td>
-                  </tr>
-                   <tr>
-                  	<th>
-                  		<div class="custom-control custom-checkbox">
-						<input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-						<label for="customCheckbox1" class="custom-control-label"></label>
-						</div>
-					</th>
-					<td></td>
-                    <th>아파트</th>
-                    <th>매매</th>
-                    <th>서울특별시 강남구 역삼동 819-10</th>
-                    <th>10,000</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>2020-10-06</th>
-                  </tr>                 
+                  </tbody>             
                 </table>
                 <div class="modal-footer justify-content-left">
                 <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-xl" style="width: 200px;">
 				신규 등록
 				</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">선택 매물 삭제하기</button>
-				<button type="button" class="btn btn-primary">선택 매물 비교하기</button>
+				<button type="button" id="pfsDelete" class="btn btn-default" data-dismiss="modal">선택 매물 삭제하기</button>
+				<button type="button" id="pfsCompare" class="btn btn-primary">선택 매물 비교하기</button>
 				</div> 
 				
 				
@@ -429,7 +513,7 @@
 
 <!-- 다이얼로그창 인클루드 -->
 <jsp:include page="./pfs_register_dialog.jsp"></jsp:include>
-<%-- <jsp:include page="./pfs_modify_dialog.jsp"></jsp:include> --%>
+<jsp:include page="./pfs_modify_dialog.jsp"></jsp:include>
 
 <!-- ajax googleapis -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -463,28 +547,9 @@
 <script src="./resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="./resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="./resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<!-- Page script -->
-<script>
- /*  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": true,
-    });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "displayLength": 5,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  }); */
-</script>
 
 <!-- 테이블 검색기능(필터) -->
-<script>
+<!-- <script>
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
@@ -555,7 +620,7 @@ $("#example2").click(function(){
 	
 
 });
-</script>
+</script> -->
 <script>
   $(function () {
     //Initialize Select2 Elements

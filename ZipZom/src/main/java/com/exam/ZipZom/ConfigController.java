@@ -20,6 +20,7 @@ import modelTO.customerTO;
 import modelTO.customer_visit_dateTO;
 import modelTO.option_customerTO;
 import modelTO.option_pfsTO;
+import modelTO.pfsAllTO;
 import modelTO.userTO;
 import modelDAO.MailSender;
 import modelDAO.encryption;
@@ -424,8 +425,8 @@ public class ConfigController {
 	}
 	
 	// 고객 수정페이지
-		@RequestMapping("/customer_modify.json")
-		public String customermodify(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,option_customerTO octo,customer_visit_dateTO cvdto,security_customerTO scto) {
+	@RequestMapping("/customer_modify.json")
+	public String customermodify(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,option_customerTO octo,customer_visit_dateTO cvdto,security_customerTO scto) {
 			int flag = 0;
 			//cto.setSeqC(Integer.parseInt(request.getParameter("seqC")));
 			if(request.getParameter("rooms") != null) {
@@ -489,6 +490,7 @@ public class ConfigController {
 	return "pfs_manage";
 	}
 	
+	// 매물 리스트
 	@RequestMapping("/pfs_list.json")
 	public String pfsList(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session,pfsTO pto) {
 	pto.setPseqPfs((int)session.getAttribute("seqU"));
@@ -498,6 +500,7 @@ public class ConfigController {
 	}
 	
 	
+	// 매물 등록
 	@RequestMapping("/pfs_write.json")
 	public String writepfs(HttpServletRequest request, HttpServletResponse response,Model model,pfsTO pto,HttpSession session,option_pfsTO opto,security_pfsTO spto) {
 		int flag = 0;
@@ -530,12 +533,92 @@ public class ConfigController {
 }
 	
 	
-	
+	// 매물 비교 페이지
 	@RequestMapping("/pfs_compare.do")
-	public String pfsCompare(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
+	public String pfsCompare(HttpServletRequest request, HttpServletResponse response,Model model) {
+		 ArrayList<pfsTO> pcList = new ArrayList<pfsTO>();
+		 if(request.getParameterValues("seqPfs") != null) {
+		 String[] seqPfs = request.getParameterValues("seqPfs");
+		 int[] seq = new int[seqPfs.length];
+		 for(int i=0;i<seqPfs.length;i++) {
+		 seq[i] = Integer.parseInt(seqPfs[i]); 
+		 pfsTO pto = new pfsTO();
+		 pto.setSeqPfs(seq[i]);
+		 pto = testmapper.pfsCompare(pto);
+		 pcList.add(pto);
+		 }
 
+		
+		request.setAttribute("pcList",pcList);
+		 }
 		return "pfs_compare";
 	}
 	
+	@RequestMapping("/pfs_compare.json")
+	public String pfsCompareJson(HttpServletRequest request, HttpServletResponse response,Model model) {
 
+		return "data/pfs_compare";
+	}
+	
+	@RequestMapping("/pfs_view.json")
+	public String pfsView(HttpServletRequest request, HttpServletResponse response,Model model,pfsAllTO pato) {
+		pato.setSeqPfs(Integer.parseInt(request.getParameter("seqPfs")));
+		ArrayList<pfsAllTO> paList = new ArrayList<pfsAllTO>();
+		paList = (ArrayList<pfsAllTO>)testmapper.pfsView(pato);
+		request.setAttribute("paList", paList);
+		
+		return "data/pfs_view";
+	}
+	
+	@RequestMapping("/pfs_modify.json")
+	public String pfsUpdate(HttpServletRequest request, HttpServletResponse response,Model model,pfsTO pto,HttpSession session,option_pfsTO opto,security_pfsTO spto) {
+		int flag = 0;
+		
+		String[] addr = request.getParameter("address").split(" ");
+		pto.setSi(addr[0]);
+		pto.setGu(addr[1]);
+		pto.setDong(addr[2]);
+		String bunji = "";
+		for(int i=3; i<addr.length;i++) {
+			bunji += addr[i] + " ";
+			pto.setBunji(bunji);
+		}
+		if(request.getParameter("rooms") != null) {
+			pto.setRoom(Integer.parseInt(request.getParameter("rooms").substring(0,1)));
+		}
+		if(request.getParameter("bathrooms") != null) {
+			pto.setBathroom(Integer.parseInt(request.getParameter("bathrooms").substring(0,1)));
+		}
+		flag = (int)testmapper.pfsUpdate(pto);
+		if(flag == 1) {
+			//opto.setPseqOp(pto.getSeqPfs());
+			//testmapper.pfsOption(opto);
+			spto.setPseqSp(pto.getSeqPfs());
+			testmapper.spUpdate(spto);
+		}
+		request.setAttribute("flag",flag);
+		return "data/flag_json";
+		}
+	
+	@RequestMapping("/pfs_delete.json")
+	public String pfsDelte(HttpServletRequest request, HttpServletResponse response,Model model,int[] check) {
+		int flag = 0;
+		for(int i=0;i<check.length;i++) {
+			pfsTO pto = new pfsTO();
+			pto.setSeqPfs(check[i]);
+		
+		flag = (int)testmapper.pfsDelete(pto);
+		if(flag == 1) {
+		option_pfsTO opto = new option_pfsTO();
+		opto.setPseqOp(pto.getSeqPfs());
+		testmapper.opDelete(opto);
+		security_pfsTO spto = new security_pfsTO();
+		spto.setPseqSp(pto.getSeqPfs());
+		testmapper.spDelete(spto);
+		}
+		}
+		
+		request.setAttribute("flag", flag);
+		return "data/flag_json";
+	}
 }

@@ -1,5 +1,106 @@
+<%@page import="modelTO.pfsTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	/* request.setCharacterEncoding("utf-8");
+	if(request.getAttribute("paList") != null) {
+	ArrayList<pfsTO> pcList = (ArrayList<pfsTO>)request.getAttribute("paList");
+	StringBuffer addressess = new StringBuffer();
+	StringBuffer contract = new StringBuffer();
+	StringBuffer area = new StringBuffer();
+	StringBuffer option = new StringBuffer();
+	for(pfsTO pto : pcList) {
+		int i=0;
+		String address = pto.getSi() + " " + pto.getGu() + " " + pto.getDong() + " " + pto.getBunji() + " " + pto.gethNumber();
+
+		String contractType = pto.getContractType();
+		int budget1 = pto.getBudget1();
+		int budget2 = pto.getBudget2();
+		int budget3 = pto.getBudget3();
+		int area1 = pto.getArea1();
+		int area2 = pto.getArea2();
+		int area3 = pto.getArea3();
+		int room = pto.getRoom();
+		int bathroom = pto.getBathroom();
+		int numberOfHousehold = pto.getNumberOfHousehold();
+		String heatingSystem = pto.getHeatingSystem();
+		String parking = "";
+		if(pto.getParking() == 1){
+			parking = "가능";
+		} else {
+			parking = "불가능";
+		}
+		String bYear = pto.getbYear();
+		String elevator = "";
+		if(pto.getElevator().equals("1")) {
+			elevator = "있음";
+		} else{
+			elevator = "없음";
+		}
+		
+		
+		addressess.append("<td class='cell'>");
+		addressess.append(address);
+		addressess.append("</td>");
+		
+		contract.append("<td class='cell'>");
+		contract.append(contractType);
+		contract.append("</td>");
+		
+		area.append("<td class='cell'>");
+		area.append("<section>");
+		area.append("<div class='input-group mb-3'>");
+		area.append("<span style='margin-right: 10px; margin-top: 10px;'>공급면적</span>");
+		area.append("<input type='text' class='form-control' value='"+area1+"' style='width: 100%; margin-top: 5px;'>");
+		area.append("<div class='input-group-append'>");
+		area.append("<span class='input-group-text' style='margin-right: 10px; margin-top: 5px;'>m²</span>");
+		area.append("</div></div>");
+		area.append("<div class='input-group mb-3'>");
+		area.append("<span style='margin-right: 10px; margin-top: 10px;'>전용면적</span>");
+		area.append("<input type='text' class='form-control' value='"+area2+"' style='width: 100%; margin-top: 5px; readonly>");
+		area.append("<div class='input-group-append'>");
+		area.append("<span class='input-group-text' style='margin-right: 10px; margin-top: 5px;''>m²</span>");
+		area.append("</div></div><div class='input-group mb-3'>");
+		area.append("<span style='margin-right: 10px; margin-top: 10px;'>대지면적</span>");
+		area.append("<input type='text' class='form-control' value='"+area3+"' style='width: 100%; margin-top: 5px;' readonly>");
+		area.append("<div class='input-group-append'>                                                                               ");
+		area.append("<span class='input-group-text' style='margin-right: 10px; margin-top: 5px;'>m²</span>");
+		area.append("</div></div></section></td>");
+	
+		option.append("<td class='cell'>                                                 ");
+		option.append("<div class='input-group mb-3'>                                    ");
+		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>방개수</span>"); 
+		option.append("</div>                                                            ");
+		option.append("<div class='input-group mb-3'>                                    ");
+		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>욕실수</span>"); 
+		option.append("</div>                                                            ");
+		option.append("<div class='input-group mb-3'>                                    ");
+		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>세대수</span>"); 
+		option.append("</div>                                                            ");
+		option.append("<div class='input-group mb-3'>                                    ");
+		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>향</span>    ");
+		option.append("</div>                                                            ");
+		option.append("<div class='input-group mb-3'>                                    ");
+		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>난방방식</span>");
+		option.append("</div>                                                            ");
+		option.append("<div class='input-group mb-3'>                                    ");
+		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>주차유무</span>"); 
+		option.append("</div>                                                            ");
+		option.append("<div class='input-group mb-3'>                                    ");
+		option.append("<span style='margin-right: 10px; margin-top: 10px;'>건축년도</span>"); 
+		option.append("</div>");
+		option.append("<div class='input-group mb-3'>");
+		option.append("<span style='margin-right: 10px; margin-top: 10px;'>승강기</span>"); 
+		option.append("</div>");
+		option.append("</td>");
+	
+	
+	
+	}
+	} */
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -154,7 +255,7 @@
 						</td>
 						<td class="cell">
 							<select class="form-control" id="" name="" >
-							<option value="none">매물 선택</option>
+							<option value="none">매물 선택 </option>
 						</td>
 					</tr>
 					
@@ -201,7 +302,14 @@
 								
 								<div class="input-group mb-3">
 									<span style="margin-right: 10px; margin-top: 10px;">전용면적</span> 
-									<input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;">
+									<input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;" readonly>
+									<div class="input-group-append">
+										<span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
+									</div>
+								</div>
+								<div class="input-group mb-3">
+									<span style="margin-right: 10px; margin-top: 10px;">대지면적</span> 
+									<input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;" readonly>
 									<div class="input-group-append">
 										<span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
 									</div>
@@ -212,7 +320,7 @@
 							<section>
 								<div class="input-group mb-3">
 									<span style="margin-right: 10px; margin-top: 10px;">공급면적</span> 
-									<input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;">
+									<input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;" readonly>
 									<div class="input-group-append">
 										<span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
 									</div>
@@ -220,7 +328,7 @@
 								
 								<div class="input-group mb-3">
 									<span style="margin-right: 10px; margin-top: 10px;">전용면적</span> 
-									<input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;">
+									<input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;" readonly>
 									<div class="input-group-append">
 										<span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
 									</div>
@@ -228,7 +336,7 @@
 								
 								<div class="input-group mb-3">
 									<span style="margin-right: 10px; margin-top: 10px;">대지면적</span> 
-									<input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;">
+									<input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;" readonly>
 									<div class="input-group-append">
 										<span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
 									</div>
@@ -239,7 +347,7 @@
 							<section>
 								<div class="input-group mb-3">
 									<span style="margin-right: 10px; margin-top: 10px;">공급면적</span> 
-									<input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;">
+									<input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;" readonly>
 									<div class="input-group-append">
 										<span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
 									</div>
@@ -247,7 +355,7 @@
 								
 								<div class="input-group mb-3">
 									<span style="margin-right: 10px; margin-top: 10px;">전용면적</span> 
-									<input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;">
+									<input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;" readonly>
 									<div class="input-group-append">
 										<span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
 									</div>
@@ -255,7 +363,7 @@
 								
 								<div class="input-group mb-3">
 									<span style="margin-right: 10px; margin-top: 10px;">대지면적</span> 
-									<input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;">
+									<input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;" readonly>
 									<div class="input-group-append">
 										<span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
 									</div>

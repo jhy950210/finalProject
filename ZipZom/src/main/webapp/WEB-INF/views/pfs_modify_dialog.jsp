@@ -46,7 +46,7 @@
 			<!-- modal 헤더 -->
 			<div class="modal-header">
 				<!-- modal 머릿말 -->
-				<h4 class="modal-title">신규 매물 등록</h4>
+				<h4 class="modal-title">매물 수정</h4>
 					<!-- modal창 닫기 버튼 -->
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 	<span aria-hidden="true">&times;</span>
