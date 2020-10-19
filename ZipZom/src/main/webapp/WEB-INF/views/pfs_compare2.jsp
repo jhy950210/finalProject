@@ -32,8 +32,13 @@
 	 select();
 	  
 	 $('#pfsAdd').on('click',function() {
-		 var param = $('#add').serialize();
-		add(param);
+		var param = $('#add').serialize();
+		var seq = new Array(3);
+		seq[0] = $('#seqpfs1').val();
+		seq[1] = $('#seqpfs2').val();
+		seq[2] = $('#seqpfs3').val();
+		console.log(seq[0]);
+		add(param,seq);
 	 });
 	  
 	  
@@ -64,20 +69,70 @@
   }
   // select 끝 셀렉트 목록
   
-  var add = function() {
+  var add = function(param,seq) {
 	  $.ajax({
-          url: 'pfs_compare.json',
-          type: 'get',
+          url: 'pfs_compareView.json',
+          type: 'post',
+          data: param,
           dataType: 'json',
           success: function( json ) {
-        	  var address = '';
-        	  var option = '';
         	  $.each( json.data, function( index, item ) {
-             	 address = item.si + " " + item.gu + " " + item.dong + " " + item.bunji + " " +item.hNumber;
-             	 option = "<option name='"+item.seqPfs+"'>"+address+"</option>";
-             	$('#select2').append(option);
-              });
-        	  
+					if(seq[0] == 0) {
+						console.log(item.area1);
+						$('#seqpfs1').val(item.seqPfs);
+						$('#address1').text(item.address);
+						$('#contractType1').text(item.contractType);
+						$('#budget1').html('매매가 : ' + item.budget1 + '만<br> 전세가 : ' + item.budget2 + '만<br> 월세 : ' + item.budget3 + '만');
+						$('#area11').val(item.area1);
+						$('#area21').val(item.area2);
+						$('#area31').val(item.area3);
+						$('#room1').text('방개수 : ' + item.room + '개');
+						$('#bathroom1').text('욕실수 : '+ item.bathroom + '개' );
+						$('#hNumber1').text('세대 수 : ' + item.numberOfHousehold);
+						$('#direction1').text('향 : ' + item.direction );
+						$('#heatingSystem1').text('난방방식 : ' + item.heatingSystem);
+						$('#parking1').text('주차유무 : ' + item.parking);
+						$('#bYear1').text('건축년도 : ' + item.bYear + '년');
+						$('#elevator1').text('승강기 : ' + item.elevator);
+						$('#context1').text(item.context);
+					} else if(seq[0] != 0 && seq[1] == 0){
+						$('#seqpfs2').val(item.seqPfs);
+						$('#address2').text(item.address);
+						$('#contractType2').text(item.contractType);
+						$('#budget2').html('매매가 : ' + item.budget1 + '만<br> 전세가 : ' + item.budget2 + '만<br> 월세 : ' + item.budget3 + '만');
+						$('#area12').val(item.area1);
+						$('#area22').val(item.area2);
+						$('#area32').val(item.area3);
+						$('#room2').text('방개수 : ' + item.room + '개');
+						$('#bathroom2').text('욕실수 : '+ item.bathroom + '개' );
+						$('#hNumber2').text('세대 수 : ' + item.numberOfHousehold);
+						$('#direction2').text('향 : ' + item.direction );
+						$('#heatingSystem2').text('난방방식 : ' + item.heatingSystem);
+						$('#parking2').text('주차유무 : ' + item.parking);
+						$('#bYear2').text('건축년도 : ' + item.bYear + '년');
+						$('#elevator2').text('승강기 : ' + item.elevator);
+						$('#context2').text(item.context);
+					} else if(seq[1] != 0 && seq[2] == 0) {
+						$('#seqpfs3').val(item.seqPfs);
+						$('#address3').text(item.address);
+						$('#contractType3').text(item.contractType);
+						$('#budget3').html('매매가 : ' + item.budget1 + '만<br> 전세가 : ' + item.budget2 + '만<br> 월세 : ' + item.budget3 + '만');
+						$('#area13').val(item.area1);
+						$('#area23').val(item.area2);
+						$('#area33').val(item.area3);
+						$('#room3').text('방개수 : ' + item.room + '개');
+						$('#bathroom3').text('욕실수 : '+ item.bathroom + '개' );
+						$('#hNumber3').text('세대 수 : ' + item.numberOfHousehold);
+						$('#direction3').text('향 : ' + item.direction );
+						$('#heatingSystem3').text('난방방식 : ' + item.heatingSystem);
+						$('#parking3').text('주차유무 : ' + item.parking);
+						$('#bYear3').text('건축년도 : ' + item.bYear + '년');
+						$('#elevator3').text('승강기 : ' + item.elevator);
+						$('#context3').text(item.context);
+					} else {
+						alert('3개까지만 됩니다. 새로고침해주세요')
+					}
+               });
           },
           error: function( e ) {
              alert( '서버 에러 ' + e );
@@ -168,21 +223,22 @@
         <div class="card-body" >
            <div class="form-group row">
               <section class="col-md-6">
-              <form name="add" id="add">      
+              <form name="add" id="add" method="post">
                <div class="input-group">
                
                <!-- 주소 검색 -->
-               <select class="form-control select2"" id="select2" name="" style="margin-top:10px;">
+               <select class="form-control select2" id="select2" name="seqPfs" style="margin-top:10px;">
                   <option value="none">동이름, 번지를 입력해주세요.</option>
                   <!-- <option>서울특별시 서초구 강남대로6길 66-4 (양재동)</option> -->
                </select>
+               </div>
                </form>
             </section>
             <section class="col-md-6">      
                <div class="input-group">      
                   <button type="button" id="pfsAdd" class="btn btn-outline-primary" value="추가하기" style="width: 100px; margin-top:5px;">
                        추가하기
-                       </button>
+                  </button>
                                          
                </div>
             </section>
@@ -200,37 +256,43 @@
                <tr class="top">
                   <th class="cell head">주소</th>
                   <td class="cell">
+                  <!-- <input type="text" id="address1" name="address1" value="" style="width: 100%; margin-top: 5px; border: none;" readonly /> -->
+                  <textarea rows="2" cols="1" id="address1" style="width: 100%; margin-top: 5px; border: none;" readonly></textarea>
                   </td>
                   <td class="cell">
+                  <!-- <input type="text" id="address2" name="address2" value="" style="width: 100%; margin-top: 5px; border: none" readonly/> -->
+                  <textarea rows="2" cols="1" id="address2" style="width: 100%; margin-top: 5px; border: none;" readonly></textarea>
                   </td>
                   <td class="cell">
+                  <!-- <input type="text" id="address3" name="address3" value="" style="width: 100%; margin-top: 5px; border: none" readonly/> -->
+                  <textarea rows="2" cols="1" id="address3" style="width: 100%; margin-top: 5px; border: none;" readonly></textarea>
                   </td>
                </tr>
                
                <!-- 거래 유형 출력 -->
                <tr>
                   <th class="cell head">거래유형</th>
-                  <td id="" class="cell">
+                  <td id="contractType1" class="cell">
                   
                   </td>
-                  <td id="" class="cell">
+                  <td id="contractType2" class="cell">
                   
                   </td>
-                  <td id="" class="cell">
-                  
+                  <td id="contractType3" class="cell">
+                 
                   </td>
                </tr>
                
                <!-- 거래 가격 출력 -->
                <tr>
                   <th class="cell head">거래가격</th>
-                  <td id="" class="cell">
+                  <td id="budget1" class="cell">
                   
                   </td>
-                  <td id="" class="cell">
+                  <td id="budget2" class="cell">
                   
                   </td>
-                  <td id="" class="cell">
+                  <td id="budget3" class="cell">
                   
                   </td>
                </tr>
@@ -242,15 +304,15 @@
                      <section>
                         <div class="input-group mb-3">
                            <span style="margin-right: 10px; margin-top: 10px;">공급면적</span> 
-                           <input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;" readonly>
+                           <input type="text" name="area1" id="area11" class="form-control" style="width: 100%; margin-top: 5px; border: none; text-align:right;" readonly>
                            <div class="input-group-append">
-                              <span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
+                              <span class="input-group-text" style="margin-right: 10px; margin-top: 5px; text-align:right;">m²</span>
                            </div>
                         </div>
                         
                         <div class="input-group mb-3">
                            <span style="margin-right: 10px; margin-top: 10px;">전용면적</span> 
-                           <input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;" readonly>
+                           <input type="text" name="area2" id="area21" class="form-control" style="width: 100%; margin-top: 5px; border: none; text-align:right;" readonly>
                            <div class="input-group-append">
                               <span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
                            </div>
@@ -258,7 +320,7 @@
                         
                         <div class="input-group mb-3">
                            <span style="margin-right: 10px; margin-top: 10px;">대지면적</span> 
-                           <input type="text" name="area1" id="area1" class="form-control" style="width: 100%; margin-top: 5px;" readonly>
+                           <input type="text" name="area3" id="area31" class="form-control" style="width: 100%; margin-top: 5px; border: none; text-align:right;" readonly>
                            <div class="input-group-append">
                               <span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
                            </div>
@@ -269,7 +331,7 @@
                      <section>
                         <div class="input-group mb-3">
                            <span style="margin-right: 10px; margin-top: 10px;">공급면적</span> 
-                           <input type="text" name="area1" id="area12" class="form-control" style="width: 100%; margin-top: 5px;" readonly>
+                           <input type="text" name="area1" id="area12" class="form-control" style="width: 100%; margin-top: 5px; border: none; text-align:right;" readonly>
                            <div class="input-group-append">
                               <span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
                            </div>
@@ -277,7 +339,7 @@
                         
                         <div class="input-group mb-3">
                            <span style="margin-right: 10px; margin-top: 10px;">전용면적</span> 
-                           <input type="text" name="area1" id="area12" class="form-control" style="width: 100%; margin-top: 5px;" readonly>
+                           <input type="text" name="area2" id="area22" class="form-control" style="width: 100%; margin-top: 5px; border: none; text-align:right;" readonly>
                            <div class="input-group-append">
                               <span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
                            </div>
@@ -285,7 +347,7 @@
                         
                         <div class="input-group mb-3">
                            <span style="margin-right: 10px; margin-top: 10px;">대지면적</span> 
-                           <input type="text" name="area1" id="area12" class="form-control" style="width: 100%; margin-top: 5px;" readonly>
+                           <input type="text" name="area3" id="area32" class="form-control" style="width: 100%; margin-top: 5px; border: none; text-align:right;" readonly>
                            <div class="input-group-append">
                               <span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
                            </div>
@@ -296,7 +358,7 @@
                      <section>
                         <div class="input-group mb-3">
                            <span style="margin-right: 10px; margin-top: 10px;">공급면적</span> 
-                           <input type="text" name="area1" id="area13" class="form-control" style="width: 100%; margin-top: 5px;" readonly>
+                           <input type="text" name="area1" id="area13" class="form-control" style="width: 100%; margin-top: 5px; border: none; text-align:right;" readonly>
                            <div class="input-group-append">
                               <span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
                            </div>
@@ -304,7 +366,7 @@
                         
                         <div class="input-group mb-3">
                            <span style="margin-right: 10px; margin-top: 10px;">전용면적</span> 
-                           <input type="text" name="area1" id="area13" class="form-control" style="width: 100%; margin-top: 5px;" v>
+                           <input type="text" name="area1" id="area23" class="form-control" style="width: 100%; margin-top: 5px; border: none; text-align:right;" readonly>
                            <div class="input-group-append">
                               <span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
                            </div>
@@ -312,7 +374,7 @@
                         
                         <div class="input-group mb-3">
                            <span style="margin-right: 10px; margin-top: 10px;">대지면적</span> 
-                           <input type="text" name="area1" id="area13" class="form-control" style="width: 100%; margin-top: 5px;" readonly>
+                           <input type="text" name="area1" id="area33" class="form-control" style="width: 100%; margin-top: 5px; border: none; text-align:right;" readonly>
                            <div class="input-group-append">
                               <span class="input-group-text" style="margin-right: 10px; margin-top: 5px;">m²</span>
                            </div>
@@ -327,80 +389,80 @@
                   <th class="cell head">상세정보</th>
                   <td class="cell">
                      <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">방개수</span> 
+                        <span id="room1" style="margin-right: 10px; margin-top: 10px;">방개수</span> 
                      </div>
                      <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">욕실수</span> 
+                        <span id="bathroom1" style="margin-right: 10px; margin-top: 10px;">욕실수</span> 
                      </div>
                      <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">세대수</span> 
+                        <span id="hNumber1" style="margin-right: 10px; margin-top: 10px;">세대수</span> 
                      </div>
                      <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">향</span> 
+                        <span id="direction1" style="margin-right: 10px; margin-top: 10px;">향</span> 
                      </div>
                      <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">난방방식</span> 
+                        <span id="heatingSystem1" style="margin-right: 10px; margin-top: 10px;">난방방식</span> 
                      </div>
                      <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">주차유무</span> 
+                        <span id="parking1" style="margin-right: 10px; margin-top: 10px;">주차유무</span> 
                      </div>
                      <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">건축년도</span> 
+                        <span id="bYear1" style="margin-right: 10px; margin-top: 10px;">건축년도</span> 
                      </div>
                      <div class="input-group mb-3">
-                        <span id=""  style="margin-right: 10px; margin-top: 10px;">승강기</span> 
+                        <span id="elevator1"  style="margin-right: 10px; margin-top: 10px;">승강기</span> 
+                     </div>
+                  </td>
+                  <td class="cell">
+                    <div class="input-group mb-3">
+                        <span id="room2" style="margin-right: 10px; margin-top: 10px;">방개수</span> 
+                     </div>
+                     <div class="input-group mb-3">
+                        <span id="bathroom2" style="margin-right: 10px; margin-top: 10px;">욕실수</span> 
+                     </div>
+                     <div class="input-group mb-3">
+                        <span id="hNumber2" style="margin-right: 10px; margin-top: 10px;">세대수</span> 
+                     </div>
+                     <div class="input-group mb-3">
+                        <span id="direction2" style="margin-right: 10px; margin-top: 10px;">향</span> 
+                     </div>
+                     <div class="input-group mb-3">
+                        <span id="heatingSystem2" style="margin-right: 10px; margin-top: 10px;">난방방식</span> 
+                     </div>
+                     <div class="input-group mb-3">
+                        <span id="parking2" style="margin-right: 10px; margin-top: 10px;">주차유무</span> 
+                     </div>
+                     <div class="input-group mb-3">
+                        <span id="bYear2" style="margin-right: 10px; margin-top: 10px;">건축년도</span> 
+                     </div>
+                     <div class="input-group mb-3">
+                        <span id="elevator2"  style="margin-right: 10px; margin-top: 10px;">승강기</span> 
                      </div>
                   </td>
                   <td class="cell">
                      <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">방개수</span> 
+                        <span id="room3" style="margin-right: 10px; margin-top: 10px;">방개수</span> 
                      </div>
                      <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">욕실수</span> 
+                        <span id="bathroom3" style="margin-right: 10px; margin-top: 10px;">욕실수</span> 
                      </div>
                      <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">세대수</span> 
+                        <span id="hNumber3" style="margin-right: 10px; margin-top: 10px;">세대수</span> 
                      </div>
                      <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">향</span> 
+                        <span id="direction3" style="margin-right: 10px; margin-top: 10px;">향</span> 
                      </div>
                      <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">난방방식</span> 
+                        <span id="heatingSystem3" style="margin-right: 10px; margin-top: 10px;">난방방식</span> 
                      </div>
                      <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">주차유무</span> 
+                        <span id="parking3" style="margin-right: 10px; margin-top: 10px;">주차유무</span> 
                      </div>
                      <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">건축년도</span> 
+                        <span id="bYear3" style="margin-right: 10px; margin-top: 10px;">건축년도</span> 
                      </div>
                      <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">승강기</span> 
-                     </div>
-                  </td>
-                  <td class="cell">
-                     <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">방개수</span> 
-                     </div>
-                     <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">욕실수</span> 
-                     </div>
-                     <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">세대수</span> 
-                     </div>
-                     <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">향</span> 
-                     </div>
-                     <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">난방방식</span> 
-                     </div>
-                     <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">주차유무</span> 
-                     </div>
-                     <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">건축년도</span> 
-                     </div>
-                     <div class="input-group mb-3">
-                        <span id="" style="margin-right: 10px; margin-top: 10px;">승강기</span>
+                        <span id="elevator3"  style="margin-right: 10px; margin-top: 10px;">승강기</span> 
                      </div>
                   </td>
                </tr>
@@ -409,13 +471,13 @@
                <!-- 메모 출력 -->
                <tr>
                   <th class="cell head">메 모</th>
-                  <td id="" class="cell">
+                  <td id="context1" class="cell">
                   
                   </td>
-                  <td id="" class="cell">
+                  <td id="context2" class="cell">
                   
                   </td>
-                  <td id="" class="cell">
+                  <td id="context3" class="cell">
                   
                   </td>
                </tr>

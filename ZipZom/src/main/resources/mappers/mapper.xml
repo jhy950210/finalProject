@@ -249,8 +249,8 @@
 	</delete>
 	
 	<select id="pfsCompare" parameterType="modelTO.pfsTO" resultType="modelTO.pfsTO">
-	select si,gu,dong,bunji,h_number hNumber,b_type bType,contract_type contractType,budget1,budget2,budget3,area1,area2,area3,room,bathroom,
-	direction,heating_system heatingSystem,parking,b_year bYear,elevator,context
+	select seq_pfs seqPfs, si,gu,dong,bunji,h_number hNumber,b_type bType,contract_type contractType,budget1,budget2,budget3,area1,area2,area3,room,bathroom,
+	direction,heating_system heatingSystem,parking,date_format(b_year,'%Y') bYear,elevator,context,number_of_household numberOfHousehold
 	from property_for_sale
 	where seq_pfs = #{seqPfs}
 	</select>

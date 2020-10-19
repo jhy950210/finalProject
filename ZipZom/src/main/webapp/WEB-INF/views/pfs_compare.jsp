@@ -12,8 +12,9 @@
 	StringBuffer memo = new StringBuffer();
 	if(request.getAttribute("pcList") != null) {
 	ArrayList<pfsTO> pcList = (ArrayList<pfsTO>)request.getAttribute("pcList");
-
+	int i=1;
 	for(pfsTO pto : pcList) {
+		
 		String address = pto.getSi() + " " + pto.getGu() + " " + pto.getDong() + " " + pto.getBunji() + " " + pto.gethNumber();
 		int seqPfs = pto.getSeqPfs();
 		String contractType = pto.getContractType();
@@ -42,10 +43,9 @@
 		} else{
 			elevator = "없음";
 		}
-		System.out.println("주소 : "+address);
 		
 		addressess.append("<td class='cell'>");
-		addressess.append(address);
+		addressess.append("<input type='text' name='address"+i+"' value='"+address+"' readonly style='width: 100%; margin-top: 5px;'/>");
 		addressess.append("</td>");
 		
 		contract.append("<td class='cell'>");
@@ -60,13 +60,13 @@
 		area.append("<section>");
 		area.append("<div class='input-group mb-3'>");
 		area.append("<span style='margin-right: 10px; margin-top: 10px;'>공급면적</span>");
-		area.append("<input type='text' class='form-control' value='"+area1+"' style='width: 100%; margin-top: 5px;'>");
+		area.append("<input type='text' class='form-control' value='"+area1+"' style='width: 100%; margin-top: 5px;'readonly>");
 		area.append("<div class='input-group-append'>");
 		area.append("<span class='input-group-text' style='margin-right: 10px; margin-top: 5px;'>m²</span>");
 		area.append("</div></div>");
 		area.append("<div class='input-group mb-3'>");
 		area.append("<span style='margin-right: 10px; margin-top: 10px;'>전용면적</span>");
-		area.append("<input type='text' class='form-control' value='"+area2+"' style='width: 100%; margin-top: 5px; readonly>");
+		area.append("<input type='text' class='form-control' value='"+area2+"' style='width: 100%; margin-top: 5px;' readonly>");
 		area.append("<div class='input-group-append'>");
 		area.append("<span class='input-group-text' style='margin-right: 10px; margin-top: 5px;''>m²</span>");
 		area.append("</div></div><div class='input-group mb-3'>");
@@ -76,26 +76,26 @@
 		area.append("<span class='input-group-text' style='margin-right: 10px; margin-top: 5px;'>m²</span>");
 		area.append("</div></div></section></td>");
 	
-		option.append("<td class='cell'>                                                 ");
-		option.append("<div class='input-group mb-3'>                                    ");
+		option.append("<td class='cell'>");
+		option.append("<div class='input-group mb-3'>");
 		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>방개수 : "+room+"개</span>"); 
-		option.append("</div>                                                            ");
-		option.append("<div class='input-group mb-3'>                                    ");
+		option.append("</div>");
+		option.append("<div class='input-group mb-3'>");
 		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>욕실수 : "+bathroom+"개</span>"); 
-		option.append("</div>                                                            ");
-		option.append("<div class='input-group mb-3'>                                    ");
+		option.append("</div>");
+		option.append("<div class='input-group mb-3'>");
 		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>세대수 : "+numberOfHousehold+"</span>"); 
-		option.append("</div>                                                            ");
-		option.append("<div class='input-group mb-3'>                                    ");
-		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>향 : "+direction+"</span>    ");
-		option.append("</div>                                                            ");
-		option.append("<div class='input-group mb-3'>                                    ");
+		option.append("</div>");
+		option.append("<div class='input-group mb-3'>");
+		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>향 : "+direction+"</span>");
+		option.append("</div>");
+		option.append("<div class='input-group mb-3'>");
 		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>난방방식 : "+heatingSystem+"</span>");
-		option.append("</div>                                                            ");
-		option.append("<div class='input-group mb-3'>                                    ");
+		option.append("</div>");
+		option.append("<div class='input-group mb-3'>");
 		option.append("	<span style='margin-right: 10px; margin-top: 10px;'>주차유무 : "+parking+"</span>"); 
-		option.append("</div>                                                            ");
-		option.append("<div class='input-group mb-3'>                                    ");
+		option.append("</div>");
+		option.append("<div class='input-group mb-3'>");
 		option.append("<span style='margin-right: 10px; margin-top: 10px;'>건축년도 : "+bYear+"년</span>"); 
 		option.append("</div>");
 		option.append("<div class='input-group mb-3'>");
@@ -108,8 +108,9 @@
 		memo.append(context);
 		memo.append("</td>");
 	
-	
+	i++;
 	}
+	
 	} 
 
 %>
@@ -233,31 +234,15 @@
         </div>
         <!-- 카드 바디 -->
         <div class="card-body" >
-        	<div class="form-group row">
-        		<div>
-        		<button type="button" class="btn btn-block btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off" style="width: 200px;">전 체</button>
-        		</div>
-        		<div>
-				<button type="button" class="btn btn-block btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off" style="width: 200px;">아파트</button>
-				</div>
-        		<div>
-				<button type="button" class="btn btn-block btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off" style="width: 200px;" >오피스텔</button>
-				</div>
-        		<div>
-				<button type="button" class="btn btn-block btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off" style="width: 200px;">다세대/빌라</button>
-				</div>
-        		<div>
-				<button type="button" class="btn btn-block btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off" style="width: 200px;">다가구/단독</button>
-				</div>
-			</div>
-			
+
+			<form action="./consulting_map.do" method="post" name="wfrm">
 			<div class="form-group">
 				<table class="table table-bordered" >
 				
 					<!-- 주소 선택 -->
 					<tr class="top">
 						<th class="cell head">주소</th>
-						<%=addressess %>
+						<%=addressess%>
 <!-- 						<td class="cell">
 							<select class="form-control" id="" name="" >
 							<option value="none">매물 선택</option>
@@ -492,8 +477,10 @@
 					
 				</table>
 			</div>
-			
-			
+			<div>
+			<input class="btn btn-primary" type="submit" value="매물 위치 보기" id="wbtn" />
+			</div>
+			</form>
         </div>
       </div>
     </section>
@@ -546,105 +533,6 @@
 <script src="./resources/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="./resources/js/demo.js"></script>
-<!-- DataTables -->
-<script src="./resources/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="./resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="./resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="./resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<!-- Page script -->
-<!-- <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": true,
-    });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>
-<script>
-  $(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
 
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    })
-
-    //Datemask dd/mm/yyyy
-    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-    //Datemask2 mm/dd/yyyy
-    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-    //Money Euro
-    $('[data-mask]').inputmask()
-
-    //Date range picker
-    $('#reservationdate').datetimepicker({
-        format: 'L'
-    });
-    
-    //Date range picker1
-    $('#reservation1').daterangepicker()
-    //Date range picker2
-    $('#reservation2').daterangepicker()
-    
-    //Date range picker with time picker
-    $('#reservationtime').daterangepicker({
-      timePicker: true,
-      timePickerIncrement: 30,
-      locale: {
-        format: 'MM/DD/YYYY hh:mm A'
-      }
-    })
-    //Date range as a button
-    $('#daterange-btn').daterangepicker(
-      {
-        ranges   : {
-          'Today'       : [moment(), moment()],
-          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        },
-        startDate: moment().subtract(29, 'days'),
-        endDate  : moment()
-      },
-      function (start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-      }
-    )
-
-    //Timepicker
-    $('#timepicker').datetimepicker({
-      format: 'LT'
-    })
-    
-    //Bootstrap Duallistbox
-    $('.duallistbox').bootstrapDualListbox()
-
-    //Colorpicker
-    $('.my-colorpicker1').colorpicker()
-    //color picker with addon
-    $('.my-colorpicker2').colorpicker()
-
-    $('.my-colorpicker2').on('colorpickerChange', function(event) {
-      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-    });
-
-    $("input[data-bootstrap-switch]").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    });
-
-  })
-</script> -->
 </body>
 </html>

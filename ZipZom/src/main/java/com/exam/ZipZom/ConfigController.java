@@ -33,6 +33,7 @@ public class ConfigController {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
 	@Autowired
 	private TestMapper testmapper;
 	
@@ -43,6 +44,14 @@ public class ConfigController {
 		ModelAndView modelAndView = new ModelAndView();
 		request.setAttribute("id", id);
 		modelAndView.setViewName("jusoPopup");
+
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/jusoPopup2.do")
+	public ModelAndView jusoPupupRequest2(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("jusoPopup2");
 
 		return modelAndView;
 	}
@@ -619,7 +628,7 @@ public class ConfigController {
 	
 	@RequestMapping("/consulting_map.do")
 	public String rtpMap(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
-
+			
 		return "consulting_map";
 	}
 	
@@ -654,14 +663,17 @@ public class ConfigController {
 		return "data/pfs_list";
 	}
 	
-	@RequestMapping("/pfs_compareAdd.json")
-	public String pfsCompareView(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session) {
-		pfsTO pto = new pfsTO();
-		pto.setSeqPfs(Integer.parseInt(request.getParameter("")));
+	@RequestMapping("/pfs_compareView.json")
+	public String pfsCompareView(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session,pfsTO pto) {
+		//System.out.println(pto.getSeqPfs());
+		
+		pto = testmapper.pfsCompare(pto);
+		request.setAttribute("pto", pto);
 			
-		return "data/pfs_list";
+		return "data/pfs_compare_json";
 	}
 	
+	// ajax쓰는 매물 비교페이지
 	@RequestMapping("/pfs_compare2.do")
 	public String pfsCompareJson(HttpServletRequest request, HttpServletResponse response,Model model) {
 		return "pfs_compare2";

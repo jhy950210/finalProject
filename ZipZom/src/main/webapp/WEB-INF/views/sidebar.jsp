@@ -84,7 +84,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <h3 class="w3-wide"><b>ZipZom</b></h3>
   </div>
   <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-    <a href="./newDashboard.jsp" class="w3-bar-item w3-button">Home</a>
+    <a href="./newDashboard.do" class="w3-bar-item w3-button">Home</a>
     <a href="./intro_website.jsp" class="w3-bar-item w3-button">About</a>
     <a href="./customer_manage.do" class="w3-bar-item w3-button">고객관리</a>
     

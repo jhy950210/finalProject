@@ -79,7 +79,7 @@
 			<br/>
 			<a href="./forgot_id.action"><p class="small">아이디 찾기</p></a>
 			
-			<a href="./forgot_password.action"><p class="small">비밀번호 찾기?</p></a>
+			<a href="./forgot_password.action"><p class="small">비밀번호 찾기</p></a>
 			
 			<a href="./register.action"><p class="small">회원가입</p></a>
 		</div>
