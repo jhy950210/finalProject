@@ -254,4 +254,112 @@
 	from property_for_sale
 	where seq_pfs = #{seqPfs}
 	</select>
+	
+	<select id="customerFind" parameterType="modelTO.customerTO" resultType="modelTO.customerTO">
+	select name,b_type bType,type,progress,contract_type contractType,date_format(b_year,'%Y') bYear,
+	budget_t1 budgetT1,budget_t2 budgetT2,budget_t3 budgetT3,
+	area2,room,floor,elevator from customer where name=#{name} and tel=#{tel} limit 0,1
+	</select>
+	
+	<!-- 일정관리 view 페이지 select sql문 -->
+	<select id="scheduleSelect" parameterType="modelTO.scheduleTO" resultType="modelTO.scheduleTO">
+		select SEQ_S as seqS,
+		PSEQ_S as pseqS,
+		CUSTOMER_NAME as customerName,
+		CUSTOMER_TEL as customerTel,
+		CUSTOMER_STATE as customerState,
+		start, 
+		end, 
+		CONTEXT, 
+		SCHEDULE_TYPE as scheduleType, 
+		PROGRESS, 
+		B_TYPE as bType, 
+		CONTRACT_TYPE as contractType,
+		backgroundColor, 
+		textColor, 
+		allday
+		from schedule
+		where PSEQ_S = ${pseqS}
+	</select>
+	<!-- 일정 추가 sql문 -->
+	<insert id="scheduleInsert" parameterType="modelTO.scheduleTO">
+		insert into schedule (
+		PSEQ_S,
+		CUSTOMER_NAME,
+		CUSTOMER_TEL,
+		CUSTOMER_STATE,
+		start, 
+		end, 
+		CONTEXT, 
+		SCHEDULE_TYPE,
+		PROGRESS, 
+		B_TYPE,
+		CONTRACT_TYPE,
+		backgroundColor, 
+		textColor, 
+		allDay
+		) 
+		values (
+		${pseqS}, 
+		#{customerName}, 
+		#{customerTel}, 
+		#{customerState}, 
+		#{start},
+		#{end},
+		#{context}, 
+		#{scheduleType}, 
+		#{progress},
+		#{bType}, 
+		#{contractType},
+		#{backgroundColor}, 
+		#{textColor}, 
+		#{allDay}
+		)
+	</insert>
+	<!--일정 변경 sql문 -->
+	<update id="scheduleUpdate" parameterType="modelTO.scheduleTO">
+		UPDATE schedule SET
+		CUSTOMER_TEL = #{customerTel},
+		CUSTOMER_STATE = #{customerState},
+		start = #{start},
+		end = #{end},
+		CONTEXT = #{context},
+		SCHEDULE_TYPE = #{scheduleType},
+		PROGRESS = #{progress},
+		B_TYPE = #{bType},
+		backgroundColor = #{backgroundColor},
+		textColor = #{textColor},
+		allday = ${allDay}
+		WHERE SEQ_S = ${seqS}
+	</update>
+	<!--드래그로 일정 변경 sql문 -->
+	<update id="scheduleDateUpdate" parameterType="modelTO.scheduleTO">
+		UPDATE schedule SET
+		start = #{start},
+		end = #{end}
+		WHERE SEQ_S = ${seqS}
+	</update>
+	<!-- 일정 삭제 sql문 -->
+	<delete id="scheduleDelete" parameterType="modelTO.scheduleTO">
+		delete from schedule where SEQ_S=${seqS}
+	</delete>
+	<!-- 회원탈퇴 sql문 
+	<delete id="userDelete" parameterType="modelTO.userTO">
+		delete from user where where SEQ_U=${seqU}, password=#{password}
+	</delete>-->
+	<!-- 관리자 회원탈퇴 sql문
+	<delete id="userAdminDelete" parameterType="modelTO.userTO">
+		delete from user where where SEQ_U=${seqU}
+	</delete> -->
+	<!-- 관리자 유저관리 view sql문 
+	<select id="userAdminSelect" resultType="modelTO.userTO">
+		select SEQ_U as seqU,
+		NAME as name,
+		ID as id,
+		EMAIL as email,
+		ADDRESS as address,
+		TEL1 as tel1, 
+		TEL2 as tel2
+		from user
+	</select>-->
 </mapper>

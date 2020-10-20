@@ -46,30 +46,37 @@
   $(document).ready(function() {
       readServer();
       
-      $("#example2 tbody").on("click","tr",function(){ 	
-		//console.log($(this).find('td:eq(0)').text());
-      	viewServer($(this).find('td:eq(0)').text());
+      
+      $("#example2 tbody").on("click","tr",function(){    
+      //console.log($(this).find('td:eq(0)').text());
+         viewServer($(this).find('td:eq(0)').text());
       });
-
+      
+      
+       $('#customerFind').on('click', function(){
+         var param = $('#find').serialize();
+         	customerInfo(param);
+         })
+                
        $('#pfsCompare').on('click', function() {
-			var checkbox = $('input:checkbox[name="selectPfs"]:checked');
-			var check = new Array();
-			checkbox.each(function(index) {
-				check[index] = checkbox[index].value;
-				console.log(index);
-			})
-			if(check[1] == null && check[0] != null) {
-				alert('2개 이상 선택해주세요');
-			}
-			else if(check[2] == null && check[1] != null){
-				location.href = './pfs_compare.do?seqPfs='+check[0]+'&seqPfs='+check[1];
-			} else if(check[2] != null) {
-				location.href = './pfs_compare.do?seqPfs='+check[0]+'&seqPfs='+check[1]+'&seqPfs='+check[2]
-			} else {
-				alert('3개까지 선택 가능합니다.');
-			}
+         var checkbox = $('input:checkbox[name="selectPfs"]:checked');
+         var check = new Array();
+         checkbox.each(function(index) {
+            check[index] = checkbox[index].value;
+            console.log(index);
+         })
+         if(check[1] == null && check[0] != null) {
+            alert('2개 이상 선택해주세요');
+         }
+         else if(check[2] == null && check[1] != null){
+            location.href = './pfs_compare.do?seqPfs='+check[0]+'&seqPfs='+check[1];
+         } else if(check[2] != null) {
+            location.href = './pfs_compare.do?seqPfs='+check[0]+'&seqPfs='+check[1]+'&seqPfs='+check[2]
+         } else {
+            alert('3개까지 선택 가능합니다.');
+         }
       }) 
-	
+   
    });
    // ready 끝
       
@@ -82,20 +89,20 @@
           success: function( json ) {  
              $( '#myTable' ).empty();
              $.each( json.data, function( index, item ) {
-            	 var mytable = '<tr data-toggle="modal" data-target="#modal2" >'
-            		 mytable += '<th onclick="event.cancelBubble=true">';
-            		 mytable += '<div class="custom-control custom-checkbox">';
-            		 mytable += '<input class="custom-control-input" type="checkbox" name="selectPfs" id="customCheckbox'+index+'" value="'+item.seqPfs+'">';
-            		 mytable += '<label for="customCheckbox'+index+'" class="custom-control-label"></label></div></th>';
-            		 mytable += '<td>'+item.seqPfs+'</td>';
-                	 mytable += '<td>'+item.bType+'</td>';
-	                 mytable += '<td>'+item.contractType+'</td>';
-	                 mytable += '<td>'+item.si+' '+item.gu+' '+' '+item.dong+' '+item.bunji+' '+item.hNumber+'</td>';
-	                 mytable += '<td>'+item.budget1+'</td>';
-	                 mytable += '<td>'+item.budget2+'</td>' ;
-	                 mytable += '<td>'+item.budget3+'</td>';
-	                 mytable += '<td>'+item.loan+'</td>';
-	                 mytable += '<td>'+item.wdate+'</td></tr>';
+                var mytable = '<tr data-toggle="modal" data-target="#modal2" >'
+                   mytable += '<th onclick="event.cancelBubble=true">';
+                   mytable += '<div class="custom-control custom-checkbox">';
+                   mytable += '<input class="custom-control-input" type="checkbox" name="selectPfs" id="customCheckbox'+index+'" value="'+item.seqPfs+'">';
+                   mytable += '<label for="customCheckbox'+index+'" class="custom-control-label"></label></div></th>';
+                   mytable += '<td>'+item.seqPfs+'</td>';
+                    mytable += '<td>'+item.bType+'</td>';
+                    mytable += '<td>'+item.contractType+'</td>';
+                    mytable += '<td>'+item.si+' '+item.gu+' '+' '+item.dong+' '+item.bunji+' '+item.hNumber+'</td>';
+                    mytable += '<td>'+item.budget1+'</td>';
+                    mytable += '<td>'+item.budget2+'</td>' ;
+                    mytable += '<td>'+item.budget3+'</td>';
+                    mytable += '<td>'+item.loan+'</td>';
+                    mytable += '<td>'+item.wdate+'</td></tr>';
                 
                 $( '#myTable' ).append( mytable );
              });
@@ -117,7 +124,7 @@
        })
       }
       // readServer 끝
-
+      
       
       var viewServer = function(seqPfs) {
           $.ajax({
@@ -125,32 +132,32 @@
               type: 'get',
               dataType: 'json',
               success: function( json ) {
-              	$.each( json, function( index, item ) {
+                 $.each( json, function( index, item ) {
                      // json이 json index는 키값 item은 value값
-              		//console.log(item)
-              	 	var name = ''+ document.getElementById(index).getAttribute('name');
+                    //console.log(item)
+                     var name = ''+ document.getElementById(index).getAttribute('name');
                      //console.log(item);
-                     //console.log(name);
+                     console.log(name);
                      if(name == 'rooms') {
-                  	   json['room'] = json['room'] + '개';
-                  	   $('#form2').find('#room').val(json['room']);
-                  	  // console.log(name);
-                  	   //console.log(json['room']);
+                        json['room'] = json['room'] + '개';
+                        $('#form2').find('#room').val(json['room']);
+                        console.log(name);
+                        console.log(json['room']);
                      }
                      if(name == 'bathrooms') {
-                    	 json['bathroom'] = json['bathroom'] + '개';
-                    	   $('#form2').find('#bathroom').val(json['bathroom']);
-                    	   console.log('bath' + json['bathroom']);
+                        json['bathroom'] = json['bathroom'] + '개';
+                          $('#form2').find('#bathroom').val(json['bathroom']);
+                          console.log('bath' + json['bathroom']);
                      }
-              		$('#form2').find('#'+name).val(json[name]);
-              		
-              		
-              		if($('#form2').find('#'+name).attr('type') == 'checkbox' && json[name] == 1){
-              			$('#form2').find('#'+name).prop("checked", true); 
-              		}
+                    $('#form2').find('#'+name).val(json[name]);
+                    
+                    
+                    if($('#form2').find('#'+name).attr('type') == 'checkbox' && json[name] == 1){
+                       $('#form2').find('#'+name).prop("checked", true); 
+                    }
                     // console.log($('#mcfrm').find('#'+name));
                      //console.log(json[index]);
-                 //	$('#name').val(json.name);
+                    $('#name').val(json.name);
                    });
               },
               error: function( e ) {
@@ -160,48 +167,31 @@
       }
       // viewServer 끝
       
-       var modifyServer = function(params) {
-           $.ajax({
-            url: 'pfs_modify.json',
-            type: 'post',
-            data:params,
-            dataType: 'json',
-            success: function( data ) {
-               if(data.flag == 1) {
-                  $('#example2').DataTable().destroy();
-                  readServer();
-               } else {
-                  alert('잘못 입력했습니다')
-               }
-            },
-            error: function( e ) {
-               alert( '서버 에러 ' + e );
-            }
-         })
-        };
-        
-        var deleteServer = function(check) {
-            $.ajax({
-             url: 'pfs_delete.json',
-             type: 'get',
-             traditional: true,
-             data:{
-             	check:check
-             	},
-             dataType: 'json',
-             success: function( data ) {
-                if(data.flag == 1) {
-                   $('#example2').DataTable().destroy();
-                   readServer(1);
-                } else {
-                   alert('잘못 입력했습니다')
-                }
-             },
-             error: function( e ) {
-                alert( '서버 에러 ' + e );
-             }
-          })
-          };
+      
+      var customerInfo = function(param) {
+    	         $.ajax({
+    	          url: 'customerFind.json',
+    	          type: 'post',
+    	          data:param,
+    	          dataType: 'json',
+    	          success: function( json ) {
+    	        	  $.each( json.data, function( index, item ) {
+    	             if(item.name != '') {
+    	            	 $('#findname').val(item.name);
+    	            	 console.log(item.name);
+    	             } else {
+    	                alert('고객이 없습니다')
+    	             }
+    	       });
+    	          },
+    	          error: function( e ) {
+    	             alert( '서버 에러 ' + e );
+    	          }
+    	       })
+    	      };
+      
+      
+      
       
       </script>
 </head>
@@ -270,138 +260,138 @@
 
       <!-- Default box -->
       <div class="card">
-      	<!-- 카드 헤더 -->
-	  	<div class="card-header">
-			<h3 class="card-title">정보 입력</h3> 
-		</div>
-		
-		<!-- 카드 바디 -->
-		<div class="card-body">
-			<div class="form-group row">
-				<section class="col-md-4">		
-					<div class="input-group">
-					<!-- 고객 이름 -->
-	         		<li style="margin-right: 10px; margin-top: 10px;">고객 이름</li>
-					<input type="text" class="form-control" id="findname" placeholder="이름" style="width: 120px; margin-right: 10px; margin-top: 5px;" readonly>
-					<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-rtp" style="width: 70px; margin-top:5px;">
+         <!-- 카드 헤더 -->
+        <div class="card-header">
+         <h3 class="card-title">정보 입력</h3> 
+      </div>
+      
+      <!-- 카드 바디 -->
+      <div class="card-body">
+      
+         <div class="form-group row">
+         
+            <section class="col-md-3">
+            
+               <div class="input-group">
+               <!-- 고객 이름 -->
+                  <li style="margin-right: 10px; margin-top: 10px;">고객 이름</li>
+               <input type="text" class="form-control" id="findname" placeholder="이름" style="width: 100px; margin-right: 10px; margin-top: 5px;" readonly>
+               <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-match" style="width: 70px; margin-top:5px;">
               		찾기
-              		</button>
-              		
-					</div>
+              	</button>
+               </div>
 
-              		
-				</section>
-				
-			</div>
-			
-			<div class="card">
-				<div class="form-group row" style="margin-left: 10px;">
-					<section class="col-md-3">		
-						<div class="input-group">
-						<!-- 계약 유형 -->
-		         		<span style="margin-right: 10px; margin-top: 10px;">계약 유형</span>
-						<input type="text" class="form-control" id="contract_type" name="contract_type" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
-						</div>
-					</section>
-					
-					<section class="col-md-3">		
-						<div class="input-group">
-						<!-- 매매 예산 -->
-		         		<span style="margin-right: 10px; margin-top: 10px;">매매 예산</span>
-						<input type="text" class="form-control" id="budget_t1" name="budget_t1" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
-						</div>
-					</section>
-					
-					<section class="col-md-3">		
-						<div class="input-group">
-						<!-- 보증금 예산 -->
-		         		<span style="margin-right: 10px; margin-top: 10px;">보증금 예산</span>
-						<input type="text" class="form-control" id="budget_t2" name="budget_t2" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
-						</div>
-					</section>
-					
-					<section class="col-md-3">		
-						<div class="input-group">
-						<!-- 월세 예산 -->
-		         		<span style="margin-right: 10px; margin-top: 10px;">월세 예산</span>
-						<input type="text" class="form-control" id="budget_t3" name="budget_t3" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
-						</div>
-					</section>
-				
-				</div>
-				
-				<div class="form-group row" style="margin-left: 10px;">
-					<section class="col-md-3">		
-						<div class="input-group">
-						<!-- 건물 용도 -->
-		         		<span style="margin-right: 10px; margin-top: 10px;">건물 용도</span>
-						<input type="text" class="form-control" id="b_type" name="b_type" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
-						</div>
-					</section>
-					
-					<section class="col-md-3">		
-						<div class="input-group">
-						<!-- 전용 면적 -->
-		         		<span style="margin-right: 10px; margin-top: 10px;">전용 면적</span>
-						<input type="text" class="form-control" id="area2" name="area2" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
-						</div>
-					</section>
-					
-					<section class="col-md-3">		
-						<div class="input-group">
-						<!-- 건축 년도 -->
-		         		<span style="margin-right: 10px; margin-top: 10px;">건축 년도</span>
-						<input type="text" class="form-control" id="b_year" name="b_year" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
-						</div>
-					</section>
-					
-					<section class="col-md-3">		
-						<div class="input-group">
-						<!-- 주차 유무 -->
-		         		<span style="margin-right: 10px; margin-top: 10px;">주차 유무</span>
-						<input type="text" class="form-control" id="budget_t3" name="budget_t3" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
-						</div>
-					</section>
-				
-				</div>
-				
-				<div class="form-group row" style="margin-left: 10px;">
-					<section class="col-md-3">		
-						<div class="input-group">
-						<!-- 방 개수 -->
-		         		<span style="margin-right: 10px; margin-top: 10px;">방 개수</span>
-						<input type="text" class="form-control" id="room" name="room" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
-						</div>
-					</section>
-					
-					<section class="col-md-3">		
-						<div class="input-group">
-						<!-- 향 -->
-		         		<span style="margin-right: 10px; margin-top: 10px;">향</span>
-						<input type="text" class="form-control" id="direction" name="direction" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
-						</div>
-					</section>
-					
-					<section class="col-md-3">		
-						<div class="input-group">
-						<!-- 층 수 -->
-		         		<span style="margin-right: 10px; margin-top: 10px;">층 수</span>
-						<input type="text" class="form-control" id="floor" name="floor" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
-						</div>
-					</section>
-					
-					<section class="col-md-3">		
-						<div class="input-group">
-						<!-- 승강기 -->
-		         		<span style="margin-right: 10px; margin-top: 10px;">승강기</span>
-						<input type="text" class="form-control" id="elevator" name="elevator" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
-						</div>
-					</section>
-				
-				</div>
-			</div>
-			
-		</div>
+            </section>
+            
+         </div>
+         
+         
+         <div class="card">
+         <form name="customer" id="customer" >
+            <div class="form-group row" style="margin-left: 10px;">
+               <section class="col-md-3"> 
+                  <div class="input-group">
+                  <!-- 계약 유형 -->
+                     <span style="margin-right: 10px; margin-top: 10px;">계약 유형</span>
+                  <input type="text" class="form-control" id="contract_type" name="contract_type" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  </div>
+               </section>
+               
+               <section class="col-md-3">      
+                  <div class="input-group">
+                  <!-- 매매 예산 -->
+                     <span style="margin-right: 10px; margin-top: 10px;">매매 예산</span>
+                  <input type="text" class="form-control" id="budget_t1" name="budget_t1" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  </div>
+               </section>
+               
+               <section class="col-md-3">      
+                  <div class="input-group">
+                  <!-- 보증금 예산 -->
+                     <span style="margin-right: 10px; margin-top: 10px;">보증금 예산</span>
+                  <input type="text" class="form-control" id="budget_t2" name="budget_t2" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  </div>
+               </section>
+               
+               <section class="col-md-3">      
+                  <div class="input-group">
+                  <!-- 월세 예산 -->
+                     <span style="margin-right: 10px; margin-top: 10px;">월세 예산</span>
+                  <input type="text" class="form-control" id="budget_t3" name="budget_t3" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  </div>
+               </section>
+            
+            </div>
+            
+            <div class="form-group row" style="margin-left: 10px;">
+               <section class="col-md-3">      
+                  <div class="input-group">
+                  <!-- 건물 용도 -->
+                     <span style="margin-right: 10px; margin-top: 10px;">건물 용도</span>
+                  <input type="text" class="form-control" id="b_type" name="b_type" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  </div>
+               </section>
+               
+               <section class="col-md-3">      
+                  <div class="input-group">
+                  <!-- 전용 면적 -->
+                     <span style="margin-right: 10px; margin-top: 10px;">전용 면적</span>
+                  <input type="text" class="form-control" id="area2" name="area2" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  </div>
+               </section>
+               
+               <section class="col-md-3">      
+                  <div class="input-group">
+                  <!-- 건축 년도 -->
+                     <span style="margin-right: 10px; margin-top: 10px;">건축 년도</span>
+                  <input type="text" class="form-control" id="b_year" name="b_year" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  </div>
+               </section>
+               
+               <section class="col-md-3">      
+                  <div class="input-group">
+                  <!-- 주차 유무 -->
+                     <span style="margin-right: 10px; margin-top: 10px;">주차 유무</span>
+                  <input type="text" class="form-control" id="budget_t3" name="budget_t3" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  </div>
+               </section>
+            
+            </div>
+            
+            <div class="form-group row" style="margin-left: 10px;">
+               <section class="col-md-3">      
+                  <div class="input-group">
+                  <!-- 방 개수 -->
+                     <span style="margin-right: 20px; margin-top: 10px;">방 개수</span>
+                  <input type="text" class="form-control" id="room" name="room" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  </div>
+               </section>
+               
+               <section class="col-md-3">      
+                  <div class="input-group">
+                  <!-- 층 수 -->
+                     <span style="margin-right: 35px; margin-top: 10px;">층 수</span>
+                  <input type="text" class="form-control" id="floor" name="floor" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  </div>
+               </section>
+               
+               <section class="col-md-3">      
+                  <div class="input-group">
+                  <!-- 승강기 -->
+                     <span style="margin-right: 20px; margin-top: 10px;">승강기</span>
+                  <input type="text" class="form-control" id="elevator" name="elevator" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  </div>
+               </section>
+            
+            </div>
+            
+         
+         <div>
+            <button type="button" id="search" class="btn btn-primary">검색하기</button>
+         </div>
+         </form>
+         </div>
+      </div>
     
       </div>
     </section>
@@ -422,8 +412,8 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-					<th></th>
-					<th>매물 번호</th>
+               <th></th>
+               <th>매물 번호</th>
                     <th>타입</th>
                     <th>거래 유형</th>
                     <th>매물 주소</th>
@@ -439,10 +429,10 @@
                 </table>
                 <div class="modal-footer justify-content-left">
                 
-				<button type="button" id="pfsCompare" class="btn btn-primary">매물 보고서</button>
-				</div> 
-				
-				
+            <button type="button" id="pfsCompare" class="btn btn-primary">매물 보고서</button>
+            </div> 
+            
+            
               </div>
               <!-- /.card-body -->
             </div>
@@ -462,6 +452,9 @@
   </div>
   <!-- /.content-wrapper -->
 
+<!-- footer include -->
+<%-- <jsp:include page = "./footer.jsp" flush = "false"/> --%>
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -473,6 +466,7 @@
 
 
 <!-- 다이얼로그창 인클루드 -->
+<jsp:include page="./consulting_match_dialog.jsp"></jsp:include>
 <jsp:include page="./pfs_modify_dialog2.jsp"></jsp:include>
 
 <!-- ajax googleapis -->

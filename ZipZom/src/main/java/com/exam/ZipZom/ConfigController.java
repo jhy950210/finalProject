@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import modelTO.pfsTO;
+import modelTO.scheduleTO;
 import modelTO.security_customerTO;
 import modelTO.security_pfsTO;
 import modelTO.CustomerAllTO;
@@ -461,6 +462,222 @@ public class ConfigController {
 		
 		return modelAndView;
 	}
+	
+	// 일정관리 view 페이지
+	@RequestMapping(value = "/viewSchedule.do")
+	public ModelAndView viewScheduleRequest(HttpServletRequest request) {
+
+		scheduleTO to = new scheduleTO();
+		
+		int pseqS = Integer.parseInt(request.getParameter("pseqS"));
+		
+		to.setPseqS(pseqS);
+		
+		List<scheduleTO> listTO = sqlSession.selectList("scheduleSelect", to);
+		
+		request.setAttribute("lists", listTO);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("data/schedule_json");
+		modelAndView.addObject("list", request);
+		
+		return modelAndView;
+	}
+	@RequestMapping(value = "/schedule.do")
+	public ModelAndView schedule(HttpServletRequest request) {
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("schedule");
+
+		
+		return modelAndView;
+	}
+	
+	// 일정관리에서 일정을 추가 한 경우
+	@RequestMapping(value = "/addSchedule.do")
+	public ModelAndView addScheduleRequest(HttpServletRequest request) {
+
+		scheduleTO to = new scheduleTO();
+		
+		int pseqS = Integer.parseInt(request.getParameter("pseqS"));
+		String customerName = request.getParameter("customerName");
+		String customerTel = request.getParameter("customerTel");
+		String customerState = request.getParameter("customerState");
+		String start = request.getParameter("start");
+		String end = request.getParameter("end");
+		String context = request.getParameter("context");
+		String scheduleType = request.getParameter("scheduleType");
+		String progress = request.getParameter("progress");
+		String bType = request.getParameter("bType");
+		String contractType = request.getParameter("contractType");
+		String backgroundColor = request.getParameter("backgroundColor");
+		String textColor = request.getParameter("textColor");
+		int allDay = Integer.parseInt(request.getParameter("allDay"));
+		
+		to.setPseqS(pseqS);
+		to.setCustomerName(customerName);
+		to.setCustomerTel(customerTel);
+		to.setCustomerState(customerState);
+		to.setStart(start);
+		to.setEnd(end);
+		to.setContext(context);
+		to.setScheduleType(scheduleType);
+		to.setProgress(progress);
+		to.setbType(bType);
+		to.setContractType(contractType);
+		to.setBackgroundColor(backgroundColor);
+		to.setTextColor(textColor);
+		to.setAllDay(allDay);
+		
+//		to.setPseqS(1);
+//		to.setCustomerName("박성훈");
+//		to.setCustomerTel("123123");
+//		to.setCustomerState("인도인");
+//		to.setStart("2020-10-07T09:30");
+//		to.setEnd("2020-10-07T12:30");
+//		to.setContext("내용33333");
+//		to.setScheduleType("전화");
+//		to.setProgress("진행중");
+//		to.setbType("아파트");
+//		to.setContractType("매매");
+//		to.setBackgroundColor("#D25565");
+//		to.setTextColor("#ffffff");
+//		to.setAllDay(1);
+		
+		int flag = 0;
+		
+		flag = sqlSession.insert("scheduleInsert", to);
+		
+		request.setAttribute("flag", flag);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("data/flag_json");
+		modelAndView.addObject("list", request);
+		
+		return modelAndView;
+	}
+	
+	// 일정관리에서 일정을 수정 한 경우
+	@RequestMapping(value = "/updateSchedule.do")
+	public ModelAndView updateScheduleRequest(HttpServletRequest request) {
+
+		scheduleTO to = new scheduleTO();
+		
+		int seqS = Integer.parseInt(request.getParameter("seqS"));
+		String customerName = request.getParameter("customerName");
+		String customerTel = request.getParameter("customerTel");
+		String customerState = request.getParameter("customerState");
+		String start = request.getParameter("start");
+		String end = request.getParameter("end");
+		String context = request.getParameter("context");
+		String scheduleType = request.getParameter("scheduleType");
+		String progress = request.getParameter("progress");
+		String bType = request.getParameter("bType");
+		String contractType = request.getParameter("contractType");
+		String backgroundColor = request.getParameter("backgroundColor");
+		String textColor = request.getParameter("textColor");
+		int allDay = 0;
+		if(request.getParameter("allDay").equals("false")) {
+			allDay = 0;
+		} else {
+			allDay = 1;
+		}
+		
+		to.setSeqS(seqS);
+		to.setCustomerName(customerName);
+		to.setCustomerTel(customerTel);
+		to.setCustomerState(customerState);
+		to.setStart(start);
+		to.setEnd(end);
+		to.setContext(context);
+		to.setScheduleType(scheduleType);
+		to.setProgress(progress);
+		to.setbType(bType);
+		to.setContractType(contractType);
+		to.setBackgroundColor(backgroundColor);
+		to.setTextColor(textColor);
+		to.setAllDay(allDay);
+		
+//		to.setSeqS(1);
+//		to.setCustomerName("박성훈");
+//		to.setCustomerTel("123123");
+//		to.setCustomerState("인도인");
+//		to.setStart("2020-10-07T09:30");
+//		to.setEnd("2020-10-07T12:30");
+//		to.setContext("내용33333");
+//		to.setScheduleType("전화");
+//		to.setProgress("진행중");
+//		to.setbType("아파트");
+//		to.setContractType("매매");
+//		to.setBackgroundColor("#D25565");
+//		to.setTextColor("#ffffff");
+//		to.setAllDay(1);
+		
+		int flag = 0;
+		
+		flag = sqlSession.update("scheduleUpdate", to);
+		
+		request.setAttribute("flag", flag);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("data/flag_json");
+		modelAndView.addObject("list", request);
+		
+		return modelAndView;
+	}
+
+	// 일정관리에서 일정을 삭제 한 경우
+	@RequestMapping(value = "/deleteSchedule.do")
+	public ModelAndView deleteScheduleRequest(HttpServletRequest request) {
+
+		scheduleTO to = new scheduleTO();
+
+		int seqS = Integer.parseInt(request.getParameter("seqS"));
+		
+		to.setSeqS(seqS);
+
+//		to.setSeqS(2);
+
+		int flag = 0;
+
+		flag = sqlSession.delete("scheduleDelete", to);
+
+		request.setAttribute("flag", flag);
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("data/flag_json");
+		modelAndView.addObject("list", request);
+
+		return modelAndView;
+	}
+	
+	// 일정관리에서 드래그로 일정을 수정 한 경우
+	@RequestMapping(value = "/updateDateSchedule.do")
+	public ModelAndView updateDateScheduleRequest(HttpServletRequest request) {
+
+		scheduleTO to = new scheduleTO();
+		
+		int seqS = Integer.parseInt(request.getParameter("seqS"));
+		String start = request.getParameter("start");
+		String end = request.getParameter("end");
+		
+		to.setSeqS(seqS);
+		to.setStart(start);
+		to.setEnd(end);
+		
+		int flag = 0;
+		
+		flag = sqlSession.update("scheduleDateUpdate", to);
+		
+		request.setAttribute("flag", flag);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("data/flag_json");
+		modelAndView.addObject("list", request);
+		
+		return modelAndView;
+	}
+	
 	// 고객 관리 페이지
 	@RequestMapping("/customer_manage.do")
 	public String customerManage(HttpServletRequest request, HttpServletResponse response,Model model) {
@@ -753,5 +970,13 @@ public class ConfigController {
 		public String consultingMatch(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
 				
 			return "consulting_match";
+		}
+		// 고객 이름 찾기
+		@RequestMapping("/customerFind.json")
+		public String find(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
+			ArrayList<customerTO> cList = (ArrayList<customerTO>)testmapper.customerFind(cto);
+			
+			request.setAttribute("cList", cList);
+			return "data/customer_list";
 		}
 }

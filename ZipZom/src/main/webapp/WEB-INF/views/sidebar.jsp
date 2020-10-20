@@ -105,7 +105,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <a href="./consulting_match.do" class="w3-bar-item w3-button">맞춤 매물</a>
       <a href="./final_report.do" class="w3-bar-item w3-button">상담보고서</a> 
     </div>
-    <a href="#" class="w3-bar-item w3-button">일정관리</a>
+    <a href="./schedule.do" class="w3-bar-item w3-button">일정관리</a>
 
   </div>
 

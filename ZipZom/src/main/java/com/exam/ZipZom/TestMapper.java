@@ -39,4 +39,5 @@ public interface TestMapper {
 	public abstract int pfsDelete(pfsTO pto);
 	public abstract int opDelete(option_pfsTO opto);
 	public abstract pfsTO pfsCompare(pfsTO pto);
+	public abstract ArrayList<customerTO> customerFind(customerTO cto);
 }
