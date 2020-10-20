@@ -849,7 +849,7 @@ public class ConfigController {
 		return "consulting_map";
 	}
 	
-	// 매물 비교 페이지
+	// 매물 비교 페이지(자바로 하는)
 	@RequestMapping("/pfs_compare.do")
 	public String pfsCompare(HttpServletRequest request, HttpServletResponse response,Model model) {
 		 ArrayList<pfsTO> pcList = new ArrayList<pfsTO>();
@@ -870,6 +870,7 @@ public class ConfigController {
 		return "pfs_compare";
 	}
 	
+	// 매물 비교창 셀렉트박스 구성
 	@RequestMapping("/pfs_compareList.json")
 	public String pfsCompare2(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session) {
 			pfsTO pto = new pfsTO();
@@ -880,6 +881,7 @@ public class ConfigController {
 		return "data/pfs_list";
 	}
 	
+	// 매물 비교창
 	@RequestMapping("/pfs_compareView.json")
 	public String pfsCompareView(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session,pfsTO pto) {
 		//System.out.println(pto.getSeqPfs());
@@ -896,6 +898,7 @@ public class ConfigController {
 		return "pfs_compare2";
 	}
 	
+	// 매물 상세 창
 	@RequestMapping("/pfs_view.json")
 	public String pfsView(HttpServletRequest request, HttpServletResponse response,Model model,pfsAllTO pato) {
 		pato.setSeqPfs(Integer.parseInt(request.getParameter("seqPfs")));
@@ -906,6 +909,7 @@ public class ConfigController {
 		return "data/pfs_view";
 	}
 	
+	// 매물 수정
 	@RequestMapping("/pfs_modify.json")
 	public String pfsUpdate(HttpServletRequest request, HttpServletResponse response,Model model,pfsTO pto,HttpSession session,option_pfsTO opto,security_pfsTO spto) {
 		int flag = 0;
@@ -936,6 +940,7 @@ public class ConfigController {
 		return "data/flag_json";
 		}
 	
+	// 매물 삭제
 	@RequestMapping("/pfs_delete.json")
 	public String pfsDelte(HttpServletRequest request, HttpServletResponse response,Model model,int[] check) {
 		int flag = 0;
@@ -961,7 +966,6 @@ public class ConfigController {
 		// 상담 보고서
 		@RequestMapping("/final_report.do")
 		public String finalReport(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
-				
 			return "final_report";
 		}
 		
@@ -974,9 +978,26 @@ public class ConfigController {
 		// 고객 이름 찾기
 		@RequestMapping("/customerFind.json")
 		public String find(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
-			ArrayList<customerTO> cList = (ArrayList<customerTO>)testmapper.customerFind(cto);
+			cto = (customerTO)testmapper.customerFind(cto);
 			
-			request.setAttribute("cList", cList);
-			return "data/customer_list";
+			request.setAttribute("cto", cto);
+			return "data/customer_find";
+		}
+		
+		// 맞춤 매물 리스트
+		@RequestMapping("/pfs_find.json")
+		public String pfsfind(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto,HttpSession session) {
+			cto.setPseqC((int)session.getAttribute("seqU"));
+			System.out.println(2 + cto.getElevator());
+			if(cto.getElevator().equals("있음")) {
+				cto.setElevator("0");
+			} else {
+				cto.setElevator("1");
+			}
+			System.out.println(1 + cto.getElevator());
+			ArrayList<pfsTO> pfsList = (ArrayList<pfsTO>)testmapper.pfsFind(cto);
+			
+			request.setAttribute("pfsList", pfsList);
+			return "data/pfs_list";
 		}
 }

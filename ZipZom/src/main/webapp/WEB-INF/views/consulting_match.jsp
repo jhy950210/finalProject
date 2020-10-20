@@ -44,8 +44,8 @@
   <link rel="stylesheet" href="./resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <script type="text/javascript">
   $(document).ready(function() {
-      readServer();
-      
+      var param = null;
+      readServer(param);
       
       $("#example2 tbody").on("click","tr",function(){    
       //console.log($(this).find('td:eq(0)').text());
@@ -55,9 +55,17 @@
       
        $('#customerFind').on('click', function(){
          var param = $('#find').serialize();
-         	customerInfo(param);
+         customerInfo(param);
          })
-                
+         
+       $('#search').on('click', function(){
+         param = $('#findpfs').serialize();
+         $('#example2').DataTable().destroy();
+        // $( '#myTable' ).empty();
+         	readServer(param);
+         })
+        
+         
        $('#pfsCompare').on('click', function() {
          var checkbox = $('input:checkbox[name="selectPfs"]:checked');
          var check = new Array();
@@ -81,7 +89,8 @@
    // ready 끝
       
                                             
-     var readServer = function() {    
+     var readServer = function(param) {
+	   if(param == null) {
        $.ajax({                         
           url: 'pfs_list.json',   
           type: 'get',                 
@@ -122,6 +131,53 @@
              alert( '서버 에러 ' + e );
           }
        })
+	   } else {
+		   $.ajax({                         
+	             url: 'pfs_find.json',   
+	             type: 'post',
+	             data: param,
+	             dataType: 'json',            
+	             success: function( json ) { 
+	                if(json.data != '' || json.data != null) {
+	                $( '#myTable' ).empty();
+	                $.each( json.data, function( index, item ) {
+	                   var mytable = '<tr data-toggle="modal" data-target="#modal2" >'
+	                      mytable += '<th onclick="event.cancelBubble=true">';
+	                      mytable += '<div class="custom-control custom-checkbox">';
+	                      mytable += '<input class="custom-control-input" type="checkbox" name="selectPfs" id="customCheckbox'+index+'" value="'+item.seqPfs+'">';
+	                      mytable += '<label for="customCheckbox'+index+'" class="custom-control-label"></label></div></th>';
+	                      mytable += '<td>'+item.seqPfs+'</td>';
+	                       mytable += '<td>'+item.bType+'</td>';
+	                       mytable += '<td>'+item.contractType+'</td>';
+	                       mytable += '<td>'+item.si+' '+item.gu+' '+' '+item.dong+' '+item.bunji+' '+item.hNumber+'</td>';
+	                       mytable += '<td>'+item.budget1+'</td>';
+	                       mytable += '<td>'+item.budget2+'</td>' ;
+	                       mytable += '<td>'+item.budget3+'</td>';
+	                       mytable += '<td>'+item.loan+'</td>';
+	                       mytable += '<td>'+item.wdate+'</td></tr>';
+	                   
+	                   $( '#myTable' ).append( mytable );
+	                });
+	                $('#example2').DataTable({
+	                    "paging": true,
+	                    "lengthChange": false,
+	                    "displayLength": 5,
+	                    "searching": true,
+	                    "ordering": true,
+	                    "info": true,
+	                    "autoWidth": false,
+	                    "responsive": true,
+	                    "bDestroy": true
+	                  });
+	                } else {
+	                	alert('맞는 매물이 없습니다');
+	                }
+	             },
+	             error: function( e ) {
+	                alert( '서버 에러 ' + e );
+	             }
+	          })
+	   }
       }
       // readServer 끝
       
@@ -137,27 +193,24 @@
                     //console.log(item)
                      var name = ''+ document.getElementById(index).getAttribute('name');
                      //console.log(item);
-                     console.log(name);
+                     console.log(index + name);
                      if(name == 'rooms') {
                         json['room'] = json['room'] + '개';
                         $('#form2').find('#room').val(json['room']);
                         console.log(name);
                         console.log(json['room']);
-                     }
+                     } 
                      if(name == 'bathrooms') {
                         json['bathroom'] = json['bathroom'] + '개';
                           $('#form2').find('#bathroom').val(json['bathroom']);
                           console.log('bath' + json['bathroom']);
-                     }
-                    $('#form2').find('#'+name).val(json[name]);
+                     } 
+                    $('#form2').find('#'+index).val(json[index]);
                     
                     
-                    if($('#form2').find('#'+name).attr('type') == 'checkbox' && json[name] == 1){
-                       $('#form2').find('#'+name).prop("checked", true); 
+                    if($('#form2').find('#'+index).attr('type') == 'checkbox' && json[name] == 1){
+                       $('#form2').find('#'+index).prop("checked", true); 
                     }
-                    // console.log($('#mcfrm').find('#'+name));
-                     //console.log(json[index]);
-                    $('#name').val(json.name);
                    });
               },
               error: function( e ) {
@@ -175,10 +228,11 @@
     	          data:param,
     	          dataType: 'json',
     	          success: function( json ) {
-    	        	  $.each( json.data, function( index, item ) {
-    	             if(item.name != '') {
-    	            	 $('#findname').val(item.name);
-    	            	 console.log(item.name);
+    	        	  $.each( json, function( index, item ) {
+    	             if(json[name] != '') {
+    	            	 //$('#findname').val(json[name]);
+    	            	 //console.log(index + ' ' + json[index]);
+    	            	 $('#'+index).val(json[index]);
     	             } else {
     	                alert('고객이 없습니다')
     	             }
@@ -189,6 +243,55 @@
     	          }
     	       })
     	      };
+    	      
+    	      var pfsList = function(param) {    
+    	          $.ajax({                         
+    	             url: 'pfs_find.json',   
+    	             type: 'post',
+    	             data: param,
+    	             dataType: 'json',            
+    	             success: function( json ) { 
+    	                if(json.data != '' || json.data != null) {
+    	                $( '#myTable' ).empty();
+    	                $('#example2').DataTable().destroy();
+    	                $.each( json.data, function( index, item ) {
+    	                   var mytable = '<tr data-toggle="modal" data-target="#modal2" >'
+    	                      mytable += '<th onclick="event.cancelBubble=true">';
+    	                      mytable += '<div class="custom-control custom-checkbox">';
+    	                      mytable += '<input class="custom-control-input" type="checkbox" name="selectPfs" id="customCheckbox'+index+'" value="'+item.seqPfs+'">';
+    	                      mytable += '<label for="customCheckbox'+index+'" class="custom-control-label"></label></div></th>';
+    	                      mytable += '<td>'+item.seqPfs+'</td>';
+    	                       mytable += '<td>'+item.bType+'</td>';
+    	                       mytable += '<td>'+item.contractType+'</td>';
+    	                       mytable += '<td>'+item.si+' '+item.gu+' '+' '+item.dong+' '+item.bunji+' '+item.hNumber+'</td>';
+    	                       mytable += '<td>'+item.budget1+'</td>';
+    	                       mytable += '<td>'+item.budget2+'</td>' ;
+    	                       mytable += '<td>'+item.budget3+'</td>';
+    	                       mytable += '<td>'+item.loan+'</td>';
+    	                       mytable += '<td>'+item.wdate+'</td></tr>';
+    	                   
+    	                   $( '#myTable' ).append( mytable );
+    	                });
+    	                $('#example2').DataTable({
+    	                    "paging": true,
+    	                    "lengthChange": false,
+    	                    "displayLength": 5,
+    	                    "searching": true,
+    	                    "ordering": true,
+    	                    "info": true,
+    	                    "autoWidth": false,
+    	                    "responsive": true,
+    	                    "bDestroy": true
+    	                  });
+    	                } else {
+    	                	alert('맞는 매물이 없습니다');
+    	                }
+    	             },
+    	             error: function( e ) {
+    	                alert( '서버 에러 ' + e );
+    	             }
+    	          })
+    	         }
       
       
       
@@ -287,13 +390,13 @@
          
          
          <div class="card">
-         <form name="customer" id="customer" >
+         <form name="findpfs" id="findpfs" >
             <div class="form-group row" style="margin-left: 10px;">
                <section class="col-md-3"> 
                   <div class="input-group">
                   <!-- 계약 유형 -->
                      <span style="margin-right: 10px; margin-top: 10px;">계약 유형</span>
-                  <input type="text" class="form-control" id="contract_type" name="contract_type" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  <input type="text" class="form-control" id="findcontractType" name="contractType" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
                   </div>
                </section>
                
@@ -301,7 +404,7 @@
                   <div class="input-group">
                   <!-- 매매 예산 -->
                      <span style="margin-right: 10px; margin-top: 10px;">매매 예산</span>
-                  <input type="text" class="form-control" id="budget_t1" name="budget_t1" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  <input type="text" class="form-control" id="findbudgetT1" name="budgetT1" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
                   </div>
                </section>
                
@@ -309,7 +412,7 @@
                   <div class="input-group">
                   <!-- 보증금 예산 -->
                      <span style="margin-right: 10px; margin-top: 10px;">보증금 예산</span>
-                  <input type="text" class="form-control" id="budget_t2" name="budget_t2" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  <input type="text" class="form-control" id="findbudgetT2" name="budgetT2" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
                   </div>
                </section>
                
@@ -317,7 +420,7 @@
                   <div class="input-group">
                   <!-- 월세 예산 -->
                      <span style="margin-right: 10px; margin-top: 10px;">월세 예산</span>
-                  <input type="text" class="form-control" id="budget_t3" name="budget_t3" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  <input type="text" class="form-control" id="findbudgetT3" name="budgetT3" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
                   </div>
                </section>
             
@@ -328,7 +431,7 @@
                   <div class="input-group">
                   <!-- 건물 용도 -->
                      <span style="margin-right: 10px; margin-top: 10px;">건물 용도</span>
-                  <input type="text" class="form-control" id="b_type" name="b_type" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  <input type="text" class="form-control" id="findbType" name="bType" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
                   </div>
                </section>
                
@@ -336,7 +439,7 @@
                   <div class="input-group">
                   <!-- 전용 면적 -->
                      <span style="margin-right: 10px; margin-top: 10px;">전용 면적</span>
-                  <input type="text" class="form-control" id="area2" name="area2" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  <input type="text" class="form-control" id="findarea2" name="area2" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
                   </div>
                </section>
                
@@ -344,15 +447,7 @@
                   <div class="input-group">
                   <!-- 건축 년도 -->
                      <span style="margin-right: 10px; margin-top: 10px;">건축 년도</span>
-                  <input type="text" class="form-control" id="b_year" name="b_year" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
-                  </div>
-               </section>
-               
-               <section class="col-md-3">      
-                  <div class="input-group">
-                  <!-- 주차 유무 -->
-                     <span style="margin-right: 10px; margin-top: 10px;">주차 유무</span>
-                  <input type="text" class="form-control" id="budget_t3" name="budget_t3" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  <input type="text" class="form-control" id="findbYear" name="bYear" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
                   </div>
                </section>
             
@@ -363,15 +458,15 @@
                   <div class="input-group">
                   <!-- 방 개수 -->
                      <span style="margin-right: 20px; margin-top: 10px;">방 개수</span>
-                  <input type="text" class="form-control" id="room" name="room" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  <input type="text" class="form-control" id="findroom" name="room" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
                   </div>
                </section>
                
-               <section class="col-md-3">      
+               <section class="col-md-3">
                   <div class="input-group">
                   <!-- 층 수 -->
                      <span style="margin-right: 35px; margin-top: 10px;">층 수</span>
-                  <input type="text" class="form-control" id="floor" name="floor" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  <input type="text" class="form-control" id="findfloor" name="floor" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
                   </div>
                </section>
                
@@ -379,7 +474,7 @@
                   <div class="input-group">
                   <!-- 승강기 -->
                      <span style="margin-right: 20px; margin-top: 10px;">승강기</span>
-                  <input type="text" class="form-control" id="elevator" name="elevator" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+                  <input type="text" class="form-control" id="findelevator" name="elevator" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
                   </div>
                </section>
             

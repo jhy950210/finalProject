@@ -51,7 +51,7 @@ var newEvent = function (start, end, eventType) {
             backgroundColor: editColor.val(),
             textColor: '#ffffff',
             allDay: 0,
-			pseqS: 1,
+			pseqS: $('#pseqS').val(),
             customerTel: editCustomer1.val(),
 			customerName: editCustomer2.val(),
 			customerState: editCustomer3.val(),
@@ -104,7 +104,7 @@ var newEvent = function (start, end, eventType) {
             type: "post",
             url: "./addSchedule.do",
             data: {
-                pseqS: eventData.pseqS,
+                pseqS: $('#pseqS').val(),
 				customerTel: eventData.customerTel,
 				customerName: eventData.customerName,
 				customerState: eventData.customerState,

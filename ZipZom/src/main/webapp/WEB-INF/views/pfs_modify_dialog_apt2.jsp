@@ -25,7 +25,7 @@
 	</ul>
 	
 			<input type="hidden" name="seqPfs" id="seqPfs" value="">
-			
+			<input type="hidden" name="bType" id="bType" style="width:40%; value="">
 	<table >
 			<colgroup>
 				<col style="width:25%"><col>
@@ -191,20 +191,13 @@
 	</li>
 </ul>
 <ul>
-	<li style="margin-right: 20px; margin-top: 5px;">상세 정보
+	<li style="margin-right: 20px; margin-top: 5px;">상세 정보</li></ul>
 		<div class="form-group row">
 			<section>
 				<div class="input-group mb-1">
 					<!-- 방 개수 -->
 					<span style="margin-right: 10px; margin-top: 10px;">방개수</span> 
-					<select class="form-control" id="room" name="rooms" style="width: 100px; margin-right: 30px; margin-top: 5px;" readonly>
-						<option value="none">선택</option>
-						<option>1개</option>
-						<option>2개</option>
-						<option>3개</option>
-						<option>4개</option>
-						<option>5개</option>
-					</select>
+					<input type="text" class="form-control" id="room" name="rooms" style="width: 100px; margin-right: 30px; margin-top: 5px;" readonly>
 				</div>
 			</section>
 
@@ -212,18 +205,7 @@
 				<div class="input-group mb-1">
 					<!-- 향 -->
 					<span style="margin-right: 10px; margin-top: 10px;">향</span> 
-					<select class="form-control" id="direction" name="direction" style="width: 100px; margin-right: 30px; margin-top: 5px;" readonly>
-						<option value="none">선택</option>
-						<option>북향</option>
-						<option>남향</option>
-						<option>동향</option>
-						<option>서향</option>
-						<option>북동향</option>
-						<option>북서향</option>
-						<option>남동향</option>
-						<option>남서향</option>
-						<option>모름</option>
-					</select>
+					<input type="text" class="form-control" id="direction" name="direction" style="width: 100px; margin-right: 30px; margin-top: 5px;" readonly>
 				</div>
 			</section>
 			
@@ -231,12 +213,7 @@
 				<div class="input-group mb-1">
 					<!-- 욕실수 -->
 					<span style="margin-right: 10px; margin-top: 10px;">욕실수</span> 
-					<select class="form-control" id="bathroom" name="bathrooms" style="width: 100px; margin-right: 30px; margin-top: 5px;" readonly>
-						<option value="none">선택</option>
-						<option>1개</option>
-						<option>2개</option>
-						<option>3개</option>
-					</select>
+					<input type="text" class="form-control" id="bathroom" name="bathrooms" style="width: 100px; margin-right: 30px; margin-top: 5px;" readonly>
 				</div>
 			</section>
 
@@ -244,13 +221,7 @@
 				<div class="input-group mb-1">
 					<!-- 난방방식 -->
 					<span style="margin-right: 10px; margin-top: 10px;">난방방식</span> 
-					<select class="form-control" name="heatingSystem" id="heatingSystem" style="width: 100px; margin-right: 10px; margin-top: 5px;" disabled>
-						<option value="none">선택</option>
-						<option>도시가스</option>
-						<option>LPG</option>
-						<option>전기</option>
-						<option>기타</option>
-					</select>
+					<input type="text" class="form-control" name="heatingSystem" id="heatingSystem" style="width: 100px; margin-right: 10px; margin-top: 5px;" readonly>
 				</div>
 			</section>
 		</div>
@@ -310,17 +281,15 @@
 				</div>
 
 			</div>
-		</li>
 		<!-- text input -->
 					
-				<li>메 모 </li>
+				<ul><li>메 모 </li></ul>
 					<!-- textarea -->
 					<div class="form-group">
-						
-							<textarea name="context" id="context" class="form-control" rows="3" readonly></textarea>
+					<textarea name="context" id="context" class="form-control" rows="3" readonly></textarea>
 					</div>
 					
-				<li>보안시설 </li>
+				<ul><li>보안시설 </li></ul>
 					<!-- checkbox -->
 					<div class="input-group row">
 						<div class="form-group col-md-3">
@@ -382,8 +351,8 @@
 						
 					</div>
 					
-				<li>연 락 처 </li>
-				</ul>
+				<ul><li>연 락 처 </li></ul>
+				
 					<!-- phone mask -->
 					<div class="input-group row">
 	                <div class="form-group col-md-6">

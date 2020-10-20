@@ -5,9 +5,17 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Forgot Password</title>
+  <title>ZipZom | Forgot ID</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="./resources3/css/animate.css">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="./resources3/css/style.css">
+  
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="./resources/plugins/jquery/jquery.min.js"></script>
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="./resources/plugins/fontawesome-free/css/all.min.css">
@@ -21,8 +29,6 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<!-- jQuery -->
-<script src="./resources/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="./resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -68,19 +74,20 @@ var forgotOk = function( name, email ){
 }
 
 </script>
-<body class="hold-transition login-page">
+<body>
 <div class="login-box">
+ <div class="box-searchID">
   <div class="login-logo">
     <a href="#"><b>ID</b>Find</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">You forgot your ID? Here you can easily retrieve a new password.</p>
+      <p class="login-box-msg">가입하실때 입력한 이름과 이메일을 입력해주세요.</p>
 
       <form action="./sendNumber.action" method="post">
         <div class="input-group mb-3">
-          <input type="text"  id="name" name="name" class="form-control" placeholder="Name">
+          <input type="text"  id="name" name="name" class="form-control" placeholder="이름">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-passport"></span>
@@ -88,7 +95,7 @@ var forgotOk = function( name, email ){
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email"  id="email" name="email" class="form-control" placeholder="Email">
+          <input type="email"  id="email" name="email" class="form-control" placeholder="이메일">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -97,21 +104,22 @@ var forgotOk = function( name, email ){
         </div>
         <div class="row">
           <div class="col-12">
-            <button type="button"  id="btn" class="btn btn-primary btn-block">ID 찾기</button>
+            <button type="button"  id="btn" >ID 찾기</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
       <p class="mt-3 mb-1">
-        <a href="./start.action">Login</a>
+        <a href="./start.action">로그인하러 가기</a>
       </p>
       <p class="mb-0">
-        <a href="./register.action" class="text-center">Register a new membership</a>
+        <a href="./register.action" class="text-center">회원가입</a>
       </p>
     </div>
     <!-- /.login-card-body -->
   </div>
+ </div>
 </div>
 <!-- /.login-box -->
 

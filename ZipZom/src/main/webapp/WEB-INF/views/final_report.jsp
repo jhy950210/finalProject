@@ -11,7 +11,7 @@
 table.type03 {
     border-collapse: collapse;
     text-align: left;
-    line-height: 1.5;
+    line-height: 1.25;
     border-top: 1px solid #ccc;
     border-left: 3px solid #369;
  	margin : 20px 10px;
@@ -35,6 +35,16 @@ table.type03 td {
     
 }
 
+.endline{page-break-before:always}
+
+}
+
+.page-break-tr { 
+
+	page-break-inside:avoid;
+
+	page-break-after: auto;
+
 }
 </style>
 <!-- Tell the browser to be responsive to screen width -->
@@ -57,33 +67,24 @@ table.type03 td {
 <link rel="stylesheet" href="./resources/css/adminlte.min.css">
 <!-- Google Font: Source Sans Pro -->
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-<!-- Select2 -->
-<link rel="stylesheet" href="./resources/plugins/select2/css/select2.min.css">
-<link rel="stylesheet" href="./resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-<!-- datepicker -->
-<link rel="stylesheet" href="./resources/plugins//jquery-ui/jquery-ui.css">
-<!-- daterange picker -->
-<link rel="stylesheet" href="./resources/plugins/daterangepicker/daterangepicker.css">
-<!-- iCheck for checkboxes and radio inputs -->
-<link rel="stylesheet" href="./resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-<!-- Bootstrap Color Picker -->
-<link rel="stylesheet" href="./resources/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
-<!-- Tempusdominus Bbootstrap 4 -->
-<link rel="stylesheet" href="./resources/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-<!-- Bootstrap4 Duallistbox -->
-<link rel="stylesheet" href="./resources/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="./resources/css/adminlte.min.css">
 <!-- DataTables -->
-<link rel="stylesheet" href="./resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="./resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+<!-- 제목 폰트 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
  
 </head>
-<body class="w3-content" style="max-width:1400px">
+<body class="w3-content" style="max-width:1500px">
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
    <!-- sidebar include -->
     <jsp:include page = "./sidebar.jsp" flush = "false"/>
-
+    
+  </aside>
+	
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -106,271 +107,366 @@ table.type03 td {
 
     <!-- 메인 컨텐츠 -->
     <section class="content">
-	
  	<div class="book">
- 		<div class="page" id="pdf_wrap">	 			
-	 			
-	 			<div class="card">         
-   	  	<!-- 카드 헤더 -->
-	  	<div class="card-header">
-			<h3 class="card-title">정보 입력</h3> 
-		</div>
+ 		<div id="report">
+ 		<div class="page" id="pdf_wrap" style="width:1100px; float: none; margin: 0 auto;">	 			
 		
-		<!-- 카드 바디 -->
-		<div class="card-body">
-			<div class="form-group row">
-				<section class="col-md-4">		
-					<div class="input-group mb-6">
-					<!-- 고객 이름 -->
-	         		<li style="margin-right: 10px; margin-top: 10px;">고객 이름</li>
-					<input type="text" class="form-control" id="name" name="name" placeholder="이름" style="width: 150px; margin-right: 10px; margin-top: 5px;" >
-					<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-rtp" style="width: 70px; margin-top:5px;">
-              		검색
-              		</button>
-					</div>
-				</section>
-				
-				<section class="col-md-4">		
-					<div class="input-group mb-6">
-					<!-- 고객 이름 -->
-	         		<span style="margin-right: 10px; margin-top: 10px;">매물주소</span>
-					<input type="text" class="form-control" id="name" name="name" placeholder="이름" style="width: 150px; margin-right: 10px; margin-top: 5px;" >
-					<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-rtp" style="width: 70px; margin-top:5px;">
-              		추가
-              		</button>
-					</div>
-				</section>
-				
+			<!-- 카드 헤더 -->
+		  	<div class="card-header">
+				<h1 style="font-size: 50px; font-family: 'Noto Sans KR', sans-serif; text-align: center;">매물 보고서</h1> 
 			</div>
 			
-		</div>
-	</div>
-	
-	<div class="card">
-		<!-- 카드 헤더 -->
-	  	<div class="card-header">
-			<h3 class="card-title">매물 정보</h3> 
-		</div>
-		
-		<!-- 카드 바디 -->
-		<div class="card-body">
-			<div class="card">
-				<table class="type03">
-                  <thead>
-                  <tr>
-					<th>매물 주소</th>
-					<td colspan="4">서울특별시 강남구 대치동 503 개포우성1차</td>
-					<th>계약 유형</th>
-					<td colspan="3">매매</td>
-                  </tr>
-                  
-                  <tr>
-					<th>금액정보</th>
-					<td>매매가</td>
-					<td>340,000</td>
-					<td>보증금</td>
-					<td>10,000</td>
-					<td>월세</td>
-					<td>200</td>
-					<td>융자금</td>
-					<td>100,000</td>
-                  </tr>
-                  
-                  <tr>
-					<th>면적정보</th>
-					<td>공급면적</td>
-					<td>127.23</td>
-					<td>전용면적</td>
-					<td>100.32</td>
-					<td>대지면적</td>
-					<td>16.45</td>
-					<td>-</td>
-					<td>-</td>
-                  </tr>
-                  
-                  <tr>
-					<th>입주정보</th>
-					<td colspan="2">입주가능날짜</td>
-					<td colspan="2">2020-10-30</td>
-					<td colspan="2">임대만기날짜</td>
-					<td colspan="2">2020-10-27</td>
-                  </tr>
-                  
-				  <tr>
-					<th rowspan="4">상세정보</th>
-					<td>방개수</td>
-					<td>4개</td>
-					<td>방향</td>
-					<td>남향</td>
-					<td>욕실수</td>
-					<td>2개</td>
-					<td>난방방식</td>
-					<td>도시가스</td>
-                  </tr>
-                  
-                  <tr>
-					<td>세대수</td>
-					<td>360세대</td>
-					<td>층수</td>
-					<td>11층</td>
-					<td>총층수</td>
-					<td>14층</td>
-					<td>냉방시설</td>
-					<td>있음</td>
-                  </tr>
-                  
-                  <tr>
-					<td>승강기</td>
-					<td>있음</td>
-					<td>주차유무</td>
-					<td>가능</td>
-					<td>건축년도</td>
-					<td>1990년</td>
-					<td>-</td>
-					<td>-</td>
-                  </tr>
-                  
-                  <tr>
-					<td>옵션</td>
-					<td colspan="3">에어컨, 가스렌지</td>
-					<td>보안시설</td>
-					<td colspan="3">경비원, CCTV, 현관보안, 방범창</td>
-                  </tr>
-                  
-				  <tr>
-					<th>메모</td>
-					<td colspan="8">-</td>
-                  </tr>
-                  
-                  </thead>
-                  <tbody id="tbody">
-                  </tbody>         
-                </table>
+			<!-- 카드 바디 -->
+			<div class="card-body">
+				<!-- 좌측 테이블 -->
+				<section class="col-md-4" style="float: left;">
+					<table class="type03">
+							<thead>
+								<tr>
+									<th>고객 이름</th>
+									<td></td>
+								</tr>
+								<tr>
+									<th>고객 연락처</th>
+									<td></td>
+								</tr>
+							</thead>
+					</table>
+				</section>
 				
-				
+				<!-- 우측 테이블 -->
+				<section class="col-md-4" style="float: right;">
+					<table class="type03">
+							<thead>
+								<tr>
+									<th>방문 일자</th>
+									<td></td>
+								</tr>
+								<tr>
+									<th>담당자</th>
+									<td></td>
+								</tr>
+							</thead>
+					</table>
+				</section>
 			</div>
 			
 			<div class="card">
-				<table class="type03">
-                  <thead>
-                  <tr>
-					<th>매물 주소</th>
-					<td colspan="4">서울특별시 강남구 대치동 503 개포우성1차</td>
-					<th>계약 유형</th>
-					<td colspan="3">매매</td>
-                  </tr>
-                  
-                  <tr>
-					<th>금액정보</th>
-					<td>매매가</td>
-					<td>340,000</td>
-					<td>보증금</td>
-					<td>10,000</td>
-					<td>월세</td>
-					<td>200</td>
-					<td>융자금</td>
-					<td>100,000</td>
-                  </tr>
-                  
-                  <tr>
-					<th>면적정보</th>
-					<td>공급면적</td>
-					<td>127.23</td>
-					<td>전용면적</td>
-					<td>100.32</td>
-					<td>대지면적</td>
-					<td>16.45</td>
-					<td>-</td>
-					<td>-</td>
-                  </tr>
-                  
-                  <tr>
-					<th>입주정보</th>
-					<td colspan="2">입주가능날짜</td>
-					<td colspan="2">2020-10-30</td>
-					<td colspan="2">임대만기날짜</td>
-					<td colspan="2">2020-10-27</td>
-                  </tr>
-                  
-				  <tr>
-					<th rowspan="4">상세정보</th>
-					<td>방개수</td>
-					<td>4개</td>
-					<td>방향</td>
-					<td>남향</td>
-					<td>욕실수</td>
-					<td>2개</td>
-					<td>난방방식</td>
-					<td>도시가스</td>
-                  </tr>
-                  
-                  <tr>
-					<td>세대수</td>
-					<td>360세대</td>
-					<td>층수</td>
-					<td>11층</td>
-					<td>총층수</td>
-					<td>14층</td>
-					<td>냉방시설</td>
-					<td>있음</td>
-                  </tr>
-                  
-                  <tr>
-					<td>승강기</td>
-					<td>있음</td>
-					<td>주차유무</td>
-					<td>가능</td>
-					<td>건축년도</td>
-					<td>1990년</td>
-					<td>-</td>
-					<td>-</td>
-                  </tr>
-                  
-                  <tr>
-					<td>옵션</td>
-					<td colspan="3">에어컨, 가스렌지</td>
-					<td>보안시설</td>
-					<td colspan="3">경비원, CCTV, 현관보안, 방범창</td>
-                  </tr>
-                  
-				  <tr>
-					<th>메모</td>
-					<td colspan="8">-</td>
-                  </tr>
-                  
-                  </thead>
-                  <tbody id="tbody">
-                  </tbody>         
-                </table>
+				<div class="card">
+					<!-- 첫번째 테이블 -->
+					<table class="type03">
+	                  <thead>
+	                  <tr class="page-break-tr">
+						<th>매물 주소</th>
+						<td colspan="4">서울특별시 강남구 대치동 503 개포우성1차</td>
+						<th>계약 유형</th>
+						<td colspan="3">매매</td>
+	                  </tr>
+	                  
+	                  <tr>
+						<th>금액정보</th>
+						<td>매매가</td>
+						<td>340,000</td>
+						<td>보증금</td>
+						<td>10,000</td>
+						<td>월세</td>
+						<td>200</td>
+						<td>융자금</td>
+						<td>100,000</td>
+	                  </tr>
+	                  
+	                  <tr>
+						<th>면적정보</th>
+						<td>공급면적</td>
+						<td>127.23</td>
+						<td>전용면적</td>
+						<td>100.32</td>
+						<td>대지면적</td>
+						<td>16.45</td>
+						<td>-</td>
+						<td>-</td>
+	                  </tr>
+	                  
+	                  <tr>
+						<th>입주정보</th>
+						<td colspan="2">입주가능날짜</td>
+						<td colspan="2">2020-10-30</td>
+						<td colspan="2">임대만기날짜</td>
+						<td colspan="2">2020-10-27</td>
+	                  </tr>
+	                  
+					  <tr>
+						<th rowspan="4">상세정보</th>
+						<td>방개수</td>
+						<td>4개</td>
+						<td>방향</td>
+						<td>남향</td>
+						<td>욕실수</td>
+						<td>2개</td>
+						<td>난방방식</td>
+						<td>도시가스</td>
+	                  </tr>
+	                  
+	                  <tr>
+						<td>세대수</td>
+						<td>360세대</td>
+						<td>층수</td>
+						<td>11층</td>
+						<td>총층수</td>
+						<td>14층</td>
+						<td>냉방시설</td>
+						<td>있음</td>
+	                  </tr>
+	                  
+	                  <tr>
+						<td>승강기</td>
+						<td>있음</td>
+						<td>주차유무</td>
+						<td>가능</td>
+						<td>건축년도</td>
+						<td>1990년</td>
+						<td>-</td>
+						<td>-</td>
+	                  </tr>
+	                  
+	                  <tr>
+						<td>옵션</td>
+						<td colspan="3">에어컨, 가스렌지</td>
+						<td>보안시설</td>
+						<td colspan="3">경비원, CCTV, 현관보안, 방범창</td>
+	                  </tr>
+	                  
+					  <tr>
+						<th>메모</th>
+						<td colspan="8">-</td>
+	                  </tr>
+	                  
+	                  </thead>
+     
+	                </table>
+					<!-- 첫번째 테이블 끝-->
+					
+				</div>
 				
-				
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-outline-primary" style="width: 100px;">
-				출력하기
-               	</button>
-               	<button type="button" id="create_pdf" class="btn btn-primary" >
-               	PDF 생성하기
-               	</button>
-			</div> 
-		</div>
-		<!-- /.card-body -->
-	</div>
-	 			
-	 			
-	 			
-	 		
- 		</div>
- 	</div>
 	
-	</section>
 	
- 
-  </div>
+				<div class="card">
+					<!-- 두번째 테이블 -->
+					<table class="type03">
+	                  <thead>
+	                  <tr>
+						<th>매물 주소</th>
+						<td colspan="4">서울특별시 강남구 대치동 503 개포우성1차</td>
+						<th>계약 유형</th>
+						<td colspan="3">매매</td>
+	                  </tr>
+	                  
+	                  <tr>
+						<th>금액정보</th>
+						<td>매매가</td>
+						<td>340,000</td>
+						<td>보증금</td>
+						<td>10,000</td>
+						<td>월세</td>
+						<td>200</td>
+						<td>융자금</td>
+						<td>100,000</td>
+	                  </tr>
+	                  
+	                  <tr>
+						<th>면적정보</th>
+						<td>공급면적</td>
+						<td>127.23</td>
+						<td>전용면적</td>
+						<td>100.32</td>
+						<td>대지면적</td>
+						<td>16.45</td>
+						<td>-</td>
+						<td>-</td>
+	                  </tr>
+	                  
+	                  <tr>
+						<th>입주정보</th>
+						<td colspan="2">입주가능날짜</td>
+						<td colspan="2">2020-10-30</td>
+						<td colspan="2">임대만기날짜</td>
+						<td colspan="2">2020-10-27</td>
+	                  </tr>
+	                  
+					  <tr>
+						<th rowspan="4">상세정보</th>
+						<td>방개수</td>
+						<td>4개</td>
+						<td>방향</td>
+						<td>남향</td>
+						<td>욕실수</td>
+						<td>2개</td>
+						<td>난방방식</td>
+						<td>도시가스</td>
+	                  </tr>
+	                  
+	                  <tr>
+						<td>세대수</td>
+						<td>360세대</td>
+						<td>층수</td>
+						<td>11층</td>
+						<td>총층수</td>
+						<td>14층</td>
+						<td>냉방시설</td>
+						<td>있음</td>
+	                  </tr>
+	                  
+	                  <tr>
+						<td>승강기</td>
+						<td>있음</td>
+						<td>주차유무</td>
+						<td>가능</td>
+						<td>건축년도</td>
+						<td>1990년</td>
+						<td>-</td>
+						<td>-</td>
+	                  </tr>
+	                  
+	                  <tr>
+						<td>옵션</td>
+						<td colspan="3">에어컨, 가스렌지</td>
+						<td>보안시설</td>
+						<td colspan="3">경비원, CCTV, 현관보안, 방범창</td>
+	                  </tr>
+	                  
+					  <tr>
+						<th>메모</th>
+						<td colspan="8">-</td>
+	                  </tr>
+	                  
+	                  </thead>
   
+	                </table>
+	                <!-- 두번째 테이블 끝 -->
+				</div>
+				
+				<div class="card">
+					<!-- 세번째 테이블 -->
+					<table class="type03">
+	                  <thead>
+	                  <tr class="page-break-tr">
+						<th>매물 주소</th>
+						<td colspan="4">서울특별시 강남구 대치동 503 개포우성1차</td>
+						<th>계약 유형</th>
+						<td colspan="3">매매</td>
+	                  </tr>
+	                  
+	                  <tr class="page-break-tr">
+						<th>금액정보</th>
+						<td>매매가</td>
+						<td>340,000</td>
+						<td>보증금</td>
+						<td>10,000</td>
+						<td>월세</td>
+						<td>200</td>
+						<td>융자금</td>
+						<td>100,000</td>
+	                  </tr>
+	                  
+	                  <tr class="page-break-tr">
+						<th>면적정보</th>
+						<td>공급면적</td>
+						<td>127.23</td>
+						<td>전용면적</td>
+						<td>100.32</td>
+						<td>대지면적</td>
+						<td>16.45</td>
+						<td>-</td>
+						<td>-</td>
+	                  </tr>
+	                  
+	                  <tr class="page-break-tr">
+						<th>입주정보</th>
+						<td colspan="2">입주가능날짜</td>
+						<td colspan="2">2020-10-30</td>
+						<td colspan="2">임대만기날짜</td>
+						<td colspan="2">2020-10-27</td>
+	                  </tr>
+	                  
+					  <tr class="page-break-tr">
+						<th rowspan="4">상세정보</th>
+						<td>방개수</td>
+						<td>4개</td>
+						<td>방향</td>
+						<td>남향</td>
+						<td>욕실수</td>
+						<td>2개</td>
+						<td>난방방식</td>
+						<td>도시가스</td>
+	                  </tr>
+	                  
+	                  <tr class="page-break-tr">
+						<td>세대수</td>
+						<td>360세대</td>
+						<td>층수</td>
+						<td>11층</td>
+						<td>총층수</td>
+						<td>14층</td>
+						<td>냉방시설</td>
+						<td>있음</td>
+	                  </tr>
+	                  
+	                  <tr class="page-break-tr">
+						<td>승강기</td>
+						<td>있음</td>
+						<td>주차유무</td>
+						<td>가능</td>
+						<td>건축년도</td>
+						<td>1990년</td>
+						<td>-</td>
+						<td>-</td>
+	                  </tr>
+	                  
+	                  <tr class="page-break-tr">
+						<td>옵션</td>
+						<td colspan="3">에어컨, 가스렌지</td>
+						<td>보안시설</td>
+						<td colspan="3">경비원, CCTV, 현관보안, 방범창</td>
+	                  </tr>
+	                  
+					  <tr class="page-break-tr">
+						<th>메모</th>
+						<td colspan="8">-</td>
+	                  </tr>
+	                  
+	                  </thead>
+  
+	                </table>
+	                <!-- 세번째 테이블 끝 -->
+				</div>		
+					
+			</div>
+		
+		
+		<!-- pdf 출력 시 다음페이지로 넘기기 -->
+		<!-- <div class="endline"></div><br style="height:0; line-height:0"> -->
+		<!-- /.pdf 출력 시 다음페이지로 넘기기 -->
+		
+		</div>
+		</div>
+		
+		<!-- /.출력페이지 끝 -->
+		
+		<!-- 출력버튼 -->
+		<div class="modal-footer">
+           	<button type="button" id="create_pdf" class="btn btn-outline-primary" >
+           	PDF 생성하기
+           	</button>
+
+		</div> 
+		
+	</div>
+	<!-- /.book -->
+
+	</section>
+	<!-- /.메인 컨텐츠 -->
+  </div>
   <!-- /.content-wrapper -->
-  <!-- footer include -->
-<%-- <jsp:include page = "./footer.jsp" flush = "false"/> --%>
 
 
   <!-- Control Sidebar -->
@@ -378,60 +474,84 @@ table.type03 td {
     <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+
 
 <!-- Bootstrap 4 -->
 <script src="./resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- <!-- Select2
-<script src="./resources/plugins/select2/js/select2.full.min.js"></script> -->
-<!-- Bootstrap4 Duallistbox -->
-<script src="./resources/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
-<!-- InputMask -->
-<script src="./resources/plugins/moment/moment.min.js"></script>
-<script src="./resources/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
-<!-- bs-custom-file-input -->
-<script src="./resources/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-<!-- datepicker -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!-- date-range-picker -->
-<script src="./resources/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- bootstrap color picker -->
-<script src="./resources/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="./resources/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Bootstrap Switch -->
-<script src="./resources/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <!-- AdminLTE App -->
 <script src="./resources/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="./resources/js/demo.js"></script>
-<!-- Page script -->
-<!-- DataTables -->
-<script src="./resources/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="./resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="./resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="./resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 
-<!-- PDF 생성 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.debug.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<!-- pdf변환 -->
+<script type = "text/javascript" src = "http://code.jquery.com/jquery-latest.min.js"></script>
+<script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script type = "text/javascript" src = "https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 <script type="text/javascript">
 
 
-var pdfprint = document.getElementById('pdf_wrap').innerHTML;
 
-jQuery('#create_pdf').click( function() {
+</script>
 
-    window.onbeforeprint = function (ev) {
+<script type="text/javascript">
+
+/* $(function() {
+	$("pdfdown").click(function() {
+		
+		html2canvas(document.getElementById("report"), {
+			
+			allowTaint: true,
+			useCORS: true,
+			logging: false,
+			height: window.outerHeight + window.innerHeight,
+			windowHeight: window.outerHeight + window.innerHeight
+			
+		}).then(function(canvas) {
+			
+			// 이미지로 변환
+			var imgData = canvas.toDataURL('image/png');
+			
+			var imgWidth = 210;
+			var pageHeight = imgWidth * 1.414;
+			var imgHeight = canvas.height * imgWidth / canvas.width;
+			var heightLeft = imgHeight;
+			var doc = new jsPDF('p', 'mm');
+			var position = 0;
+			
+			// 첫페이지 출력
+			doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+			heightLeft -= pageHeight;
+			
+			// 파일 저장
+			doc.save('ZipZom.pdf');
+			
+		});
+		
+	});
+}); */
+
+
+
+</script>
+<script type="text/javascript">
+
+ var pdfprint = document.getElementById('pdf_wrap').innerHTML; 
+
+$('#create_pdf').click( function() {
+	html2canvas($('#pdf_wrap')[0]).then(function(canvas) {
+	    var doc = new jsPDF('p', 'mm', 'a4'); //jspdf객체 생성
+	    var imgData = canvas.toDataURL('image/png'); //캔버스를 이미지로 변환
+	    doc.addImage(imgData, 'PNG', 0, 0); //이미지를 기반으로 pdf생성
+	    doc.save('sample-file.pdf'); //pdf저장
+	  });
+		
+     window.onbeforeprint = function (ev) {
         document.body.innerHTML = pdfprint;
     };
 
     window.print();
-    location.reload();
+    location.reload(); 
 
 });
 </script>

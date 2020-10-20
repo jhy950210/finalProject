@@ -6,10 +6,18 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Forgot Password</title>
+  <title>ZipZom | Change Password</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <link rel="stylesheet" href="./resources3/css/animate.css">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="./resources3/css/style.css">
+    
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="./resources/plugins/jquery/jquery.min.js"></script>
+  
   <!-- Font Awesome -->
   <link rel="stylesheet" href="./resources/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -90,19 +98,20 @@ var checkPasswordOk = function( password, email ){
 }
 
 </script>
-<body class="hold-transition login-page">
+<body>
 <div class="login-box">
+ <div class="box-searchID">
   <div class="login-logo">
     <a href="#"><b>Password</b>Change</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Set new password.</p>
+      <p class="login-box-msg">변경하실 새로운 비밀번호를 입력해주세요.</p>
 
       <form action="./changePassword.action" method="post">
         <div class="input-group mb-3">
-          <input type="text"  id="password" name="password" class="form-control" placeholder="New Password">
+          <input type="text"  id="password" name="password" class="form-control" placeholder="새 비밀번호">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-password"></span>
@@ -110,7 +119,7 @@ var checkPasswordOk = function( password, email ){
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text"  id="checkPassword" name="checkPassword" class="form-control" placeholder="Check Password">
+          <input type="text"  id="checkPassword" name="checkPassword" class="form-control" placeholder="비밀번호 확인">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-password"></span>
@@ -119,7 +128,7 @@ var checkPasswordOk = function( password, email ){
         </div>
         <div class="row">
           <div class="col-12">
-            <button type="button"  id="okBtn" class="btn btn-primary btn-block">변경</button>
+            <button type="button"  id="okBtn" >변경</button>
           </div>
           <!-- /.col -->
         </div>
@@ -128,6 +137,7 @@ var checkPasswordOk = function( password, email ){
     </div>
     <!-- /.login-card-body -->
   </div>
+ </div>
 </div>
 <!-- /.login-box -->
 

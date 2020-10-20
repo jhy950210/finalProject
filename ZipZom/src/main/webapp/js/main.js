@@ -90,7 +90,7 @@ var calendar = $('#calendar').fullCalendar({
       delay: {
         show: "800",
         hide: "50"
-      },
+      },	
       trigger: 'hover',
       placement: 'top',
       html: true,
@@ -107,7 +107,7 @@ var calendar = $('#calendar').fullCalendar({
   events: function (start, end, timezone, callback) {
 	var pseqS = $('#pseqS').val();
     $.ajax({
-      type: "get",
+      type: "post",
       url: "./viewSchedule.do",
       data: {
         // 화면이 바뀌면 Date 객체인 start, end 가 들어옴

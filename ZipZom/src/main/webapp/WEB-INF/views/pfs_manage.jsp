@@ -469,6 +469,18 @@
                   </tr>
                   </thead>
                   <tbody id="myTable" >
+                  <tr>
+                  	<th></th>
+					<th>매물 번호</th>
+                    <th>타입</th>
+                    <th>거래 유형</th>
+                    <th>매물 주소</th>
+                    <th>매도금액</th>
+                    <th>(현)보증금</th>
+                    <th>(현)월임대료</th>
+                    <th>융자금</th>
+                    <th>등록일</th>
+                    </tr>
                   </tbody>             
                 </table>
                 <div class="modal-footer justify-content-left">

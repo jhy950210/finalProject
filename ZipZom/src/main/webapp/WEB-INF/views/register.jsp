@@ -5,9 +5,17 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Registration Page</title>
+  <title>ZipZom | Registration Page</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="./resources3/css/animate.css">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="./resources3/css/style.css">
+    
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="./resources/plugins/jquery/jquery.min.js"></script>
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="./resources/plugins/fontawesome-free/css/all.min.css">
@@ -19,9 +27,10 @@
   <link rel="stylesheet" href="./resources/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Bootstrap 4 -->
+  <script src="./resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>
-<!-- jQuery -->
-<script src="./resources/plugins/jquery/jquery.min.js"></script>
+
 <script type="text/javascript">
 var isCheckId = 0;
 var isCheckEmail = 0;
@@ -142,19 +151,19 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 }
 
 </script>
-<body class="hold-transition register-page">
-<div class="register-box">
+<body>
+<div class="login-box">
   <div class="register-logo">
     <a href="#"><b>ZipZom</b>Register</a>
   </div>
 
   <div class="card">
     <div class="card-body register-card-body">
-      <p class="login-box-msg">Register a new membership</p>
+      <p class="login-box-msg">새로운 회원으로 가입하세요.</p>
 
       <form id="form" name="form" action="./sign_up.action" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+          <input type="text" class="form-control" id="name" name="name" placeholder="이름">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -162,15 +171,15 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="id" name="id" placeholder="ID">
+          <input type="text" class="form-control" id="id" name="id" placeholder="아이디">
           <div class="input-group-append">
             <div class="input-group-text">
-              <button type="button"  id="idBtn" class="btn btn-primary btn-block" style="width:60pt; height:18pt; padding: 0.1rem 0.1rem; font-size: 11.5pt;'">중복검사</button>
+              <button type="button"  id="idBtn" style="width:60pt; height:18pt; padding: 0.1rem 0.1rem; font-size: 11.5pt;'">중복검사</button>
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control"  id="password" name="password" placeholder="Password">
+          <input type="password" class="form-control"  id="password" name="password" placeholder="비밀번호">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -178,10 +187,10 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control"  id="email" name="email" placeholder="Email">
+          <input type="email" class="form-control"  id="email" name="email" placeholder="이메일">
           <div class="input-group-append">
             <div class="input-group-text">
-              <button type="button"  id="emailBtn" class="btn btn-primary btn-block" style="width:60pt; height:18pt; padding: 0.1rem 0.1rem; font-size: 11.5pt;'">중복검사</button>
+              <button type="button"  id="emailBtn" style="width:60pt; height:18pt; padding: 0.1rem 0.1rem; font-size: 11.5pt;'">중복검사</button>
             </div>
           </div>
         </div>
@@ -219,40 +228,42 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
         </div>
         <!-- /주소 -->
         <div class="input-group mb-3">
-          <input type="tel" class="form-control"  id="phone" name="phone" placeholder="Phone">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-phone"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="tel" class="form-control"  id="tel" name="tel" placeholder="Tel">
+          <input type="tel" class="form-control"  id="phone" name="phone" placeholder="사무실번호">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-suitcase"></span>
             </div>
           </div>
         </div>
+        <div class="input-group mb-3">
+          <input type="tel" class="form-control"  id="tel" name="tel" placeholder="핸드폰번호">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-phone"></span>
+            </div>
+          </div>
+        </div>
         
         <div class="row">
           <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-              <label for="agreeTerms">
-               I agree to the <a href="#">terms</a>
-              </label>
-            </div>
+			<div style="align-self: left;">
+       
+			</div>
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="button"  id="btn" class="btn btn-primary btn-block">Register</button>
+            <button type="button"  id="btn" >회원가입</button>
           </div>
           <!-- /.col -->
         </div>
+        
+        <p class="login-box-msg" style="margin-top: 20px; padding-bottom: -20px;">
+        	<a href="./start.action" >로그인하러 가기</a>
+        </p>
+        
       </form>
 
-      <a href="./start.action" class="text-center">I already have a membership</a>
+      
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

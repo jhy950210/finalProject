@@ -257,15 +257,15 @@
                   <th class="cell head">주소</th>
                   <td class="cell">
                   <!-- <input type="text" id="address1" name="address1" value="" style="width: 100%; margin-top: 5px; border: none;" readonly /> -->
-                  <textarea rows="2" cols="1" id="address1" style="width: 100%; margin-top: 5px; border: none;" readonly></textarea>
+                  <textarea rows="2" cols="1" id="address1" name="address1" style="width: 100%; margin-top: 5px; border: none;" readonly></textarea>
                   </td>
                   <td class="cell">
                   <!-- <input type="text" id="address2" name="address2" value="" style="width: 100%; margin-top: 5px; border: none" readonly/> -->
-                  <textarea rows="2" cols="1" id="address2" style="width: 100%; margin-top: 5px; border: none;" readonly></textarea>
+                  <textarea rows="2" cols="1" id="address2" name="address2" style="width: 100%; margin-top: 5px; border: none;" readonly></textarea>
                   </td>
                   <td class="cell">
                   <!-- <input type="text" id="address3" name="address3" value="" style="width: 100%; margin-top: 5px; border: none" readonly/> -->
-                  <textarea rows="2" cols="1" id="address3" style="width: 100%; margin-top: 5px; border: none;" readonly></textarea>
+                  <textarea rows="2" cols="1" id="address3" name="address3" style="width: 100%; margin-top: 5px; border: none;" readonly></textarea>
                   </td>
                </tr>
                
