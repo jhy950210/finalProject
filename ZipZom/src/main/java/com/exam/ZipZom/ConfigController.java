@@ -740,4 +740,18 @@ public class ConfigController {
 		request.setAttribute("flag", flag);
 		return "data/flag_json";
 	}
+	
+		// 상담 보고서
+		@RequestMapping("/final_report.do")
+		public String finalReport(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
+				
+			return "final_report";
+		}
+		
+		// 맞춤 매물
+		@RequestMapping("/consulting_match.do")
+		public String consultingMatch(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
+				
+			return "consulting_match";
+		}
 }

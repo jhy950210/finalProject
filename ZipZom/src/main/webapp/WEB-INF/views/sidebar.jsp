@@ -100,9 +100,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       고객상담 <i class="fa fa-caret-down"></i>
     </a>
     <div id="demoAcc2" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-      <a href="./consulting_rtp.do" class="w3-bar-item w3-button">매물 시세</a>
       <a href="./consulting_map.do" class="w3-bar-item w3-button">매물 위치</a>
-      <a href="./final_report.jsp" class="w3-bar-item w3-button w3-light-grey" <i class="fa fa-caret-right w3-margin-right"></i>>상담보고서</a> 
+      <a href="./consulting_rtp.do" class="w3-bar-item w3-button">매물 시세</a>
+      <a href="./consulting_match.do" class="w3-bar-item w3-button">맞춤 매물</a>
+      <a href="./final_report.do" class="w3-bar-item w3-button">상담보고서</a> 
     </div>
     <a href="#" class="w3-bar-item w3-button">일정관리</a>
 

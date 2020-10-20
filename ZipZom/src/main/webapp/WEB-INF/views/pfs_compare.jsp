@@ -154,7 +154,7 @@
 <!--   <link rel="stylesheet" href="./resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="./resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"> -->
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="w3-content" style="max-width:1500px">
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
