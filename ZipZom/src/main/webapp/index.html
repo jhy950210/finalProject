@@ -20,16 +20,22 @@
 </head>
 
 <body>
+	<input type="hidden" value="1" id="pseqS">
     <div class="container">
 
         <!-- 일자 클릭시 메뉴오픈 -->
         <div id="contextMenu" class="dropdown clearfix">
             <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
                 style="display:block;position:static;margin-bottom:5px;">
-                <li><a tabindex="-1" href="#">카테고리1</a></li>
-                <li><a tabindex="-1" href="#">카테고리2</a></li>
-                <li><a tabindex="-1" href="#">카테고리3</a></li>
-                <li><a tabindex="-1" href="#">카테고리4</a></li>
+                <li><a tabindex="-1" href="#">전화상담</a></li>
+                <li><a tabindex="-1" href="#">방문상담</a></li>
+                <li><a tabindex="-1" href="#">계약일</a></li>
+                <li><a tabindex="-1" href="#">중도금일</a></li>
+                <li><a tabindex="-1" href="#">잔금일</a></li>
+                <li><a tabindex="-1" href="#">계약일</a></li>
+                <li><a tabindex="-1" href="#">만기일</a></li>
+                <li><a tabindex="-1" href="#">매물방문</a></li>
+                <li><a tabindex="-1" href="#">기타</a></li>
                 <li class="divider"></li>
                 <li><a tabindex="-1" href="#" data-role="close">Close</a></li>
             </ul>
@@ -79,13 +85,13 @@
                                 	required="required" style="width:21%" placeholder="고객명"/>
                                 <select class="inputModal" type="text" name="edit-customer" id="edit-customer3"  style="width:20.5%">
                                     <option value="" hidden>선택</option>
-                                    <option value="카테고리1">매도인</option>
-                                    <option value="카테고리2">매수인</option>
-                                    <option value="카테고리3">임대인</option>
-                                    <option value="카테고리4">임차인</option>
-                                    <option value="카테고리5">중개인</option>
-                                    <option value="카테고리6">집주인</option>
-                                    <option value="카테고리7">일반상담</option>
+                                    <option value="매도인">매도인</option>
+                                    <option value="매수인">매수인</option>
+                                    <option value="임대인">임대인</option>
+                                    <option value="임차인">임차인</option>
+                                    <option value="중개인">중개인</option>
+                                    <option value="집주인">집주인</option>
+                                    <option value="일반상담">일반상담</option>
                                 </select>
                             </div>
                         </div>
@@ -94,15 +100,15 @@
                                 <label class="col-xs-4" for="edit-type1">일정구분</label>
                                 <select class="inputModal" type="text" name="edit-type1" id="edit-type1">
                                 	<option value="" hidden>선택</option>
-                                    <option value="카테고리1">전화상담</option>
-                                    <option value="카테고리2">방문상담</option>
-                                    <option value="카테고리3">계약일</option>
-                                    <option value="카테고리4">중도금일</option>
-                                    <option value="카테고리5">잔금일</option>
-                                    <option value="카테고리6">계약일</option>
-                                    <option value="카테고리7">만기일</option>
-                                    <option value="카테고리8">매물방문</option>
-                                    <option value="카테고리9">기타</option>
+                                    <option value="전화상담">전화상담</option>
+                                    <option value="방문상담">방문상담</option>
+                                    <option value="계약일">계약일</option>
+                                    <option value="중도금일">중도금일</option>
+                                    <option value="잔금일">잔금일</option>
+                                    <option value="계약일">계약일</option>
+                                    <option value="만기일">만기일</option>
+                                    <option value="매물방문">매물방문</option>
+                                    <option value="기타">기타</option>
                                 </select>
                             </div>
                         </div>
@@ -111,9 +117,9 @@
                                 <label class="col-xs-4" for="edit-type2">일정상태</label>
                                 <select class="inputModal" type="text" name="edit-type2" id="edit-type2">
                                 	<option value="" hidden>선택</option>
-                                    <option value="카테고리1">진행중</option>
-                                    <option value="카테고리2">대기중</option>
-                                    <option value="카테고리3">완료</option>
+                                    <option value="진행중">진행중</option>
+                                    <option value="대기중">대기중</option>
+                                    <option value="완료">완료</option>
                                 </select>
                             </div>
                         </div>
@@ -122,19 +128,19 @@
                                 <label class="col-xs-4" for="edit-type3">매물종류</label>
                                 <select class="inputModal" type="text" name="edit-type3" id="edit-type3">
                                 	<option value="" hidden>선택</option>
-                                    <option value="카테고리1">아파트</option>
-                                    <option value="카테고리2">오피스텔</option>
-                                    <option value="카테고리3">연/빌/다세대</option>
-                                    <option value="카테고리4">단독/다가구</option>
-                                    <option value="카테고리5">도시형 생활주택</option>
-                                    <option value="카테고리6">원룸</option>
-                                    <option value="카테고리7">상가</option>
-                                    <option value="카테고리8">사무실</option>
-                                    <option value="카테고리9">건물(전체매매)</option>
-                                    <option value="카테고리10">토지</option>
-                                    <option value="카테고리11">공장/창고</option>
-                                    <option value="카테고리12">분양권</option>
-                                    <option value="카테고리13">지식산업센터</option>
+                                    <option value="아파트">아파트</option>
+                                    <option value="오피스텔">오피스텔</option>
+                                    <option value="연/빌/다세대">연/빌/다세대</option>
+                                    <option value="단독/다가구">단독/다가구</option>
+                                    <option value="도시형 생활주택">도시형 생활주택</option>
+                                    <option value="원룸">원룸</option>
+                                    <option value="상가">상가</option>
+                                    <option value="사무실">사무실</option>
+                                    <option value="건물(전체매매)">건물(전체매매)</option>
+                                    <option value="토지">토지</option>
+                                    <option value="공장/창고">공장/창고</option>
+                                    <option value="분양권">분양권</option>
+                                    <option value="지식산업센터">지식산업센터</option>
                                 </select>
                             </div>
                         </div>
@@ -143,10 +149,10 @@
                                 <label class="col-xs-4" for="edit-type4">거래유형</label>
                                 <select class="inputModal" type="text" name="edit-type4" id="edit-type4">
                                 	<option value="" hidden>선택</option>
-                                    <option value="카테고리1">매매</option>
-                                    <option value="카테고리2">월세</option>
-                                    <option value="카테고리3">전세</option>
-                                    <option value="카테고리4">연세</option>
+                                    <option value="매매">매매</option>
+                                    <option value="월세">월세</option>
+                                    <option value="전세">전세</option>
+                                    <option value="연세">연세</option>
                                 </select>
                             </div>
                         </div>

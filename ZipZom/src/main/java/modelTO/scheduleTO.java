@@ -108,5 +108,4 @@ public class scheduleTO {
 		this.allDay = allDay;
 	}
 	
-	
 }

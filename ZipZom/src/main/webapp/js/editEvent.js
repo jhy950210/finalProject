@@ -2,9 +2,11 @@
  *  일정 편집
  * ************** */
 var editEvent = function (event, element, view) {
+	
 
-    $('#deleteEvent').data('id', event._id); //클릭한 이벤트 ID
-
+    $('#deleteEvent').data('id', event.seqS); //클릭한 이벤트 ID
+	
+	$('#edit-customer2').attr('disabled',true);
     $('.popover.fade.top').remove();
     $(element).popover("hide");
 
@@ -25,10 +27,15 @@ var editEvent = function (event, element, view) {
     }
 
     modalTitle.html('일정 수정');
-    editTitle.val(event.scheduleType);
     editStart.val(event.start.format('YYYY-MM-DD HH:mm'));
-    editType.val(event.type);
-    editDesc.val(event.description);
+    editType1.val(event.title);
+    editType2.val(event.progress);
+    editType3.val(event.bType);
+    editType4.val(event.contractType);
+	editCustomer1.val(event.customerTel);
+	editCustomer2.val(event.customerName);
+	editCustomer3.val(event.customerState);
+    editDesc.val(event.context);
     editColor.val(event.backgroundColor).css('color', event.backgroundColor);
 
     addBtnContainer.hide();
@@ -67,23 +74,40 @@ var editEvent = function (event, element, view) {
         }
 
         eventModal.modal('hide');
-
         event.allDay = statusAllDay;
-        event.scheduleType = editTitle.val();
+        event.scheduleType = editType1.val();
         event.start = startDate;
         event.end = displayDate;
-        event.type = editType.val();
+        event.customerTel = editCustomer1.val();
+        event.customerName = editCustomer2.val();
+        event.customerState = editCustomer3.val();
+        event.progress = editType2.val();
+        event.bType = editType3.val();
+        event.contractType = editType4.val();
         event.backgroundColor = editColor.val();
-        event.description = editDesc.val();
+        event.context = editDesc.val();
 
         $("#calendar").fullCalendar('updateEvent', event);
 
         //일정 업데이트
         $.ajax({
-            type: "get",
-            url: "",
+            type: "post",
+            url: "./updateSchedule.action",
             data: {
-                //...
+				seqS: event.seqS,
+                start: startDate,
+	            end: displayDate,
+	            backgroundColor: editColor.val(),
+	            textColor: '#ffffff',
+	            allDay: statusAllDay,
+	            customerTel: editCustomer1.val(),
+				customerName: editCustomer2.val(),
+				customerState: editCustomer3.val(),
+	            context: editDesc.val(),
+	            scheduleType: editType1.val(),
+				progress: editType2.val(),
+				bType: editType3.val(),
+				contractType: editType4.val()
             },
             success: function (response) {
                 alert('수정되었습니다.')
@@ -91,25 +115,27 @@ var editEvent = function (event, element, view) {
         });
 
     });
+
+	// 삭제버튼
+	$('#deleteEvent').on('click', function () {
+	    $('#deleteEvent').unbind();
+	    $("#calendar").fullCalendar('removeEvents', $(this).data('id'));
+	    eventModal.modal('hide');
+	
+	    //삭제시
+	    $.ajax({
+	        type: "post",
+	        url: "./deleteSchedule.action",
+	        data: {
+	            seqS: event.seqS
+	        },
+	        success: function (response) {
+	            alert('삭제되었습니다.');
+                $('#calendar').fullCalendar('removeEvents');
+                $('#calendar').fullCalendar('refetchEvents');
+	        }
+	    });
+	
+	});
 };
 
-// 삭제버튼
-$('#deleteEvent').on('click', function () {
-    
-    $('#deleteEvent').unbind();
-    $("#calendar").fullCalendar('removeEvents', $(this).data('id'));
-    eventModal.modal('hide');
-
-    //삭제시
-    $.ajax({
-        type: "get",
-        url: "",
-        data: {
-            //...
-        },
-        success: function (response) {
-            alert('삭제되었습니다.');
-        }
-    });
-
-});

@@ -26,10 +26,12 @@ var modifyBtnContainer = $('.modalBtnContainer-modifyEvent');
  * ************** */
 var newEvent = function (start, end, eventType) {
 
+	$('#edit-customer2').attr('disabled',false);
+	
     $("#contextMenu").hide(); //메뉴 숨김
 
     modalTitle.html('새로운 일정');
-    editType.val(eventType).prop('selected', true);
+    editType1.val(eventType).prop('selected', true);
     editTitle.val('');
     editStart.val(start);
     editEnd.val(end);
@@ -43,7 +45,6 @@ var newEvent = function (start, end, eventType) {
     //새로운 일정 저장버튼 클릭
     $('#save-event').unbind();
     $('#save-event').on('click', function () {
-	alert("일정 저장 누름");
         var eventData = {
             start: editStart.val(),
             end: editEnd.val(),
@@ -57,7 +58,7 @@ var newEvent = function (start, end, eventType) {
             context: editDesc.val(),
             scheduleType: editType1.val(),
 			progress: editType2.val(),
-			btype: editType3.val(),
+			bType: editType3.val(),
 			contractType: editType4.val()
         };
 
@@ -86,7 +87,7 @@ var newEvent = function (start, end, eventType) {
         if (editAllDay.is(':checked')) {
             eventData.start = moment(eventData.start).format('YYYY-MM-DD');
             //render시 날짜표기수정
-            eventData.end = moment(eventData.end).add(1, 'days').format('YYYY-MM-DD');
+            eventData.end = moment(eventData.end).format('YYYY-MM-DD');
             //DB에 넣을때(선택)
             realEndDay = moment(eventData.end).format('YYYY-MM-DD');
 
@@ -112,7 +113,7 @@ var newEvent = function (start, end, eventType) {
 	            context: eventData.context,
 	            scheduleType: eventData.scheduleType,
 				progress: eventData.progress,
-				btype: eventData.btype,
+				bType: eventData.bType,
 				contractType: eventData.contractType,
 				backgroundColor: eventData.backgroundColor,
 				textColor: eventData.textColor,
@@ -121,8 +122,8 @@ var newEvent = function (start, end, eventType) {
             success: function (response) {
 				alert('성공');
                 //DB연동시 중복이벤트 방지를 위한
-                //$('#calendar').fullCalendar('removeEvents');
-                //$('#calendar').fullCalendar('refetchEvents');
+                $('#calendar').fullCalendar('removeEvents');
+                $('#calendar').fullCalendar('refetchEvents');
             }
         });
     });

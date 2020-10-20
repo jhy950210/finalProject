@@ -83,8 +83,8 @@ var calendar = $('#calendar').fullCalendar({
       }),
       content: $('<div />', {
           class: 'popoverInfoCalendar'
-        }).append('<p><strong>등록자:</strong> ' + event.username + '</p>')
-        .append('<p><strong>구분:</strong> ' + event.type + '</p>')
+        }).append('<p><strong>고객명:</strong> ' + event.customerName + '</p>')
+        .append('<p><strong>진행사항:</strong> ' + event.progress + '</p>')
         .append('<p><strong>시간:</strong> ' + getDisplayEventDate(event) + '</p>')
         .append('<div class="popoverDescCalendar"><strong>설명:</strong> ' + event.context + '</div>'),
       delay: {
@@ -105,11 +105,13 @@ var calendar = $('#calendar').fullCalendar({
    *  일정 받아옴 
    * ************** */
   events: function (start, end, timezone, callback) {
+	var pseqS = $('#pseqS').val();
     $.ajax({
       type: "get",
       url: "./viewSchedule.action",
       data: {
         // 화면이 바뀌면 Date 객체인 start, end 가 들어옴
+		pseqS: pseqS,
         startDate : moment(start).format('YYYY-MM-DD'),
         endDate   : moment(end).format('YYYY-MM-DD')
       },
@@ -174,10 +176,12 @@ var calendar = $('#calendar').fullCalendar({
 
     //드롭한 일정 업데이트
     $.ajax({
-      type: "get",
-      url: "",
+      type: "post",
+      url: "./updateDateSchedule.action",
       data: {
-        //...
+		seqS: event.seqS,
+        start: newDates.startDate,
+		end: newDates.endDate
       },
       success: function (response) {
         alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
@@ -318,7 +322,6 @@ function calDateWhenDragnDrop(event) {
 
   //하루짜리 all day
   if (event.allDay && event.end === event.start) {
-    console.log('1111')
     newDates.startDate = moment(event.start._d).format('YYYY-MM-DD');
     newDates.endDate = newDates.startDate;
   }

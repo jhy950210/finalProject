@@ -100,26 +100,6 @@
 		from schedule
 		where PSEQ_S = ${pseqS}
 	</select>
-	<!-- 일정관리 상세정보 view 페이지 select sql문 -->
-	<select id="schedulePropertySelect" parameterType="modelTO.scheduleTO" resultType="modelTO.scheduleTO">
-		select SEQ_S as seqS,
-		PSEQ_S as pseqS,
-		CUSTOMER_NAME as customerName,
-		CUSTOMER_TEL as customerTel,
-		CUSTOMER_STATE as customerState,
-		start, 
-		end, 
-		CONTEXT, 
-		SCHEDULE_TYPE as scheduleType, 
-		PROGRESS, 
-		B_TYPE as bType, 
-		CONTRACT_TYPE as contractType,
-		backgroundColor, 
-		textColor, 
-		allday, 
-		from schedule
-		where SEQ_S = ${seqS}
-	</select>
 	<!-- 일정 추가 sql문 -->
 	<insert id="scheduleInsert" parameterType="modelTO.scheduleTO">
 		insert into schedule (
@@ -136,7 +116,7 @@
 		CONTRACT_TYPE,
 		backgroundColor, 
 		textColor, 
-		allday, 
+		allDay
 		) 
 		values (
 		${pseqS}, 
@@ -152,7 +132,7 @@
 		#{contractType},
 		#{backgroundColor}, 
 		#{textColor}, 
-		${allday}
+		#{allDay}
 		)
 	</insert>
 	<!--일정 변경 sql문 -->
@@ -166,9 +146,16 @@
 		SCHEDULE_TYPE = #{scheduleType},
 		PROGRESS = #{progress},
 		B_TYPE = #{bType},
-		backgroundColor = #{backgroundColor}
-		textColor = #{textColor}
-		allday = ${allday}
+		backgroundColor = #{backgroundColor},
+		textColor = #{textColor},
+		allday = ${allDay}
+		WHERE SEQ_S = ${seqS}
+	</update>
+	<!--드래그로 일정 변경 sql문 -->
+	<update id="scheduleDateUpdate" parameterType="modelTO.scheduleTO">
+		UPDATE schedule SET
+		start = #{start},
+		end = #{end}
 		WHERE SEQ_S = ${seqS}
 	</update>
 	<!-- 일정 삭제 sql문 -->
