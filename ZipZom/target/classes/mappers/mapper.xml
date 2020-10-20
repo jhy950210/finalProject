@@ -101,6 +101,11 @@
 		from user
 	</select>
 	
+	<select id="customerInfo" parameterType="modelTO.customerTO" resultType="modelTO.customerTO">
+	select name,tel
+ 	from customer where seq_C=#{seqC}
+	</select>
+	
 	<!-- 고객 상세보기,수정창 -->
 	<select id="customerView" parameterType="modelTO.customerTO" resultType="modelTO.CustomerAllTO">
 		select seq_c seqC,name,tel,b_type bType,type,progress,contract_type contractType,date_format(b_year,'%Y') bYear,budget_t1 budgetT1,budget_t2 budgetT2,budget_t3 budgetT3,budget_l budgetL,
@@ -256,9 +261,9 @@
 	where seq_pfs = #{seqPfs}
 	</select>
 	
-	<!-- 맞춤매물 뷰 -->
+	<!-- 맞춤매물 고객정보 -->
 	<select id="customerFind" parameterType="modelTO.customerTO" resultType="modelTO.customerTO">
-	select name,b_type bType,type,progress,contract_type contractType,date_format(b_year,'%Y') bYear,
+	select seq_c seqC,name,tel,b_type bType,type,progress,contract_type contractType,date_format(b_year,'%Y') bYear,
 	budget_t1 budgetT1,budget_t2 budgetT2,budget_t3 budgetT3,
 	area2,room,floor,elevator from customer where name=#{name} and tel=#{tel} limit 0,1
 	</select>
@@ -269,8 +274,8 @@
 	select seq_pfs seqPfs,b_type bType,contract_type contractType,si,gu,dong,bunji,h_number hNumber,budget1,budget2,budget3,loan,wdate
 	 from property_for_sale
 	 where pseq_pfs = #{pseqC} and b_type=#{bType} and budget1 <= #{budgetT1} and budget2 <= #{budgetT2}
-	 and budget3 <= #{budgetT3} and contract_type = #{contractType} and area2 >= #{area2} and b_year >= #{bYear} and room > #{room}
-	 and floor <= #{floor} and elevator >= ${elevator}
+	 and budget3 <= #{budgetT3} and contract_type = #{contractType} and area2 >= #{area2} and b_year >= #{bYear} and room >= #{room}
+	 and floor <= #{floor} and elevator <= ${elevator}
 	 order by seq_pfs desc
 	 ]]>
 	</select>

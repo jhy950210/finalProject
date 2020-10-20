@@ -41,4 +41,6 @@ public interface TestMapper {
 	public abstract pfsTO pfsCompare(pfsTO pto);
 	public abstract customerTO customerFind(customerTO cto);
 	public abstract ArrayList<pfsTO> pfsFind(customerTO cto);
+	public abstract pfsAllTO pfsView(int seqPfs);
+	public abstract customerTO customerInfo(customerTO cto);
 }

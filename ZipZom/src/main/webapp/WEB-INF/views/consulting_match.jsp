@@ -66,20 +66,24 @@
          })
         
          
-       $('#pfsCompare').on('click', function() {
+       $('#report').on('click', function() {
          var checkbox = $('input:checkbox[name="selectPfs"]:checked');
          var check = new Array();
+         var seqC = $('#number').val();
          checkbox.each(function(index) {
             check[index] = checkbox[index].value;
-            console.log(index);
+            //console.log(index + seqC);
          })
-         if(check[1] == null && check[0] != null) {
-            alert('2개 이상 선택해주세요');
+         if(seqC == '') {
+        	 alert('고객을 검색해주세요');
+         }
+         else if(check[1] == null && check[0] != null) {
+        	 location.href = './report.do?seqC='+seqC+'&seqPfs='+check[0];
          }
          else if(check[2] == null && check[1] != null){
-            location.href = './pfs_compare.do?seqPfs='+check[0]+'&seqPfs='+check[1];
+            location.href = './report.do?seqC='+seqC+'&seqPfs='+check[0]+'&seqPfs='+check[1];
          } else if(check[2] != null) {
-            location.href = './pfs_compare.do?seqPfs='+check[0]+'&seqPfs='+check[1]+'&seqPfs='+check[2]
+            location.href = './report.do?seqC='+seqC+'&seqPfs='+check[0]+'&seqPfs='+check[1]+'&seqPfs='+check[2]
          } else {
             alert('3개까지 선택 가능합니다.');
          }
@@ -232,6 +236,7 @@
     	             if(json[name] != '') {
     	            	 //$('#findname').val(json[name]);
     	            	 //console.log(index + ' ' + json[index]);
+    	            	 //$('#number').val(json[number]);
     	            	 $('#'+index).val(json[index]);
     	             } else {
     	                alert('고객이 없습니다')
@@ -379,6 +384,7 @@
                <!-- 고객 이름 -->
                   <li style="margin-right: 10px; margin-top: 10px;">고객 이름</li>
                <input type="text" class="form-control" id="findname" placeholder="이름" style="width: 100px; margin-right: 10px; margin-top: 5px;" readonly>
+               <input type="hidden" name="number" id="number" value="" />
                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-match" style="width: 70px; margin-top:5px;">
               		찾기
               	</button>
@@ -524,7 +530,7 @@
                 </table>
                 <div class="modal-footer justify-content-left">
                 
-            <button type="button" id="pfsCompare" class="btn btn-primary">매물 보고서</button>
+            <button type="button" id="report" class="btn btn-primary">매물 보고서</button>
             </div> 
             
             

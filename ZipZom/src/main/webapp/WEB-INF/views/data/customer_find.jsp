@@ -8,7 +8,7 @@
 	customerTO cto = (customerTO)request.getAttribute( "cto" );
 	
 	JSONArray jsonArray = new JSONArray();
-		//int seqC = cto.getSeqC();
+		int seqC = cto.getSeqC();
 		String name= cto.getName();
 		int floor = cto.getFloor();
 		String contractType= cto.getContractType();
@@ -24,7 +24,7 @@
 		
 		
 		JSONObject jsonObject = new JSONObject();
-		//jsonObject.put("seqC", seqC);
+		jsonObject.put("number", seqC);
 		jsonObject.put("findname", name);	
 		jsonObject.put("findfloor", floor);
 		jsonObject.put("findroom", room);

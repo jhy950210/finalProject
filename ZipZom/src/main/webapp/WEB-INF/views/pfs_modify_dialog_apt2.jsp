@@ -35,7 +35,6 @@
 					<!-- <th>우편번호</th> -->
 					<td>
 						<div class="form-group row">
-						<!-- 건물 타입 : &nbsp;&nbsp;<input type="text" name="bType" id="bType" style="width:40%; value="" readonly> -->
 						</div>
 					</td>
 				</tr>

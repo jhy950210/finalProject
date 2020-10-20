@@ -1,5 +1,151 @@
+<%@page import="modelTO.customerTO"%>
+<%@page import="modelTO.pfsAllTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%	
+	String name = "";
+	String tel = "";
+	StringBuffer table = new StringBuffer();
+	if(request.getAttribute("paList") != null && request.getAttribute("cto") != null) {
+	ArrayList<pfsAllTO> paList = (ArrayList<pfsAllTO>)request.getAttribute("paList");
+	customerTO cto = (customerTO)request.getAttribute("cto");
+	name = cto.getName();
+	tel = cto.getTel();
+	
+	
+	for(pfsAllTO pato : paList) {
+		String address = pato.getAddress();
+		String contractType = pato.getContractType();
+		int budget1 = pato.getBudget1();
+		int budget2 = pato.getBudget2();
+		int budget3 = pato.getBudget3();
+		String loan = pato.getLoan();
+		int area1 = pato.getArea1();
+		int area2 = pato.getArea2();
+		int area3 = pato.getArea3();
+		String moveSchedule = pato.getMoveSchedule();
+		String endOfLease = pato.getEndOfLease();
+		int room = pato.getRoom();
+		String direction = pato.getDirection();
+		int bathroom = pato.getBathroom();
+		String heatingSystem = pato.getHeatingSystem();
+		int numberOfHousehold = pato.getNumberOfHousehold();
+		int floor = pato.getFloor();
+		int floorTotal = pato.getFloorTotal();
+		String aircondition = (pato.getAircondition() == 0) ? "" : "있음";
+		String elevator = (pato.getElevator() == 0) ? "" : "있음";
+		String parking = (pato.getParking() == 0) ? "" : "없음";
+		String bYear = pato.getbYear();
+		String context = pato.getContext();
+		String secu = "";
+		String[] str = {"경비원","비디오폰","인터폰","카드키","cctv","도어락","방범창"};
+		String[] strSecurity = new String[7];
+		int[] security = {pato.getSecurityGuard(),pato.getVideophone(),pato.getInterphone(),pato.getCardKey(),pato.getCctv(),pato.getDoorSecurity(),pato.getWindowGuard()};
+		for(int i=0;i<security.length;i++) {
+			strSecurity[i] = (security[i] == 0) ? "" : str[i];
+		}
+		for(int i=0;i<strSecurity.length;i++){
+			if(!strSecurity[i].equals("")) {
+				secu += strSecurity[i]+ " ";
+			}
+			if(!strSecurity[6].equals("")) {
+				secu += strSecurity[i];
+				System.out.println(secu);
+			}
+		}
+		table.append("<div class='card'>");
+		table.append("<table class='type03'>");
+        table.append("<thead>");
+        table.append("<tr class='page-break-tr'>");
+		table.append("<th>매물 주소</th>");
+		table.append("<td colspan='4'>"+address+"</td>");
+		table.append("<th>계약 유형</th>");
+		table.append("<td colspan='3'>"+contractType+"</td>");
+        table.append("</tr>");
+        table.append("<tr>");
+		table.append("<th>금액정보</th>");
+		table.append("<td>매매가</td>");
+		table.append("<td>"+budget1+"</td>");
+		table.append("<td>보증금</td>");
+		table.append("<td>"+budget2+"</td>");
+		table.append("<td>월세</td>");
+		table.append("<td>"+budget3+"</td>");
+		table.append("<td>융자금</td>");
+		table.append("<td>"+loan+"</td>");
+        table.append("</tr>");
+        table.append("<tr>");
+		table.append("<th>면적정보</th>");
+		table.append("<td>공급면적</td>");
+		table.append("<td>"+area1+"</td>");
+		table.append("<td>전용면적</td>");
+		table.append("<td>"+area2+"</td>");
+		table.append("<td>대지면적</td>");
+		table.append("<td>"+area3+"</td>");
+		table.append("<td>-</td>");
+		table.append("<td>-</td>");
+        table.append("</tr>");
+        table.append("<tr>");
+		table.append("<th>입주정보</th>");
+		table.append("<td colspan='2'>입주가능날짜</td>");
+		table.append("<td colspan='2'>"+moveSchedule+"</td>");
+		table.append("<td colspan='2'>임대만기날짜</td>");
+		table.append("<td colspan='2'>"+endOfLease+"</td>");
+        table.append("</tr>");
+		table.append("<tr>");
+		table.append("<th rowspan='4'>상세정보</th>");
+		table.append("<td>방개수</td>");
+		table.append("<td>"+room+"개</td>");
+		table.append("<td>방향</td>");
+		table.append("<td>"+direction+"</td>");
+		table.append("<td>욕실수</td>");
+		table.append("<td>"+bathroom+"개</td>");
+		table.append("<td>난방방식</td>");
+		table.append("<td>"+heatingSystem+"</td>");
+        table.append("</tr>");
+        table.append("<tr>");
+		table.append("<td>세대수</td>");
+		table.append("<td>"+numberOfHousehold+"세대</td>");
+		table.append("<td>층수</td>");
+		table.append("<td>"+floor+"층</td>");
+		table.append("<td>총층수</td>");
+		table.append("<td>"+floorTotal+"층</td>");
+		table.append("<td>냉방시설</td>");
+		table.append("<td>"+aircondition+"</td>");
+        table.append("</tr>");
+        table.append("<tr>");
+		table.append("<td>승강기</td>");
+		table.append("<td>"+elevator+"</td>");
+		table.append("<td>주차유무</td>");
+		table.append("<td>"+parking+"</td>");
+		table.append("<td>건축년도</td>");
+		table.append("<td>"+bYear+"년</td>");
+		table.append("<td>-</td>");
+		table.append("<td>-</td>");
+        table.append("</tr>");
+        table.append("<tr>");
+		table.append("<td>옵션</td>");
+		table.append("<td colspan='3'>에어컨</td>");
+		table.append("<td>보안시설</td>");
+		table.append("<td colspan='3'>"+secu+"</td>");
+        table.append("</tr>");
+		table.append("<tr>");
+		table.append("<th>메모</th>");
+		table.append("<td colspan='8'>"+context+"</td>");
+        table.append("</tr>");
+        table.append("</thead>");
+        table.append("</table>");
+		table.append("</div>");
+		
+		
+		
+		
+		
+	}
+	}
+
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -124,11 +270,11 @@ table.type03 td {
 							<thead>
 								<tr>
 									<th>고객 이름</th>
-									<td></td>
+									<td><%=name %></td>
 								</tr>
 								<tr>
 									<th>고객 연락처</th>
-									<td></td>
+									<td><%=tel %></td>
 								</tr>
 							</thead>
 					</table>
@@ -152,8 +298,9 @@ table.type03 td {
 			</div>
 			
 			<div class="card">
-				<div class="card">
-					<!-- 첫번째 테이블 -->
+			<%=table %>
+				<!--<div class="card">
+					
 					<table class="type03">
 	                  <thead>
 	                  <tr class="page-break-tr">
@@ -244,14 +391,12 @@ table.type03 td {
 	                  </thead>
      
 	                </table>
-					<!-- 첫번째 테이블 끝-->
 					
 				</div>
 				
 	
 	
 				<div class="card">
-					<!-- 두번째 테이블 -->
 					<table class="type03">
 	                  <thead>
 	                  <tr>
@@ -342,11 +487,10 @@ table.type03 td {
 	                  </thead>
   
 	                </table>
-	                <!-- 두번째 테이블 끝 -->
 				</div>
 				
 				<div class="card">
-					<!-- 세번째 테이블 -->
+					세번째 테이블
 					<table class="type03">
 	                  <thead>
 	                  <tr class="page-break-tr">
@@ -437,8 +581,7 @@ table.type03 td {
 	                  </thead>
   
 	                </table>
-	                <!-- 세번째 테이블 끝 -->
-				</div>		
+				</div> -->		
 					
 			</div>
 		

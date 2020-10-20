@@ -92,6 +92,29 @@
 
    });
    // ready 끝
+   
+   var table = function() {
+       $('#example2').DataTable({
+           "paging": true,
+           "lengthChange": false,
+           "displayLength": 5,
+           "searching": true,
+           "ordering": true,
+           "info": true,
+           "autoWidth": false,
+           "responsive": true,
+           "bDestroy": true,
+           "language":{
+             	 "paginate":{
+             		 "next":"다음",
+             		 "previous":"이전"
+             	 },
+             	 "search":"검색 : ",
+             	 "info":"현재 _START_-_END_ / _TOTAL_건",
+             	"emptyTable": "데이터가 없어요."
+              }
+         });
+   }
       
                                             
      var readServer = function() {    
@@ -119,18 +142,7 @@
                 
                 $( '#myTable' ).append( mytable );
              });
-             $('#example2').DataTable({
-                 "paging": true,
-                 "lengthChange": false,
-                 "displayLength": 5,
-                 "searching": true,
-                 "ordering": true,
-                 "info": true,
-                 "autoWidth": false,
-                 "responsive": true,
-                 "bDestroy": true
-               });
-
+				table();
           },
           error: function( e ) {
              alert( '서버 에러 ' + e );

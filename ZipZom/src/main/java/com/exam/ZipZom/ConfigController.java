@@ -964,8 +964,25 @@ public class ConfigController {
 	}
 	
 		// 상담 보고서
-		@RequestMapping("/final_report.do")
-		public String finalReport(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
+		@RequestMapping("/report.do")
+		public String finalReport(HttpServletRequest request, HttpServletResponse response,Model model) {
+			 ArrayList<pfsAllTO> paList = new ArrayList<pfsAllTO>();
+			 customerTO cto = new customerTO();
+			 if(request.getParameterValues("seqPfs") != null) {
+				 cto.setSeqC(Integer.parseInt(request.getParameter("seqC")));
+				 cto = testmapper.customerInfo(cto);
+			 String[] seqPfs = request.getParameterValues("seqPfs");
+			 int[] seq = new int[seqPfs.length];
+			 for(int i=0;i<seqPfs.length;i++) {
+			 seq[i] = Integer.parseInt(seqPfs[i]); 
+			 pfsAllTO pato = new pfsAllTO();
+			 pato = testmapper.pfsView(seq[i]);
+			 paList.add(pato);
+			 }
+			
+			 }
+			request.setAttribute("paList",paList);
+			request.setAttribute("cto", cto);	
 			return "final_report";
 		}
 		

@@ -114,7 +114,7 @@
                		 "next":"다음",
                		 "previous":"이전"
                	 },
-               	 "search":"검색",
+               	 "search":"검색 : ",
                	 "info":"현재 _START_-_END_ / _TOTAL_건",
                	"emptyTable": "데이터가 없어요."
                 }
@@ -186,12 +186,12 @@
                    // json이 json index는 키값 item은 value값
                   //console.log(item)
                   var name = ''+ document.getElementById(index).getAttribute('name');
-                   console.log(index);
+                   //console.log(index);
                    if(name == 'rooms') {
                       json['room'] = json['room'] + '개';
                       $('#mcfrm').find('#room').val(json['room']);
-                      console.log(name);
-                      console.log(json['room']);
+                      //console.log(name);
+                      //console.log(json['room']);
                    }
                   $('#mcfrm').find('#'+name).val(json[index]);
                   
