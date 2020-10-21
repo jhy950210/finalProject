@@ -9,6 +9,7 @@ import modelTO.option_customerTO;
 import modelTO.option_pfsTO;
 import modelTO.pfsAllTO;
 import modelTO.pfsTO;
+import modelTO.rtpTO;
 import modelTO.security_customerTO;
 import modelTO.security_pfsTO;
 import modelTO.userTO;
@@ -43,4 +44,6 @@ public interface TestMapper {
 	public abstract ArrayList<pfsTO> pfsFind(customerTO cto);
 	public abstract pfsAllTO pfsView(int seqPfs);
 	public abstract customerTO customerInfo(customerTO cto);
+	public abstract ArrayList<rtpTO> rtpFind(customerTO cto);
+	public abstract ArrayList<rtpTO> rtpList(rtpTO rto);
 }

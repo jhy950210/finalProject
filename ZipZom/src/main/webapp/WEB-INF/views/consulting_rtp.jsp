@@ -36,7 +36,349 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="./resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="./resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
- 
+ <script type="text/javascript">
+  $(document).ready(function() {
+      var param = null;
+      readServer(param);
+            
+       $('#customerFind').on('click', function(){
+         var param = $('#find').serialize();
+         customerInfo(param);
+         })
+         
+       $('#search').on('click', function(){
+         param = $('#findrtp').serialize();
+         $('#example2').DataTable().destroy();
+        // $( '#myTable' ).empty();
+         	readServer(param);
+         })
+        
+         $('#btn').on('click', function() {
+        	$('#example2').DataTable().destroy();
+        	var value1 = '-- 시 --';
+        	var value2 = '-- 구 --';
+        	var value3 = '-- 동 --';
+        	
+        	value1 = $('#si option:selected').val();
+        	value2 = $('#gu option:selected').val();
+        	value3 = $('#dong option:selected').val();
+        	console.log(value2);
+        	if(value1 == '-- 시 --' && value2 == '-- 구 --' && value3 == '-- 동 --'){
+        		readServer();
+        	} else if(value1 != '-- 시 --' && value2 == '-- 구 --' && value3 == '-- 동 --'){
+        		selectServer1(value1);
+        	} else if(value1 != '-- 시 --' && value2 != '-- 구 --' && value3 == '-- 동 --'){
+        		selectServer2(value1,value2);
+        	}else {
+        		selectServer3(value1,value2,value3);
+        	}
+        }) 
+        
+   
+   });
+   // ready 끝
+      
+                                            
+     var readServer = function(param) {
+	   if(param == null) {
+       $.ajax({                         
+          url: 'rtp_list.json',   
+          type: 'get',                 
+          dataType: 'json',            
+          success: function( json ) {  
+             $( '#myTable' ).empty();
+             $.each( json.data, function( index, item ) {
+                var mytable = '<tr>'
+                	mytable += '<td>'+item.bType+'</td>';
+                    mytable += '<td>'+item.si+'</td>';
+                    mytable += '<td>'+item.gu+'</td>';
+                    mytable += '<td>'+item.dong+'</td>';
+                    mytable += '<td>'+item.bunji+'</td>';
+                    mytable += '<td>'+item.bName+'</td>';
+                    mytable += '<td>'+item.area2+'</td>';
+                    mytable += '<td>'+item.contractDate1+'</td>';
+                    mytable += '<td>'+item.contractDate2+'</td>';
+                    mytable += '<td>'+item.price+'</td>' ;
+                    mytable += '<td>'+item.floor+'</td>';
+                    mytable += '<td>'+item.bYear+'</td>';
+                    mytable += '<td>'+item.roadAddress+'</td></tr>';
+                
+                $( '#myTable' ).append( mytable );
+             });
+             $('#example2').DataTable({
+                 "paging": true,
+                 "lengthChange": false,
+                 "displayLength": 5,
+                 "searching": true,
+                 "ordering": true,
+                 "language":{
+              	 "paginate":{
+              		 "next":"다음",
+              		 "previous":"이전"
+              	 },
+              	"search":"주소검색",
+              	 "info":"현재 _START_-_END_ / _TOTAL_건",
+              	"emptyTable": "데이터가 없어요."
+                 },
+                 "info": true,
+                 "autoWidth": false,
+                 "responsive": true,
+                 "bDestroy": true
+               });
+          },
+          error: function( e ) {
+             alert( '서버 에러 ' + e );
+          }
+       })
+	   } else {
+		   $.ajax({                         
+	             url: 'rtp_find.json',   
+	             type: 'post',
+	             data: param,
+	             dataType: 'json',            
+	             success: function( json ) { 
+	                if(json.data != '' || json.data != null) {
+	                $( '#myTable' ).empty();
+	                $.each( json.data, function( index, item ) {
+	                	var mytable = '<tr>'
+	                		mytable += '<td>'+item.bType+'</td>';
+	                        mytable += '<td>'+item.si+'</td>';
+	                        mytable += '<td>'+item.gu+'</td>';
+	                        mytable += '<td>'+item.dong+'</td>';
+	                        mytable += '<td>'+item.bunji+'</td>';
+	                        mytable += '<td>'+item.bName+'</td>';
+	                        mytable += '<td>'+item.area2+'</td>';
+	                        mytable += '<td>'+item.contractDate1+'</td>';
+	                        mytable += '<td>'+item.contractDate2+'</td>';
+	                        mytable += '<td>'+item.price+'</td>' ;
+	                        mytable += '<td>'+item.floor+'</td>';
+	                        mytable += '<td>'+item.bYear+'</td>';
+	                        mytable += '<td>'+item.roadAddress+'</td></tr>';
+	                   
+	                   $( '#myTable' ).append( mytable );
+	                });
+	                $('#example2').DataTable({
+	                    "paging": true,
+	                    "lengthChange": false,
+	                    "displayLength": 5,
+	                    "searching": true,
+	                    "ordering": true,
+	                    "language":{
+                      	 "paginate":{
+                      		 "next":"다음",
+                      		 "previous":"이전"
+                      	 },
+                      	"search":"주소검색",
+                      	 "info":"현재 _START_-_END_ / _TOTAL_건",
+                      	"emptyTable": "데이터가 없어요."
+                       	},
+	                    "info": true,
+	                    "autoWidth": false,
+	                    "responsive": true,
+	                    "bDestroy": true
+	                  });
+	                } else {
+	                	alert('맞는 매물이 없습니다');
+	                }
+	             },
+	             error: function( e ) {
+	                alert( '서버 에러 ' + e );
+	             }
+	          })
+	   }
+      }
+      // readServer 끝
+      
+      var selectServer1 = function(value1) {    
+             $.ajax({                         
+                url: 'customer_list.json',   
+                type: 'get',                 
+                dataType: 'json',            
+                success: function( json ) {  
+                   $( '#tbody' ).empty();
+                   $.each( json.data, function( index, item ) {
+                	   if(item.si == value1) {
+                		   var mytable = '<tr>'
+   	                		mytable += '<td>'+item.bType+'</td>';
+   	                        mytable += '<td>'+item.si+'</td>';
+   	                        mytable += '<td>'+item.gu+'</td>';
+   	                        mytable += '<td>'+item.dong+'</td>';
+   	                        mytable += '<td>'+item.bunji+'</td>';
+   	                        mytable += '<td>'+item.bName+'</td>';
+   	                        mytable += '<td>'+item.area2+'</td>';
+   	                        mytable += '<td>'+item.contractDate1+'</td>';
+   	                        mytable += '<td>'+item.contractDate2+'</td>';
+   	                        mytable += '<td>'+item.price+'</td>' ;
+   	                        mytable += '<td>'+item.floor+'</td>';
+   	                        mytable += '<td>'+item.bYear+'</td>';
+   	                        mytable += '<td>'+item.roadAddress+'</td></tr>';
+                      
+                      $( '#tbody' ).append( html );
+                	   }
+                   });
+                  table();
+                },
+                error: function( e ) {
+                   alert( '서버 에러 ' + e );
+                }
+             })
+		}
+      // selectServer1 끝
+      
+      var selectServer2 = function(value1) {    
+             $.ajax({                         
+                url: 'customer_list.json',   
+                type: 'get',                 
+                dataType: 'json',            
+                success: function( json ) {  
+                   $( '#tbody' ).empty();
+                   $.each( json.data, function( index, item ) {
+                	   if(item.si == value1 && item.gu == value2) {
+                		   var mytable = '<tr>'
+   	                		mytable += '<td>'+item.bType+'</td>';
+   	                        mytable += '<td>'+item.si+'</td>';
+   	                        mytable += '<td>'+item.gu+'</td>';
+   	                        mytable += '<td>'+item.dong+'</td>';
+   	                        mytable += '<td>'+item.bunji+'</td>';
+   	                        mytable += '<td>'+item.bName+'</td>';
+   	                        mytable += '<td>'+item.area2+'</td>';
+   	                        mytable += '<td>'+item.contractDate1+'</td>';
+   	                        mytable += '<td>'+item.contractDate2+'</td>';
+   	                        mytable += '<td>'+item.price+'</td>' ;
+   	                        mytable += '<td>'+item.floor+'</td>';
+   	                        mytable += '<td>'+item.bYear+'</td>';
+   	                        mytable += '<td>'+item.roadAddress+'</td></tr>';
+                      
+                      $( '#tbody' ).append( html );
+                	   }
+                   });
+                  table();
+                },
+                error: function( e ) {
+                   alert( '서버 에러 ' + e );
+                }
+             })
+		}
+      // selectServer2 끝
+      
+      var selectServer3 = function(value1) {    
+             $.ajax({                         
+                url: 'customer_list.json',   
+                type: 'get',                 
+                dataType: 'json',            
+                success: function( json ) {  
+                   $( '#tbody' ).empty();
+                   $.each( json.data, function( index, item ) {
+                	   if(item.si == value1 && item.gu == value2 && item.dong == value3) {
+                		   var mytable = '<tr>'
+   	                		mytable += '<td>'+item.bType+'</td>';
+   	                        mytable += '<td>'+item.si+'</td>';
+   	                        mytable += '<td>'+item.gu+'</td>';
+   	                        mytable += '<td>'+item.dong+'</td>';
+   	                        mytable += '<td>'+item.bunji+'</td>';
+   	                        mytable += '<td>'+item.bName+'</td>';
+   	                        mytable += '<td>'+item.area2+'</td>';
+   	                        mytable += '<td>'+item.contractDate1+'</td>';
+   	                        mytable += '<td>'+item.contractDate2+'</td>';
+   	                        mytable += '<td>'+item.price+'</td>' ;
+   	                        mytable += '<td>'+item.floor+'</td>';
+   	                        mytable += '<td>'+item.bYear+'</td>';
+   	                        mytable += '<td>'+item.roadAddress+'</td></tr>';
+                      
+                      $( '#tbody' ).append( html );
+                	   }
+                   });
+                  table();
+                },
+                error: function( e ) {
+                   alert( '서버 에러 ' + e );
+                }
+             })
+		}
+      // selectServer3 끝
+      
+            
+      var customerInfo = function(param) {
+    	         $.ajax({
+    	          url: 'customerFind.json',
+    	          type: 'post',
+    	          data:param,
+    	          dataType: 'json',
+    	          success: function( json ) {
+    	        	  $.each( json, function( index, item ) {
+    	             if(json[name] != '') {
+    	            	 //$('#findname').val(json[name]);
+    	            	 //console.log(index + ' ' + json[index]);
+    	            	 $('#'+index).val(json[index]);
+    	             } else {
+    	                alert('고객이 없습니다')
+    	             }
+    	       });
+    	          },
+    	          error: function( e ) {
+    	             alert( '서버 에러 ' + e );
+    	          }
+    	       })
+    	      };
+    	      
+    	      var rtpList = function(param) {    
+    	          $.ajax({                         
+    	             url: 'rtp_find.json',   
+    	             type: 'post',
+    	             data: param,
+    	             dataType: 'json',            
+    	             success: function( json ) { 
+    	                if(json.data != '' || json.data != null) {
+    	                $( '#myTable' ).empty();
+    	                $('#example2').DataTable().destroy();
+    	                $.each( json.data, function( index, item ) {
+    	                	var mytable = '<tr>'
+    	                		mytable += '<td>'+item.bType+'</td>';
+    	                        mytable += '<td>'+item.si+'</td>';
+    	                        mytable += '<td>'+item.gu+'</td>';
+    	                        mytable += '<td>'+item.dong+'</td>';
+    	                        mytable += '<td>'+item.bunji+'</td>';
+    	                        mytable += '<td>'+item.bName+'</td>';
+    	                        mytable += '<td>'+item.area2+'</td>';
+    	                        mytable += '<td>'+item.contractDate1+'</td>';
+    	                        mytable += '<td>'+item.contractDate2+'</td>';
+    	                        mytable += '<td>'+item.price+'</td>' ;
+    	                        mytable += '<td>'+item.floor+'</td>';
+    	                        mytable += '<td>'+item.bYear+'</td>';
+    	                        mytable += '<td>'+item.roadAddress+'</td></tr>';
+    	                   
+    	                   $( '#myTable' ).append( mytable );
+    	                });
+    	                $('#example2').DataTable({
+    	                    "paging": true,
+    	                    "lengthChange": false,
+    	                    "displayLength": 5,
+    	                    "searching": true,
+    	                    "ordering": true,
+    	                    "language":{
+   	                      	 "paginate":{
+   	                      		 "next":"다음",
+   	                      		 "previous":"이전"
+   	                      	 },
+   	                      	"search":"주소검색",
+   	                      	 "info":"현재 _START_-_END_ / _TOTAL_건",
+   	                      	"emptyTable": "데이터가 없어요."
+   	                       	},
+    	                    "info": true,
+    	                    "autoWidth": false,
+    	                    "responsive": true,
+    	                    "bDestroy": true
+    	                  });
+    	                } else {
+    	                	alert('맞는 매물이 없습니다');
+    	                }
+    	             },
+    	             error: function( e ) {
+    	                alert( '서버 에러 ' + e );
+    	             }
+    	          })
+    	         }
+</script>
 </head>
 <body class="w3-content" style="max-width:1700px">
 <!-- Site wrapper -->
@@ -74,14 +416,6 @@
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="./resources/index3.html" class="brand-link">
-      <img src="./resources/img/zipzom_logo.png"
-           alt="AdminLTE Logo"
-           class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">ZipZom</span>
-    </a>
 
    <!-- sidebar include -->
     <jsp:include page = "./sidebar.jsp" flush = "false"/>
@@ -111,7 +445,8 @@
     <section class="content">
 
       <!-- 카드 시작 -->
-      <div class="card">         
+      <div class="card">  
+      <form name="findrtp" id="findrtp" >       
    	  	<!-- 카드 헤더 -->
 	  	<div class="card-header">
 			<h3 class="card-title">정보 입력</h3> 
@@ -136,31 +471,10 @@
 				
 				<section class="col-md-8">
               		<div class="input-group mb-3">
-						<!-- 시 -->
-						<li style="margin-right: 10px; margin-top: 10px;">주소</li>
-						<select class="form-control select" id="si" name="si" style="width: 150px; margin-right: 20px; margin-top: 5px;">
-	                    	<option value="none">-- 시 --</option>
-								<option>서울특별시</option>
-						</select>
 						
-						<!-- 구 -->
-						<select class="form-control select" id="gu" name="gu" style="width: 150px; margin-right: 20px; margin-top: 5px;">
-	                    	<option value="none">-- 구 --</option>
-								<option>강남구</option>
-								<option>강동구</option>
-								<option>강서구</option>
-						</select>
-						
-						<!-- 동 -->
-						<select class="form-control select" id="dong" name="dong" style="width: 150px; margin-right: 20px; margin-top: 5px;">
-	                    	<option value="none">-- 동 --</option>
-								<option>개포동</option>
-								<option>논현동</option>
-								<option>대치동</option>
-						</select>
 						
 						<section>
-							<button type="button" class="btn btn-primary" style="width: 150px; margin-top:5px;">
+							<button type="button" id="search" class="btn btn-primary" style="width: 150px; margin-top:5px;">
               				검색
               				</button>
 						</section>
@@ -169,12 +483,13 @@
 			</div>
 			
 			<div class="card">
+				
 				<div class="form-group row" style="margin-left: 10px;">
 					<section class="col-md-3">		
 						<div class="input-group">
 						<!-- 계약 유형 -->
 		         		<span style="margin-right: 10px; margin-top: 10px;">계약 유형</span>
-						<input type="text" class="form-control" id="contract_type" name="contract_type" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+						<input type="text" class="form-control" id="findcontractType" name="contractType" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
 						</div>
 					</section>
 					
@@ -182,7 +497,7 @@
 						<div class="input-group">
 						<!-- 매매 예산 -->
 		         		<span style="margin-right: 10px; margin-top: 10px;">매매 예산</span>
-						<input type="text" class="form-control" id="budget_t1" name="budget_t1" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+						<input type="text" class="form-control" id="findbudgetT1" name="budgetT1" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
 						</div>
 					</section>
 					
@@ -190,7 +505,7 @@
 						<div class="input-group">
 						<!-- 보증금 예산 -->
 		         		<span style="margin-right: 10px; margin-top: 10px;">보증금 예산</span>
-						<input type="text" class="form-control" id="budget_t2" name="budget_t2" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+						<input type="text" class="form-control" id="findbudgetT2" name="budgetT2" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
 						</div>
 					</section>
 					
@@ -198,18 +513,19 @@
 						<div class="input-group">
 						<!-- 보증금 예산 -->
 		         		<span style="margin-right: 10px; margin-top: 10px;">월세 예산</span>
-						<input type="text" class="form-control" id="budget_t3" name="budget_t3" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+						<input type="text" class="form-control" id="findbudgetT3" name="budgetT3" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
 						</div>
 					</section>
 				
 				</div>
+				
 				
 				<div class="form-group row" style="margin-left: 10px;">
 					<section class="col-md-3">		
 						<div class="input-group">
 						<!-- 건물 용도 -->
 		         		<span style="margin-right: 10px; margin-top: 10px;">건물 용도</span>
-						<input type="text" class="form-control" id="b_type" name="b_type" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+						<input type="text" class="form-control" id="findbType" name="bType" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
 						</div>
 					</section>
 					
@@ -217,7 +533,7 @@
 						<div class="input-group">
 						<!-- 전용 면적 -->
 		         		<span style="margin-right: 10px; margin-top: 10px;">전용 면적</span>
-						<input type="text" class="form-control" id="area2" name="area2" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+						<input type="text" class="form-control" id="findarea2" name="area2" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
 						</div>
 					</section>
 					
@@ -225,11 +541,13 @@
 						<div class="input-group">
 						<!-- 건축 년도 -->
 		         		<span style="margin-right: 10px; margin-top: 10px;">건축 년도</span>
-						<input type="text" class="form-control" id="b_year" name="b_year" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
+						<input type="text" class="form-control" id="findbYear" name="bYear" placeholder="" style="width: 150px; margin-right: 10px; margin-top: 5px;" readonly>
 						</div>
 					</section>
+
 				
 				</div>
+				</form>
 			</div>
 			
 		</div>
@@ -244,9 +562,10 @@
 		
 		<!-- 카드 바디 -->
 		<div class="card-body">
-			<table id="example3" class="table table-bordered table-hover">
+			<table id="example2" class="table table-bordered table-hover">
 				<thead>
 					<tr>
+						<th>건물</th>
 						<th>시</th>
 	               		<th>구</th>
 	                    <th>동</th>
@@ -261,96 +580,8 @@
 	                    <th>도로명주소</th>
 	                  </tr>
 				</thead>
-				<tbody id="tbody">
-					<tr>
-						<td>서울특별시</td>
-	               		<td>강남구</td>
-	                    <td>삼성동</td>
-	                    <td>142-3</td>
-	                    <td>LG선릉에클라트(B)</td>
-	                    <td>56.68</td>
-	                    <td>202006</td>
-	                    <td>10</td>
-	                    <td>83000</td>
-	                    <td>14</td>
-	                    <td>2004</td>
-	                    <td>테헤란로63길 12</td>
-	                  </tr>
-	                  
-	                  <tr>
-						<td>서울특별시</td>
-	               		<td>강남구</td>
-	                    <td>삼성동</td>
-	                    <td>142-3</td>
-	                    <td>LG선릉에클라트(B)</td>
-	                    <td>56.68</td>
-	                    <td>202006</td>
-	                    <td>10</td>
-	                    <td>83000</td>
-	                    <td>14</td>
-	                    <td>2004</td>
-	                    <td>테헤란로63길 12</td>
-	                  </tr>
-	                  
-	                  <tr>
-						<td>서울특별시</td>
-	               		<td>강남구</td>
-	                    <td>대치동</td>
-	                    <td>503</td>
-	                    <td>개포우성1</td>
-	                    <td>127.61</td>
-	                    <td>202006</td>
-	                    <td>8</td>
-	                    <td>322000</td>
-	                    <td>14</td>
-	                    <td>1983</td>
-	                    <td>선릉로 120</td>
-	                  </tr>
-	                  
-	                  <tr>
-						<td>서울특별시</td>
-	               		<td>강남구</td>
-	                    <td>대치동</td>
-	                    <td>503</td>
-	                    <td>개포우성1</td>
-	                    <td>127.61</td>
-	                    <td>202006</td>
-	                    <td>21</td>
-	                    <td>334000</td>
-	                    <td>3</td>
-	                    <td>1983</td>
-	                    <td>선릉로 120</td>
-	                  </tr>
-	                  
-	                  <tr>
-						<td>서울특별시</td>
-	               		<td>강남구</td>
-	                    <td>대치동</td>
-	                    <td>500</td>
-	                    <td>개포우성2</td>
-	                    <td>127.78</td>
-	                    <td>202006</td>
-	                    <td>12</td>
-	                    <td>335000</td>
-	                    <td>12</td>
-	                    <td>1984</td>
-	                    <td>선릉로 120</td>
-	                  </tr>
-	                  
-	                  <tr>
-						<td>서울특별시</td>
-	               		<td>강남구</td>
-	                    <td>삼성동</td>
-	                    <td>142-3</td>
-	                    <td>LG선릉에클라트(B)</td>
-	                    <td>56.68</td>
-	                    <td>202006</td>
-	                    <td>10</td>
-	                    <td>83000</td>
-	                    <td>14</td>
-	                    <td>2004</td>
-	                    <td>테헤란로63길 12</td>
-	                  </tr>
+				<tbody id="myTable">
+					
 				</tbody>         
 			</table>
 			<div class="modal-footer">
@@ -426,7 +657,6 @@ $(document).ready(function() {
 		}
 	})
 })
-
 </script>
 
 </body>

@@ -393,4 +393,20 @@
 		TEL2 = #{tel2}
 		where SEQ_U=${seqU}
 	</update>
+	
+	<!-- 실거래가 매물 리스트 -->
+	<select id="rtpFind" parameterType="modelTO.rtpTO" resultType="modelTO.rtpTO">
+	<![CDATA[
+	select seq_Rtp seqRtp,pseq_Rtp pseqRtp,si,gu,dong,bunji,b_name bName,b_type bType,area2,contract_date1 contractDate1,contract_date2 contractDate2,price,floor,b_year bYear,road_address roadAddress
+	 from real_transaction_price
+	 where price <= #{budgetT1} and b_type = #{bType} and area2 >= #{area2} and b_year >= #{bYear} 
+	 order by dong asc
+	 ]]>
+	</select>
+	
+	<!-- 실거래매물 리스트 -->
+	<select id="rtpList" parameterType="modelTO.rtpTO" resultType="modelTO.rtpTO">
+	select seq_Rtp seqRtp,pseq_Rtp pseqRtp,si,gu,dong,bunji,b_name bName,b_type bType,area2,contract_date1 contractDate1,contract_date2 contractDate2,price,floor,b_year bYear,road_address roadAddress
+	 from real_transaction_price order by dong asc
+	</select>
 </mapper>

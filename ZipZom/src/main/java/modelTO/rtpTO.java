@@ -9,13 +9,21 @@ public class rtpTO {
 	private String dong;
 	private String bunji;
 	private String bName;
+	private String bType;
 	private int area2;
 	private String contractDate1;
 	private String contractDate2;
 	private int price;
 	private int floor;
-	private int bYear;
+	private String bYear;
 	private String roadAddress;
+	
+	public String getbType() {
+		return bType;
+	}
+	public void setbType(String bType) {
+		this.bType = bType;
+	}
 	
 	public int getSeqRtp() {
 		return seqRtp;
@@ -89,10 +97,11 @@ public class rtpTO {
 	public void setFloor(int floor) {
 		this.floor = floor;
 	}
-	public int getbYear() {
+
+	public String getbYear() {
 		return bYear;
 	}
-	public void setbYear(int bYear) {
+	public void setbYear(String bYear) {
 		this.bYear = bYear;
 	}
 	public String getRoadAddress() {

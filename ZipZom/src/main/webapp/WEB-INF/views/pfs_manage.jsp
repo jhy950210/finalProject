@@ -259,7 +259,7 @@
       
       </script>
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini"  style="max-width:1500px; margin: 0 auto;" >
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->

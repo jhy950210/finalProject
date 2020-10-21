@@ -16,53 +16,7 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Theme style -->
   <link rel="stylesheet" href="./resources/css/adminlte.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="./resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="./resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  
-  <script type="text/javascript">
-  
-  	$(document).ready(function() {
-  		$("#btn").button().on('click', function() {
-  			var name = $('#name').val();
-  			var tel = $('#tel').val();
-  			searchOk(name, tel);
-  		});
-  		
-  		$("#okbtn").button().on('click', function() {
-  			
-  		});
-  	});
-  	
-  	var searchOk = function(name, tel) {
-  		
-  		$.ajax({
-  			url: './findIdRtp.action',
-  			data: {
-  				name: name,
-  				tel: tel
-  			},
-  			type: 'post',
-  			datatype: 'json',
-  			success: function(json) {
-  				if(json.flag == 1) {
-  					alert("고객 찾기 성공! 이름 : " + json.name)
-  					$.each(json, function(index, item) {
-  						
-  						$("#findname").val(json.name);
-  						
-  					})
-  				
-  				} else {
-  					alert("일치하는 고객이 없습니다.")
-  					
-  				}
-  			}
-  		})
-  		
-  	}
-  
-  </script>
+
 </head>
 <body>
 
@@ -83,7 +37,6 @@
             
             <!-- modal 바디 -->
             <div class="modal-body" style="font-family: 'Helvetica', sans-serif; color: #085ee4; font-weight: bold;">
-            	<form id="rtp_codeForm">
 		            <div class="card card-primary card-outline card-outline-tabs">
 						<!-- 카드 헤더 -->
 						<div class="card-header p-0 border-bottom-0">
@@ -91,6 +44,7 @@
 						</div>
 						
 						<!-- 카드 바디 -->
+						<form name="find" id="find">
 						<div class="card-body">
 		                	<div class="form-group">
 		                		<section>
@@ -120,9 +74,8 @@
 								</section>
 							</div>
 						</div>
+						</form>
 					</div>
-				</form>
-				
 
 			<!-- 카드 바디 -->
             </div>          
@@ -144,13 +97,6 @@
 <script src="./resources/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="./resources/js/demo.js"></script>
-<!-- DataTables -->
-<script src="./resources/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="./resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="./resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="./resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-
-
 
 </body>
 </html>

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import modelTO.pfsTO;
+import modelTO.rtpTO;
 import modelTO.scheduleTO;
 import modelTO.security_customerTO;
 import modelTO.security_pfsTO;
@@ -1115,5 +1116,32 @@ public class ConfigController {
 			
 			request.setAttribute("pfsList", pfsList);
 			return "data/pfs_list";
+		}
+		
+		// 실거래가 매물 리스트
+		@RequestMapping("/rtp_find.json")
+		public String rtpfind(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto, rtpTO rto, HttpSession session) {
+			cto.setPseqC((int)session.getAttribute("seqU"));
+
+			ArrayList<rtpTO> rtpList = (ArrayList<rtpTO>)testmapper.rtpFind(cto);
+			
+			request.setAttribute("rtpList", rtpList);
+			return "data/rtp_list";
+		}
+		
+		// My Page
+		@RequestMapping("/mypage.do")
+		public String myPage(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
+				
+			return "mypage";
+		}
+		
+		// 실거래가 리스트
+		@RequestMapping("/rtp_list.json")
+		public String rtpList(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session,rtpTO rto) {
+		rto.setPseqRtp((Integer)session.getAttribute("seqU"));
+		ArrayList<rtpTO> rtpList = (ArrayList<rtpTO>)testmapper.rtpList(rto);
+		request.setAttribute("rtpList", rtpList);
+		return "data/rtp_list";
 		}
 }

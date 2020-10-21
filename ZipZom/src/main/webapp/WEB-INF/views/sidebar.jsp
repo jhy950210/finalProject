@@ -54,7 +54,6 @@
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
-
 .w3-content {
   width: 100%;
   height: 100%;
@@ -72,8 +71,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   z-index: -1;
   opacity: 0.5;
 }
-
-
 </style>
 </head>
 
@@ -103,9 +100,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <a href="./consulting_map.do" class="w3-bar-item w3-button">매물 위치</a>
       <a href="./consulting_rtp.do" class="w3-bar-item w3-button">매물 시세</a>
       <a href="./consulting_match.do" class="w3-bar-item w3-button">맞춤 매물</a>
-      <a href="./final_report.do" class="w3-bar-item w3-button">상담보고서</a> 
     </div>
     <a href="./schedule.do" class="w3-bar-item w3-button">일정관리</a>
+    <a href="./mypage.do" class="w3-bar-item w3-button">My Page</a>
 
   </div>
 
@@ -121,7 +118,6 @@ function myAccFunc1() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
-
 function myAccFunc2() {
   var x = document.getElementById("demoAcc2");
   if (x.className.indexOf("w3-show") == -1) {
@@ -130,12 +126,9 @@ function myAccFunc2() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
-
 // Click on the "Jeans" link on page load to open the accordion for demo purposes
 document.getElementById("myBtn1").click();
 document.getElementById("myBtn2").click();
-
-
 // Open and close sidebar
 function w3_open() {
   document.getElementById("mySidebar").style.display = "block";
