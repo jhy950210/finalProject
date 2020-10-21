@@ -40,7 +40,7 @@
 		            <div class="card card-primary card-outline card-outline-tabs">
 						<!-- 카드 헤더 -->
 						<div class="card-header p-0 border-bottom-0">
-							고객 찾기
+							이름과 연락처를 입력해주세요.
 						</div>
 						
 						<!-- 카드 바디 -->
@@ -69,13 +69,16 @@
 										</div>
 									</div>
 								</section>
-								<section>
-									<div>
-									<button type="button"  id="customerFind" class="btn btn-primary btn-block" data-dismiss="modal">고객 찾기</button>
-									</div>
-								</section>
+								
 							</div>
 
+						</div>
+						<div class="card-body">
+						<section>
+							<div>
+							<button type="button"  id="customerFind" class="btn btn-primary btn-block" data-dismiss="modal" style="width: 150px; margin: 0 auto;">고객 찾기</button>
+							</div>
+						</section>
 						</div>
 						</form>
 					</div>

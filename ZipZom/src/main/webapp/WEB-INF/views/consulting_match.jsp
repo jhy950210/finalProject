@@ -356,7 +356,8 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">등록 매물 관리</li>
+              <li class="breadcrumb-item active">고객 상담</li>
+                  <li class="breadcrumb-item active">맞춤 매물</li>
             </ol>
           </div>
         </div>

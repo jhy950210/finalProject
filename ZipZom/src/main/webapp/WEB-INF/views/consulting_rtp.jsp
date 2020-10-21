@@ -455,7 +455,7 @@
 		<!-- 카드 바디 -->
 		<div class="card-body">
 			<div class="form-group row">
-				<section class="col-md-4">		
+				<section class="col-md-3">		
 					<div class="input-group">
 					<!-- 고객 이름 -->
 	         		<li style="margin-right: 10px; margin-top: 10px;">고객 이름</li>
@@ -471,13 +471,7 @@
 				
 				<section class="col-md-8">
               		<div class="input-group mb-3">
-						
-						
-						<section>
-							<button type="button" id="search" class="btn btn-primary" style="width: 150px; margin-top:5px;">
-              				검색
-              				</button>
-						</section>
+
 					</div>
            		</section>
 			</div>
@@ -547,6 +541,11 @@
 
 				
 				</div>
+				<section>
+							<button type="button" id="search" class="btn btn-primary" style="width: 150px; margin-top:5px;">
+              				검색하기
+              				</button>
+						</section>
 				</form>
 			</div>
 			
@@ -584,11 +583,7 @@
 					
 				</tbody>         
 			</table>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-outline-primary" style="width: 100px;">
-				출력하기
-               	</button>
-			</div> 
+			
 		</div>
 		<!-- /.card-body -->
 	</div>
@@ -645,18 +640,6 @@
       "responsive": true,
     });
   });
-</script>
-<script type="text/javascript">
-  
-$(document).ready(function() {
-	$("#si").change(function(){
-		if($(this).val()=="") {
-			alert("시를 선택해 주세요.");
-		} else if ($(this).val()=="서울특별시") {
-			alert("서울특별시를 선택하였습니다.")
-		}
-	})
-})
 </script>
 
 </body>
