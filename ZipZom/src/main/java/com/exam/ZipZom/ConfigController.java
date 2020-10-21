@@ -463,6 +463,58 @@ public class ConfigController {
 		return modelAndView;
 	}
 	
+	// 회원정보 수정 페이지
+		@RequestMapping(value = "/userPropertyView.do")
+		public ModelAndView userPropertyViewRequest(HttpServletRequest request) {
+			
+			userTO to = new userTO();
+			
+			to.setSeqU(Integer.parseInt(request.getParameter("seqU")));
+			
+			List<userTO> listTO = sqlSession.selectList("userPropertyViewSelect", to);
+			
+			request.setAttribute("lists", listTO);
+			
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("data/user_json");
+			modelAndView.addObject("list", request);
+			
+			return modelAndView;
+		}
+		
+		// 회원정보 수정 확인
+		@RequestMapping(value = "/userPropertyUpdate.do")
+		public ModelAndView userPropertyUpdateRequest(HttpServletRequest request) {
+			
+			userTO to = new userTO();
+			encryption enc = new encryption();
+			
+			int seqU = Integer.parseInt(request.getParameter("seqU"));
+			String password = enc.encryptionMain(request.getParameter("password")); 
+			String address = request.getParameter("zipNo") + request.getParameter("roadAddrPart1") + request.getParameter("roadAddrPart2") + request.getParameter("addrDetail");
+			String email = request.getParameter("email"); 
+			String phone = request.getParameter("phone");
+			String tel = request.getParameter("tel");
+			
+			to.setSeqU(seqU);
+			to.setPassword(password);
+			to.setAddress(address);
+			to.setEmail(email);
+			to.setTel1(phone);
+			to.setTel2(tel);
+			
+			int flag = 0;
+			
+			flag = sqlSession.update("userPropertyUpdate", to);
+			request.setAttribute("flag", flag);
+			
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("register_ok");
+			modelAndView.addObject("flag",flag);
+			
+			return modelAndView;
+		}
+	
 	// 일정관리 view 페이지
 	@RequestMapping(value = "/viewSchedule.do")
 	public ModelAndView viewScheduleRequest(HttpServletRequest request) {
@@ -845,10 +897,57 @@ public class ConfigController {
 	
 	@RequestMapping("/consulting_map.do")
 	public String rtpMap(HttpServletRequest request, HttpServletResponse response,Model model,customerTO cto) {
-			
+			System.out.println(request.getParameter("seqPfs1"));
 		return "consulting_map";
 	}
 	
+	// 매물 위치 페이지 매물 정보 ajax 요청
+		@RequestMapping(value = "/pfsMapCompareView.json")
+		public ModelAndView pfsMapCompareViewRequest(HttpServletRequest request) {
+			
+			pfsTO pto = new pfsTO();
+			
+			int seqPfs1 = 0;
+			int seqPfs2 = 0;
+			int seqPfs3 = 0;
+			
+			if(request.getParameter("seqPfs1") != null && Integer.parseInt(request.getParameter("seqPfs1")) != 0) {
+				seqPfs1 = Integer.parseInt(request.getParameter("seqPfs1"));
+			}
+			if(request.getParameter("seqPfs2") != null && Integer.parseInt(request.getParameter("seqPfs2")) != 0) {
+				seqPfs2 = Integer.parseInt(request.getParameter("seqPfs2"));
+			}
+			if(request.getParameter("seqPfs3") != null && Integer.parseInt(request.getParameter("seqPfs3")) != 0) {
+				seqPfs3 = Integer.parseInt(request.getParameter("seqPfs3"));
+			}
+			
+			ArrayList<pfsTO> lists = new ArrayList<pfsTO>();
+			
+			if(seqPfs1 != 0) {
+				pto.setSeqPfs(seqPfs1);
+				pto = sqlSession.selectOne("pfsMapCompare", pto);
+				lists.add(pto);
+			}
+			if(seqPfs2 != 0) {
+				pto.setSeqPfs(seqPfs2);
+				pto = sqlSession.selectOne("pfsMapCompare", pto);
+				lists.add(pto);
+			}
+			if(seqPfs3 != 0) {
+				pto.setSeqPfs(seqPfs3);
+				pto = sqlSession.selectOne("pfsMapCompare", pto);
+				lists.add(pto);
+			}
+			
+			request.setAttribute("lists", lists);
+			
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("data/pfs_compare_map_json");
+			modelAndView.addObject("list", request);
+			
+			return modelAndView;
+		}
+
 	// 매물 비교 페이지(자바로 하는)
 	@RequestMapping("/pfs_compare.do")
 	public String pfsCompare(HttpServletRequest request, HttpServletResponse response,Model model) {

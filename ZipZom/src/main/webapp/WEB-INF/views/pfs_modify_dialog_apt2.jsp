@@ -25,7 +25,7 @@
 	</ul>
 	
 			<input type="hidden" name="seqPfs" id="seqPfs" value="">
-			<input type="hidden" name="bType" id="bType" style="width:40%; value="">
+			<input type="hidden" name="bType" id="bType" style="width:40%;" value="" />
 	<table >
 			<colgroup>
 				<col style="width:25%"><col>

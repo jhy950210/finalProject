@@ -6,10 +6,6 @@
 	String address1 = request.getParameter("address1");
 	String address2 = request.getParameter("address2");
 	String address3 = request.getParameter("address3");
-	
-	String seqPfs1 = request.getParameter("seqPfs1");
-	String seqPfs2 = request.getParameter("seqPfs2");
-	String seqPfs3 = request.getParameter("seqPfs3");	
 %>
 <!DOCTYPE html>
 <html>
@@ -35,77 +31,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <!-- jQuery UI -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- Select2 -->
-<link rel="stylesheet" href="./resources/plugins/select2/css/select2.min.css">
-<link rel="stylesheet" href="./resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-  <script type="text/javascript">
-  $(document).ready(function() {
-	  	$('#seq1').empty();
-	  	$('#seq2').empty();
-	  	$('#seq3').empty();
-  		compare(<%=seqPfs1%>, <%=seqPfs2%>, <%=seqPfs3%>);
-  });
-  
-  var compare = function(seq1,seq2,seq3) {
-	  $.ajax({
-          url: 'pfsMapCompareView.json',
-          type: 'post',
-          data: {
-        	  	seqPfs1: seq1,
-        	  	seqPfs2: seq2,
-        	  	seqPfs3: seq3
-			},
-          dataType: 'json',
-          success: function( json ) {
-  		  		var i = 1;
-        	  $.each( json, function( index, item ) {
-					var html = '';
-					html += "<section><table class='type03'><thead><tr><th>매물 주소</th><td colspan='6'>";
-					html += item.address;
-					html += "</td></tr><tr><th>금액정보</th><td>매매가</td><td>";
-					html += item.budget1;
-					html += "</td><td>전세가</td><td>";
-					html += item.budget2;
-					html += "</td><td>월세</td><td>";
-					html += item.budget3;
-					html += "</td></tr><tr><th>면적정보</th><td>공급면적</td><td>";
-					html += item.area1;
-					html += "</td><td>전용면적</td><td>";
-					html += item.area2;
-					html += "</td><td>대지면적</td><td>";
-					html += item.area3;
-					html += "</td></tr><tr><th rowspan='4'>상세정보</th><td>방개수</td><td colspan='2'>";
-					html += item.room;
-					html += "개</td><td>욕실수</td><td colspan='2'>";
-					html += item.bathroom;
-					html += "개</td></tr><tr><td>층수</td><td colspan='2'>";
-					html += item.floor;
-					html += "층</td><td>냉방시설</td><td colspan='2'>";
-					html += item.aircon;
-					html += "</td></tr><tr><td>승강기</td><td colspan='2'>";
-					html += item.elevator;
-					html += "</td><td>주차유무</td><td colspan='2'>";
-					html += item.parking;
-					html += "</td></tr></thead><tbody id='tbody'></tbody></table></section>";
 
-					if(i == 1) {
-						$('#seq1').html(html);
-					} else if (i == 2) {
-						$('#seq2').html(html);
-					} else if (i == 3) {
-						$('#seq3').html(html);
-					} else {
-						alert('3개 이상의 매물은 비교할 수 없습니다.');
-					}
-					i++;
-               });
-          },
-          error: function( e ) {
-             alert( '서버 에러 ' + e );
-          }
-       })
-  };
-  </script>
 </head>
 <body class="w3-content" style="max-width:1700px">
 <!-- Site wrapper -->
@@ -182,35 +108,26 @@
 							<div class="card-header">
 								<div class="form-group row">
 									<section class="col-md-6">		
-<!-- 										<div class="input-group"> -->
-<!-- 										주소 검색 -->
-<!-- 						         		<input type="hidden" id="confmKey" name="confmKey" value=""  > -->
-<!-- 										<input type="text" class="form-control" id="findname" placeholder=주소 검색 style="width: 100%; margin-right: 10px; margin-top: 5px;" readonly> -->
-<!-- 											<button type="button" class="btn btn-outline-primary" value="주소검색" onclick="goPopup();" style="width: 70px; margin-top:5px;"> -->
-<!-- 						              		찾기 -->
-<!-- 						              		</button>              		 -->
-<!-- 										</div> -->
+										<div class="input-group">
 										<!-- 주소 검색 -->
-						               <div class="input-group">  
-						               <!-- <select class="form-control select2" id="select2" name="seqPfs" style="margin-top:10px;">
-						                  <option value="none">동이름, 번지를 입력해주세요.</option>
-						                  <option>서울특별시 서초구 강남대로6길 66-4 (양재동)</option>
-						               </select>    
-						                  <button type="button" id="pfsAdd" class="btn btn-outline-primary" value="추가하기" style="width: 100px; margin-top:5px;">
-						                       		추가하기
-						                  </button>     -->
-						               </div>
+						         		<input type="hidden" id="confmKey" name="confmKey" value=""  >
+										<input type="text" class="form-control" id="findname" placeholder=주소 검색 style="width: 100%; margin-right: 10px; margin-top: 5px;" readonly>
+											<button type="button" class="btn btn-outline-primary" value="주소검색" onclick="goPopup();" style="width: 70px; margin-top:5px;">
+						              		찾기
+						              		</button>              		
+										</div>
 									</section>
 								</div>
 							</div>
 							<div class="card-body">	
-								<div class="form-group row" id="seq1">
+								<div class="form-group row">
 									<section>		
 										<table class="type03">
 						                  <thead>
 						                  <tr>
 											<th>매물 주소</th>
 											<td colspan="6">서울특별시 서초구 강남대로6길 66-4 (양재동)</td>
+											
 						                  </tr>
 						                  
 						                  <tr>
@@ -276,7 +193,7 @@
 							</div>
 							
 							<div class="card-body">	
-								<div class="form-group row" id="seq2">
+								<div class="form-group row">
 									<section>		
 										<table class="type03">
 						                  <thead>
@@ -349,7 +266,7 @@
 							</div>
 							
 							<div class="card-body">	
-								<div class="form-group row" id="seq3">
+								<div class="form-group row">
 									<section>		
 										<table class="type03">
 						                  <thead>

@@ -362,4 +362,35 @@
 	<delete id="scheduleDelete" parameterType="modelTO.scheduleTO">
 		delete from schedule where SEQ_S=${seqS}
 	</delete>
+	
+	<!-- 지도비교창 -->
+	<select id="pfsMapCompare" parameterType="modelTO.pfsTO" resultType="modelTO.pfsTO">
+	select seq_pfs seqPfs, si,gu,dong,bunji,h_number hNumber,b_type bType,contract_type contractType,budget1,budget2,budget3,area1,area2,area3,room,bathroom,floor,AIRCONDITION,
+	direction,heating_system heatingSystem,parking,date_format(b_year,'%Y') bYear,elevator,context,number_of_household numberOfHousehold
+	from property_for_sale
+	where seq_pfs = #{seqPfs}
+	</select>
+	
+	<!-- 유저정보 view sql문 -->
+	<select id="userPropertyViewSelect" resultType="modelTO.userTO" parameterType="modelTO.userTO">
+		select SEQ_U as seqU,
+		NAME as name,
+		ID as id,
+		EMAIL as email,
+		ADDRESS as address,
+		TEL1 as tel1, 
+		TEL2 as tel2
+		from user
+		where SEQ_U=${seqU}
+	</select>
+	
+	<!-- 유저정보 update sql문 -->
+	<update id="userPropertyUpdate" parameterType="modelTO.userTO">
+		update user set
+		EMAIL = #{email},
+		ADDRESS = #{address},
+		TEL1 = #{tel1},
+		TEL2 = #{tel2}
+		where SEQ_U=${seqU}
+	</update>
 </mapper>
