@@ -303,7 +303,7 @@
       
       </script>
 </head>
-<body class="w3-content" style="max-width:1500px">
+<body class="w3-content" style="max-width:1700px">
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->

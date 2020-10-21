@@ -358,7 +358,7 @@
   
   </script>
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" style="width:1700px; margin: 0 auto;">
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
@@ -393,10 +393,12 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
    <!-- sidebar include -->
     <jsp:include page = "./sidebar.jsp" flush = "false"/>
-
+    
+  </aside>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

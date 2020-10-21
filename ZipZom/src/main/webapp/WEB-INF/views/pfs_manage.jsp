@@ -259,7 +259,7 @@
       
       </script>
 </head>
-<body class="hold-transition sidebar-mini"  style="max-width:1600px; margin: 0 auto;" >
+<body class="hold-transition sidebar-mini"  style="max-width:1700px; margin: 0 auto;" >
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
@@ -316,7 +316,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>등록 매물 관리</h1>
+            
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

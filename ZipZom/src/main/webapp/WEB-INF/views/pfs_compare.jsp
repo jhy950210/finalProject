@@ -157,7 +157,7 @@
 <!--   <link rel="stylesheet" href="./resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="./resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"> -->
 </head>
-<body class="w3-content" style="max-width:1500px">
+<body class="w3-content" style="max-width:1700px">
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
@@ -193,15 +193,7 @@
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="./resources/index3.html" class="brand-link">
-      <img src="./resources/img/zipzom_logo.png"
-           alt="AdminLTE Logo"
-           class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">ZipZom</span>
-    </a>
-    
+      
    <!-- sidebar include -->
     <jsp:include page = "./sidebar.jsp" flush = "false"/>
    
