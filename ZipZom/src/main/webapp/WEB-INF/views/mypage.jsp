@@ -43,7 +43,6 @@ var isCheckEmail = 0;
 $(document).ready(function() {
 	
 	$("#btn").button().on('click', function() {
-		//alert('click');
 		if( $('#name').val().trim() == "" ){
 			alert('이름 입력 오류입니다.');
 			return false;
@@ -52,16 +51,16 @@ $(document).ready(function() {
 			alert('아이디 입력 오류입니다.');
 			return false;
 		}
-		if( $('#password').val().trim() == "" ){
+		if( $('#passwordOri').val().trim() == "" ){
+			alert('패스워드 입력 오류입니다.');
+			return false;
+		}
+		if( $('#password1').val().trim() == "" ){
 			alert('패스워드 입력 오류입니다.');
 			return false;
 		}
 		if( $('#email').val().trim() == "" ){
 			alert('이메일 입력 오류입니다.');
-			return false;
-		}
-		if( $('#zipNo').val().trim() == "" ){
-			alert('주소 입력 오류입니다.');
 			return false;
 		}
 		if( $('#phone').val().trim() == "" ){
@@ -72,20 +71,17 @@ $(document).ready(function() {
 			alert('유선 전화번호 입력 오류입니다.');
 			return false;
 		}
-		
-		if( isCheckId == 0 ){
-			alert('ID 중복을 확인하세요.');
-			return false;
-		}
-		
 		if( isCheckEmail == 0 ){
 			alert('Email 중복을 확인하세요.');
+			return false;
+		}
+		if( $('#password1').val().trim() != $('#password2').val().trim() ){
+			alert('새 비밀번호 값이 다릅니다. 다시 입력해주세요');
 			return false;
 		}
 		
 		$("#form").submit();
 	});
-	
 	$("#idBtn").button().on('click', function() {
 		var id = $('#id').val();
 		checkId( id );
@@ -93,36 +89,19 @@ $(document).ready(function() {
 	
 	$("#emailBtn").button().on('click', function() {
 		var email = $('#email').val();
-		checkEmail( email );
+		checkEmail( email, <%= session.getAttribute("seqU")%> );
 	});
+	
+	userInfo(<%= session.getAttribute("seqU")%>);
 	
 });
 
-var checkId = function( id ){
-	$.ajax({
-		url: './duId.action',
-		data: {
-			id: id
-		},
-		type: 'post',
-		datatype: 'json',
-		success: function( json ) {
-			if( json.flag == 1 ){
-				alert("이미 존재하는 ID입니다.");
-			} else {
-				alert('사용 가능한 ID입니다.');
-				isCheckId = 1;
-			}
-		}
-		
-	}); 
-}
-
-var checkEmail = function( email ){
+var checkEmail = function( email, seqU){
 	$.ajax({
 		url: './duEmail.action',
 		data: {
-			email: email
+			email: email,
+			seqU: seqU
 		},
 		type: 'post',
 		datatype: 'json',
@@ -137,7 +116,24 @@ var checkEmail = function( email ){
 		
 	}); 
 }
-
+var userInfo = function(seqU){
+	$.ajax({
+		url: './userPropertyView.do',
+		data: {
+			seqU: seqU
+		},
+		type: 'post',
+		datatype: 'json',
+		success: function( json ) {
+			$('#id').val(json[0].id);
+			$('#name').val(json[0].name);
+			$('#email').val(json[0].email);
+			$('#phone').val(json[0].tel1);
+			$('#tel').val(json[0].tel2);
+			$('#roadAddrPart1').val( json[0].address);
+		}
+	}); 
+}
 function goPopup(){
 	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
     var pop = window.open("./jusoPopup.action?id=0","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
@@ -149,10 +145,7 @@ function goPopup(){
 function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
 						, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
 	// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-	document.form.roadAddrPart1.value = roadAddrPart1;
-	document.form.roadAddrPart2.value = roadAddrPart2;
-	document.form.addrDetail.value = addrDetail;
-	document.form.zipNo.value = zipNo;
+	document.form.roadAddrPart1.value = zipNo + roadAddrPart1 + roadAddrPart2 + addrDetail;
 }
 
 </script>
@@ -216,11 +209,12 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
   <div class="login-box">
  <div class="card">
    <div class="card-body register-card-body">
-      <p class="login-box-msg">새로운 회원으로 가입하세요.</p>
+      <p class="login-box-msg">정보를 수정하세요.</p>
 
-      <form id="form" name="form" action="./sign_up.action" method="post">
+      <form id="form" name="form" action="./userPropertyUpdate.do" method="post">
+      	<input type="hidden" id="seqU" name="seqU" value="<%=session.getAttribute("seqU") %>"  >
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="name" name="name" placeholder="이름">
+          <input type="text" class="form-control" id="name" name="name" placeholder="이름" readonly>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -228,15 +222,29 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="id" name="id" placeholder="아이디">
+          <input type="text" class="form-control" id="id" name="id" placeholder="아이디" readonly>
+          <div class="input-group-append">
+            
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control"  id="passwordOri" name="passwordOri" placeholder="기존 비밀번호">
           <div class="input-group-append">
             <div class="input-group-text">
-              <button type="button"  id="idBtn" style="width:60pt; height:18pt; padding: 0.1rem 0.1rem; font-size: 11.5pt;'">중복검사</button>
+              <span class="fas fa-lock"></span>
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control"  id="password" name="password" placeholder="비밀번호">
+          <input type="password" class="form-control"  id="password1" name="password1" placeholder="새 비밀번호">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control"  id="password2" name="password2" placeholder="새 비밀번호 확인">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -255,7 +263,6 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
         <div class="input-group mb-3">
           <!--  <input type="text" class="form-control"  id="address" name="address" placeholder="Address"> -->
           	<input type="hidden" id="confmKey" name="confmKey" value=""  >
-			<input type="text" class="form-control" id="zipNo" name="zipNo"  placeholder="우편번호" readonly style="width:100px">
 			<input type="button"  class="form-control" value="주소검색" onclick="goPopup();">
           <div class="input-group-append">
             <div class="input-group-text">
@@ -263,6 +270,17 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
             </div>
           </div>
         </div>
+<!--         <div class="input-group mb-3"> -->
+<!--           	<input type="text"  class="form-control" id="addrDetail" name="addrDetail" placeholder="상세주소" style="width:50%" value="" readonly> -->
+<!-- 			<input type="text"  class="form-control" id="roadAddrPart2" name="roadAddrPart2" style="width:50%" value="" readonly> -->
+			
+<!--           <div class="input-group-append"> -->
+<!--             <div class="input-group-text"> -->
+<!--               <span class="fas fa-map"></span> -->
+<!--             </div> -->
+<!--           </div> -->
+          
+<!--         </div> -->
         <div class="input-group mb-3">
           
 		<input type="text"  class="form-control" id="roadAddrPart1" name="roadAddrPart1" placeholder="도로명주소"  readonly >
@@ -271,17 +289,6 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
               <span class="fas fa-map"></span>
             </div>
           </div>
-        </div>
-        <div class="input-group mb-3">
-          	<input type="text"  class="form-control" id="addrDetail" name="addrDetail" placeholder="상세주소" style="width:50%" value="" readonly>
-			<input type="text"  class="form-control" id="roadAddrPart2" name="roadAddrPart2" style="width:50%" value="" readonly>
-			
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-map"></span>
-            </div>
-          </div>
-          
         </div>
         <!-- /주소 -->
         <div class="input-group mb-3">
@@ -304,9 +311,9 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
         <div class="row">
           <div class="col-8">
 			<div style="float:right;">
-            <button type="button"  id="" >수정</button>
+            <button type="button"  id="btn" >수정</button>
           	
-            <button type="button"  id="" >삭제</button>
+<!--             <button type="button"  id="btn2"  data-toggle="modal" data-target="#modal-out">탈퇴</button> -->
  			</div>
           </div>
           <!-- /.col -->
@@ -323,6 +330,10 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
   </div>
   </div>
 <!-- ./wrapper -->
+
+<!-- 다이얼로그창 인클루드 -->
+<%-- <jsp:include page="./mypage_dialog_out.jsp"></jsp:include>
+<jsp:include page="./mypage_dialog_modify.jsp"></jsp:include> --%>
 
 <!-- jQuery -->
 <script src="./resources/plugins/jquery/jquery.min.js"></script>

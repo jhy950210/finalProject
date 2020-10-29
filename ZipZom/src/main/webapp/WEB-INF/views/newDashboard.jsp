@@ -29,15 +29,14 @@
 
 <body class="w3-content" style="max-width:1500px">
 <div class="wrapper">
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="./resources/index3.html" class="nav-link">Home</a>
+        <a href="./newDashboard.do" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -54,11 +53,13 @@
           </button>
         </div>
       </div>
-    </form>
-
-
+    </form>   
+    <div>
+      <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-xl" style="width: 150px; margin-left:650px;" >
+      로그 아웃
+      </button>
+   </div>
   </nav>
-  <!-- /.navbar -->
 
 <jsp:include page="./sidebar.jsp" flush="false" />
 

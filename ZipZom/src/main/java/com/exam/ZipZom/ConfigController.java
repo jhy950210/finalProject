@@ -213,29 +213,33 @@ public class ConfigController {
 	}
 	
 	// 이메일 중복검사 버튼 클릭한 경우
-	@RequestMapping(value = "/duEmail.action")
-	public ModelAndView duplicateEmailRequest(HttpServletRequest request) {
+		@RequestMapping(value = "/duEmail.action")
+		public ModelAndView duplicateEmailRequest(HttpServletRequest request) {
 
-		userTO to = new userTO();
-		
-		String email = request.getParameter("email");
-		
-		to.setEmail(email);
+			userTO to = new userTO();
+			int seqU = Integer.parseInt(request.getParameter("seqU"));
+			String email = request.getParameter("email");
+			
+			to.setEmail(email);
+			to.setSeqU(seqU);
 
-		int flag = 0;
-		
-		if(sqlSession.selectOne("duEmailSelect", to) != null) {
-			flag = 1;
+			int flag = 0;
+			
+			if(sqlSession.selectOne("duEmailSelect", to) != null) {
+				flag = 1;	
+				if(sqlSession.selectOne("duOwnEmailSelect", to) != null) {
+					flag = 0;
+				}
+			}
+			
+			request.setAttribute("flag", flag);
+			
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("/data/flag_json");
+			modelAndView.addObject("list", request);
+			
+			return modelAndView;
 		}
-		
-		request.setAttribute("flag", flag);
-		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/data/flag_json");
-		modelAndView.addObject("list", request);
-		
-		return modelAndView;
-	}
 	
 	// 아이디 찾기 버튼 클릭한 경우
 	@RequestMapping(value = "/findId.action")
@@ -482,7 +486,7 @@ public class ConfigController {
 			
 			return modelAndView;
 		}
-		
+			
 		// 회원정보 수정 확인
 		@RequestMapping(value = "/userPropertyUpdate.do")
 		public ModelAndView userPropertyUpdateRequest(HttpServletRequest request) {
@@ -491,26 +495,31 @@ public class ConfigController {
 			encryption enc = new encryption();
 			
 			int seqU = Integer.parseInt(request.getParameter("seqU"));
-			String password = enc.encryptionMain(request.getParameter("password")); 
-			String address = request.getParameter("zipNo") + request.getParameter("roadAddrPart1") + request.getParameter("roadAddrPart2") + request.getParameter("addrDetail");
+			
+			String passwordOri = enc.encryptionMain(request.getParameter("passwordOri")); 
+			String passwordNew = enc.encryptionMain(request.getParameter("password1")); 
+			String address = request.getParameter("roadAddrPart1");
 			String email = request.getParameter("email"); 
 			String phone = request.getParameter("phone");
 			String tel = request.getParameter("tel");
 			
-			to.setSeqU(seqU);
-			to.setPassword(password);
-			to.setAddress(address);
-			to.setEmail(email);
-			to.setTel1(phone);
-			to.setTel2(tel);
-			
 			int flag = 0;
 			
-			flag = sqlSession.update("userPropertyUpdate", to);
+			to.setSeqU(seqU);
+			to.setPassword(passwordOri);
+			if(sqlSession.selectOne("checkPasswordSelect", to) != null) {
+				to.setPassword(passwordNew);
+				to.setAddress(address);
+				to.setEmail(email);
+				to.setTel1(phone);
+				to.setTel2(tel);
+				flag = sqlSession.update("userPropertyUpdate", to);
+			}
+			
 			request.setAttribute("flag", flag);
 			
 			ModelAndView modelAndView = new ModelAndView();
-			modelAndView.setViewName("register_ok");
+			modelAndView.setViewName("register_update_ok");
 			modelAndView.addObject("flag",flag);
 			
 			return modelAndView;

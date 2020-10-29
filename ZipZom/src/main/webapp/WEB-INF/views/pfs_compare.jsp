@@ -10,6 +10,7 @@
 	StringBuffer budget = new StringBuffer();
 	StringBuffer option = new StringBuffer();
 	StringBuffer memo = new StringBuffer();
+	StringBuffer seqPfss = new StringBuffer();
 	if(request.getAttribute("pcList") != null) {
 	ArrayList<pfsTO> pcList = (ArrayList<pfsTO>)request.getAttribute("pcList");
 	int i=1;
@@ -43,6 +44,8 @@
 		} else{
 			elevator = "없음";
 		}
+		
+		seqPfss.append("<input type='hidden' name='seqPfs"+i+"'value='"+seqPfs+"'>");
 		
 		addressess.append("<td class='cell'>");
 		addressess.append("<input type='text' name='address"+i+"' value='"+address+"' readonly style='width: 100%; margin-top: 5px;'/>");
@@ -236,6 +239,7 @@
         <div class="card-body" >
 
 			<form action="./consulting_map.do" method="post" name="wfrm">
+				<%=seqPfss %>
 			<div class="form-group">
 				<table class="table table-bordered" >
 				

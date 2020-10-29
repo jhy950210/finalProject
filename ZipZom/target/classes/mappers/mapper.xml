@@ -275,7 +275,7 @@
 	 from property_for_sale
 	 where pseq_pfs = #{pseqC} and b_type=#{bType} and budget1 <= #{budgetT1} and budget2 <= #{budgetT2}
 	 and budget3 <= #{budgetT3} and contract_type = #{contractType} and area2 >= #{area2} and b_year >= #{bYear} and room >= #{room}
-	 and floor <= #{floor} and elevator <= ${elevator}
+	 and floor <= #{floor} and elevator >= ${elevator}
 	 order by seq_pfs desc
 	 ]]>
 	</select>
@@ -371,6 +371,23 @@
 	where seq_pfs = #{seqPfs}
 	</select>
 	
+	
+	<!-- 실거래가 매물 리스트 -->
+	<select id="rtpFind" parameterType="modelTO.rtpTO" resultType="modelTO.rtpTO">
+	<![CDATA[
+	select seq_Rtp seqRtp,pseq_Rtp pseqRtp,si,gu,dong,bunji,b_name bName,b_type bType,area2,contract_date1 contractDate1,contract_date2 contractDate2,price,floor,b_year bYear,road_address roadAddress
+	 from real_transaction_price
+	 where price <= #{budgetT1} and b_type = #{bType} and area2 >= #{area2} and b_year >= #{bYear} 
+	 order by dong asc
+	 ]]>
+	</select>
+	
+	<!-- 실거래매물 리스트 -->
+	<select id="rtpList" parameterType="modelTO.rtpTO" resultType="modelTO.rtpTO">
+	select seq_Rtp seqRtp,pseq_Rtp pseqRtp,si,gu,dong,bunji,b_name bName,b_type bType,area2,contract_date1 contractDate1,contract_date2 contractDate2,price,floor,b_year bYear,road_address roadAddress
+	 from real_transaction_price order by dong asc
+	</select>
+	
 	<!-- 유저정보 view sql문 -->
 	<select id="userPropertyViewSelect" resultType="modelTO.userTO" parameterType="modelTO.userTO">
 		select SEQ_U as seqU,
@@ -387,6 +404,7 @@
 	<!-- 유저정보 update sql문 -->
 	<update id="userPropertyUpdate" parameterType="modelTO.userTO">
 		update user set
+		password = #{password},
 		EMAIL = #{email},
 		ADDRESS = #{address},
 		TEL1 = #{tel1},
@@ -394,19 +412,13 @@
 		where SEQ_U=${seqU}
 	</update>
 	
-	<!-- 실거래가 매물 리스트 -->
-	<select id="rtpFind" parameterType="modelTO.rtpTO" resultType="modelTO.rtpTO">
-	<![CDATA[
-	select seq_Rtp seqRtp,pseq_Rtp pseqRtp,si,gu,dong,bunji,b_name bName,b_type bType,area2,contract_date1 contractDate1,contract_date2 contractDate2,price,floor,b_year bYear,road_address roadAddress
-	 from real_transaction_price
-	 where price <= #{budgetT1} and b_type = #{bType} and area2 >= #{area2} and b_year >= #{bYear} 
-	 order by dong asc
-	 ]]>
-	</select>
 	
-	<!-- 실거래매물 리스트 -->
-	<select id="rtpList" parameterType="modelTO.rtpTO" resultType="modelTO.rtpTO">
-	select seq_Rtp seqRtp,pseq_Rtp pseqRtp,si,gu,dong,bunji,b_name bName,b_type bType,area2,contract_date1 contractDate1,contract_date2 contractDate2,price,floor,b_year bYear,road_address roadAddress
-	 from real_transaction_price order by dong asc
+	<!-- 자기 이메일 중복 검사 sql문 -->
+	<select id="duOwnEmailSelect" parameterType="modelTO.userTO" resultType="modelTO.userTO">
+		select email from user where email=#{email} and SEQ_U=${seqU}
+	</select>
+	<!-- 회원정보 수정 password 검사 sql문 -->
+	<select id="checkPasswordSelect" parameterType="modelTO.userTO" resultType="modelTO.userTO">
+		select email from user where password=#{password} and SEQ_U=${seqU}
 	</select>
 </mapper>

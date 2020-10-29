@@ -259,7 +259,7 @@
       
       </script>
 </head>
-<body class="hold-transition sidebar-mini"  style="max-width:1500px; margin: 0 auto;" >
+<body class="hold-transition sidebar-mini"  style="max-width:1700px; margin: 0 auto;" >
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
@@ -316,11 +316,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>등록 매물 관리</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">매물 관리</li>
               <li class="breadcrumb-item active">등록 매물 관리</li>
             </ol>
           </div>
@@ -339,23 +339,6 @@
         </div>
         <!-- 본문 내용 -->
         <div class="card-body" >
-        	<div class="btn-group row" >
-        		<div>
-        		<button type="button" class="btn btn-block btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off" style="width: 200px;">전 체</button>
-        		</div>
-        		<div>
-				<button type="button" class="btn btn-block btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off" style="width: 200px;">아파트</button>
-				</div>
-        		<div>
-				<button type="button" class="btn btn-block btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off" style="width: 200px;" >오피스텔</button>
-				</div>
-        		<div>
-				<button type="button" class="btn btn-block btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off" style="width: 200px;">다세대/빌라</button>
-				</div>
-        		<div>
-				<button type="button" class="btn btn-block btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off" style="width: 200px;">다가구/단독</button>
-				</div>
-			</div>
 			
 			<div class="form-group row dataTables_filter" style="margin-right: 10px; margin-top: 10px;">
 				<section>

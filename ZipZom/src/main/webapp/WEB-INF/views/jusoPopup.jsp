@@ -50,7 +50,7 @@
 */
 function init(){
 	var url = location.href;
-	var confmKey = "devU01TX0FVVEgyMDIwMTAxOTE2MjgxMDExMDMwMzE=";//승인키
+	var confmKey = "devU01TX0FVVEgyMDIwMTAwNTE0MjAxMTExMDI1NTY=";//승인키
 	// resultType항목 추가(2016.10.06)
 	var resultType = "4"; // 도로명주소 검색결과 화면 출력유형, 1 : 도로명, 2 : 도로명+지번, 3 : 도로명+상세건물명, 4 : 도로명+지번+상세건물명
 	var inputYn= "<%=inputYn%>";
